@@ -1,0 +1,184 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Plan {
+  BASIC
+  NORMAL
+  PROFESSIONAL
+}
+
+enum AppointmentStatus {
+  PENDING
+  SCHEDULED
+  COMPLETED
+  NO_SHOW
+  CANCELLED
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title       String // Ex: "Relatório Semana 18", "Clientes de Maio"
+  type        String // Ex: "semanal", "mensal", "diário"
+  periodStart DateTime // Início do período do relatório
+  periodEnd   DateTime // Fim do período do relatório
+  fileUrl     String // Caminho/URL do arquivo PDF gerado (ex: em S3, Supabase, etc)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Appointment {
+  id              String            @id @default(cuid())
+  name            String
+  email           String
+  phone           String
+  appointmentDate DateTime
+  time            String
+  status          AppointmentStatus @default(PENDING)
+  serviceId       String
+  userId          String
+  user            User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  service         Service           @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([appointmentDate])
+}
+
+model Reminder {
+  id          String @id @default(cuid())
+  description String
+  userId      String
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Service {
+  id       String  @id @default(cuid())
+  name     String
+  price    Decimal @db.Decimal(10, 2)
+  duration Int
+  status   Boolean @default(true)
+  userId   String
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  Appointment Appointment[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model Subscription {
+  id      String @id @default(cuid())
+  status  String
+  plan    Plan
+  priceId String
+
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id                 String    @id @default(cuid())
+  name               String?
+  email              String    @unique
+  emailVerified      DateTime?
+  image              String?
+  address            String?   @default("")
+  phone              String?   @default("")
+  status             Boolean   @default(true)
+  timeZone           String?   @default("")
+  stripe_customer_id String?
+
+  subscriptionId String?
+  subscription   Subscription?
+
+  rimes         Times[]
+  Service       Service[]
+  accounts      Account[]
+  reminder      Reminder[]
+  appointment   Appointment[]
+  sessions      Session[]
+  report        Report[]
+  Authenticator Authenticator[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Times {
+  id        String   @id @default(cuid())
+  time      String
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([provider, providerAccountId])
+}
+
+model Session {
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+}
+
+// Optional for WebAuthn support
+model Authenticator {
+  credentialID         String  @unique
+  userId               String
+  providerAccountId    String
+  credentialPublicKey  String
+  counter              Int
+  credentialDeviceType String
+  credentialBackedUp   Boolean
+  transports           String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, credentialID])
+}
