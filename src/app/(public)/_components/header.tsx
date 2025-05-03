@@ -13,6 +13,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { LogIn, Menu } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useSession } from 'next-auth/react'
+import { handleRegister } from "../_actions/login";
+import { FaGithub, FaDiscord } from "react-icons/fa6";
 
 interface NavItemsProps {
   href: string;
@@ -20,10 +23,9 @@ interface NavItemsProps {
 }
 
 export function Header() {
+  const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [bgVisible, setBgVisible] = useState<boolean>(false);
-
-  const session = false;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +46,10 @@ export function Header() {
     { href: "/contatos", label: "Contatos" },
   ];
 
+  async function handdleLogin(provider: string) {
+    await handleRegister(provider)
+  }
+
   const NavLinks = () => (
     <>
       {navItems.map(link => (
@@ -59,21 +65,31 @@ export function Header() {
         </Button>
       ))}
 
-      {session ? (
+      {status === 'loading' ? (
+        <><p className="text-black">loading...</p></>
+      ) : session ? (
         <>
-          <Link href="/" className="text-corprimary hover:text-corsecondary">
+          <Link href="/" className="w-full text-center font-semibold rounded-md bg-corprimary hover:bg-corsecondary py-1 px-2">
             Acessar Clinica
           </Link>
         </>
       ) : (
-        <>
+        <div className="space-x-2.5">
           <Button
+            onClick={() => handdleLogin("discord")}
             className="bg-corsecondary hover:bg-corprimary"
           >
-            Portal da Clinica
+            <FaDiscord />
             <LogIn />
           </Button>
-        </>
+          <Button
+            onClick={() => handdleLogin("github")}
+            className="bg-corsecondary hover:bg-corprimary"
+          >
+            <FaGithub />
+            <LogIn />
+          </Button>
+        </div>
       )}
     </>
   );

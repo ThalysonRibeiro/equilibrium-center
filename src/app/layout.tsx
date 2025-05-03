@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Open_Sans, Mansalva } from "next/font/google";
 import "./globals.css";
+import { SessionAuthProvider } from "@/components/session-auth";
+
 
 
 const pen_Sans = Open_Sans({
@@ -29,7 +31,9 @@ export default function RootLayout({
       <body
         className={` ${pen_Sans.variable} ${mansalva.variable} antialiased`}
       >
-        {children}
+        <SessionAuthProvider>
+          {children}
+        </SessionAuthProvider>
       </body>
     </html>
   );
