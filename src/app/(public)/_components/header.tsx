@@ -10,12 +10,23 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 import { Button } from "@/components/ui/button";
-import { LogIn, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react'
 import { handleRegister } from "../_actions/login";
-import { FaGithub, FaDiscord } from "react-icons/fa6";
+import { FaGithub, FaDiscord, FaYinYang } from "react-icons/fa6";
+import img_bg_modal from "@/assets/1.png";
+
 
 interface NavItemsProps {
   href: string;
@@ -26,6 +37,7 @@ export function Header() {
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [bgVisible, setBgVisible] = useState<boolean>(false);
+  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +59,8 @@ export function Header() {
   ];
 
   async function handdleLogin(provider: string) {
-    await handleRegister(provider)
+    await handleRegister(provider);
+    setDialogIsOpen(false)
   }
 
   const NavLinks = () => (
@@ -66,29 +79,82 @@ export function Header() {
       ))}
 
       {status === 'loading' ? (
-        <><p className="text-black">loading...</p></>
+        <><p className="text-black font-semibold inline-flex gap-2"><FaYinYang size={22} className="animate-spin" /> loading...</p></>
       ) : session ? (
         <>
-          <Link href="/" className="w-full text-center font-semibold rounded-md bg-corprimary hover:bg-corsecondary py-1 px-2">
+          <Link href="/dashboard" className="w-full text-center font-semibold rounded-md bg-corprimary hover:bg-corsecondary py-1 px-2">
             Acessar Clinica
           </Link>
         </>
       ) : (
-        <div className="space-x-2.5">
-          <Button
-            onClick={() => handdleLogin("discord")}
-            className="bg-corsecondary hover:bg-corprimary"
-          >
-            <FaDiscord />
-            <LogIn />
-          </Button>
-          <Button
-            onClick={() => handdleLogin("github")}
-            className="bg-corsecondary hover:bg-corprimary"
-          >
-            <FaGithub />
-            <LogIn />
-          </Button>
+        <div className="space-y-2">
+
+          <section className="w-full md:hidden space-y-4">
+            <Button
+              onClick={() => handdleLogin("discord")}
+              className="border border-corprimary bg-white w-50 text-indigo-500 hover:bg-corprimary"
+            >
+              Discord
+              <FaDiscord />
+            </Button>
+
+            <Button
+              onClick={() => handdleLogin("github")}
+              className="border border-corprimary hover:bg-corprimary w-50"
+            >
+              GitHub
+              <FaGithub />
+            </Button>
+          </section>
+
+
+          <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
+            <DialogTrigger asChild className="hidden md:block">
+              <Button className="bg-corsecondary hover:bg-corprimary">
+                Entrar ou Registrar
+              </Button>
+            </DialogTrigger>
+
+            <DialogContent className="border-corprimary h-70 overflow-hidden bg-background/70  backdrop-blur-lg">
+              <DialogHeader>
+                <DialogTitle className="text-center text-corprimary text-3xl font-mansalva text-shadow-md">Entrar ou registrar</DialogTitle>
+                <DialogDescription className="text-center text-corprimary">
+                  Selecione abaixo o metodo para entrar ou se registrar
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="absolute w-135 h-100 -z-10 ">
+                <Image
+                  src={img_bg_modal}
+                  alt="image modal login or register"
+                  fill
+                  className="objecti-cover"
+                />
+              </div>
+              <section className="relative py-4 flex gap-4 w-full items-center justify-between">
+
+                <Button
+                  onClick={() => handdleLogin("discord")}
+                  className="border border-corprimary bg-white w-50 text-indigo-500 hover:bg-corprimary"
+                >
+                  Discord
+                  <FaDiscord />
+                </Button>
+
+                <Button
+                  onClick={() => handdleLogin("github")}
+                  className="border border-corprimary hover:bg-corprimary w-50"
+                >
+                  GitHub
+                  <FaGithub />
+                </Button>
+              </section>
+            </DialogContent>
+          </Dialog>
+
+
+
+
         </div>
       )}
     </>
