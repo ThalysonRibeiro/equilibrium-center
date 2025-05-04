@@ -6,7 +6,7 @@ import { useState } from "react";
 import {
   Sheet,
   SheetContent,
-  SheetDescription, SheetTitle,
+  SheetDescription, SheetFooter, SheetTitle,
   SheetTrigger
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
@@ -19,9 +19,29 @@ import {
   CollapsibleContent
 } from "@/components/ui/collapsible";
 
+interface SidebarDashboardProps {
+  children: React.ReactNode
+  user: UserProps
+}
+
+interface UserProps {
+  id: string;
+  name: string;
+  email: string;
+  emailVerified?: null | string | boolean;
+  image?: string;
+  address?: string;
+  phone?: string;
+  status: boolean;
+  stripe_customer_id?: string | null;
+  subscriptionId?: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
 
 
-export function SidebarDashboard({ children }: { children: React.ReactNode }) {
+
+export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
@@ -147,9 +167,35 @@ export function SidebarDashboard({ children }: { children: React.ReactNode }) {
                 Outros
               </span>
             </nav>
+
           </CollapsibleContent>
         </Collapsible>
 
+        <SheetFooter className="p-0">
+          {!isCollapsed && <p className="text-sm">{user.name}</p>}
+          <div className={`${isCollapsed && 'flex-col-reverse'} flex items-center justify-between`}>
+            <Button
+              variant={"ghost"}
+              className="border border-corprimary hover:text-white hover:bg-red-500"
+            >
+              Sair
+            </Button>
+            <div className="mb-6 mt-6 w-12 rounded-full overflow-hidden border border-corprimary">
+              <Image
+                src={user?.image as string}
+                alt="logo"
+                priority
+                quality={100}
+                width={48}
+                height={48}
+                style={{
+                  width: 'auto',
+                  height: 'auto',
+                }}
+              />
+            </div>
+          </div>
+        </SheetFooter>
       </aside>
 
 
