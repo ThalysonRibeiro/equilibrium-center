@@ -21,7 +21,7 @@ export function Hero() {
         <main className="flex flex-col lg:flex-row items-center justify-center w-full h-full gap-6 sm:pt-40 pt-20">
 
           <article className="z-10 pt-5 space-y-5 max-w-3xl w-full flex flex-col justify-center">
-            <h1 className="text-corprimary text-7xl font-bold font-mansalva">
+            <h1 className="text-corprimary text-7xl font-bold font-mansalva text-shadow-md">
               Equilibrium Center
             </h1>
             <p className="text-corsecondary font-medium text-3xl">
