@@ -24,7 +24,7 @@ import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react'
 import { handleRegister } from "../_actions/login";
-import { FaGithub, FaDiscord, FaYinYang } from "react-icons/fa6";
+import { FaGithub, FaDiscord } from "react-icons/fa6";
 import img_bg_modal from "@/assets/1.png";
 
 
@@ -79,7 +79,9 @@ export function Header() {
       ))}
 
       {status === 'loading' ? (
-        <><p className="text-black font-semibold inline-flex gap-2"><FaYinYang size={22} className="animate-spin" /> loading...</p></>
+        <>
+          <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+        </>
       ) : session ? (
         <>
           <Link href="/dashboard" className="w-full text-center font-semibold rounded-md bg-corprimary hover:bg-corsecondary py-1 px-2">
