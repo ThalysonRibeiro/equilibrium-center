@@ -172,7 +172,7 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
         </Collapsible>
 
         <SheetFooter className="p-0">
-          {!isCollapsed && <p className="text-sm">{user.name}</p>}
+          {!isCollapsed && <p className="text-sm line-clamp-1">{user.name}</p>}
           <div className={`${isCollapsed && 'flex-col-reverse'} flex items-center justify-between`}>
             <Button
               variant={"ghost"}
