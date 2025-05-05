@@ -199,6 +199,20 @@ exports.Prisma.TimesScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.SchedulesScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.HoursScalarFieldEnum = {
+  id: 'id',
+  time: 'time',
+  schedulesId: 'schedulesId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   userId: 'userId',
   type: 'type',
@@ -276,6 +290,8 @@ exports.Prisma.ModelName = {
   Subscription: 'Subscription',
   User: 'User',
   Times: 'Times',
+  Schedules: 'Schedules',
+  Hours: 'Hours',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',

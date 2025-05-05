@@ -106,7 +106,7 @@ model User {
   subscriptionId String?
   subscription   Subscription?
 
-  rimes         Times[]
+  times         Times[]
   Service       Service[]
   accounts      Account[]
   reminder      Reminder[]
@@ -120,12 +120,28 @@ model User {
 }
 
 model Times {
-  id        String   @id @default(cuid())
+  id        String   @id
   time      String
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model Schedules {
+  id        String   @id @default(cuid())
+  Hours     Hours[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Hours {
+  id          String    @id @default(cuid())
+  time        String
+  schedulesId String
+  schedules   Schedules @relation(fields: [schedulesId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }
 
 model Account {
