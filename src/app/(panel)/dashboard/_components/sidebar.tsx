@@ -18,6 +18,8 @@ import {
   Collapsible,
   CollapsibleContent
 } from "@/components/ui/collapsible";
+import { signOut, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation"
 
 interface SidebarDashboardProps {
   children: React.ReactNode
@@ -42,9 +44,16 @@ interface UserProps {
 
 
 export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
+  const { update } = useSession();
+  const router = useRouter();
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false);
 
+  async function handleLogout() {
+    await signOut();
+    await update();
+    router.replace("/")
+  }
 
   return (
     <div className="flex min-h-screen w-full">
@@ -175,8 +184,8 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
           {!isCollapsed && <p className="text-sm line-clamp-1">{user.name}</p>}
           <div className={`${isCollapsed && 'flex-col-reverse'} flex items-center justify-between`}>
             <Button
-              variant={"ghost"}
-              className="border border-corprimary hover:text-white hover:bg-red-500"
+              variant={"destructive"}
+              onClick={handleLogout}
             >
               Sair
             </Button>
