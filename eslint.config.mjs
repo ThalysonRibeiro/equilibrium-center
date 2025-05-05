@@ -13,4 +13,11 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
 ];
 
+tseslint.config({
+  rules: {
+    "@typescript-eslint/no-non-null-asserted-optional-chain": "error"
+  }
+});
+
+
 export default eslintConfig;
