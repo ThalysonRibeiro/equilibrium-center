@@ -187,28 +187,7 @@ exports.Prisma.UserScalarFieldEnum = {
   timeZone: 'timeZone',
   stripe_customer_id: 'stripe_customer_id',
   subscriptionId: 'subscriptionId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.TimesScalarFieldEnum = {
-  id: 'id',
-  time: 'time',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.SchedulesScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.HoursScalarFieldEnum = {
-  id: 'id',
-  time: 'time',
-  schedulesId: 'schedulesId',
+  times: 'times',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -289,9 +268,6 @@ exports.Prisma.ModelName = {
   Service: 'Service',
   Subscription: 'Subscription',
   User: 'User',
-  Times: 'Times',
-  Schedules: 'Schedules',
-  Hours: 'Hours',
   Account: 'Account',
   Session: 'Session',
   VerificationToken: 'VerificationToken',

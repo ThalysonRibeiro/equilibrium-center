@@ -41,27 +41,22 @@ import { useRouter } from "next/navigation"
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
-    subscription: true,
-    times: true
+    subscription: true
   }
 }>
 
 interface ProfileContentProps {
-  listHours: TimesProps[] | [];
   user: UserWithSubscription | null;
 }
 
-interface TimesProps {
-  id: string;
-  time: string;
-}
-
 export function ProfileContent(
-  { listHours, user }: ProfileContentProps
+  { user }: ProfileContentProps
 ) {
 
   const { update } = useSession();
   const router = useRouter();
+  const [selectedHours, setSelectedHours] = useState<string[]>(user?.times ?? []);
+  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
 
   const form = useProfileForm({
     name: user?.name || null,
@@ -70,18 +65,25 @@ export function ProfileContent(
     status: user?.status as boolean,
     timeZone: user?.timeZone || null
   });
-  const [selectedHours, setSelectedHours] = useState<TimesProps[] | []>(user?.times || []);
-  const [dialogIsOpen, setDialogIsOpen] = useState<boolean>(false);
 
-  function toggleHour(slot: TimesProps) {
-    setSelectedHours((prev) => {
-      const exists = prev.find((h) => h.id === slot.id); // <-- compara pelo times
-      if (exists) {
-        return prev.filter((h) => h.id !== slot.id); // remove se já existe
-      } else {
-        return [...prev, slot]; // adiciona se ainda não está
+  function generateTimeSlots(): string[] {
+    const hours: string[] = [];
+
+    for (let i = 6; i <= 23.5; i++) {
+      for (let j = 0; j < 2; j++) {
+        const hour = i.toString().padStart(2, "0");
+        const minute = (j * 30).toString().padStart(2, "0")
+        hours.push(`${hour === "24" ? "00" : hour}:${minute}`)
       }
-    });
+    }
+
+    return hours;
+  }
+
+  const hours = generateTimeSlots();
+
+  function togglreHour(hour: string) {
+    setSelectedHours((prev) => prev.includes(hour) ? prev.filter(h => h !== hour) : [...prev, hour].sort())
   }
 
   const timeZones = Intl.supportedValuesOf("timeZone").filter(zone =>
@@ -252,16 +254,13 @@ export function ProfileContent(
                         </p>
 
                         <div className="grid grid-cols-4 gap-2">
-                          {listHours?.map((hour) => (
+                          {hours?.map((hour) => (
                             <Button
-                              key={hour.id}
-                              onClick={() => toggleHour(hour)}
-                              className={cn(
-                                "border border-corprimary",
-                                selectedHours.some((slot) => slot.time === hour.time) && 'border-corsecondary bg-corsecondary'
-                              )}
+                              key={hour}
+                              onClick={() => togglreHour(hour)}
+                              className={cn("border border-corprimary", selectedHours.includes(hour) && 'border-corsecondary bg-corsecondary')}
                             >
-                              {hour.time}
+                              {hour}
                             </Button>
                           ))}
                         </div>

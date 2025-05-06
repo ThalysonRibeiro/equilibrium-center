@@ -11,12 +11,7 @@ const formSchema = z.object({
   phone: z.string().optional(),
   status: z.boolean(),
   timeZone: z.string(),
-  times: z.array(
-    z.object({
-      id: z.string(),
-      time: z.string()
-    })
-  )
+  times: z.array(z.string())
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -48,13 +43,7 @@ export async function updateProfile(formData: FormSchema) {
         phone: formData.phone,
         status: formData.status,
         timeZone: formData.timeZone,
-        times: {
-          deleteMany: {}, // Limpa os registros antigos de times
-          create: formData?.times.map((t) => ({
-            id: t.id,
-            time: t.time
-          })) || []
-        }
+        times: formData.times || []
       }
     });
 

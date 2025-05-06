@@ -44,21 +44,6 @@ export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model Times
- * 
- */
-export type Times = $Result.DefaultSelection<Prisma.$TimesPayload>
-/**
- * Model Schedules
- * 
- */
-export type Schedules = $Result.DefaultSelection<Prisma.$SchedulesPayload>
-/**
- * Model Hours
- * 
- */
-export type Hours = $Result.DefaultSelection<Prisma.$HoursPayload>
-/**
  * Model Account
  * 
  */
@@ -296,36 +281,6 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.times`: Exposes CRUD operations for the **Times** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Times
-    * const times = await prisma.times.findMany()
-    * ```
-    */
-  get times(): Prisma.TimesDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.schedules`: Exposes CRUD operations for the **Schedules** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Schedules
-    * const schedules = await prisma.schedules.findMany()
-    * ```
-    */
-  get schedules(): Prisma.SchedulesDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.hours`: Exposes CRUD operations for the **Hours** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Hours
-    * const hours = await prisma.hours.findMany()
-    * ```
-    */
-  get hours(): Prisma.HoursDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -812,9 +767,6 @@ export namespace Prisma {
     Service: 'Service',
     Subscription: 'Subscription',
     User: 'User',
-    Times: 'Times',
-    Schedules: 'Schedules',
-    Hours: 'Hours',
     Account: 'Account',
     Session: 'Session',
     VerificationToken: 'VerificationToken',
@@ -837,7 +789,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "report" | "appointment" | "reminder" | "service" | "subscription" | "user" | "times" | "schedules" | "hours" | "account" | "session" | "verificationToken" | "authenticator"
+      modelProps: "report" | "appointment" | "reminder" | "service" | "subscription" | "user" | "account" | "session" | "verificationToken" | "authenticator"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1285,228 +1237,6 @@ export namespace Prisma {
           }
         }
       }
-      Times: {
-        payload: Prisma.$TimesPayload<ExtArgs>
-        fields: Prisma.TimesFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.TimesFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.TimesFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          findFirst: {
-            args: Prisma.TimesFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.TimesFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          findMany: {
-            args: Prisma.TimesFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>[]
-          }
-          create: {
-            args: Prisma.TimesCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          createMany: {
-            args: Prisma.TimesCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.TimesCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>[]
-          }
-          delete: {
-            args: Prisma.TimesDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          update: {
-            args: Prisma.TimesUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          deleteMany: {
-            args: Prisma.TimesDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.TimesUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.TimesUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>[]
-          }
-          upsert: {
-            args: Prisma.TimesUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$TimesPayload>
-          }
-          aggregate: {
-            args: Prisma.TimesAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateTimes>
-          }
-          groupBy: {
-            args: Prisma.TimesGroupByArgs<ExtArgs>
-            result: $Utils.Optional<TimesGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.TimesCountArgs<ExtArgs>
-            result: $Utils.Optional<TimesCountAggregateOutputType> | number
-          }
-        }
-      }
-      Schedules: {
-        payload: Prisma.$SchedulesPayload<ExtArgs>
-        fields: Prisma.SchedulesFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SchedulesFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SchedulesFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          findFirst: {
-            args: Prisma.SchedulesFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SchedulesFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          findMany: {
-            args: Prisma.SchedulesFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>[]
-          }
-          create: {
-            args: Prisma.SchedulesCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          createMany: {
-            args: Prisma.SchedulesCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SchedulesCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>[]
-          }
-          delete: {
-            args: Prisma.SchedulesDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          update: {
-            args: Prisma.SchedulesUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          deleteMany: {
-            args: Prisma.SchedulesDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SchedulesUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.SchedulesUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>[]
-          }
-          upsert: {
-            args: Prisma.SchedulesUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SchedulesPayload>
-          }
-          aggregate: {
-            args: Prisma.SchedulesAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSchedules>
-          }
-          groupBy: {
-            args: Prisma.SchedulesGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SchedulesGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SchedulesCountArgs<ExtArgs>
-            result: $Utils.Optional<SchedulesCountAggregateOutputType> | number
-          }
-        }
-      }
-      Hours: {
-        payload: Prisma.$HoursPayload<ExtArgs>
-        fields: Prisma.HoursFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.HoursFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.HoursFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          findFirst: {
-            args: Prisma.HoursFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.HoursFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          findMany: {
-            args: Prisma.HoursFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>[]
-          }
-          create: {
-            args: Prisma.HoursCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          createMany: {
-            args: Prisma.HoursCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.HoursCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>[]
-          }
-          delete: {
-            args: Prisma.HoursDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          update: {
-            args: Prisma.HoursUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          deleteMany: {
-            args: Prisma.HoursDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.HoursUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.HoursUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>[]
-          }
-          upsert: {
-            args: Prisma.HoursUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$HoursPayload>
-          }
-          aggregate: {
-            args: Prisma.HoursAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateHours>
-          }
-          groupBy: {
-            args: Prisma.HoursGroupByArgs<ExtArgs>
-            result: $Utils.Optional<HoursGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.HoursCountArgs<ExtArgs>
-            result: $Utils.Optional<HoursCountAggregateOutputType> | number
-          }
-        }
-      }
       Account: {
         payload: Prisma.$AccountPayload<ExtArgs>
         fields: Prisma.AccountFieldRefs
@@ -1893,9 +1623,6 @@ export namespace Prisma {
     service?: ServiceOmit
     subscription?: SubscriptionOmit
     user?: UserOmit
-    times?: TimesOmit
-    schedules?: SchedulesOmit
-    hours?: HoursOmit
     account?: AccountOmit
     session?: SessionOmit
     verificationToken?: VerificationTokenOmit
@@ -2025,8 +1752,7 @@ export namespace Prisma {
    */
 
   export type UserCountOutputType = {
-    times: number
-    Service: number
+    service: number
     accounts: number
     reminder: number
     appointment: number
@@ -2036,8 +1762,7 @@ export namespace Prisma {
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    times?: boolean | UserCountOutputTypeCountTimesArgs
-    Service?: boolean | UserCountOutputTypeCountServiceArgs
+    service?: boolean | UserCountOutputTypeCountServiceArgs
     accounts?: boolean | UserCountOutputTypeCountAccountsArgs
     reminder?: boolean | UserCountOutputTypeCountReminderArgs
     appointment?: boolean | UserCountOutputTypeCountAppointmentArgs
@@ -2055,13 +1780,6 @@ export namespace Prisma {
      * Select specific fields to fetch from the UserCountOutputType
      */
     select?: UserCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * UserCountOutputType without action
-   */
-  export type UserCountOutputTypeCountTimesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TimesWhereInput
   }
 
   /**
@@ -2111,37 +1829,6 @@ export namespace Prisma {
    */
   export type UserCountOutputTypeCountAuthenticatorArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuthenticatorWhereInput
-  }
-
-
-  /**
-   * Count Type SchedulesCountOutputType
-   */
-
-  export type SchedulesCountOutputType = {
-    Hours: number
-  }
-
-  export type SchedulesCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Hours?: boolean | SchedulesCountOutputTypeCountHoursArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * SchedulesCountOutputType without action
-   */
-  export type SchedulesCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SchedulesCountOutputType
-     */
-    select?: SchedulesCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * SchedulesCountOutputType without action
-   */
-  export type SchedulesCountOutputTypeCountHoursArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: HoursWhereInput
   }
 
 
@@ -7764,6 +7451,7 @@ export namespace Prisma {
     timeZone: number
     stripe_customer_id: number
     subscriptionId: number
+    times: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -7814,6 +7502,7 @@ export namespace Prisma {
     timeZone?: true
     stripe_customer_id?: true
     subscriptionId?: true
+    times?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -7903,6 +7592,7 @@ export namespace Prisma {
     timeZone: string | null
     stripe_customer_id: string | null
     subscriptionId: string | null
+    times: string[]
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -7936,11 +7626,11 @@ export namespace Prisma {
     timeZone?: boolean
     stripe_customer_id?: boolean
     subscriptionId?: boolean
+    times?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
-    times?: boolean | User$timesArgs<ExtArgs>
-    Service?: boolean | User$ServiceArgs<ExtArgs>
+    service?: boolean | User$serviceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     reminder?: boolean | User$reminderArgs<ExtArgs>
     appointment?: boolean | User$appointmentArgs<ExtArgs>
@@ -7962,6 +7652,7 @@ export namespace Prisma {
     timeZone?: boolean
     stripe_customer_id?: boolean
     subscriptionId?: boolean
+    times?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -7978,6 +7669,7 @@ export namespace Prisma {
     timeZone?: boolean
     stripe_customer_id?: boolean
     subscriptionId?: boolean
+    times?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -7994,15 +7686,15 @@ export namespace Prisma {
     timeZone?: boolean
     stripe_customer_id?: boolean
     subscriptionId?: boolean
+    times?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "subscriptionId" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "subscriptionId" | "times" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
-    times?: boolean | User$timesArgs<ExtArgs>
-    Service?: boolean | User$ServiceArgs<ExtArgs>
+    service?: boolean | User$serviceArgs<ExtArgs>
     accounts?: boolean | User$accountsArgs<ExtArgs>
     reminder?: boolean | User$reminderArgs<ExtArgs>
     appointment?: boolean | User$appointmentArgs<ExtArgs>
@@ -8018,8 +7710,7 @@ export namespace Prisma {
     name: "User"
     objects: {
       subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
-      times: Prisma.$TimesPayload<ExtArgs>[]
-      Service: Prisma.$ServicePayload<ExtArgs>[]
+      service: Prisma.$ServicePayload<ExtArgs>[]
       accounts: Prisma.$AccountPayload<ExtArgs>[]
       reminder: Prisma.$ReminderPayload<ExtArgs>[]
       appointment: Prisma.$AppointmentPayload<ExtArgs>[]
@@ -8039,6 +7730,7 @@ export namespace Prisma {
       timeZone: string | null
       stripe_customer_id: string | null
       subscriptionId: string | null
+      times: string[]
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -8436,8 +8128,7 @@ export namespace Prisma {
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     subscription<T extends User$subscriptionArgs<ExtArgs> = {}>(args?: Subset<T, User$subscriptionArgs<ExtArgs>>): Prisma__SubscriptionClient<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    times<T extends User$timesArgs<ExtArgs> = {}>(args?: Subset<T, User$timesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Service<T extends User$ServiceArgs<ExtArgs> = {}>(args?: Subset<T, User$ServiceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    service<T extends User$serviceArgs<ExtArgs> = {}>(args?: Subset<T, User$serviceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     accounts<T extends User$accountsArgs<ExtArgs> = {}>(args?: Subset<T, User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     reminder<T extends User$reminderArgs<ExtArgs> = {}>(args?: Subset<T, User$reminderArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     appointment<T extends User$appointmentArgs<ExtArgs> = {}>(args?: Subset<T, User$appointmentArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -8484,6 +8175,7 @@ export namespace Prisma {
     readonly timeZone: FieldRef<"User", 'String'>
     readonly stripe_customer_id: FieldRef<"User", 'String'>
     readonly subscriptionId: FieldRef<"User", 'String'>
+    readonly times: FieldRef<"User", 'String[]'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -8893,33 +8585,9 @@ export namespace Prisma {
   }
 
   /**
-   * User.times
+   * User.service
    */
-  export type User$timesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    where?: TimesWhereInput
-    orderBy?: TimesOrderByWithRelationInput | TimesOrderByWithRelationInput[]
-    cursor?: TimesWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: TimesScalarFieldEnum | TimesScalarFieldEnum[]
-  }
-
-  /**
-   * User.Service
-   */
-  export type User$ServiceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type User$serviceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Service
      */
@@ -9100,3166 +8768,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Times
-   */
-
-  export type AggregateTimes = {
-    _count: TimesCountAggregateOutputType | null
-    _min: TimesMinAggregateOutputType | null
-    _max: TimesMaxAggregateOutputType | null
-  }
-
-  export type TimesMinAggregateOutputType = {
-    id: string | null
-    time: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TimesMaxAggregateOutputType = {
-    id: string | null
-    time: string | null
-    userId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type TimesCountAggregateOutputType = {
-    id: number
-    time: number
-    userId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type TimesMinAggregateInputType = {
-    id?: true
-    time?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TimesMaxAggregateInputType = {
-    id?: true
-    time?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type TimesCountAggregateInputType = {
-    id?: true
-    time?: true
-    userId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type TimesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Times to aggregate.
-     */
-    where?: TimesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Times to fetch.
-     */
-    orderBy?: TimesOrderByWithRelationInput | TimesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: TimesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Times from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Times.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Times
-    **/
-    _count?: true | TimesCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: TimesMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: TimesMaxAggregateInputType
-  }
-
-  export type GetTimesAggregateType<T extends TimesAggregateArgs> = {
-        [P in keyof T & keyof AggregateTimes]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateTimes[P]>
-      : GetScalarType<T[P], AggregateTimes[P]>
-  }
-
-
-
-
-  export type TimesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: TimesWhereInput
-    orderBy?: TimesOrderByWithAggregationInput | TimesOrderByWithAggregationInput[]
-    by: TimesScalarFieldEnum[] | TimesScalarFieldEnum
-    having?: TimesScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: TimesCountAggregateInputType | true
-    _min?: TimesMinAggregateInputType
-    _max?: TimesMaxAggregateInputType
-  }
-
-  export type TimesGroupByOutputType = {
-    id: string
-    time: string
-    userId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: TimesCountAggregateOutputType | null
-    _min: TimesMinAggregateOutputType | null
-    _max: TimesMaxAggregateOutputType | null
-  }
-
-  type GetTimesGroupByPayload<T extends TimesGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<TimesGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof TimesGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], TimesGroupByOutputType[P]>
-            : GetScalarType<T[P], TimesGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type TimesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["times"]>
-
-  export type TimesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["times"]>
-
-  export type TimesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["times"]>
-
-  export type TimesSelectScalar = {
-    id?: boolean
-    time?: boolean
-    userId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type TimesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "time" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["times"]>
-  export type TimesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type TimesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-  export type TimesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | UserDefaultArgs<ExtArgs>
-  }
-
-  export type $TimesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Times"
-    objects: {
-      user: Prisma.$UserPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      time: string
-      userId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["times"]>
-    composites: {}
-  }
-
-  type TimesGetPayload<S extends boolean | null | undefined | TimesDefaultArgs> = $Result.GetResult<Prisma.$TimesPayload, S>
-
-  type TimesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<TimesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: TimesCountAggregateInputType | true
-    }
-
-  export interface TimesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Times'], meta: { name: 'Times' } }
-    /**
-     * Find zero or one Times that matches the filter.
-     * @param {TimesFindUniqueArgs} args - Arguments to find a Times
-     * @example
-     * // Get one Times
-     * const times = await prisma.times.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends TimesFindUniqueArgs>(args: SelectSubset<T, TimesFindUniqueArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Times that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {TimesFindUniqueOrThrowArgs} args - Arguments to find a Times
-     * @example
-     * // Get one Times
-     * const times = await prisma.times.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends TimesFindUniqueOrThrowArgs>(args: SelectSubset<T, TimesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Times that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesFindFirstArgs} args - Arguments to find a Times
-     * @example
-     * // Get one Times
-     * const times = await prisma.times.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends TimesFindFirstArgs>(args?: SelectSubset<T, TimesFindFirstArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Times that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesFindFirstOrThrowArgs} args - Arguments to find a Times
-     * @example
-     * // Get one Times
-     * const times = await prisma.times.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends TimesFindFirstOrThrowArgs>(args?: SelectSubset<T, TimesFindFirstOrThrowArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Times that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Times
-     * const times = await prisma.times.findMany()
-     * 
-     * // Get first 10 Times
-     * const times = await prisma.times.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const timesWithIdOnly = await prisma.times.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends TimesFindManyArgs>(args?: SelectSubset<T, TimesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Times.
-     * @param {TimesCreateArgs} args - Arguments to create a Times.
-     * @example
-     * // Create one Times
-     * const Times = await prisma.times.create({
-     *   data: {
-     *     // ... data to create a Times
-     *   }
-     * })
-     * 
-     */
-    create<T extends TimesCreateArgs>(args: SelectSubset<T, TimesCreateArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Times.
-     * @param {TimesCreateManyArgs} args - Arguments to create many Times.
-     * @example
-     * // Create many Times
-     * const times = await prisma.times.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends TimesCreateManyArgs>(args?: SelectSubset<T, TimesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Times and returns the data saved in the database.
-     * @param {TimesCreateManyAndReturnArgs} args - Arguments to create many Times.
-     * @example
-     * // Create many Times
-     * const times = await prisma.times.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Times and only return the `id`
-     * const timesWithIdOnly = await prisma.times.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends TimesCreateManyAndReturnArgs>(args?: SelectSubset<T, TimesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Times.
-     * @param {TimesDeleteArgs} args - Arguments to delete one Times.
-     * @example
-     * // Delete one Times
-     * const Times = await prisma.times.delete({
-     *   where: {
-     *     // ... filter to delete one Times
-     *   }
-     * })
-     * 
-     */
-    delete<T extends TimesDeleteArgs>(args: SelectSubset<T, TimesDeleteArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Times.
-     * @param {TimesUpdateArgs} args - Arguments to update one Times.
-     * @example
-     * // Update one Times
-     * const times = await prisma.times.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends TimesUpdateArgs>(args: SelectSubset<T, TimesUpdateArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Times.
-     * @param {TimesDeleteManyArgs} args - Arguments to filter Times to delete.
-     * @example
-     * // Delete a few Times
-     * const { count } = await prisma.times.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends TimesDeleteManyArgs>(args?: SelectSubset<T, TimesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Times.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Times
-     * const times = await prisma.times.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends TimesUpdateManyArgs>(args: SelectSubset<T, TimesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Times and returns the data updated in the database.
-     * @param {TimesUpdateManyAndReturnArgs} args - Arguments to update many Times.
-     * @example
-     * // Update many Times
-     * const times = await prisma.times.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Times and only return the `id`
-     * const timesWithIdOnly = await prisma.times.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends TimesUpdateManyAndReturnArgs>(args: SelectSubset<T, TimesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Times.
-     * @param {TimesUpsertArgs} args - Arguments to update or create a Times.
-     * @example
-     * // Update or create a Times
-     * const times = await prisma.times.upsert({
-     *   create: {
-     *     // ... data to create a Times
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Times we want to update
-     *   }
-     * })
-     */
-    upsert<T extends TimesUpsertArgs>(args: SelectSubset<T, TimesUpsertArgs<ExtArgs>>): Prisma__TimesClient<$Result.GetResult<Prisma.$TimesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Times.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesCountArgs} args - Arguments to filter Times to count.
-     * @example
-     * // Count the number of Times
-     * const count = await prisma.times.count({
-     *   where: {
-     *     // ... the filter for the Times we want to count
-     *   }
-     * })
-    **/
-    count<T extends TimesCountArgs>(
-      args?: Subset<T, TimesCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], TimesCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Times.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends TimesAggregateArgs>(args: Subset<T, TimesAggregateArgs>): Prisma.PrismaPromise<GetTimesAggregateType<T>>
-
-    /**
-     * Group by Times.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {TimesGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends TimesGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: TimesGroupByArgs['orderBy'] }
-        : { orderBy?: TimesGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, TimesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTimesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Times model
-   */
-  readonly fields: TimesFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Times.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__TimesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Times model
-   */
-  interface TimesFieldRefs {
-    readonly id: FieldRef<"Times", 'String'>
-    readonly time: FieldRef<"Times", 'String'>
-    readonly userId: FieldRef<"Times", 'String'>
-    readonly createdAt: FieldRef<"Times", 'DateTime'>
-    readonly updatedAt: FieldRef<"Times", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Times findUnique
-   */
-  export type TimesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter, which Times to fetch.
-     */
-    where: TimesWhereUniqueInput
-  }
-
-  /**
-   * Times findUniqueOrThrow
-   */
-  export type TimesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter, which Times to fetch.
-     */
-    where: TimesWhereUniqueInput
-  }
-
-  /**
-   * Times findFirst
-   */
-  export type TimesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter, which Times to fetch.
-     */
-    where?: TimesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Times to fetch.
-     */
-    orderBy?: TimesOrderByWithRelationInput | TimesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Times.
-     */
-    cursor?: TimesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Times from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Times.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Times.
-     */
-    distinct?: TimesScalarFieldEnum | TimesScalarFieldEnum[]
-  }
-
-  /**
-   * Times findFirstOrThrow
-   */
-  export type TimesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter, which Times to fetch.
-     */
-    where?: TimesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Times to fetch.
-     */
-    orderBy?: TimesOrderByWithRelationInput | TimesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Times.
-     */
-    cursor?: TimesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Times from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Times.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Times.
-     */
-    distinct?: TimesScalarFieldEnum | TimesScalarFieldEnum[]
-  }
-
-  /**
-   * Times findMany
-   */
-  export type TimesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter, which Times to fetch.
-     */
-    where?: TimesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Times to fetch.
-     */
-    orderBy?: TimesOrderByWithRelationInput | TimesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Times.
-     */
-    cursor?: TimesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Times from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Times.
-     */
-    skip?: number
-    distinct?: TimesScalarFieldEnum | TimesScalarFieldEnum[]
-  }
-
-  /**
-   * Times create
-   */
-  export type TimesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Times.
-     */
-    data: XOR<TimesCreateInput, TimesUncheckedCreateInput>
-  }
-
-  /**
-   * Times createMany
-   */
-  export type TimesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Times.
-     */
-    data: TimesCreateManyInput | TimesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Times createManyAndReturn
-   */
-  export type TimesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * The data used to create many Times.
-     */
-    data: TimesCreateManyInput | TimesCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Times update
-   */
-  export type TimesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Times.
-     */
-    data: XOR<TimesUpdateInput, TimesUncheckedUpdateInput>
-    /**
-     * Choose, which Times to update.
-     */
-    where: TimesWhereUniqueInput
-  }
-
-  /**
-   * Times updateMany
-   */
-  export type TimesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Times.
-     */
-    data: XOR<TimesUpdateManyMutationInput, TimesUncheckedUpdateManyInput>
-    /**
-     * Filter which Times to update
-     */
-    where?: TimesWhereInput
-    /**
-     * Limit how many Times to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Times updateManyAndReturn
-   */
-  export type TimesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * The data used to update Times.
-     */
-    data: XOR<TimesUpdateManyMutationInput, TimesUncheckedUpdateManyInput>
-    /**
-     * Filter which Times to update
-     */
-    where?: TimesWhereInput
-    /**
-     * Limit how many Times to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Times upsert
-   */
-  export type TimesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Times to update in case it exists.
-     */
-    where: TimesWhereUniqueInput
-    /**
-     * In case the Times found by the `where` argument doesn't exist, create a new Times with this data.
-     */
-    create: XOR<TimesCreateInput, TimesUncheckedCreateInput>
-    /**
-     * In case the Times was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<TimesUpdateInput, TimesUncheckedUpdateInput>
-  }
-
-  /**
-   * Times delete
-   */
-  export type TimesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-    /**
-     * Filter which Times to delete.
-     */
-    where: TimesWhereUniqueInput
-  }
-
-  /**
-   * Times deleteMany
-   */
-  export type TimesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Times to delete
-     */
-    where?: TimesWhereInput
-    /**
-     * Limit how many Times to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Times without action
-   */
-  export type TimesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Times
-     */
-    select?: TimesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Times
-     */
-    omit?: TimesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: TimesInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Schedules
-   */
-
-  export type AggregateSchedules = {
-    _count: SchedulesCountAggregateOutputType | null
-    _min: SchedulesMinAggregateOutputType | null
-    _max: SchedulesMaxAggregateOutputType | null
-  }
-
-  export type SchedulesMinAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SchedulesMaxAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SchedulesCountAggregateOutputType = {
-    id: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type SchedulesMinAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SchedulesMaxAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SchedulesCountAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type SchedulesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Schedules to aggregate.
-     */
-    where?: SchedulesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Schedules to fetch.
-     */
-    orderBy?: SchedulesOrderByWithRelationInput | SchedulesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SchedulesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Schedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Schedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Schedules
-    **/
-    _count?: true | SchedulesCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SchedulesMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SchedulesMaxAggregateInputType
-  }
-
-  export type GetSchedulesAggregateType<T extends SchedulesAggregateArgs> = {
-        [P in keyof T & keyof AggregateSchedules]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSchedules[P]>
-      : GetScalarType<T[P], AggregateSchedules[P]>
-  }
-
-
-
-
-  export type SchedulesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SchedulesWhereInput
-    orderBy?: SchedulesOrderByWithAggregationInput | SchedulesOrderByWithAggregationInput[]
-    by: SchedulesScalarFieldEnum[] | SchedulesScalarFieldEnum
-    having?: SchedulesScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SchedulesCountAggregateInputType | true
-    _min?: SchedulesMinAggregateInputType
-    _max?: SchedulesMaxAggregateInputType
-  }
-
-  export type SchedulesGroupByOutputType = {
-    id: string
-    createdAt: Date
-    updatedAt: Date
-    _count: SchedulesCountAggregateOutputType | null
-    _min: SchedulesMinAggregateOutputType | null
-    _max: SchedulesMaxAggregateOutputType | null
-  }
-
-  type GetSchedulesGroupByPayload<T extends SchedulesGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SchedulesGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SchedulesGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SchedulesGroupByOutputType[P]>
-            : GetScalarType<T[P], SchedulesGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SchedulesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    Hours?: boolean | Schedules$HoursArgs<ExtArgs>
-    _count?: boolean | SchedulesCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["schedules"]>
-
-  export type SchedulesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["schedules"]>
-
-  export type SchedulesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }, ExtArgs["result"]["schedules"]>
-
-  export type SchedulesSelectScalar = {
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type SchedulesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt", ExtArgs["result"]["schedules"]>
-  export type SchedulesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Hours?: boolean | Schedules$HoursArgs<ExtArgs>
-    _count?: boolean | SchedulesCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type SchedulesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type SchedulesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-
-  export type $SchedulesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Schedules"
-    objects: {
-      Hours: Prisma.$HoursPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["schedules"]>
-    composites: {}
-  }
-
-  type SchedulesGetPayload<S extends boolean | null | undefined | SchedulesDefaultArgs> = $Result.GetResult<Prisma.$SchedulesPayload, S>
-
-  type SchedulesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SchedulesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SchedulesCountAggregateInputType | true
-    }
-
-  export interface SchedulesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Schedules'], meta: { name: 'Schedules' } }
-    /**
-     * Find zero or one Schedules that matches the filter.
-     * @param {SchedulesFindUniqueArgs} args - Arguments to find a Schedules
-     * @example
-     * // Get one Schedules
-     * const schedules = await prisma.schedules.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SchedulesFindUniqueArgs>(args: SelectSubset<T, SchedulesFindUniqueArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Schedules that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SchedulesFindUniqueOrThrowArgs} args - Arguments to find a Schedules
-     * @example
-     * // Get one Schedules
-     * const schedules = await prisma.schedules.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SchedulesFindUniqueOrThrowArgs>(args: SelectSubset<T, SchedulesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Schedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesFindFirstArgs} args - Arguments to find a Schedules
-     * @example
-     * // Get one Schedules
-     * const schedules = await prisma.schedules.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SchedulesFindFirstArgs>(args?: SelectSubset<T, SchedulesFindFirstArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Schedules that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesFindFirstOrThrowArgs} args - Arguments to find a Schedules
-     * @example
-     * // Get one Schedules
-     * const schedules = await prisma.schedules.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SchedulesFindFirstOrThrowArgs>(args?: SelectSubset<T, SchedulesFindFirstOrThrowArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Schedules that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Schedules
-     * const schedules = await prisma.schedules.findMany()
-     * 
-     * // Get first 10 Schedules
-     * const schedules = await prisma.schedules.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const schedulesWithIdOnly = await prisma.schedules.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SchedulesFindManyArgs>(args?: SelectSubset<T, SchedulesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Schedules.
-     * @param {SchedulesCreateArgs} args - Arguments to create a Schedules.
-     * @example
-     * // Create one Schedules
-     * const Schedules = await prisma.schedules.create({
-     *   data: {
-     *     // ... data to create a Schedules
-     *   }
-     * })
-     * 
-     */
-    create<T extends SchedulesCreateArgs>(args: SelectSubset<T, SchedulesCreateArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Schedules.
-     * @param {SchedulesCreateManyArgs} args - Arguments to create many Schedules.
-     * @example
-     * // Create many Schedules
-     * const schedules = await prisma.schedules.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SchedulesCreateManyArgs>(args?: SelectSubset<T, SchedulesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Schedules and returns the data saved in the database.
-     * @param {SchedulesCreateManyAndReturnArgs} args - Arguments to create many Schedules.
-     * @example
-     * // Create many Schedules
-     * const schedules = await prisma.schedules.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Schedules and only return the `id`
-     * const schedulesWithIdOnly = await prisma.schedules.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SchedulesCreateManyAndReturnArgs>(args?: SelectSubset<T, SchedulesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Schedules.
-     * @param {SchedulesDeleteArgs} args - Arguments to delete one Schedules.
-     * @example
-     * // Delete one Schedules
-     * const Schedules = await prisma.schedules.delete({
-     *   where: {
-     *     // ... filter to delete one Schedules
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SchedulesDeleteArgs>(args: SelectSubset<T, SchedulesDeleteArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Schedules.
-     * @param {SchedulesUpdateArgs} args - Arguments to update one Schedules.
-     * @example
-     * // Update one Schedules
-     * const schedules = await prisma.schedules.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SchedulesUpdateArgs>(args: SelectSubset<T, SchedulesUpdateArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Schedules.
-     * @param {SchedulesDeleteManyArgs} args - Arguments to filter Schedules to delete.
-     * @example
-     * // Delete a few Schedules
-     * const { count } = await prisma.schedules.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SchedulesDeleteManyArgs>(args?: SelectSubset<T, SchedulesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Schedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Schedules
-     * const schedules = await prisma.schedules.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SchedulesUpdateManyArgs>(args: SelectSubset<T, SchedulesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Schedules and returns the data updated in the database.
-     * @param {SchedulesUpdateManyAndReturnArgs} args - Arguments to update many Schedules.
-     * @example
-     * // Update many Schedules
-     * const schedules = await prisma.schedules.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Schedules and only return the `id`
-     * const schedulesWithIdOnly = await prisma.schedules.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SchedulesUpdateManyAndReturnArgs>(args: SelectSubset<T, SchedulesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Schedules.
-     * @param {SchedulesUpsertArgs} args - Arguments to update or create a Schedules.
-     * @example
-     * // Update or create a Schedules
-     * const schedules = await prisma.schedules.upsert({
-     *   create: {
-     *     // ... data to create a Schedules
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Schedules we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SchedulesUpsertArgs>(args: SelectSubset<T, SchedulesUpsertArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Schedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesCountArgs} args - Arguments to filter Schedules to count.
-     * @example
-     * // Count the number of Schedules
-     * const count = await prisma.schedules.count({
-     *   where: {
-     *     // ... the filter for the Schedules we want to count
-     *   }
-     * })
-    **/
-    count<T extends SchedulesCountArgs>(
-      args?: Subset<T, SchedulesCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SchedulesCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Schedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SchedulesAggregateArgs>(args: Subset<T, SchedulesAggregateArgs>): Prisma.PrismaPromise<GetSchedulesAggregateType<T>>
-
-    /**
-     * Group by Schedules.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SchedulesGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SchedulesGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SchedulesGroupByArgs['orderBy'] }
-        : { orderBy?: SchedulesGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SchedulesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSchedulesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Schedules model
-   */
-  readonly fields: SchedulesFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Schedules.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SchedulesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    Hours<T extends Schedules$HoursArgs<ExtArgs> = {}>(args?: Subset<T, Schedules$HoursArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Schedules model
-   */
-  interface SchedulesFieldRefs {
-    readonly id: FieldRef<"Schedules", 'String'>
-    readonly createdAt: FieldRef<"Schedules", 'DateTime'>
-    readonly updatedAt: FieldRef<"Schedules", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Schedules findUnique
-   */
-  export type SchedulesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter, which Schedules to fetch.
-     */
-    where: SchedulesWhereUniqueInput
-  }
-
-  /**
-   * Schedules findUniqueOrThrow
-   */
-  export type SchedulesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter, which Schedules to fetch.
-     */
-    where: SchedulesWhereUniqueInput
-  }
-
-  /**
-   * Schedules findFirst
-   */
-  export type SchedulesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter, which Schedules to fetch.
-     */
-    where?: SchedulesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Schedules to fetch.
-     */
-    orderBy?: SchedulesOrderByWithRelationInput | SchedulesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Schedules.
-     */
-    cursor?: SchedulesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Schedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Schedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Schedules.
-     */
-    distinct?: SchedulesScalarFieldEnum | SchedulesScalarFieldEnum[]
-  }
-
-  /**
-   * Schedules findFirstOrThrow
-   */
-  export type SchedulesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter, which Schedules to fetch.
-     */
-    where?: SchedulesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Schedules to fetch.
-     */
-    orderBy?: SchedulesOrderByWithRelationInput | SchedulesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Schedules.
-     */
-    cursor?: SchedulesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Schedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Schedules.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Schedules.
-     */
-    distinct?: SchedulesScalarFieldEnum | SchedulesScalarFieldEnum[]
-  }
-
-  /**
-   * Schedules findMany
-   */
-  export type SchedulesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter, which Schedules to fetch.
-     */
-    where?: SchedulesWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Schedules to fetch.
-     */
-    orderBy?: SchedulesOrderByWithRelationInput | SchedulesOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Schedules.
-     */
-    cursor?: SchedulesWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Schedules from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Schedules.
-     */
-    skip?: number
-    distinct?: SchedulesScalarFieldEnum | SchedulesScalarFieldEnum[]
-  }
-
-  /**
-   * Schedules create
-   */
-  export type SchedulesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Schedules.
-     */
-    data: XOR<SchedulesCreateInput, SchedulesUncheckedCreateInput>
-  }
-
-  /**
-   * Schedules createMany
-   */
-  export type SchedulesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Schedules.
-     */
-    data: SchedulesCreateManyInput | SchedulesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Schedules createManyAndReturn
-   */
-  export type SchedulesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * The data used to create many Schedules.
-     */
-    data: SchedulesCreateManyInput | SchedulesCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Schedules update
-   */
-  export type SchedulesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Schedules.
-     */
-    data: XOR<SchedulesUpdateInput, SchedulesUncheckedUpdateInput>
-    /**
-     * Choose, which Schedules to update.
-     */
-    where: SchedulesWhereUniqueInput
-  }
-
-  /**
-   * Schedules updateMany
-   */
-  export type SchedulesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Schedules.
-     */
-    data: XOR<SchedulesUpdateManyMutationInput, SchedulesUncheckedUpdateManyInput>
-    /**
-     * Filter which Schedules to update
-     */
-    where?: SchedulesWhereInput
-    /**
-     * Limit how many Schedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Schedules updateManyAndReturn
-   */
-  export type SchedulesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * The data used to update Schedules.
-     */
-    data: XOR<SchedulesUpdateManyMutationInput, SchedulesUncheckedUpdateManyInput>
-    /**
-     * Filter which Schedules to update
-     */
-    where?: SchedulesWhereInput
-    /**
-     * Limit how many Schedules to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Schedules upsert
-   */
-  export type SchedulesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Schedules to update in case it exists.
-     */
-    where: SchedulesWhereUniqueInput
-    /**
-     * In case the Schedules found by the `where` argument doesn't exist, create a new Schedules with this data.
-     */
-    create: XOR<SchedulesCreateInput, SchedulesUncheckedCreateInput>
-    /**
-     * In case the Schedules was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SchedulesUpdateInput, SchedulesUncheckedUpdateInput>
-  }
-
-  /**
-   * Schedules delete
-   */
-  export type SchedulesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-    /**
-     * Filter which Schedules to delete.
-     */
-    where: SchedulesWhereUniqueInput
-  }
-
-  /**
-   * Schedules deleteMany
-   */
-  export type SchedulesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Schedules to delete
-     */
-    where?: SchedulesWhereInput
-    /**
-     * Limit how many Schedules to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Schedules.Hours
-   */
-  export type Schedules$HoursArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    where?: HoursWhereInput
-    orderBy?: HoursOrderByWithRelationInput | HoursOrderByWithRelationInput[]
-    cursor?: HoursWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: HoursScalarFieldEnum | HoursScalarFieldEnum[]
-  }
-
-  /**
-   * Schedules without action
-   */
-  export type SchedulesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Schedules
-     */
-    select?: SchedulesSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Schedules
-     */
-    omit?: SchedulesOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SchedulesInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model Hours
-   */
-
-  export type AggregateHours = {
-    _count: HoursCountAggregateOutputType | null
-    _min: HoursMinAggregateOutputType | null
-    _max: HoursMaxAggregateOutputType | null
-  }
-
-  export type HoursMinAggregateOutputType = {
-    id: string | null
-    time: string | null
-    schedulesId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type HoursMaxAggregateOutputType = {
-    id: string | null
-    time: string | null
-    schedulesId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type HoursCountAggregateOutputType = {
-    id: number
-    time: number
-    schedulesId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type HoursMinAggregateInputType = {
-    id?: true
-    time?: true
-    schedulesId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type HoursMaxAggregateInputType = {
-    id?: true
-    time?: true
-    schedulesId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type HoursCountAggregateInputType = {
-    id?: true
-    time?: true
-    schedulesId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type HoursAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Hours to aggregate.
-     */
-    where?: HoursWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Hours to fetch.
-     */
-    orderBy?: HoursOrderByWithRelationInput | HoursOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: HoursWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Hours from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Hours.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Hours
-    **/
-    _count?: true | HoursCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: HoursMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: HoursMaxAggregateInputType
-  }
-
-  export type GetHoursAggregateType<T extends HoursAggregateArgs> = {
-        [P in keyof T & keyof AggregateHours]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateHours[P]>
-      : GetScalarType<T[P], AggregateHours[P]>
-  }
-
-
-
-
-  export type HoursGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: HoursWhereInput
-    orderBy?: HoursOrderByWithAggregationInput | HoursOrderByWithAggregationInput[]
-    by: HoursScalarFieldEnum[] | HoursScalarFieldEnum
-    having?: HoursScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: HoursCountAggregateInputType | true
-    _min?: HoursMinAggregateInputType
-    _max?: HoursMaxAggregateInputType
-  }
-
-  export type HoursGroupByOutputType = {
-    id: string
-    time: string
-    schedulesId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: HoursCountAggregateOutputType | null
-    _min: HoursMinAggregateOutputType | null
-    _max: HoursMaxAggregateOutputType | null
-  }
-
-  type GetHoursGroupByPayload<T extends HoursGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<HoursGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof HoursGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], HoursGroupByOutputType[P]>
-            : GetScalarType<T[P], HoursGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type HoursSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    schedulesId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["hours"]>
-
-  export type HoursSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    schedulesId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["hours"]>
-
-  export type HoursSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    time?: boolean
-    schedulesId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["hours"]>
-
-  export type HoursSelectScalar = {
-    id?: boolean
-    time?: boolean
-    schedulesId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type HoursOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "time" | "schedulesId" | "createdAt" | "updatedAt", ExtArgs["result"]["hours"]>
-  export type HoursInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }
-  export type HoursIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }
-  export type HoursIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    schedules?: boolean | SchedulesDefaultArgs<ExtArgs>
-  }
-
-  export type $HoursPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Hours"
-    objects: {
-      schedules: Prisma.$SchedulesPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      time: string
-      schedulesId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["hours"]>
-    composites: {}
-  }
-
-  type HoursGetPayload<S extends boolean | null | undefined | HoursDefaultArgs> = $Result.GetResult<Prisma.$HoursPayload, S>
-
-  type HoursCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<HoursFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: HoursCountAggregateInputType | true
-    }
-
-  export interface HoursDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Hours'], meta: { name: 'Hours' } }
-    /**
-     * Find zero or one Hours that matches the filter.
-     * @param {HoursFindUniqueArgs} args - Arguments to find a Hours
-     * @example
-     * // Get one Hours
-     * const hours = await prisma.hours.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends HoursFindUniqueArgs>(args: SelectSubset<T, HoursFindUniqueArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Hours that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {HoursFindUniqueOrThrowArgs} args - Arguments to find a Hours
-     * @example
-     * // Get one Hours
-     * const hours = await prisma.hours.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends HoursFindUniqueOrThrowArgs>(args: SelectSubset<T, HoursFindUniqueOrThrowArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Hours that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursFindFirstArgs} args - Arguments to find a Hours
-     * @example
-     * // Get one Hours
-     * const hours = await prisma.hours.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends HoursFindFirstArgs>(args?: SelectSubset<T, HoursFindFirstArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Hours that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursFindFirstOrThrowArgs} args - Arguments to find a Hours
-     * @example
-     * // Get one Hours
-     * const hours = await prisma.hours.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends HoursFindFirstOrThrowArgs>(args?: SelectSubset<T, HoursFindFirstOrThrowArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Hours that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Hours
-     * const hours = await prisma.hours.findMany()
-     * 
-     * // Get first 10 Hours
-     * const hours = await prisma.hours.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const hoursWithIdOnly = await prisma.hours.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends HoursFindManyArgs>(args?: SelectSubset<T, HoursFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Hours.
-     * @param {HoursCreateArgs} args - Arguments to create a Hours.
-     * @example
-     * // Create one Hours
-     * const Hours = await prisma.hours.create({
-     *   data: {
-     *     // ... data to create a Hours
-     *   }
-     * })
-     * 
-     */
-    create<T extends HoursCreateArgs>(args: SelectSubset<T, HoursCreateArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Hours.
-     * @param {HoursCreateManyArgs} args - Arguments to create many Hours.
-     * @example
-     * // Create many Hours
-     * const hours = await prisma.hours.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends HoursCreateManyArgs>(args?: SelectSubset<T, HoursCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Hours and returns the data saved in the database.
-     * @param {HoursCreateManyAndReturnArgs} args - Arguments to create many Hours.
-     * @example
-     * // Create many Hours
-     * const hours = await prisma.hours.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Hours and only return the `id`
-     * const hoursWithIdOnly = await prisma.hours.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends HoursCreateManyAndReturnArgs>(args?: SelectSubset<T, HoursCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Hours.
-     * @param {HoursDeleteArgs} args - Arguments to delete one Hours.
-     * @example
-     * // Delete one Hours
-     * const Hours = await prisma.hours.delete({
-     *   where: {
-     *     // ... filter to delete one Hours
-     *   }
-     * })
-     * 
-     */
-    delete<T extends HoursDeleteArgs>(args: SelectSubset<T, HoursDeleteArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Hours.
-     * @param {HoursUpdateArgs} args - Arguments to update one Hours.
-     * @example
-     * // Update one Hours
-     * const hours = await prisma.hours.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends HoursUpdateArgs>(args: SelectSubset<T, HoursUpdateArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Hours.
-     * @param {HoursDeleteManyArgs} args - Arguments to filter Hours to delete.
-     * @example
-     * // Delete a few Hours
-     * const { count } = await prisma.hours.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends HoursDeleteManyArgs>(args?: SelectSubset<T, HoursDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Hours.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Hours
-     * const hours = await prisma.hours.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends HoursUpdateManyArgs>(args: SelectSubset<T, HoursUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Hours and returns the data updated in the database.
-     * @param {HoursUpdateManyAndReturnArgs} args - Arguments to update many Hours.
-     * @example
-     * // Update many Hours
-     * const hours = await prisma.hours.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Hours and only return the `id`
-     * const hoursWithIdOnly = await prisma.hours.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends HoursUpdateManyAndReturnArgs>(args: SelectSubset<T, HoursUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Hours.
-     * @param {HoursUpsertArgs} args - Arguments to update or create a Hours.
-     * @example
-     * // Update or create a Hours
-     * const hours = await prisma.hours.upsert({
-     *   create: {
-     *     // ... data to create a Hours
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Hours we want to update
-     *   }
-     * })
-     */
-    upsert<T extends HoursUpsertArgs>(args: SelectSubset<T, HoursUpsertArgs<ExtArgs>>): Prisma__HoursClient<$Result.GetResult<Prisma.$HoursPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Hours.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursCountArgs} args - Arguments to filter Hours to count.
-     * @example
-     * // Count the number of Hours
-     * const count = await prisma.hours.count({
-     *   where: {
-     *     // ... the filter for the Hours we want to count
-     *   }
-     * })
-    **/
-    count<T extends HoursCountArgs>(
-      args?: Subset<T, HoursCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], HoursCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Hours.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends HoursAggregateArgs>(args: Subset<T, HoursAggregateArgs>): Prisma.PrismaPromise<GetHoursAggregateType<T>>
-
-    /**
-     * Group by Hours.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {HoursGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends HoursGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: HoursGroupByArgs['orderBy'] }
-        : { orderBy?: HoursGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, HoursGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetHoursGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Hours model
-   */
-  readonly fields: HoursFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Hours.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__HoursClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    schedules<T extends SchedulesDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SchedulesDefaultArgs<ExtArgs>>): Prisma__SchedulesClient<$Result.GetResult<Prisma.$SchedulesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Hours model
-   */
-  interface HoursFieldRefs {
-    readonly id: FieldRef<"Hours", 'String'>
-    readonly time: FieldRef<"Hours", 'String'>
-    readonly schedulesId: FieldRef<"Hours", 'String'>
-    readonly createdAt: FieldRef<"Hours", 'DateTime'>
-    readonly updatedAt: FieldRef<"Hours", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Hours findUnique
-   */
-  export type HoursFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter, which Hours to fetch.
-     */
-    where: HoursWhereUniqueInput
-  }
-
-  /**
-   * Hours findUniqueOrThrow
-   */
-  export type HoursFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter, which Hours to fetch.
-     */
-    where: HoursWhereUniqueInput
-  }
-
-  /**
-   * Hours findFirst
-   */
-  export type HoursFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter, which Hours to fetch.
-     */
-    where?: HoursWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Hours to fetch.
-     */
-    orderBy?: HoursOrderByWithRelationInput | HoursOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Hours.
-     */
-    cursor?: HoursWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Hours from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Hours.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Hours.
-     */
-    distinct?: HoursScalarFieldEnum | HoursScalarFieldEnum[]
-  }
-
-  /**
-   * Hours findFirstOrThrow
-   */
-  export type HoursFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter, which Hours to fetch.
-     */
-    where?: HoursWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Hours to fetch.
-     */
-    orderBy?: HoursOrderByWithRelationInput | HoursOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Hours.
-     */
-    cursor?: HoursWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Hours from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Hours.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Hours.
-     */
-    distinct?: HoursScalarFieldEnum | HoursScalarFieldEnum[]
-  }
-
-  /**
-   * Hours findMany
-   */
-  export type HoursFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter, which Hours to fetch.
-     */
-    where?: HoursWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Hours to fetch.
-     */
-    orderBy?: HoursOrderByWithRelationInput | HoursOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Hours.
-     */
-    cursor?: HoursWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Hours from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Hours.
-     */
-    skip?: number
-    distinct?: HoursScalarFieldEnum | HoursScalarFieldEnum[]
-  }
-
-  /**
-   * Hours create
-   */
-  export type HoursCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Hours.
-     */
-    data: XOR<HoursCreateInput, HoursUncheckedCreateInput>
-  }
-
-  /**
-   * Hours createMany
-   */
-  export type HoursCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Hours.
-     */
-    data: HoursCreateManyInput | HoursCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Hours createManyAndReturn
-   */
-  export type HoursCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * The data used to create many Hours.
-     */
-    data: HoursCreateManyInput | HoursCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Hours update
-   */
-  export type HoursUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Hours.
-     */
-    data: XOR<HoursUpdateInput, HoursUncheckedUpdateInput>
-    /**
-     * Choose, which Hours to update.
-     */
-    where: HoursWhereUniqueInput
-  }
-
-  /**
-   * Hours updateMany
-   */
-  export type HoursUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Hours.
-     */
-    data: XOR<HoursUpdateManyMutationInput, HoursUncheckedUpdateManyInput>
-    /**
-     * Filter which Hours to update
-     */
-    where?: HoursWhereInput
-    /**
-     * Limit how many Hours to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Hours updateManyAndReturn
-   */
-  export type HoursUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * The data used to update Hours.
-     */
-    data: XOR<HoursUpdateManyMutationInput, HoursUncheckedUpdateManyInput>
-    /**
-     * Filter which Hours to update
-     */
-    where?: HoursWhereInput
-    /**
-     * Limit how many Hours to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Hours upsert
-   */
-  export type HoursUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Hours to update in case it exists.
-     */
-    where: HoursWhereUniqueInput
-    /**
-     * In case the Hours found by the `where` argument doesn't exist, create a new Hours with this data.
-     */
-    create: XOR<HoursCreateInput, HoursUncheckedCreateInput>
-    /**
-     * In case the Hours was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<HoursUpdateInput, HoursUncheckedUpdateInput>
-  }
-
-  /**
-   * Hours delete
-   */
-  export type HoursDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
-    /**
-     * Filter which Hours to delete.
-     */
-    where: HoursWhereUniqueInput
-  }
-
-  /**
-   * Hours deleteMany
-   */
-  export type HoursDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Hours to delete
-     */
-    where?: HoursWhereInput
-    /**
-     * Limit how many Hours to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Hours without action
-   */
-  export type HoursDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Hours
-     */
-    select?: HoursSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Hours
-     */
-    omit?: HoursOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: HoursInclude<ExtArgs> | null
   }
 
 
@@ -16713,42 +13221,12 @@ export namespace Prisma {
     timeZone: 'timeZone',
     stripe_customer_id: 'stripe_customer_id',
     subscriptionId: 'subscriptionId',
+    times: 'times',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const TimesScalarFieldEnum: {
-    id: 'id',
-    time: 'time',
-    userId: 'userId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type TimesScalarFieldEnum = (typeof TimesScalarFieldEnum)[keyof typeof TimesScalarFieldEnum]
-
-
-  export const SchedulesScalarFieldEnum: {
-    id: 'id',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type SchedulesScalarFieldEnum = (typeof SchedulesScalarFieldEnum)[keyof typeof SchedulesScalarFieldEnum]
-
-
-  export const HoursScalarFieldEnum: {
-    id: 'id',
-    time: 'time',
-    schedulesId: 'schedulesId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type HoursScalarFieldEnum = (typeof HoursScalarFieldEnum)[keyof typeof HoursScalarFieldEnum]
 
 
   export const AccountScalarFieldEnum: {
@@ -17314,11 +13792,11 @@ export namespace Prisma {
     timeZone?: StringNullableFilter<"User"> | string | null
     stripe_customer_id?: StringNullableFilter<"User"> | string | null
     subscriptionId?: StringNullableFilter<"User"> | string | null
+    times?: StringNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
-    times?: TimesListRelationFilter
-    Service?: ServiceListRelationFilter
+    service?: ServiceListRelationFilter
     accounts?: AccountListRelationFilter
     reminder?: ReminderListRelationFilter
     appointment?: AppointmentListRelationFilter
@@ -17339,11 +13817,11 @@ export namespace Prisma {
     timeZone?: SortOrderInput | SortOrder
     stripe_customer_id?: SortOrderInput | SortOrder
     subscriptionId?: SortOrderInput | SortOrder
+    times?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     subscription?: SubscriptionOrderByWithRelationInput
-    times?: TimesOrderByRelationAggregateInput
-    Service?: ServiceOrderByRelationAggregateInput
+    service?: ServiceOrderByRelationAggregateInput
     accounts?: AccountOrderByRelationAggregateInput
     reminder?: ReminderOrderByRelationAggregateInput
     appointment?: AppointmentOrderByRelationAggregateInput
@@ -17367,11 +13845,11 @@ export namespace Prisma {
     timeZone?: StringNullableFilter<"User"> | string | null
     stripe_customer_id?: StringNullableFilter<"User"> | string | null
     subscriptionId?: StringNullableFilter<"User"> | string | null
+    times?: StringNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     subscription?: XOR<SubscriptionNullableScalarRelationFilter, SubscriptionWhereInput> | null
-    times?: TimesListRelationFilter
-    Service?: ServiceListRelationFilter
+    service?: ServiceListRelationFilter
     accounts?: AccountListRelationFilter
     reminder?: ReminderListRelationFilter
     appointment?: AppointmentListRelationFilter
@@ -17392,6 +13870,7 @@ export namespace Prisma {
     timeZone?: SortOrderInput | SortOrder
     stripe_customer_id?: SortOrderInput | SortOrder
     subscriptionId?: SortOrderInput | SortOrder
+    times?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -17414,163 +13893,9 @@ export namespace Prisma {
     timeZone?: StringNullableWithAggregatesFilter<"User"> | string | null
     stripe_customer_id?: StringNullableWithAggregatesFilter<"User"> | string | null
     subscriptionId?: StringNullableWithAggregatesFilter<"User"> | string | null
+    times?: StringNullableListFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
-  }
-
-  export type TimesWhereInput = {
-    AND?: TimesWhereInput | TimesWhereInput[]
-    OR?: TimesWhereInput[]
-    NOT?: TimesWhereInput | TimesWhereInput[]
-    id?: StringFilter<"Times"> | string
-    time?: StringFilter<"Times"> | string
-    userId?: StringFilter<"Times"> | string
-    createdAt?: DateTimeFilter<"Times"> | Date | string
-    updatedAt?: DateTimeFilter<"Times"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }
-
-  export type TimesOrderByWithRelationInput = {
-    id?: SortOrder
-    time?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    user?: UserOrderByWithRelationInput
-  }
-
-  export type TimesWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: TimesWhereInput | TimesWhereInput[]
-    OR?: TimesWhereInput[]
-    NOT?: TimesWhereInput | TimesWhereInput[]
-    time?: StringFilter<"Times"> | string
-    userId?: StringFilter<"Times"> | string
-    createdAt?: DateTimeFilter<"Times"> | Date | string
-    updatedAt?: DateTimeFilter<"Times"> | Date | string
-    user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "id">
-
-  export type TimesOrderByWithAggregationInput = {
-    id?: SortOrder
-    time?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: TimesCountOrderByAggregateInput
-    _max?: TimesMaxOrderByAggregateInput
-    _min?: TimesMinOrderByAggregateInput
-  }
-
-  export type TimesScalarWhereWithAggregatesInput = {
-    AND?: TimesScalarWhereWithAggregatesInput | TimesScalarWhereWithAggregatesInput[]
-    OR?: TimesScalarWhereWithAggregatesInput[]
-    NOT?: TimesScalarWhereWithAggregatesInput | TimesScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Times"> | string
-    time?: StringWithAggregatesFilter<"Times"> | string
-    userId?: StringWithAggregatesFilter<"Times"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Times"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Times"> | Date | string
-  }
-
-  export type SchedulesWhereInput = {
-    AND?: SchedulesWhereInput | SchedulesWhereInput[]
-    OR?: SchedulesWhereInput[]
-    NOT?: SchedulesWhereInput | SchedulesWhereInput[]
-    id?: StringFilter<"Schedules"> | string
-    createdAt?: DateTimeFilter<"Schedules"> | Date | string
-    updatedAt?: DateTimeFilter<"Schedules"> | Date | string
-    Hours?: HoursListRelationFilter
-  }
-
-  export type SchedulesOrderByWithRelationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    Hours?: HoursOrderByRelationAggregateInput
-  }
-
-  export type SchedulesWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: SchedulesWhereInput | SchedulesWhereInput[]
-    OR?: SchedulesWhereInput[]
-    NOT?: SchedulesWhereInput | SchedulesWhereInput[]
-    createdAt?: DateTimeFilter<"Schedules"> | Date | string
-    updatedAt?: DateTimeFilter<"Schedules"> | Date | string
-    Hours?: HoursListRelationFilter
-  }, "id">
-
-  export type SchedulesOrderByWithAggregationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: SchedulesCountOrderByAggregateInput
-    _max?: SchedulesMaxOrderByAggregateInput
-    _min?: SchedulesMinOrderByAggregateInput
-  }
-
-  export type SchedulesScalarWhereWithAggregatesInput = {
-    AND?: SchedulesScalarWhereWithAggregatesInput | SchedulesScalarWhereWithAggregatesInput[]
-    OR?: SchedulesScalarWhereWithAggregatesInput[]
-    NOT?: SchedulesScalarWhereWithAggregatesInput | SchedulesScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Schedules"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Schedules"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Schedules"> | Date | string
-  }
-
-  export type HoursWhereInput = {
-    AND?: HoursWhereInput | HoursWhereInput[]
-    OR?: HoursWhereInput[]
-    NOT?: HoursWhereInput | HoursWhereInput[]
-    id?: StringFilter<"Hours"> | string
-    time?: StringFilter<"Hours"> | string
-    schedulesId?: StringFilter<"Hours"> | string
-    createdAt?: DateTimeFilter<"Hours"> | Date | string
-    updatedAt?: DateTimeFilter<"Hours"> | Date | string
-    schedules?: XOR<SchedulesScalarRelationFilter, SchedulesWhereInput>
-  }
-
-  export type HoursOrderByWithRelationInput = {
-    id?: SortOrder
-    time?: SortOrder
-    schedulesId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    schedules?: SchedulesOrderByWithRelationInput
-  }
-
-  export type HoursWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: HoursWhereInput | HoursWhereInput[]
-    OR?: HoursWhereInput[]
-    NOT?: HoursWhereInput | HoursWhereInput[]
-    time?: StringFilter<"Hours"> | string
-    schedulesId?: StringFilter<"Hours"> | string
-    createdAt?: DateTimeFilter<"Hours"> | Date | string
-    updatedAt?: DateTimeFilter<"Hours"> | Date | string
-    schedules?: XOR<SchedulesScalarRelationFilter, SchedulesWhereInput>
-  }, "id">
-
-  export type HoursOrderByWithAggregationInput = {
-    id?: SortOrder
-    time?: SortOrder
-    schedulesId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: HoursCountOrderByAggregateInput
-    _max?: HoursMaxOrderByAggregateInput
-    _min?: HoursMinOrderByAggregateInput
-  }
-
-  export type HoursScalarWhereWithAggregatesInput = {
-    AND?: HoursScalarWhereWithAggregatesInput | HoursScalarWhereWithAggregatesInput[]
-    OR?: HoursScalarWhereWithAggregatesInput[]
-    NOT?: HoursScalarWhereWithAggregatesInput | HoursScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Hours"> | string
-    time?: StringWithAggregatesFilter<"Hours"> | string
-    schedulesId?: StringWithAggregatesFilter<"Hours"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Hours"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Hours"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -18237,11 +14562,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -18262,11 +14587,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -18287,11 +14612,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -18312,11 +14637,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -18337,6 +14662,7 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -18353,6 +14679,7 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18369,162 +14696,7 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesCreateInput = {
-    id: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    user: UserCreateNestedOneWithoutTimesInput
-  }
-
-  export type TimesUncheckedCreateInput = {
-    id: string
-    time: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TimesUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: UserUpdateOneRequiredWithoutTimesNestedInput
-  }
-
-  export type TimesUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesCreateManyInput = {
-    id: string
-    time: string
-    userId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TimesUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    userId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SchedulesCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Hours?: HoursCreateNestedManyWithoutSchedulesInput
-  }
-
-  export type SchedulesUncheckedCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    Hours?: HoursUncheckedCreateNestedManyWithoutSchedulesInput
-  }
-
-  export type SchedulesUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Hours?: HoursUpdateManyWithoutSchedulesNestedInput
-  }
-
-  export type SchedulesUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    Hours?: HoursUncheckedUpdateManyWithoutSchedulesNestedInput
-  }
-
-  export type SchedulesCreateManyInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SchedulesUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SchedulesUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HoursCreateInput = {
-    id?: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    schedules: SchedulesCreateNestedOneWithoutHoursInput
-  }
-
-  export type HoursUncheckedCreateInput = {
-    id?: string
-    time: string
-    schedulesId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HoursUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    schedules?: SchedulesUpdateOneRequiredWithoutHoursNestedInput
-  }
-
-  export type HoursUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    schedulesId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HoursCreateManyInput = {
-    id?: string
-    time: string
-    schedulesId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HoursUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HoursUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    schedulesId?: StringFieldUpdateOperationsInput | string
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -19193,15 +15365,17 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type SubscriptionNullableScalarRelationFilter = {
     is?: SubscriptionWhereInput | null
     isNot?: SubscriptionWhereInput | null
-  }
-
-  export type TimesListRelationFilter = {
-    every?: TimesWhereInput
-    some?: TimesWhereInput
-    none?: TimesWhereInput
   }
 
   export type ServiceListRelationFilter = {
@@ -19245,10 +15419,6 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type TimesOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type ServiceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -19285,6 +15455,7 @@ export namespace Prisma {
     timeZone?: SortOrder
     stripe_customer_id?: SortOrder
     subscriptionId?: SortOrder
+    times?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -19351,87 +15522,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type TimesCountOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TimesMaxOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type TimesMinOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    userId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type HoursListRelationFilter = {
-    every?: HoursWhereInput
-    some?: HoursWhereInput
-    none?: HoursWhereInput
-  }
-
-  export type HoursOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SchedulesCountOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SchedulesMaxOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SchedulesMinOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SchedulesScalarRelationFilter = {
-    is?: SchedulesWhereInput
-    isNot?: SchedulesWhereInput
-  }
-
-  export type HoursCountOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    schedulesId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type HoursMaxOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    schedulesId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type HoursMinOrderByAggregateInput = {
-    id?: SortOrder
-    time?: SortOrder
-    schedulesId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -19777,17 +15867,14 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSubscriptionInput, UserUpdateWithoutSubscriptionInput>, UserUncheckedUpdateWithoutSubscriptionInput>
   }
 
+  export type UserCreatetimesInput = {
+    set: string[]
+  }
+
   export type SubscriptionCreateNestedOneWithoutUserInput = {
     create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
     connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
     connect?: SubscriptionWhereUniqueInput
-  }
-
-  export type TimesCreateNestedManyWithoutUserInput = {
-    create?: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput> | TimesCreateWithoutUserInput[] | TimesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TimesCreateOrConnectWithoutUserInput | TimesCreateOrConnectWithoutUserInput[]
-    createMany?: TimesCreateManyUserInputEnvelope
-    connect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
   }
 
   export type ServiceCreateNestedManyWithoutUserInput = {
@@ -19843,13 +15930,6 @@ export namespace Prisma {
     create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
     connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
     connect?: SubscriptionWhereUniqueInput
-  }
-
-  export type TimesUncheckedCreateNestedManyWithoutUserInput = {
-    create?: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput> | TimesCreateWithoutUserInput[] | TimesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TimesCreateOrConnectWithoutUserInput | TimesCreateOrConnectWithoutUserInput[]
-    createMany?: TimesCreateManyUserInputEnvelope
-    connect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
   }
 
   export type ServiceUncheckedCreateNestedManyWithoutUserInput = {
@@ -19909,6 +15989,11 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
+  export type UserUpdatetimesInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
   export type SubscriptionUpdateOneWithoutUserNestedInput = {
     create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
     connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
@@ -19917,20 +16002,6 @@ export namespace Prisma {
     delete?: SubscriptionWhereInput | boolean
     connect?: SubscriptionWhereUniqueInput
     update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
-  }
-
-  export type TimesUpdateManyWithoutUserNestedInput = {
-    create?: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput> | TimesCreateWithoutUserInput[] | TimesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TimesCreateOrConnectWithoutUserInput | TimesCreateOrConnectWithoutUserInput[]
-    upsert?: TimesUpsertWithWhereUniqueWithoutUserInput | TimesUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: TimesCreateManyUserInputEnvelope
-    set?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    disconnect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    delete?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    connect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    update?: TimesUpdateWithWhereUniqueWithoutUserInput | TimesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: TimesUpdateManyWithWhereWithoutUserInput | TimesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: TimesScalarWhereInput | TimesScalarWhereInput[]
   }
 
   export type ServiceUpdateManyWithoutUserNestedInput = {
@@ -20041,20 +16112,6 @@ export namespace Prisma {
     update?: XOR<XOR<SubscriptionUpdateToOneWithWhereWithoutUserInput, SubscriptionUpdateWithoutUserInput>, SubscriptionUncheckedUpdateWithoutUserInput>
   }
 
-  export type TimesUncheckedUpdateManyWithoutUserNestedInput = {
-    create?: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput> | TimesCreateWithoutUserInput[] | TimesUncheckedCreateWithoutUserInput[]
-    connectOrCreate?: TimesCreateOrConnectWithoutUserInput | TimesCreateOrConnectWithoutUserInput[]
-    upsert?: TimesUpsertWithWhereUniqueWithoutUserInput | TimesUpsertWithWhereUniqueWithoutUserInput[]
-    createMany?: TimesCreateManyUserInputEnvelope
-    set?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    disconnect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    delete?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    connect?: TimesWhereUniqueInput | TimesWhereUniqueInput[]
-    update?: TimesUpdateWithWhereUniqueWithoutUserInput | TimesUpdateWithWhereUniqueWithoutUserInput[]
-    updateMany?: TimesUpdateManyWithWhereWithoutUserInput | TimesUpdateManyWithWhereWithoutUserInput[]
-    deleteMany?: TimesScalarWhereInput | TimesScalarWhereInput[]
-  }
-
   export type ServiceUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ServiceCreateWithoutUserInput, ServiceUncheckedCreateWithoutUserInput> | ServiceCreateWithoutUserInput[] | ServiceUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ServiceCreateOrConnectWithoutUserInput | ServiceCreateOrConnectWithoutUserInput[]
@@ -20151,76 +16208,6 @@ export namespace Prisma {
     update?: AuthenticatorUpdateWithWhereUniqueWithoutUserInput | AuthenticatorUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: AuthenticatorUpdateManyWithWhereWithoutUserInput | AuthenticatorUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
-  }
-
-  export type UserCreateNestedOneWithoutTimesInput = {
-    create?: XOR<UserCreateWithoutTimesInput, UserUncheckedCreateWithoutTimesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTimesInput
-    connect?: UserWhereUniqueInput
-  }
-
-  export type UserUpdateOneRequiredWithoutTimesNestedInput = {
-    create?: XOR<UserCreateWithoutTimesInput, UserUncheckedCreateWithoutTimesInput>
-    connectOrCreate?: UserCreateOrConnectWithoutTimesInput
-    upsert?: UserUpsertWithoutTimesInput
-    connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutTimesInput, UserUpdateWithoutTimesInput>, UserUncheckedUpdateWithoutTimesInput>
-  }
-
-  export type HoursCreateNestedManyWithoutSchedulesInput = {
-    create?: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput> | HoursCreateWithoutSchedulesInput[] | HoursUncheckedCreateWithoutSchedulesInput[]
-    connectOrCreate?: HoursCreateOrConnectWithoutSchedulesInput | HoursCreateOrConnectWithoutSchedulesInput[]
-    createMany?: HoursCreateManySchedulesInputEnvelope
-    connect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-  }
-
-  export type HoursUncheckedCreateNestedManyWithoutSchedulesInput = {
-    create?: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput> | HoursCreateWithoutSchedulesInput[] | HoursUncheckedCreateWithoutSchedulesInput[]
-    connectOrCreate?: HoursCreateOrConnectWithoutSchedulesInput | HoursCreateOrConnectWithoutSchedulesInput[]
-    createMany?: HoursCreateManySchedulesInputEnvelope
-    connect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-  }
-
-  export type HoursUpdateManyWithoutSchedulesNestedInput = {
-    create?: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput> | HoursCreateWithoutSchedulesInput[] | HoursUncheckedCreateWithoutSchedulesInput[]
-    connectOrCreate?: HoursCreateOrConnectWithoutSchedulesInput | HoursCreateOrConnectWithoutSchedulesInput[]
-    upsert?: HoursUpsertWithWhereUniqueWithoutSchedulesInput | HoursUpsertWithWhereUniqueWithoutSchedulesInput[]
-    createMany?: HoursCreateManySchedulesInputEnvelope
-    set?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    disconnect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    delete?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    connect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    update?: HoursUpdateWithWhereUniqueWithoutSchedulesInput | HoursUpdateWithWhereUniqueWithoutSchedulesInput[]
-    updateMany?: HoursUpdateManyWithWhereWithoutSchedulesInput | HoursUpdateManyWithWhereWithoutSchedulesInput[]
-    deleteMany?: HoursScalarWhereInput | HoursScalarWhereInput[]
-  }
-
-  export type HoursUncheckedUpdateManyWithoutSchedulesNestedInput = {
-    create?: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput> | HoursCreateWithoutSchedulesInput[] | HoursUncheckedCreateWithoutSchedulesInput[]
-    connectOrCreate?: HoursCreateOrConnectWithoutSchedulesInput | HoursCreateOrConnectWithoutSchedulesInput[]
-    upsert?: HoursUpsertWithWhereUniqueWithoutSchedulesInput | HoursUpsertWithWhereUniqueWithoutSchedulesInput[]
-    createMany?: HoursCreateManySchedulesInputEnvelope
-    set?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    disconnect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    delete?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    connect?: HoursWhereUniqueInput | HoursWhereUniqueInput[]
-    update?: HoursUpdateWithWhereUniqueWithoutSchedulesInput | HoursUpdateWithWhereUniqueWithoutSchedulesInput[]
-    updateMany?: HoursUpdateManyWithWhereWithoutSchedulesInput | HoursUpdateManyWithWhereWithoutSchedulesInput[]
-    deleteMany?: HoursScalarWhereInput | HoursScalarWhereInput[]
-  }
-
-  export type SchedulesCreateNestedOneWithoutHoursInput = {
-    create?: XOR<SchedulesCreateWithoutHoursInput, SchedulesUncheckedCreateWithoutHoursInput>
-    connectOrCreate?: SchedulesCreateOrConnectWithoutHoursInput
-    connect?: SchedulesWhereUniqueInput
-  }
-
-  export type SchedulesUpdateOneRequiredWithoutHoursNestedInput = {
-    create?: XOR<SchedulesCreateWithoutHoursInput, SchedulesUncheckedCreateWithoutHoursInput>
-    connectOrCreate?: SchedulesCreateOrConnectWithoutHoursInput
-    upsert?: SchedulesUpsertWithoutHoursInput
-    connect?: SchedulesWhereUniqueInput
-    update?: XOR<XOR<SchedulesUpdateToOneWithWhereWithoutHoursInput, SchedulesUpdateWithoutHoursInput>, SchedulesUncheckedUpdateWithoutHoursInput>
   }
 
   export type UserCreateNestedOneWithoutAccountsInput = {
@@ -20547,11 +16534,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -20571,11 +16558,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -20611,11 +16598,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -20635,11 +16622,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -20659,11 +16646,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -20683,11 +16670,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -20750,11 +16737,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -20774,11 +16761,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -20831,11 +16818,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -20855,11 +16842,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -20895,11 +16882,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -20919,11 +16906,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -20943,10 +16930,10 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -20967,10 +16954,10 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -21043,10 +17030,10 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -21067,10 +17054,10 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -21124,10 +17111,10 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -21148,10 +17135,10 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -21188,10 +17175,10 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -21212,10 +17199,10 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -21245,30 +17232,6 @@ export namespace Prisma {
   export type SubscriptionCreateOrConnectWithoutUserInput = {
     where: SubscriptionWhereUniqueInput
     create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
-  }
-
-  export type TimesCreateWithoutUserInput = {
-    id: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TimesUncheckedCreateWithoutUserInput = {
-    id: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type TimesCreateOrConnectWithoutUserInput = {
-    where: TimesWhereUniqueInput
-    create: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput>
-  }
-
-  export type TimesCreateManyUserInputEnvelope = {
-    data: TimesCreateManyUserInput | TimesCreateManyUserInput[]
-    skipDuplicates?: boolean
   }
 
   export type ServiceCreateWithoutUserInput = {
@@ -21518,33 +17481,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type TimesUpsertWithWhereUniqueWithoutUserInput = {
-    where: TimesWhereUniqueInput
-    update: XOR<TimesUpdateWithoutUserInput, TimesUncheckedUpdateWithoutUserInput>
-    create: XOR<TimesCreateWithoutUserInput, TimesUncheckedCreateWithoutUserInput>
-  }
-
-  export type TimesUpdateWithWhereUniqueWithoutUserInput = {
-    where: TimesWhereUniqueInput
-    data: XOR<TimesUpdateWithoutUserInput, TimesUncheckedUpdateWithoutUserInput>
-  }
-
-  export type TimesUpdateManyWithWhereWithoutUserInput = {
-    where: TimesScalarWhereInput
-    data: XOR<TimesUpdateManyMutationInput, TimesUncheckedUpdateManyWithoutUserInput>
-  }
-
-  export type TimesScalarWhereInput = {
-    AND?: TimesScalarWhereInput | TimesScalarWhereInput[]
-    OR?: TimesScalarWhereInput[]
-    NOT?: TimesScalarWhereInput | TimesScalarWhereInput[]
-    id?: StringFilter<"Times"> | string
-    time?: StringFilter<"Times"> | string
-    userId?: StringFilter<"Times"> | string
-    createdAt?: DateTimeFilter<"Times"> | Date | string
-    updatedAt?: DateTimeFilter<"Times"> | Date | string
-  }
-
   export type ServiceUpsertWithWhereUniqueWithoutUserInput = {
     where: ServiceWhereUniqueInput
     update: XOR<ServiceUpdateWithoutUserInput, ServiceUncheckedUpdateWithoutUserInput>
@@ -21741,209 +17677,6 @@ export namespace Prisma {
     transports?: StringNullableFilter<"Authenticator"> | string | null
   }
 
-  export type UserCreateWithoutTimesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    address?: string | null
-    phone?: string | null
-    status?: boolean
-    timeZone?: string | null
-    stripe_customer_id?: string | null
-    subscriptionId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-    reminder?: ReminderCreateNestedManyWithoutUserInput
-    appointment?: AppointmentCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    report?: ReportCreateNestedManyWithoutUserInput
-    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutTimesInput = {
-    id?: string
-    name?: string | null
-    email: string
-    emailVerified?: Date | string | null
-    image?: string | null
-    address?: string | null
-    phone?: string | null
-    status?: boolean
-    timeZone?: string | null
-    stripe_customer_id?: string | null
-    subscriptionId?: string | null
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-    reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
-    appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    report?: ReportUncheckedCreateNestedManyWithoutUserInput
-    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutTimesInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutTimesInput, UserUncheckedCreateWithoutTimesInput>
-  }
-
-  export type UserUpsertWithoutTimesInput = {
-    update: XOR<UserUpdateWithoutTimesInput, UserUncheckedUpdateWithoutTimesInput>
-    create: XOR<UserCreateWithoutTimesInput, UserUncheckedCreateWithoutTimesInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutTimesInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutTimesInput, UserUncheckedUpdateWithoutTimesInput>
-  }
-
-  export type UserUpdateWithoutTimesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: BoolFieldUpdateOperationsInput | boolean
-    timeZone?: NullableStringFieldUpdateOperationsInput | string | null
-    stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
-    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-    reminder?: ReminderUpdateManyWithoutUserNestedInput
-    appointment?: AppointmentUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    report?: ReportUpdateManyWithoutUserNestedInput
-    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutTimesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: NullableStringFieldUpdateOperationsInput | string | null
-    email?: StringFieldUpdateOperationsInput | string
-    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    address?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: BoolFieldUpdateOperationsInput | boolean
-    timeZone?: NullableStringFieldUpdateOperationsInput | string | null
-    stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
-    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-    reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
-    appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    report?: ReportUncheckedUpdateManyWithoutUserNestedInput
-    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type HoursCreateWithoutSchedulesInput = {
-    id?: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HoursUncheckedCreateWithoutSchedulesInput = {
-    id?: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HoursCreateOrConnectWithoutSchedulesInput = {
-    where: HoursWhereUniqueInput
-    create: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput>
-  }
-
-  export type HoursCreateManySchedulesInputEnvelope = {
-    data: HoursCreateManySchedulesInput | HoursCreateManySchedulesInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type HoursUpsertWithWhereUniqueWithoutSchedulesInput = {
-    where: HoursWhereUniqueInput
-    update: XOR<HoursUpdateWithoutSchedulesInput, HoursUncheckedUpdateWithoutSchedulesInput>
-    create: XOR<HoursCreateWithoutSchedulesInput, HoursUncheckedCreateWithoutSchedulesInput>
-  }
-
-  export type HoursUpdateWithWhereUniqueWithoutSchedulesInput = {
-    where: HoursWhereUniqueInput
-    data: XOR<HoursUpdateWithoutSchedulesInput, HoursUncheckedUpdateWithoutSchedulesInput>
-  }
-
-  export type HoursUpdateManyWithWhereWithoutSchedulesInput = {
-    where: HoursScalarWhereInput
-    data: XOR<HoursUpdateManyMutationInput, HoursUncheckedUpdateManyWithoutSchedulesInput>
-  }
-
-  export type HoursScalarWhereInput = {
-    AND?: HoursScalarWhereInput | HoursScalarWhereInput[]
-    OR?: HoursScalarWhereInput[]
-    NOT?: HoursScalarWhereInput | HoursScalarWhereInput[]
-    id?: StringFilter<"Hours"> | string
-    time?: StringFilter<"Hours"> | string
-    schedulesId?: StringFilter<"Hours"> | string
-    createdAt?: DateTimeFilter<"Hours"> | Date | string
-    updatedAt?: DateTimeFilter<"Hours"> | Date | string
-  }
-
-  export type SchedulesCreateWithoutHoursInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SchedulesUncheckedCreateWithoutHoursInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SchedulesCreateOrConnectWithoutHoursInput = {
-    where: SchedulesWhereUniqueInput
-    create: XOR<SchedulesCreateWithoutHoursInput, SchedulesUncheckedCreateWithoutHoursInput>
-  }
-
-  export type SchedulesUpsertWithoutHoursInput = {
-    update: XOR<SchedulesUpdateWithoutHoursInput, SchedulesUncheckedUpdateWithoutHoursInput>
-    create: XOR<SchedulesCreateWithoutHoursInput, SchedulesUncheckedCreateWithoutHoursInput>
-    where?: SchedulesWhereInput
-  }
-
-  export type SchedulesUpdateToOneWithWhereWithoutHoursInput = {
-    where?: SchedulesWhereInput
-    data: XOR<SchedulesUpdateWithoutHoursInput, SchedulesUncheckedUpdateWithoutHoursInput>
-  }
-
-  export type SchedulesUpdateWithoutHoursInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SchedulesUncheckedUpdateWithoutHoursInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -21956,11 +17689,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
@@ -21980,11 +17713,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
@@ -22020,11 +17753,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
@@ -22044,11 +17777,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -22068,11 +17801,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -22092,11 +17825,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -22132,11 +17865,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -22156,11 +17889,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -22180,11 +17913,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionCreateNestedOneWithoutUserInput
-    times?: TimesCreateNestedManyWithoutUserInput
-    Service?: ServiceCreateNestedManyWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
     accounts?: AccountCreateNestedManyWithoutUserInput
     reminder?: ReminderCreateNestedManyWithoutUserInput
     appointment?: AppointmentCreateNestedManyWithoutUserInput
@@ -22204,11 +17937,11 @@ export namespace Prisma {
     timeZone?: string | null
     stripe_customer_id?: string | null
     subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
     updatedAt?: Date | string
     subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
-    times?: TimesUncheckedCreateNestedManyWithoutUserInput
-    Service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -22244,11 +17977,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUpdateOneWithoutUserNestedInput
-    times?: TimesUpdateManyWithoutUserNestedInput
-    Service?: ServiceUpdateManyWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
     accounts?: AccountUpdateManyWithoutUserNestedInput
     reminder?: ReminderUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
@@ -22268,11 +18001,11 @@ export namespace Prisma {
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-    times?: TimesUncheckedUpdateManyWithoutUserNestedInput
-    Service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -22330,13 +18063,6 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesCreateManyUserInput = {
-    id: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
   }
 
   export type ServiceCreateManyUserInput = {
@@ -22410,27 +18136,6 @@ export namespace Prisma {
     credentialDeviceType: string
     credentialBackedUp: boolean
     transports?: string | null
-  }
-
-  export type TimesUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesUncheckedUpdateWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type TimesUncheckedUpdateManyWithoutUserInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ServiceUpdateWithoutUserInput = {
@@ -22652,34 +18357,6 @@ export namespace Prisma {
     credentialDeviceType?: StringFieldUpdateOperationsInput | string
     credentialBackedUp?: BoolFieldUpdateOperationsInput | boolean
     transports?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type HoursCreateManySchedulesInput = {
-    id?: string
-    time: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type HoursUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HoursUncheckedUpdateWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type HoursUncheckedUpdateManyWithoutSchedulesInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    time?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

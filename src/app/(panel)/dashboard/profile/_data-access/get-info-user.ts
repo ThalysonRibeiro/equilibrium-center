@@ -12,7 +12,6 @@ export async function getUserData({ userId }: GetUserDataProps) {
     const user = await prisma.user.findFirst({
       where: { id: userId },
       include: {
-        times: true,
         subscription: true,
       }
     });
