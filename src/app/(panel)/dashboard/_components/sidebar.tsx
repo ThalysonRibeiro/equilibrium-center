@@ -18,8 +18,9 @@ import {
   Collapsible,
   CollapsibleContent
 } from "@/components/ui/collapsible";
+
 import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation"
+import { useRouter } from "next/navigation";
 
 interface SidebarDashboardProps {
   children: React.ReactNode
@@ -59,23 +60,26 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
     <div className="flex min-h-screen w-full">
 
       <aside
-        className={clsx("flex flex-col border-r border-cinza transition-all duration-300 p-4 h-full", {
+        className={clsx("flex flex-col border-r border-corprimary transition-all duration-300 p-4 h-full", {
           "w-20": isCollapsed,
-          "w-64": !isCollapsed,
+          "w-74": !isCollapsed,
           "hidden md:flex md:fixed": true
         })}
       >
-        <div className="mb-6 mt-6 w-12">
-          <Image
-            src={img_logo}
-            alt="logo"
-            priority
-            quality={100}
-            style={{
-              width: 'auto',
-              height: 'auto',
-            }}
-          />
+        <div className="flex items-center rounded-lg mb-2">
+          <div className="w-12">
+            <Image
+              src={img_logo}
+              alt="logo"
+              priority
+              quality={100}
+              style={{
+                width: 'auto',
+                height: 'auto',
+              }}
+            />
+          </div>
+          {!isCollapsed && <p className="text-white uppercase font-semibold">Equilibrium <br /> Center</p>}
         </div>
         <Button
           className="bg-corprimary hover:bg-corsecondary self-end mb-2"
@@ -181,28 +185,34 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
         </Collapsible>
 
         <SheetFooter className="p-0">
-          {!isCollapsed && <p className="text-sm line-clamp-1">{user.name}</p>}
-          <div className={`${isCollapsed && 'flex-col-reverse'} flex items-center justify-between`}>
+          <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between`}>
+            <div className="h-full flex items-center gap-1">
+              <div className="w-12 rounded-lg overflow-hidden">
+                <Image
+                  src={user?.image as string}
+                  alt="logo"
+                  priority
+                  quality={100}
+                  width={48}
+                  height={48}
+                  style={{
+                    width: 'auto',
+                    height: 'auto',
+                  }}
+                />
+              </div>
+              {!isCollapsed && <div className="flex flex-col items-start w-full">
+                <span className="text-[12px] line-clamp-1">{user.name}</span>
+                <span className="text-[12px]">{user.email}</span>
+              </div>}
+            </div>
             <Button
               variant={"destructive"}
               onClick={handleLogout}
+              className="w-fit"
             >
               Sair
             </Button>
-            <div className="mb-6 mt-6 w-12 rounded-full overflow-hidden border border-corprimary">
-              <Image
-                src={user?.image as string}
-                alt="logo"
-                priority
-                quality={100}
-                width={48}
-                height={48}
-                style={{
-                  width: 'auto',
-                  height: 'auto',
-                }}
-              />
-            </div>
           </div>
         </SheetFooter>
       </aside>
@@ -211,60 +221,114 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
       {/* mobile */}
       <div className={clsx("flex flex-1 flex-col transition-all duration-300", {
         "md:ml-20": isCollapsed,
-        "md:ml-64": !isCollapsed
+        "md:ml-74": !isCollapsed
       })}>
 
-        <header className="md:hidden flex items-center justify-between border-b border-b-cinza px-2 md:px-6 h-14 z-10 sticky bg-white">
+        <header className="md:hidden flex items-center justify-between border-b border-b-corprimary px-2 md:px-6 h-20 z-10 sticky bg-white">
           <Sheet>
-            <div>
+            <div className="flex items-center gap-2">
               <SheetTrigger asChild>
                 <Button
                   variant={"outline"}
                   size={"icon"}
-                  className="md:hidden"
+                  className="md:hidden border border-corsecondary bg-transparent"
                   onClick={() => setIsCollapsed(false)}
                 >
-                  <List className="w-5 h-5" />
+                  <List className="w-6 h-6 text-corsecondary" />
                 </Button>
               </SheetTrigger>
-              <h1 className="text-black font-open_Sans">Menu - Equilibrium Center</h1>
+              <h1 className="text-corsecondary font-semibold font-open_Sans">Menu - Equilibrium Center</h1>
             </div>
 
-            <SheetContent side="right" className="sm:max-w-xs p-5">
-              <SheetTitle>Equilibrium Center</SheetTitle>
+            <SheetContent side="right" className="sm:max-w-xs p-3 border-l border-corprimary pt-10">
+              <SheetTitle>
+                <div className="flex items-center rounded-lg mb-2">
+                  <div className="w-12">
+                    <Image
+                      src={img_logo}
+                      alt="logo"
+                      priority
+                      quality={100}
+                      style={{
+                        width: 'auto',
+                        height: 'auto',
+                      }}
+                    />
+                  </div>
+                  <p className="text-white uppercase font-semibold">Equilibrium <br /> Center</p>
+                </div>
+              </SheetTitle>
               <SheetDescription>Menu administrativo</SheetDescription>
-              <nav className="grid gap-2 text-base">
-                <SidebarLinks
-                  href="/dashboard"
-                  label="Agendamentos"
-                  pathname={pathname}
-                  isCollapsed={isCollapsed}
-                  icon={<CalendarCheck2 className="w-6 h-6 text-corprimary" />}
-                />
-                <SidebarLinks
-                  href="/dashboard/services"
-                  label="Serviços"
-                  pathname={pathname}
-                  isCollapsed={isCollapsed}
-                  icon={<Folder className="w-6 h-6 text-corprimary" />}
-                />
-                <SidebarLinks
-                  href="/dashboard/profile"
-                  label="Perfil"
-                  pathname={pathname}
-                  isCollapsed={isCollapsed}
-                  icon={<Settings className="w-6 h-6 text-corprimary" />}
-                />
-                <SidebarLinks
-                  href="/dashboard/plans"
-                  label="Planos"
-                  pathname={pathname}
-                  isCollapsed={isCollapsed}
-                  icon={<Banknote className="w-6 h-6 text-corprimary" />}
-                />
-              </nav>
-            </SheetContent>
+              <div className="flex flex-col justify-between h-full">
+                <nav className="grid gap-2 text-base">
+                  <SidebarLinks
+                    href="/dashboard"
+                    label="Agendamentos"
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                    icon={<CalendarCheck2 className="w-6 h-6 text-corprimary" />}
+                  />
+                  <SidebarLinks
+                    href="/dashboard/services"
+                    label="Serviços"
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                    icon={<Folder className="w-6 h-6 text-corprimary" />}
+                  />
+                  <SidebarLinks
+                    href="/dashboard/profile"
+                    label="Perfil"
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                    icon={<Settings className="w-6 h-6 text-corprimary" />}
+                  />
+                  <SidebarLinks
+                    href="/dashboard/plans"
+                    label="Planos"
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                    icon={<Banknote className="w-6 h-6 text-corprimary" />}
+                  />
+                  <SidebarLinks
+                    href="/dashboard/reports"
+                    label="Relatorios"
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                    icon={<FileText className="w-6 h-6 text-corprimary" />}
+                  />
+                </nav>
 
+                <div className="w-full flex justify-between">
+                  <div className="h-full flex items-center gap-2 px-1">
+                    <div className="w-11 rounded-lg overflow-hidden">
+                      <Image
+                        src={user?.image as string}
+                        alt="logo"
+                        priority
+                        quality={100}
+                        width={48}
+                        height={48}
+                        style={{
+                          width: 'auto',
+                          height: 'auto',
+                        }}
+                      />
+                    </div>
+                    <div className="flex flex-col items-start w-full">
+                      <span className="text-[12px] line-clamp-1">{user.name}</span>
+                      <span className="text-[12px]">{user.email}</span>
+                    </div>
+                  </div>
+                  <Button
+                    variant={"destructive"}
+                    onClick={handleLogout}
+                  >
+                    Sair
+                  </Button>
+                </div>
+
+              </div>
+            </SheetContent>
           </Sheet>
 
 
