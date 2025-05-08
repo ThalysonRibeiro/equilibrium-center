@@ -3,6 +3,7 @@ import { Open_Sans, Mansalva } from "next/font/google";
 import "./globals.css";
 import { SessionAuthProvider } from "@/components/session-auth";
 import { Toaster } from "sonner";
+import { QueryClientContext } from "@/providers/queryclient";
 
 
 
@@ -32,12 +33,14 @@ export default function RootLayout({
       <body
         className={` ${pen_Sans.variable} ${mansalva.variable} antialiased`}
       >
-        <Toaster
-          position="top-right"
-          richColors
-        />
         <SessionAuthProvider>
-          {children}
+          <QueryClientContext>
+            <Toaster
+              position="top-right"
+              richColors
+            />
+            {children}
+          </QueryClientContext>
         </SessionAuthProvider>
       </body>
     </html>
