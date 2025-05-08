@@ -4,15 +4,18 @@ import { Header } from "./_components/header";
 import { Hero } from "./_components/hero";
 import { Professionals } from "./_components/professionals";
 import img_1 from "@/assets/1.png";
+import { getProfessionals } from "./_data-access/get-professionals";
 
 
-export default function Home() {
+export default async function Home() {
+  const professionals = await getProfessionals();
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <div>
         <Hero />
-        <Professionals />
+        <Professionals professionals={professionals || []} />
         <section className="container mx-auto px-6 sm:px-1 flex items-center justify-between gap-6 w-full">
           <div className="w-125 space-y-4 flex-1 p-6">
             <p>
