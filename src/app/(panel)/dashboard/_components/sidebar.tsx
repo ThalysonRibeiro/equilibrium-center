@@ -10,7 +10,21 @@ import {
   SheetTrigger
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Banknote, CalendarCheck2, ChevronLeft, ChevronRight, FileText, Folder, List, Settings } from "lucide-react";
+import {
+  Banknote,
+  BarChart, Briefcase,
+  CalendarCheck2,
+  CalendarRange,
+  ChevronLeft,
+  ChevronRight,
+  CircleDollarSign,
+  FileStack,
+  FileText,
+  Folder,
+  List,
+  Settings,
+  User
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import img_logo from "@/assets/logo.png";
@@ -105,6 +119,7 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
               isCollapsed={isCollapsed}
               icon={<Folder className="w-6 h-6 text-corprimary" />}
             />
+            {/* reports */}
             <SidebarLinks
               href="/dashboard/reports"
               label="Relatorios"
@@ -112,6 +127,38 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
               isCollapsed={isCollapsed}
               icon={<FileText className="w-6 h-6 text-corprimary" />}
             />
+            <div>
+              <SidebarLinks
+                label="Serviços"
+                href="/dashboard/reports/services"
+                icon={<Briefcase className="text-corprimary w-6 h-6" />}
+                pathname={pathname}
+                isCollapsed={isCollapsed}
+              />
+              <SidebarLinks
+                label="Clientes"
+                href="/dashboard/reports/client"
+                icon={<User className="text-corprimary w-6 h-6" />}
+                pathname={pathname}
+                isCollapsed={isCollapsed}
+              />
+              <SidebarLinks
+                label="Relatórios Gerados"
+                href="/dashboard/reports/generated"
+                icon={<FileStack className="text-corprimary w-6 h-6" />}
+                pathname={pathname}
+                isCollapsed={isCollapsed}
+              />
+              <SidebarLinks
+                label="Faturamento"
+                href="/dashboard/reports/invoicing"
+                icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
+                pathname={pathname}
+                isCollapsed={isCollapsed}
+              />
+            </div>
+            {/* reports */}
+
             <SidebarLinks
               href="/dashboard/profile"
               label="Perfil"
@@ -150,13 +197,45 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
                 isCollapsed={isCollapsed}
                 icon={<Folder className="w-6 h-6 text-corprimary" />}
               />
-              <SidebarLinks
-                href="/dashboard/reports"
-                label="Relatorios"
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-                icon={<FileText className="w-6 h-6 text-corprimary" />}
-              />
+              <div>
+                <SidebarLinks
+                  href="/dashboard/reports"
+                  label="Relatorios"
+                  pathname={pathname}
+                  isCollapsed={isCollapsed}
+                  icon={<FileText className="w-6 h-6 text-corprimary" />}
+                />
+                <div className="ml-6 pl-1 mt-3 border-l border-corprimary/30">
+                  <SidebarLinks
+                    label="Serviços"
+                    href="/dashboard/reports/services"
+                    icon={<Briefcase className="text-corprimary w-6 h-6" />}
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                  />
+                  <SidebarLinks
+                    label="Clientes"
+                    href="/dashboard/reports/client"
+                    icon={<User className="text-corprimary w-6 h-6" />}
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                  />
+                  <SidebarLinks
+                    label="Relatórios Gerados"
+                    href="/dashboard/reports/generated"
+                    icon={<FileStack className="text-corprimary w-6 h-6" />}
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                  />
+                  <SidebarLinks
+                    label="Faturamento"
+                    href="/dashboard/reports/invoicing"
+                    icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
+                    pathname={pathname}
+                    isCollapsed={isCollapsed}
+                  />
+                </div>
+              </div>
 
               <span className="text-sm text-gray-400 font-medium mt-1 uppercase">
                 Minha conta
@@ -289,13 +368,45 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
                     isCollapsed={isCollapsed}
                     icon={<Banknote className="w-6 h-6 text-corprimary" />}
                   />
-                  <SidebarLinks
-                    href="/dashboard/reports"
-                    label="Relatorios"
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                    icon={<FileText className="w-6 h-6 text-corprimary" />}
-                  />
+                  <div>
+                    <SidebarLinks
+                      href="/dashboard/reports"
+                      label="Relatorios"
+                      pathname={pathname}
+                      isCollapsed={isCollapsed}
+                      icon={<FileText className="w-6 h-6 text-corprimary" />}
+                    />
+                    <div className="ml-6 mt-2">
+                      <SidebarLinks
+                        label="Serviços"
+                        href="/dashboard/reports/services"
+                        icon={<Briefcase className="text-corprimary w-6 h-6" />}
+                        pathname={pathname}
+                        isCollapsed={isCollapsed}
+                      />
+                      <SidebarLinks
+                        label="Clientes"
+                        href="/dashboard/reports/client"
+                        icon={<User className="text-corprimary w-6 h-6" />}
+                        pathname={pathname}
+                        isCollapsed={isCollapsed}
+                      />
+                      <SidebarLinks
+                        label="Relatórios Gerados"
+                        href="/dashboard/reports/generated"
+                        icon={<FileStack className="text-corprimary w-6 h-6" />}
+                        pathname={pathname}
+                        isCollapsed={isCollapsed}
+                      />
+                      <SidebarLinks
+                        label="Faturamento"
+                        href="/dashboard/reports/invoicing"
+                        icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
+                        pathname={pathname}
+                        isCollapsed={isCollapsed}
+                      />
+                    </div>
+                  </div>
                 </nav>
 
                 <div className="w-full flex justify-between">
