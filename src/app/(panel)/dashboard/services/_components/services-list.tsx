@@ -4,17 +4,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Pencil, Plus, X } from "lucide-react";
-import { useState } from "react"
+import { useState } from "react";
 import { DialogService } from "./dialog-sevice";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { toast } from "sonner";
-import { deleteService } from "../_actions/delete-service";
+import { updateStatusService } from "../_actions/update-status-service";
+import { useIsMobile } from "@/app/hooks/useMobile";
 
-interface ServicesListProps {
+export interface ServicesListProps {
   services: ServiceProps[];
 }
 
-interface ServiceProps {
+export interface ServiceProps {
   userId: string;
   id: string;
   name: string;
@@ -26,11 +27,12 @@ interface ServiceProps {
 }
 
 export function ServicesList({ services }: ServicesListProps) {
+  const isMobile = useIsMobile(1024);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [editingService, setEditingService] = useState<null | ServiceProps>(null);
 
-  async function handleDeleteService(serviceId: string) {
-    const response = await deleteService({ serviceId: serviceId });
+  async function handleStatusService(serviceId: string, status: string) {
+    const response = await updateStatusService({ serviceId: serviceId, status });
     if (response.error) {
       toast.error(response.error)
       return;
@@ -41,7 +43,6 @@ export function ServicesList({ services }: ServicesListProps) {
   async function handleEditService(service: ServiceProps) {
     setEditingService(service);
     setIsDialogOpen(true);
-
   }
 
   return (
@@ -56,7 +57,7 @@ export function ServicesList({ services }: ServicesListProps) {
       <section className="mx-auto">
         <Card>
           <CardHeader className="flex flex-row justify-between items-center space-y-0">
-            <CardTitle className="text-xl text-corsecondary">Servoços</CardTitle>
+            <CardTitle className="text-xl text-gray-700">Serviços Ativo</CardTitle>
             <DialogTrigger asChild>
               <Button className="bg-corsecondary hover:bg-corprimary">
                 <Plus className="w-4 h-4" />
@@ -92,29 +93,39 @@ export function ServicesList({ services }: ServicesListProps) {
               {services.map(service => (
                 <article
                   key={service.id}
-                  className="flex items-center justify-between"
+                  className="flex items-center justify-between gap-2"
                 >
-                  <div className="flex items-center space-x-2">
-                    <span className="font-medium">{service.name}</span>
+                  <div className="flex items-center justify-between rounded-md space-x-2 px-2 w-full h-9 border text-sm lg:text-base">
+                    <span className="font-medium text-gray-700 line-clamp-1">{service.name}</span>
                     <span className="font-medium text-green-500">{formatCurrency(service.price)}</span>
                   </div>
 
-                  <div className="space-x-2">
+                  <div className="space-x-2 flex items-center">
                     <Button
                       variant={"ghost"}
-                      size={"icon"}
-                      className="border border-corsecondary"
+                      className="border"
                       onClick={() => handleEditService(service)}
                     >
-                      <Pencil className="w-4 h-4 text-corsecondary" />
+                      {isMobile ? (
+                        <>
+                          <Pencil className="w-4 h-4" />
+                        </>
+                      ) : (
+                        <p>
+                          Editar
+                        </p>
+                      )}
                     </Button>
                     <Button
                       variant={"ghost"}
-                      size={"icon"}
-                      className="border border-red-500"
-                      onClick={() => handleDeleteService(service.id)}
+                      className="border text-red-500"
+                      onClick={() => handleStatusService(service.id, "deactivate")}
                     >
-                      <X className="w-4 h-4 text-red-500" />
+                      {isMobile ? (
+                        <X className="w-4 h-4 text-red-500" />
+                      ) : (
+                        <p>Desativar</p>
+                      )}
                     </Button>
                   </div>
                 </article>

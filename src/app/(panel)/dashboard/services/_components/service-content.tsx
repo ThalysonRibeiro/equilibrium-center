@@ -1,4 +1,6 @@
 import { getAllServices } from "../_data-access/get-all-services";
+import { getAllServicesActive } from "../_data-access/get-all-services-active";
+import { AllServiceList } from "./all-service-list";
 import { ServicesList } from "./services-list";
 
 interface ServicesContentProps {
@@ -6,9 +8,13 @@ interface ServicesContentProps {
 }
 
 export async function ServicesContent({ userId }: ServicesContentProps) {
-  const services = await getAllServices({ userId });
+  const services = await getAllServicesActive({ userId });
+  const allServices = await getAllServices({ userId });
 
   return (
-    <ServicesList services={services.data || []} />
+    <section className="space-y-4">
+      <ServicesList services={services.data || []} />
+      <AllServiceList services={allServices.data || []} />
+    </section>
   )
 }
