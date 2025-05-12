@@ -1,5 +1,4 @@
 "use client"
-
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
@@ -11,19 +10,17 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import {
-  Banknote,
-  BarChart, Briefcase,
-  CalendarCheck2,
-  CalendarRange,
-  ChevronLeft,
+  Banknote, CalendarCheck2, ChevronLeft,
   ChevronRight,
   CircleDollarSign,
-  FileStack,
-  FileText,
-  Folder,
+  FileStack, Folder,
   List,
   Settings,
-  User
+  User,
+  BarChart3,
+  LifeBuoy,
+  HelpCircle,
+  MessageCircleQuestion
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,7 +29,6 @@ import {
   Collapsible,
   CollapsibleContent
 } from "@/components/ui/collapsible";
-
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
@@ -56,8 +52,6 @@ interface UserProps {
   updatedAt: string;
 }
 
-
-
 export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
   const { update } = useSession();
   const router = useRouter();
@@ -72,7 +66,6 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
 
   return (
     <div className="flex min-h-screen w-full">
-
       <aside
         className={clsx("flex flex-col border-r border-corprimary transition-all duration-300 p-4 h-full", {
           "w-20": isCollapsed,
@@ -104,198 +97,19 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
 
         {/* sidebar recolhida */}
         {isCollapsed && (
-          <nav className="flex flex-col gap-1 overflow-hidden mt-2">
-            <SidebarLinks
-              href="/dashboard"
-              label="Agendamentos"
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-              icon={<CalendarCheck2 className="w-6 h-6 text-corprimary" />}
-            />
-            <SidebarLinks
-              href="/dashboard/services"
-              label="Serviços"
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-              icon={<Folder className="w-6 h-6 text-corprimary" />}
-            />
-            {/* reports */}
-            <SidebarLinks
-              href="/dashboard/reports"
-              label="Relatorios"
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-              icon={<FileText className="w-6 h-6 text-corprimary" />}
-            />
-            <div>
-              <SidebarLinks
-                label="Serviços"
-                href="/dashboard/reports/services"
-                icon={<Briefcase className="text-corprimary w-6 h-6" />}
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-              />
-              <SidebarLinks
-                label="Clientes"
-                href="/dashboard/reports/client"
-                icon={<User className="text-corprimary w-6 h-6" />}
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-              />
-              <SidebarLinks
-                label="Relatórios Gerados"
-                href="/dashboard/reports/generated"
-                icon={<FileStack className="text-corprimary w-6 h-6" />}
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-              />
-              <SidebarLinks
-                label="Faturamento"
-                href="/dashboard/reports/invoicing"
-                icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-              />
-            </div>
-            {/* reports */}
-
-            <SidebarLinks
-              href="/dashboard/profile"
-              label="Perfil"
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-              icon={<Settings className="w-6 h-6 text-corprimary" />}
-            />
-            <SidebarLinks
-              href="/dashboard/plans"
-              label="Planos"
-              pathname={pathname}
-              isCollapsed={isCollapsed}
-              icon={<Banknote className="w-6 h-6 text-corprimary" />}
-            />
-          </nav>
-
+          <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
         )}
 
         <Collapsible open={!isCollapsed}>
           <CollapsibleContent>
-            <nav className="flex flex-col gap-1 overflow-hidden">
-              <span className="text-sm text-gray-400 font-medium mt-1 uppercase">
-                Painel
-              </span>
-              <SidebarLinks
-                href="/dashboard"
-                label="Agendamentos"
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-                icon={<CalendarCheck2 className="w-6 h-6 text-corprimary" />}
-              />
-              <SidebarLinks
-                href="/dashboard/services"
-                label="Serviços"
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-                icon={<Folder className="w-6 h-6 text-corprimary" />}
-              />
-              <div>
-                <SidebarLinks
-                  href="/dashboard/reports"
-                  label="Relatorios"
-                  pathname={pathname}
-                  isCollapsed={isCollapsed}
-                  icon={<FileText className="w-6 h-6 text-corprimary" />}
-                />
-                <div className="ml-6 pl-1 mt-3 border-l border-corprimary/30">
-                  <SidebarLinks
-                    label="Serviços"
-                    href="/dashboard/reports/services"
-                    icon={<Briefcase className="text-corprimary w-6 h-6" />}
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                  />
-                  <SidebarLinks
-                    label="Clientes"
-                    href="/dashboard/reports/client"
-                    icon={<User className="text-corprimary w-6 h-6" />}
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                  />
-                  <SidebarLinks
-                    label="Relatórios Gerados"
-                    href="/dashboard/reports/generated"
-                    icon={<FileStack className="text-corprimary w-6 h-6" />}
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                  />
-                  <SidebarLinks
-                    label="Faturamento"
-                    href="/dashboard/reports/invoicing"
-                    icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                  />
-                </div>
-              </div>
-
-              <span className="text-sm text-gray-400 font-medium mt-1 uppercase">
-                Minha conta
-              </span>
-              <SidebarLinks
-                href="/dashboard/profile"
-                label="Perfil"
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-                icon={<Settings className="w-6 h-6 text-corprimary" />}
-              />
-              <SidebarLinks
-                href="/dashboard/plans"
-                label="Planos"
-                pathname={pathname}
-                isCollapsed={isCollapsed}
-                icon={<Banknote className="w-6 h-6 text-corprimary" />}
-              />
-
-              <span className="text-sm text-gray-400 font-medium mt-1 uppercase">
-                Outros
-              </span>
-            </nav>
-
+            <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
           </CollapsibleContent>
         </Collapsible>
 
         <SheetFooter className="p-0">
-          <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between`}>
-            <div className="h-full flex items-center gap-1">
-              <div className="w-12 rounded-lg overflow-hidden">
-                <Image
-                  src={user?.image as string}
-                  alt="logo"
-                  priority
-                  quality={100}
-                  width={48}
-                  height={48}
-                  style={{
-                    width: 'auto',
-                    height: 'auto',
-                  }}
-                />
-              </div>
-              {!isCollapsed && <div className="flex flex-col items-start w-full">
-                <span className="text-[12px] line-clamp-1">{user.name}</span>
-                <span className="text-[12px]">{user.email}</span>
-              </div>}
-            </div>
-            <Button
-              variant={"destructive"}
-              onClick={handleLogout}
-              className="w-fit"
-            >
-              Sair
-            </Button>
-          </div>
+          <SideBarFooter handleLogout={handleLogout} isCollapsed={isCollapsed} user={user} />
         </SheetFooter>
       </aside>
-
 
       {/* mobile */}
       <div className={clsx("flex flex-1 flex-col transition-all duration-300", {
@@ -339,116 +153,21 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
               </SheetTitle>
               <SheetDescription>Menu administrativo</SheetDescription>
               <div className="flex flex-col justify-between h-full">
-                <nav className="grid gap-2 text-base">
-                  <SidebarLinks
-                    href="/dashboard"
-                    label="Agendamentos"
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                    icon={<CalendarCheck2 className="w-6 h-6 text-corprimary" />}
-                  />
-                  <SidebarLinks
-                    href="/dashboard/services"
-                    label="Serviços"
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                    icon={<Folder className="w-6 h-6 text-corprimary" />}
-                  />
-                  <SidebarLinks
-                    href="/dashboard/profile"
-                    label="Perfil"
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                    icon={<Settings className="w-6 h-6 text-corprimary" />}
-                  />
-                  <SidebarLinks
-                    href="/dashboard/plans"
-                    label="Planos"
-                    pathname={pathname}
-                    isCollapsed={isCollapsed}
-                    icon={<Banknote className="w-6 h-6 text-corprimary" />}
-                  />
-                  <div>
-                    <SidebarLinks
-                      href="/dashboard/reports"
-                      label="Relatorios"
-                      pathname={pathname}
-                      isCollapsed={isCollapsed}
-                      icon={<FileText className="w-6 h-6 text-corprimary" />}
-                    />
-                    <div className="ml-6 mt-2">
-                      <SidebarLinks
-                        label="Serviços"
-                        href="/dashboard/reports/services"
-                        icon={<Briefcase className="text-corprimary w-6 h-6" />}
-                        pathname={pathname}
-                        isCollapsed={isCollapsed}
-                      />
-                      <SidebarLinks
-                        label="Clientes"
-                        href="/dashboard/reports/client"
-                        icon={<User className="text-corprimary w-6 h-6" />}
-                        pathname={pathname}
-                        isCollapsed={isCollapsed}
-                      />
-                      <SidebarLinks
-                        label="Relatórios Gerados"
-                        href="/dashboard/reports/generated"
-                        icon={<FileStack className="text-corprimary w-6 h-6" />}
-                        pathname={pathname}
-                        isCollapsed={isCollapsed}
-                      />
-                      <SidebarLinks
-                        label="Faturamento"
-                        href="/dashboard/reports/invoicing"
-                        icon={<CircleDollarSign className="text-corprimary w-6 h-6" />}
-                        pathname={pathname}
-                        isCollapsed={isCollapsed}
-                      />
-                    </div>
-                  </div>
-                </nav>
 
-                <div className="w-full flex justify-between">
-                  <div className="h-full flex items-center gap-2 px-1">
-                    <div className="w-11 rounded-lg overflow-hidden">
-                      <Image
-                        src={user?.image as string}
-                        alt="logo"
-                        priority
-                        quality={100}
-                        width={48}
-                        height={48}
-                        style={{
-                          width: 'auto',
-                          height: 'auto',
-                        }}
-                      />
-                    </div>
-                    <div className="flex flex-col items-start w-full">
-                      <span className="text-[12px] line-clamp-1">{user.name}</span>
-                      <span className="text-[12px]">{user.email}</span>
-                    </div>
-                  </div>
-                  <Button
-                    variant={"destructive"}
-                    onClick={handleLogout}
-                  >
-                    Sair
-                  </Button>
-                </div>
+                <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
+
+                <SheetFooter className="p-0">
+                  <SideBarFooter handleLogout={handleLogout} isCollapsed={isCollapsed} user={user} />
+                </SheetFooter>
 
               </div>
             </SheetContent>
           </Sheet>
-
-
         </header>
 
         <main className="flex-1 py-4 px-2 md:p-6">
           {children}
         </main>
-
       </div>
     </div>
   )
@@ -475,5 +194,156 @@ function SidebarLinks({ href, icon, label, isCollapsed, pathname }: SidebarLinks
         {!isCollapsed && <span>{label}</span>}
       </div>
     </Link>
+  )
+}
+
+type NavigationItemsMapProps = Partial<SidebarLinksProps> & {};
+
+function NavigationItemsMap({ isCollapsed, pathname }: NavigationItemsMapProps) {
+  return (
+    <nav className="grid gap-2 text-base">
+      {navigationItems.map(link => (
+        <div key={link.heading}>
+          {!isCollapsed && (
+            <span
+              key={link.heading}
+              className="text-sm text-gray-400 font-medium mt-1 uppercase"
+            >
+              {link.heading}
+            </span>)}
+          {link.links.map(item => (
+            <div key={item.href} className="mt-0.5">
+              <SidebarLinks
+                href={item.href}
+                label={item.label}
+                pathname={pathname as string}
+                isCollapsed={isCollapsed as boolean}
+                icon={item.icon}
+              />
+              {item.subLinks && item.subLinks.length > 0 && (
+                <div className={`${isCollapsed ? "mt-0.5" : "ml-6 pl-1 mt-0.5 border-l border-corprimary/30"}`}>
+                  {item?.subLinks?.map(item => (
+                    <div className="mt-0.5" key={item.href}>
+                      <SidebarLinks
+                        key={item.href}
+                        href={item.href}
+                        label={item.label}
+                        pathname={pathname as string}
+                        isCollapsed={isCollapsed as boolean}
+                        icon={item.icon}
+                      />
+                    </div>
+                  ))}
+                </div>)}
+            </div>
+          ))}
+        </div>
+      ))}
+    </nav>
+  )
+}
+
+const navigationItems = [
+  {
+    heading: "Painel",
+    links: [
+      {
+        href: "/dashboard",
+        label: "Agendamentos",
+        icon: <CalendarCheck2 className="w-6 h-6 text-corprimary" />
+      },
+      {
+        href: "/dashboard/services",
+        label: "Serviços",
+        icon: <Folder className="w-6 h-6 text-corprimary" />
+      },
+      {
+        href: "/dashboard/reports",
+        label: "Relatorios",
+        icon: <BarChart3 className="w-6 h-6 text-corprimary" />,
+        subLinks: [
+          {
+            href: "/dashboard/reports/client",
+            label: "Clientes",
+            icon: <User className="w-6 h-6 text-corprimary" />
+          },
+          {
+            href: "/dashboard/reports/generated",
+            label: "Relatórios Gerados",
+            icon: <FileStack className="w-6 h-6 text-corprimary" />
+          },
+          {
+            href: "/dashboard/reports/invoicing",
+            label: "Faturamento",
+            icon: <CircleDollarSign className="w-6 h-6 text-corprimary" />
+          }
+        ]
+      }
+    ]
+  },
+  {
+    heading: "Minha conta",
+    links: [
+      {
+        href: "/dashboard/profile",
+        label: "Perfil",
+        icon: <Settings className="w-6 h-6 text-corprimary" />
+      },
+      {
+        href: "/dashboard/plans",
+        label: "Planos",
+        icon: <Banknote className="w-6 h-6 text-corprimary" />
+      }
+    ]
+  },
+  {
+    heading: "Outros",
+    links: [
+      {
+        href: "/dashboard/support",
+        label: "Suporte",
+        icon: <MessageCircleQuestion className="w-6 h-6 text-corprimary" />
+      }
+    ]
+  }
+];
+
+interface SideBarFooterProps {
+  user: UserProps;
+  isCollapsed: boolean;
+  handleLogout: () => void;
+}
+
+function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) {
+  return (
+    <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between`}>
+      <div className="h-full flex items-center gap-1">
+        <div className="w-12 rounded-lg overflow-hidden">
+          <Image
+            src={user?.image as string}
+            alt="logo"
+            priority
+            quality={100}
+            width={48}
+            height={48}
+            style={{
+              width: 'auto',
+              height: 'auto',
+            }}
+          />
+        </div>
+        {!isCollapsed && <div className="flex flex-col items-start w-full">
+          <span className="text-[12px] line-clamp-1">{user.name}</span>
+          <span className="text-[12px]">{user.email}</span>
+        </div>}
+      </div>
+      <Button
+        variant={"destructive"}
+        onClick={handleLogout}
+        className="w-fit"
+      >
+        Sair
+      </Button>
+    </div>
   )
 }
