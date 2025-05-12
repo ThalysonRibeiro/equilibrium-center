@@ -8,12 +8,35 @@ import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { DateRange } from "react-day-picker"
+import { useRouter } from "next/navigation"
 
 export function DateRangePicker() {
+  const router = useRouter();
   const [date, setDate] = React.useState<DateRange | undefined>({
     from: addDays(new Date(), -20),
-    to: addDays(new Date(), 0),
+    to: new Date(),
   })
+
+  // Função para atualizar a URL
+  const updateURLWithDates = React.useCallback((range: DateRange | undefined) => {
+    if (!range?.from || !range.to) return
+
+    const startDateString = format(range.from, "yyyy-MM-dd")
+    const endDateString = format(range.to, "yyyy-MM-dd")
+
+    const url = new URL(window.location.href)
+    url.searchParams.set("start-date", startDateString)
+    url.searchParams.set("end-date", endDateString)
+
+    // router.push(url.toString());
+    router.replace(url.toString());
+  }, [router])
+
+  // Atualiza a URL sempre que o intervalo muda
+  React.useEffect(() => {
+    updateURLWithDates(date)
+  }, [date, updateURLWithDates])
+
 
   return (
     <div className="grid gap-2">

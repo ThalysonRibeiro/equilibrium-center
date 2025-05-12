@@ -3,7 +3,7 @@
 import prisma from "@/lib/prisma";
 
 
-export async function getAllServices({ userId }: { userId: string }) {
+export async function getAllServicesActive({ userId }: { userId: string }) {
   if (!userId) {
     return {
       error: "Falha ao buscar servoços"
@@ -14,12 +14,7 @@ export async function getAllServices({ userId }: { userId: string }) {
     const services = await prisma.service.findMany({
       where: {
         userId: userId,
-      }
-    });
-
-    const totalService = await prisma.service.count({
-      where: {
-        userId: userId,
+        status: true
       }
     });
 
@@ -29,8 +24,7 @@ export async function getAllServices({ userId }: { userId: string }) {
       price: service.price.toString(), // ou .toNumber() se preferir número
     }));
     return {
-      data: servicesData,
-      total: totalService
+      data: servicesData
     }
   } catch (error) {
     console.log(error);

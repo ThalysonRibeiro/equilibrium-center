@@ -6,37 +6,173 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+import { useSearchParams } from "next/navigation";
+import { addDays, format } from "date-fns";
+import { AppointmentStatus } from "@/generated/prisma";
+import { TrendingDown, TrendingUp } from "lucide-react";
+import { join } from "path";
+import { formatCurrency } from "@/utils/formatCurrency";
 
-interface PerformanceCardsProps {
+interface OverviewProps {
+  currentPeriod: CurrentPeriodProps;
+  previousPeriod: PreviousPeriodProps;
+  comparison: ComparisonProps;
 }
 
-export function PerformanceCards({ }: PerformanceCardsProps) {
+interface CurrentPeriodProps {
+  appointmentsCurrent: CurrentAndPreviousProps[];
+  appointmentsPrevious: CurrentAndPreviousProps[];
+  totalRevenue: number;
+  totalCurrentAppointmentsMonth: number;
+}
+interface CurrentAndPreviousProps {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  appointmentDate: Date;
+  time: string;
+  status: AppointmentStatus;
+  serviceId: string;
+  userId: string;
+  createdAt: Date;
+  updatedAt: Date;
+  service: {
+    price: string;
+  }
+}
 
+interface PreviousPeriodProps {
+  totalRevenue: number;
+}
+
+interface ComparisonProps {
+  revenueChangePercent: number;
+  PercentageVariationInAppointments: number;
+}
+
+
+
+
+export function PerformanceCards() {
+  const searchParams = useSearchParams();
+  // const startDateString = searchParams.get('start-date');
+  // const endDateString = searchParams.get('end-date');
+
+  const { data, isLoading, refetch } = useQuery({
+    queryKey: ["get-metrics-overview",],
+    queryFn: async () => {
+      // let activeStartDate = startDateString;
+      // let activeEndDate = endDateString;
+      // if (!startDateString || !endDateString) {
+      const start = format(addDays(new Date(), -30), "yyyy-MM-dd");
+      const end = format(new Date(), "yyyy-MM-dd");
+      let activeStartDate = start;
+      let activeEndDate = end;
+      // }
+
+      const url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/overview?start-date=${activeStartDate}&end-date=${activeEndDate}`;
+      const response = await fetch(url);
+      const json = await response.json() as OverviewProps;
+
+      if (!response.ok) {
+        throw new Error("Erro ao buscar métricas");
+      }
+
+      return json;
+    },
+    staleTime: 20000, // 20 segundos de staletime
+    refetchInterval: 30000
+  })
 
   return (
-    <section className="grid grid-cols-2 gap-3 mb-3">
-      {infoCads.map((item, index) => (
-        <Card
-          key={item.title}
-          className=""
-        >
-          <CardHeader>
-            <CardTitle className="text-xl font-bold">
-              {item.title}
-            </CardTitle>
-            <CardDescription></CardDescription>
-          </CardHeader>
-          <CardContent>
-            <span className="text-2xl font-bold text-green-500">{item.value}</span>
-            <p>{item.metrics}</p>
-          </CardContent>
-        </Card>
-      ))}
-    </section>
+    <>
+      {isLoading ? (
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
+          <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
+            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+          </div>
+          <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
+            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+          </div>
+        </section>
+      ) : (
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
+          <Card className="text-gray-700">
+            <CardHeader>
+              <CardTitle className="text-xl font-bold inline-flex justify-between w-full">
+                Agendamentos
+
+                {typeof data?.comparison?.PercentageVariationInAppointments === "number" && (
+                  <div className="border rounded-md px-2 py-1 inline-flex items-center text-sm font-normal">
+                    {data.comparison.PercentageVariationInAppointments >= 100 ? (
+                      <span className="text-green-500 font-semibold inline-flex items-center">
+                        <TrendingUp className="w-4 h-4 mr-1" /> +{data.comparison.PercentageVariationInAppointments.toFixed(2)}%
+                      </span>
+                    ) : (
+                      <span className="text-red-500 font-semibold inline-flex items-center">
+                        <TrendingDown className="w-4 h-4 mr-1" /> {data.comparison.PercentageVariationInAppointments.toFixed(2)}%
+                      </span>
+                    )}
+                  </div>
+                )}
+              </CardTitle>
+
+              <CardDescription>
+                Tendências de Agendamentos até essa data.
+              </CardDescription>
+            </CardHeader>
+
+            <CardContent className="flex flex-col">
+              <span className="font-bold text-4xl">
+                {typeof data?.comparison?.PercentageVariationInAppointments === "number"
+                  ? `${Math.abs(data.comparison.PercentageVariationInAppointments).toFixed(2)}%`
+                  : "0.00%"}
+              </span>
+              <span className="text-2xl font-bold">
+                Agendamento {data?.currentPeriod?.totalCurrentAppointmentsMonth ?? 0}
+              </span>
+            </CardContent>
+          </Card>
+
+
+          <Card className="text-gray-700">
+            <CardHeader>
+              <CardTitle className="md:text-xl font-bold inline-flex items-center justify-between w-full">
+                Receita
+
+                {typeof data?.comparison?.revenueChangePercent === "number" && (
+                  <div className="border rounded-md px-2 py-1 inline-flex items-center text-sm font-normal">
+                    {data.comparison.revenueChangePercent >= 100 ? (
+                      <span className="text-green-500 font-semibold inline-flex items-center">
+                        <TrendingUp className="w-4 h-4 mr-1" /> +{data.comparison.revenueChangePercent.toFixed(2)}%
+                      </span>
+                    ) : (
+                      <span className="text-red-500 font-semibold inline-flex items-center">
+                        <TrendingDown className="w-4 h-4 mr-1" /> {data.comparison.revenueChangePercent.toFixed(2)}%
+                      </span>
+                    )}
+                  </div>
+                )}
+              </CardTitle>
+              <CardDescription>
+                Tendências de Receita até essa data.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="flex flex-col justify-between">
+              <span className="font-bold text-4xl">
+                {typeof data?.comparison?.revenueChangePercent === "number"
+                  ? `${Math.abs(data.comparison.revenueChangePercent).toFixed(2)}%`
+                  : "0.00%"}
+              </span>
+              <span className="text-4xl font-bold">
+                {formatCurrency(String(data?.currentPeriod?.totalRevenue))}
+              </span>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+    </>
   )
 }
-
-const infoCads = [
-  { title: "Agendamentos", metrics: "+15% até esta data", value: "+110" },
-  { title: "Total de ganhos", metrics: "+55% até esta data", value: "+R$ 2.110,00" },
-];
