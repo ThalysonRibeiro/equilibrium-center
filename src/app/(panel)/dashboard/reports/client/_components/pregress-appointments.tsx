@@ -25,16 +25,15 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
       ) : (
         <article>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-            <Card className="text-sm lg:text-base text-gray-700">
+            <Card className="text-sm lg:text-base text-primary">
               <CardHeader>
-                <CardTitle className="inline-flex justify-between">Total de Agendamentos <Activity /></CardTitle>
+                <CardTitle className="inline-flex justify-between font-montserrat">
+                  Total de Agendamentos <Activity />
+                </CardTitle>
               </CardHeader>
               <CardContent>
-                <span className="text-5xl font-bold">{countAllAppointments}</span>
+                <span className="text-5xl font-montserrat">{countAllAppointments}</span>
               </CardContent>
-              <CardFooter>
-
-              </CardFooter>
             </Card>
             <CardMetricsStatus
               title={"Pendendte"}
@@ -94,13 +93,13 @@ interface CardMetricsStatusProps {
 
 function CardMetricsStatus({ title, countValue, percentage, width, max, color }: CardMetricsStatusProps) {
   return (
-    <Card className="text-sm text-gray-700">
+    <Card className="text-sm text-primary">
       <CardHeader>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="font-semibold">Total: <span className="font-bold text-2xl">{countValue}</span></p>
-        <p className="font-semibold">Margem: <span className="font-bold text-2xl">{percentage}</span></p>
+        <p className="font-montserrat">Total: <span className="text-2xl">{countValue}</span></p>
+        <p className="font-montserrat">Margem: <span className="text-2xl">{percentage}</span></p>
       </CardContent>
       <CardFooter>
         <Progress

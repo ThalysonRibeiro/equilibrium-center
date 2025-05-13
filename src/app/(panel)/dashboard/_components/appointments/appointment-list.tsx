@@ -28,14 +28,11 @@ interface AppointmentListProps {
   times: string[];
 }
 
-
 export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
     service: true
   }
 }>;
-
-
 
 export function AppointmentList({ times }: AppointmentListProps) {
   const searchParams = useSearchParams();
@@ -116,7 +113,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-xl md:text-2xl font-bold">
+          <CardTitle className="text-xl md:text-2xl font-montserrat">
             Agendamentos
           </CardTitle>
           <ButtonPickerAppointment />
@@ -125,7 +122,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
           <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-15rem)] pr-4">
             {isLoading ? (
               <div className="w-full h-[calc(100vh-15rem)] flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
               </div>
             ) : (
               times.map(slot => {
@@ -152,7 +149,6 @@ export function AppointmentList({ times }: AppointmentListProps) {
                           </div>
                         </div>
                         <div className="flex gap-3 items-center justify-between">
-                          {/* <div> */}
                           <Select onValueChange={(value: AppointmentStatus) => {
                             handleStatusAppointment(occupant.id, value)
                           }}>
@@ -167,12 +163,11 @@ export function AppointmentList({ times }: AppointmentListProps) {
                               <SelectItem value="CANCELLED">Cancelado</SelectItem>
                             </SelectContent>
                           </Select>
-                          {/* </div> */}
                           <div className="flex gap-2.5">
                             <Button
                               size={"icon"}
                               onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
-                              className="bg-green-400 hover:bg-corsecondary rounded-md text-white text-sm font-semibold cursor-pointer"
+                              className="bg-green-400 rounded-md text-white text-sm font-semibold cursor-pointer"
                             >
                               <FaWhatsapp />
                             </Button>
@@ -183,7 +178,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
                                 size={"icon"}
                                 onClick={() => setDetailAppointment(occupant)}
                               >
-                                <Eye className="text-corsecondary" />
+                                <Eye />
                               </Button>
                             </DialogTrigger>
                           </div>
@@ -199,10 +194,6 @@ export function AppointmentList({ times }: AppointmentListProps) {
                   >
                     <div className="font-bold">{slot}</div>
                     <div>Disponível</div>
-                    {/* <div>
-                      <div>Status</div>
-                      <div><FaWhatsapp /></div>
-                    </div> */}
                   </div>
                 )
               })

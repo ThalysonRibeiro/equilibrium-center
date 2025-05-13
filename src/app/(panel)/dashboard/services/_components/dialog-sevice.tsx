@@ -113,8 +113,8 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
 
   return (
     <>
-      <DialogHeader>
-        <DialogTitle>Novo Servoço</DialogTitle>
+      <DialogHeader className="text-primary">
+        <DialogTitle className="font-montserrat">Novo Servoço</DialogTitle>
         <DialogDescription>
           Adicione um serviço
         </DialogDescription>
@@ -122,7 +122,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
 
       <Form {...form}>
         <form
-          className="space-y-2"
+          className="space-y-2 text-primary"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="flex flex-col">
@@ -137,7 +137,6 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
                   </FormLabel>
                   <FormControl>
                     <Input {...field}
-                      className="border-corprimary"
                       placeholder="Digite o nome do seviço..."
                     />
                   </FormControl>
@@ -157,7 +156,6 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
                   <FormControl>
                     <Input {...field}
                       onChange={changeCurrency}
-                      className="border-corprimary"
                       placeholder="Ex: 120,00"
                     />
                   </FormControl>
@@ -179,7 +177,6 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
                   </FormLabel>
                   <FormControl>
                     <Input {...field}
-                      className="border-corprimary"
                       placeholder="1"
                       min={0}
                       type="number"
@@ -199,7 +196,6 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
                   </FormLabel>
                   <FormControl>
                     <Input {...field}
-                      className="border-corprimary"
                       placeholder="0"
                       min={0}
                       type="number"
@@ -214,7 +210,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
           <Button
             disabled={loading}
             type="submit"
-            className="bg-corprimary hover:bg-corsecondary w-full"
+            className=" hover:bg-accent w-full"
           >
             {loading ?
               <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-corsecondary rounded-full animate-spin" />

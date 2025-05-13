@@ -11,9 +11,9 @@ interface DialogAppointmentsProps {
 export function DialogAppointments({ appointment }: DialogAppointmentsProps) {
 
   return (
-    <DialogContent className="border-corprimary">
+    <DialogContent className="bg-white text-primary">
       <DialogHeader>
-        <DialogTitle className="text-center text-corprimary">
+        <DialogTitle className="text-center">
           Detalhes do agendamento
         </DialogTitle>
         <DialogDescription className="text-center">
@@ -24,21 +24,21 @@ export function DialogAppointments({ appointment }: DialogAppointmentsProps) {
       <div className="py-4">
         {appointment && (
           <article>
-            <p><span className="font-bold text-corprimary">Horario agendado: </span>{appointment.time}</p>
-            <p className="mb-2"><span className="font-bold text-corprimary">Data do agendamento: </span>
+            <p className="font-lato"><span className="font-montserrat">Horario agendado: </span>{appointment.time}</p>
+            <p className="mb-2 font-lato"><span className="font-montserrat">Data do agendamento: </span>
               {new Intl.DateTimeFormat('pt-BR', {
                 timeZone: "UTC",
                 year: "numeric",
                 month: "2-digit",
                 day: "2-digit",
               }).format(new Date(appointment.appointmentDate))}</p>
-            <p><span className="font-bold text-corprimary">Nome: </span>{appointment.name}</p>
-            <p><span className="font-bold text-corprimary">Telefone: </span>{appointment.phone}</p>
-            <p><span className="font-bold text-corprimary">Email: </span>{appointment.email}</p>
+            <p className="font-lato"><span className="font-montserrat">Nome: </span>{appointment.name}</p>
+            <p className="font-lato"><span className="font-montserrat">Telefone: </span>{appointment.phone}</p>
+            <p className="font-lato"><span className="font-montserrat">Email: </span>{appointment.email}</p>
 
-            <section className="bg-corsecondary border border-corprimary/50 mt-4 p-2 rounded-md">
-              <p><span className="font-bold text-corprimary">Serviço: </span>{appointment.service.name}</p>
-              <p><span className="font-bold text-corprimary">Valor: </span>{formatCurrency(appointment.service.price.toString())}</p>
+            <section className="bg-gray-100 border border-corprimary/50 mt-4 p-2 rounded-md">
+              <p className="font-lato"><span className="font-montserrat">Serviço: </span>{appointment.service.name}</p>
+              <p className="font-lato"><span className="font-montserrat">Valor: </span>{formatCurrency(appointment.service.price.toString())}</p>
             </section>
 
           </article>

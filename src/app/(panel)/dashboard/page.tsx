@@ -19,7 +19,7 @@ export default async function Dashboard() {
       <div className="space-x-2 flex items-center justify-end">
         <Link href={`/clinica/${session.user.id}`} target="_blank">
           <Button
-            className="bg-corsecondary hover:bg-corprimary flex-1 md:flex-[0]"
+            className="hover:bg-accent flex-1 md:flex-[0]"
           >
             <Calendar />
             <span>Novo agendamento</span>

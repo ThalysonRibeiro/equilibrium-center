@@ -47,7 +47,7 @@ export function ReminderContent({ closeDialog }: ReminderContentProps) {
                   <Textarea
                     {...field}
                     placeholder="Digite o nome do lembrete..."
-                    className="max-h-52 border-corprimary"
+                    className="max-h-52"
                   />
                 </FormControl>
                 <FormMessage />
@@ -56,7 +56,7 @@ export function ReminderContent({ closeDialog }: ReminderContentProps) {
           />
 
           <Button
-            className="w-full text-white bg-corsecondary"
+            className="w-full hover:bg-accent"
             type="submit"
             disabled={!form.watch("description")}
           >

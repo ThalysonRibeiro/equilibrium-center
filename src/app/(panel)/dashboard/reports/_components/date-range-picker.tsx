@@ -44,8 +44,7 @@ export function DateRangePicker() {
         <PopoverTrigger asChild>
           <Button
             id="date"
-            variant={"secondary"}
-            className="w-[260px] justify-start text-left font-normal"
+            className="w-[260px] justify-start text-left font-normal hover:bg-accent"
           >
             <CalendarIcon className="mr-2 h-4 w-4" />
             {date?.from ? (

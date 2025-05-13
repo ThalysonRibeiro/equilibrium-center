@@ -1,21 +1,24 @@
 import type { Metadata } from "next";
-import { Open_Sans, Mansalva } from "next/font/google";
+import { Montserrat, Lato } from "next/font/google";
 import "./globals.css";
 import { SessionAuthProvider } from "@/components/session-auth";
 import { Toaster } from "sonner";
 import { QueryClientContext } from "@/providers/queryclient";
 
+// Títulos: Montserrat (peso 600-700)
+// Texto: Lato
 
 
-const pen_Sans = Open_Sans({
-  variable: "--font-open_Sans",
-  subsets: ["latin"],
-});
-
-const mansalva = Mansalva({
-  variable: "--font-mansalva",
+const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
   weight: ["400",]
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  weight: ["600", "700"]
 });
 
 export const metadata: Metadata = {
@@ -31,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={` ${pen_Sans.variable} ${mansalva.variable} antialiased`}
+        className={` ${lato.variable} ${montserrat.variable} antialiased`}
       >
         <SessionAuthProvider>
           <QueryClientContext>

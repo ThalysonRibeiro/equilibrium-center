@@ -91,17 +91,17 @@ export function PerformanceCards() {
       {isLoading ? (
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
           <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
           </div>
           <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
           </div>
         </section>
       ) : (
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
-          <Card className="text-gray-700">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3 text-primary">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-xl font-bold inline-flex justify-between w-full">
+              <CardTitle className="text-xl font-montserrat inline-flex justify-between w-full">
                 Agendamentos
 
                 {typeof data?.comparison?.PercentageVariationInAppointments === "number" && (
@@ -120,26 +120,26 @@ export function PerformanceCards() {
               </CardTitle>
 
               <CardDescription>
-                Tendências de Agendamentos até essa data.
+                Tendências de Agendamentos.
               </CardDescription>
             </CardHeader>
 
             <CardContent className="flex flex-col">
-              <span className="font-bold text-4xl">
+              <span className="font-montserrat text-4xl">
                 {typeof data?.comparison?.PercentageVariationInAppointments === "number"
                   ? `${Math.abs(data.comparison.PercentageVariationInAppointments).toFixed(2)}%`
                   : "0.00%"}
               </span>
-              <span className="text-2xl font-bold">
-                Agendamento {data?.currentPeriod?.totalCurrentAppointmentsMonth ?? 0}
+              <span className="text-2xl font-montserrat">
+                Agendamento: {data?.currentPeriod?.totalCurrentAppointmentsMonth ?? 0}
               </span>
             </CardContent>
           </Card>
 
 
-          <Card className="text-gray-700">
+          <Card className="text-primary">
             <CardHeader>
-              <CardTitle className="md:text-xl font-bold inline-flex items-center justify-between w-full">
+              <CardTitle className="md:text-xl font-montserrat inline-flex items-center justify-between w-full">
                 Receita
 
                 {typeof data?.comparison?.revenueChangePercent === "number" && (
@@ -157,16 +157,16 @@ export function PerformanceCards() {
                 )}
               </CardTitle>
               <CardDescription>
-                Tendências de Receita até essa data.
+                Tendências de Receita.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col justify-between">
-              <span className="font-bold text-4xl">
+              <span className="font-montserrat text-4xl">
                 {typeof data?.comparison?.revenueChangePercent === "number"
                   ? `${Math.abs(data.comparison.revenueChangePercent).toFixed(2)}%`
                   : "0.00%"}
               </span>
-              <span className="text-4xl font-bold">
+              <span className="text-4xl font-montserrat">
                 {formatCurrency(String(data?.currentPeriod?.totalRevenue))}
               </span>
             </CardContent>

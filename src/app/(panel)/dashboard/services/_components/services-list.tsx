@@ -54,18 +54,18 @@ export function ServicesList({ services }: ServicesListProps) {
           setEditingService(null)
         }
       }}>
-      <section className="mx-auto">
+      <section className="mx-auto text-primary">
         <Card>
           <CardHeader className="flex flex-row justify-between items-center space-y-0">
-            <CardTitle className="text-xl text-gray-700">Serviços Ativo</CardTitle>
+            <CardTitle className="text-xl font-montserrat">Serviços Ativo</CardTitle>
             <DialogTrigger asChild>
-              <Button className="bg-corsecondary hover:bg-corprimary">
+              <Button className="hover:bg-accent">
                 <Plus className="w-4 h-4" />
               </Button>
             </DialogTrigger>
 
             <DialogContent
-              className="border-corprimary"
+              className="bg-white"
               onInteractOutside={(e) => {
                 e.preventDefault();
                 setIsDialogOpen(false);
@@ -96,7 +96,7 @@ export function ServicesList({ services }: ServicesListProps) {
                   className="flex items-center justify-between gap-2"
                 >
                   <div className="flex items-center justify-between rounded-md space-x-2 px-2 w-full h-9 border text-sm lg:text-base">
-                    <span className="font-medium text-gray-700 line-clamp-1">{service.name}</span>
+                    <span className="font-medium line-clamp-1">{service.name}</span>
                     <span className="font-medium text-green-500">{formatCurrency(service.price)}</span>
                   </div>
 

@@ -105,13 +105,13 @@ export function BarChartMultiple() {
     <>
       {isLoading ? (
         <div className="w-full h-100 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
         </div>
       ) : (
         <Card>
           <CardHeader className="flex items-center gap-2 space-y-0 border-b py-5 sm:flex-row">
             <div className="grid flex-1 gap-1 text-center sm:text-left">
-              <CardTitle>Gráfico de Área - Interativo</CardTitle>
+              <CardTitle className="font-montserrat">Gráfico de Área - Interativo</CardTitle>
               <CardDescription>
                 Mostrando o total de receita dos últimos {timeRange.replace("d", "")} dias
               </CardDescription>
@@ -125,13 +125,13 @@ export function BarChartMultiple() {
               </SelectTrigger>
               <SelectContent className="rounded-xl">
                 <SelectItem value="90d" className="rounded-lg">
-                  Last 3 months
+                  Últimos 3 meses
                 </SelectItem>
                 <SelectItem value="30d" className="rounded-lg">
-                  Last 30 days
+                  Últimos 30 dias
                 </SelectItem>
                 <SelectItem value="7d" className="rounded-lg">
-                  Last 7 days
+                  Últimos 7 dias
                 </SelectItem>
               </SelectContent>
             </Select>

@@ -35,18 +35,18 @@ export function ReminderList({ reminder }: ReminderListProps) {
     <div className="flex flex-col gap-3">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-lx md:text-2xl font-bold">
+          <CardTitle className="text-lx md:text-2xl font-montserrat">
             Lembretes
           </CardTitle>
 
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button className="w-9 p-0 bg-corsecondary hover:bg-corprimary">
+              <Button className="w-9 p-0 hover:bg-accent">
                 <Plus className="w-5 -h-5" />
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-[425px] border border-corprimary">
+            <DialogContent className="sm:max-w-[425px] text-primary bg-white">
               <DialogHeader>
                 <DialogTitle>Novo Lembrete</DialogTitle>
                 <DialogDescription>Criar um novo lemrete para sua lista.</DialogDescription>

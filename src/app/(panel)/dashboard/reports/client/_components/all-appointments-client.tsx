@@ -77,7 +77,7 @@ export function AllAppointmentClient() {
 
   return (
     <section className="space-y-4">
-      <h1 className="text-2xl font-bold text-center">Atividade de agendamento de clientes</h1>
+      <h1 className="text-2xl font-montserrat text-primary text-center">Atividade de agendamento de clientes</h1>
       <DateRangePicker />
       <ProgressAppointments
         loading={isLoading}
