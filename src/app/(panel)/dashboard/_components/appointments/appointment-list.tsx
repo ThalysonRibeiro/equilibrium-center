@@ -134,7 +134,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
                   PENDING: "Pendente",
                   SCHEDULED: "Confirmado",
                   COMPLETED: "Completo",
-                  NO_SHOW: "Não comparecimento",
+                  NO_SHOW: "Não comparecido",
                   CANCELLED: "Cancelado"
                 };
                 if (occupant) {

@@ -1,7 +1,5 @@
+import { AllAppointmentClient } from "./_components/all-appointments-client";
+
 export default function Client() {
-  return (
-    <section>
-      Client
-    </section>
-  )
+  return <AllAppointmentClient />
 }

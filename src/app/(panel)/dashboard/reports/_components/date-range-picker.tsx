@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation"
 export function DateRangePicker() {
   const router = useRouter();
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: addDays(new Date(), -20),
+    from: addDays(new Date(), -30),
     to: new Date(),
   })
 
@@ -29,7 +29,7 @@ export function DateRangePicker() {
     url.searchParams.set("end-date", endDateString)
 
     // router.push(url.toString());
-    router.replace(url.toString());
+    router.push(url.toString());
   }, [router])
 
   // Atualiza a URL sempre que o intervalo muda

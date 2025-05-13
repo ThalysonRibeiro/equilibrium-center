@@ -50,7 +50,7 @@ export async function GET(request: NextRequest) {
 
     const blockedSlots = new Set<string>()
     for (const apt of appointments) {
-      const requiredSlots = Math.ceil(apt.service.duration / 15);
+      const requiredSlots = Math.ceil(apt.service.duration / 30);
       const startIndex = user.times.indexOf(apt.time);
 
       if (startIndex !== -1) {

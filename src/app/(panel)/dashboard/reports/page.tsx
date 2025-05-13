@@ -20,16 +20,6 @@ export default async function Reports() {
 
       <div className="flex flex-col lg:flex-row items-center justify-between mb-3">
         <h1 className="text-xl font-bold flex-1">Dashboard - Visão geral</h1>
-        {/* <div className="flex-1 inline-flex gap-3 justify-between lg:justify-end w-full">
-          <DateRangePicker />
-          <Button
-            variant={"secondary"}
-            className=""
-          >
-            Download
-            <DownloadIcon />
-          </Button>
-        </div> */}
       </div>
 
       <PerformanceCards />
