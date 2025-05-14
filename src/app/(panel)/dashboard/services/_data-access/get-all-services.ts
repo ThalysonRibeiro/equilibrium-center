@@ -17,11 +17,7 @@ export async function getAllServices({ userId }: { userId: string }) {
       }
     });
 
-    const totalService = await prisma.service.count({
-      where: {
-        userId: userId,
-      }
-    });
+    const totalService = services.length;
 
     // Converter todos os valores 'Decimal' para 'string' ou 'number'
     const servicesData = services.map(service => ({

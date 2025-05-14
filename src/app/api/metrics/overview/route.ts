@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
-import { getAllAppointments } from '@/app/(panel)/dashboard/reports/_data-access/get-all-appointments';
-import { getAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-appointments";
+import { getAppointments } from "@/lib/prisma/get-appointments";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {
