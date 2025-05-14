@@ -1,7 +1,7 @@
-import prisma from '@/lib/prisma'
-import { auth } from "@/lib/auth"
-import { NextRequest, NextResponse } from 'next/server'
+import { auth } from "@/lib/auth";
+import { NextResponse } from 'next/server';
 import { getAllCompletedAppointments } from '@/app/(panel)/dashboard/reports/_data-access/get-invoicing';
+import { getAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-appointments";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {
@@ -34,7 +34,7 @@ export const GET = auth(async function GET(req) {
     startDatePrev.setHours(0, 0, 0, 0); // Início do dia 60 dias atrás
 
     // Uma única consulta que busca TODOS os agendamentos completados
-    const allCompletedAppointments = await getAllCompletedAppointments(clinicId);
+    const allCompletedAppointments = await getAppointments({ userId: clinicId, status: 'COMPLETED', });
 
     // Métricas para todos os agendamentos
     const totalAppointments = allCompletedAppointments.length;

@@ -1,8 +1,9 @@
-import prisma from '@/lib/prisma'
-import { auth } from "@/lib/auth"
-import { NextRequest, NextResponse } from 'next/server'
+import prisma from '@/lib/prisma';
+import { auth } from "@/lib/auth";
+import { NextResponse } from 'next/server';
 import { AppointmentStatus } from '@/generated/prisma';
 import { getAllAppointments } from '@/app/(panel)/dashboard/reports/_data-access/get-all-appointments';
+import { getAppointments } from '@/app/(panel)/dashboard/reports/_data-access/get-appointments';
 
 
 export const GET = auth(async function GET(req) {
@@ -32,7 +33,7 @@ export const GET = auth(async function GET(req) {
       endDate = new Date(Date.UTC(endYear, endMonth - 1, endDay, 23, 59, 59, 999));
     }
 
-    const allAppointments = await getAllAppointments(clinicId, startDate, endDate);
+    const allAppointments = await getAppointments({ userId: clinicId, startDate, endDate });
 
     const countAllAppointments = allAppointments.length;
 

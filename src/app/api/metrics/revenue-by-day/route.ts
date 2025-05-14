@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
-import { getAppointmentsByDay } from '@/app/(panel)/dashboard/reports/_data-access/get-revenue-by-day';
 import { getAllAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-all-appointments";
+import { getAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-appointments";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {
@@ -24,7 +24,7 @@ export const GET = auth(async function GET(req) {
     startDate.setUTCHours(0, 0, 0, 0);
 
     // Buscando todos os appointments no intervalo completo de 180 dias
-    const appointments = await getAllAppointments(clinicId, startDate, endDate);
+    const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED', });
 
     // Cria um mapa com soma dos valores por dia
     const sumByDate: Record<string, number> = {};

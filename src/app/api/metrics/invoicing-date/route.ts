@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
-import { getCompletedAppointmentsByDateRange } from '@/app/(panel)/dashboard/reports/_data-access/get-invoicing-date';
 import { getAllAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-all-appointments";
+import { getAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-appointments";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) return NextResponse.json({ error: "Acesso não autorizado" }, { status: 401 });
@@ -15,14 +15,15 @@ export const GET = auth(async function GET(req) {
     return NextResponse.json({ error: "Dados inválidos!" }, { status: 400 });
   }
 
-  const [start, end] = [
+  const [startDate, endDate] = [
     new Date(startDateString + "T00:00:00.000Z"),
     new Date(endDateString + "T23:59:59.999Z"),
   ];
 
   try {
 
-    const appointments = await getAllAppointments(clinicId, start, end);
+    const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED', });
+
 
     // Métricas para todos os agendamentos
     const totalAppointments = appointments.length;
@@ -35,8 +36,8 @@ export const GET = auth(async function GET(req) {
       appointments,
       totalAppointments,
       totalInvoicing,
-      startDate: start,
-      endDate: end,
+      startDate: startDate,
+      endDate: endDate,
     });
 
   } catch (error) {
