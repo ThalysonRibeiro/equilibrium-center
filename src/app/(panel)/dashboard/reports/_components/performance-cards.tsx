@@ -15,18 +15,19 @@ import { join } from "path";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 interface OverviewProps {
-  currentPeriod: CurrentPeriodProps;
-  previousPeriod: PreviousPeriodProps;
+  metricsTotalInvoicing: MetricsTotalInvoicingProps;
+  currentPeriod: CurrentAndPreviousPeriodProps;
+  previousPeriod: CurrentAndPreviousPeriodProps;
   comparison: ComparisonProps;
 }
 
-interface CurrentPeriodProps {
-  appointmentsCurrent: CurrentAndPreviousProps[];
-  appointmentsPrevious: CurrentAndPreviousProps[];
-  totalRevenue: number;
-  totalCurrentAppointmentsMonth: number;
+interface MetricsTotalInvoicingProps {
+  appointments: AppointmentsProps[];
+  totalAppointments: number;
+  totalInvoicing: number;
 }
-interface CurrentAndPreviousProps {
+
+interface AppointmentsProps {
   id: string;
   name: string;
   email: string;
@@ -43,36 +44,24 @@ interface CurrentAndPreviousProps {
   }
 }
 
-interface PreviousPeriodProps {
+interface CurrentAndPreviousPeriodProps {
+  appointments: AppointmentsProps[];
+  totalAppointments: number;
   totalRevenue: number;
+  startDate: Date;
+  endDate: Date;
 }
 
 interface ComparisonProps {
   revenueChangePercent: number;
-  PercentageVariationInAppointments: number;
+  appointmentChangePercent: number;
 }
 
-
-
-
 export function PerformanceCards() {
-  const searchParams = useSearchParams();
-  // const startDateString = searchParams.get('start-date');
-  // const endDateString = searchParams.get('end-date');
-
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["get-metrics-overview",],
     queryFn: async () => {
-      // let activeStartDate = startDateString;
-      // let activeEndDate = endDateString;
-      // if (!startDateString || !endDateString) {
-      const start = format(addDays(new Date(), -30), "yyyy-MM-dd");
-      const end = format(new Date(), "yyyy-MM-dd");
-      let activeStartDate = start;
-      let activeEndDate = end;
-      // }
-
-      const url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/overview?start-date=${activeStartDate}&end-date=${activeEndDate}`;
+      const url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/invoicing`;
       const response = await fetch(url);
       const json = await response.json() as OverviewProps;
 
@@ -104,15 +93,15 @@ export function PerformanceCards() {
               <CardTitle className="text-xl font-montserrat inline-flex justify-between w-full">
                 Agendamentos
 
-                {typeof data?.comparison?.PercentageVariationInAppointments === "number" && (
+                {typeof data?.comparison?.appointmentChangePercent === "number" && (
                   <div className="border rounded-md px-2 py-1 inline-flex items-center text-sm font-normal">
-                    {data.comparison.PercentageVariationInAppointments >= 100 ? (
+                    {data.comparison?.appointmentChangePercent >= 100 ? (
                       <span className="text-green-500 font-semibold inline-flex items-center">
-                        <TrendingUp className="w-4 h-4 mr-1" /> +{data.comparison.PercentageVariationInAppointments.toFixed(2)}%
+                        <TrendingUp className="w-4 h-4 mr-1" /> +{data.comparison?.appointmentChangePercent.toFixed(2)}%
                       </span>
                     ) : (
                       <span className="text-red-500 font-semibold inline-flex items-center">
-                        <TrendingDown className="w-4 h-4 mr-1" /> {data.comparison.PercentageVariationInAppointments.toFixed(2)}%
+                        <TrendingDown className="w-4 h-4 mr-1" /> {data.comparison?.appointmentChangePercent.toFixed(2)}%
                       </span>
                     )}
                   </div>
@@ -126,12 +115,12 @@ export function PerformanceCards() {
 
             <CardContent className="flex flex-col">
               <span className="font-montserrat text-4xl">
-                {typeof data?.comparison?.PercentageVariationInAppointments === "number"
-                  ? `${Math.abs(data.comparison.PercentageVariationInAppointments).toFixed(2)}%`
+                {typeof data?.comparison?.appointmentChangePercent === "number"
+                  ? `${Math.abs(data.comparison?.appointmentChangePercent).toFixed(2)}%`
                   : "0.00%"}
               </span>
               <span className="text-2xl font-montserrat">
-                Agendamento: {data?.currentPeriod?.totalCurrentAppointmentsMonth ?? 0}
+                Agendamento: {data?.currentPeriod?.totalAppointments ?? 0}
               </span>
             </CardContent>
           </Card>

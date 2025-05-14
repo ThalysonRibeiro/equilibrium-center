@@ -134,13 +134,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col text-black mb-6">
-      <div className="h-32 bg-corsecondary" />
+    <div className="min-h-screen flex flex-col text-primary mb-6">
+      <div className="h-32 bg-primary" />
 
       <section className="container mx-auto px-4 -mt-20">
         <div className="max-w-2xl mx-auto">
           <article className="flex flex-col items-center">
-            <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-corprimary">
+            <div className="relative w-48 h-48 rounded-full overflow-hidden border-4">
               <Image
                 src={clinic.image ? clinic.image : img_test}
                 alt="foto da clinica"
@@ -149,10 +149,10 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               />
             </div>
 
-            <h1 className="text-2xl text-white font-semibold">
+            <h1 className="text-2xl font-montserrat">
               {clinic.name}
             </h1>
-            <div className="flex items-center gap-2 text-white mb-2">
+            <div className="flex items-center gap-2 mb-2">
               <MapPin className="w-5 h-5" />
               <span>
                 {clinic.address ? clinic.address : "Endereço não informado"}
@@ -167,7 +167,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
-            className="mx-4 space-y-6 bg-white p-6 rounded-md border border-corprimary"
+            className="mx-4 space-y-6 bg-white p-6 rounded-md border"
           >
             <FormField
               control={form.control}
@@ -281,10 +281,10 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
             {selectedServiceId && (
               <div className="space-y-2">
                 <Label>Horários disponíeis</Label>
-                <div className="bg-gray-100 p-2 rounded-md border border-corprimary">
+                <div className="bg-gray-100 p-2 rounded-md border">
                   {loadingSlots ? (
                     <div className="flex items-center justify-center">
-                      <div className="w-12 h-12 border-4 border-t-4 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+                      <div className="w-12 h-12 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
                     </div>
                   ) : availableTimeSlots.length === 0 ? (
                     <p>Nenhum horário disponivel</p>
@@ -309,7 +309,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
             {clinic.status ? (
               <Button
-                className="bg-corsecondary hover:bg-corprimary w-full"
+                className="hover:bg-accent w-full"
                 disabled={
                   !watch("name") ||
                   !watch("email") ||

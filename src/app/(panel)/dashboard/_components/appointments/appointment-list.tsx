@@ -90,11 +90,20 @@ export function AppointmentList({ times }: AppointmentListProps) {
     }
   }
 
-  function confirmToWhatsapp(phone: string, name: string, date: Date, time: string) {
-    const message = `Olá ${name}, sua consulta foi agendada com sucesso para o dia ${format(new Date(date), "dd/MM/yyyy")} às ${time}. Posso confirmar o agendamento?`;
+  function confirmToWhatsapp(phone: string, name: string, date: string | Date, time: string) {
+    if (!date) {
+      console.error("Data inválida");
+      return;
+    }
+    const isoString = typeof date === "string" ? date : date.toISOString();
+    const [year, month, day] = isoString.split("T")[0].split("-");
+    const formatted = `${day}/${month}/${year}`;
+    const message = `Olá ${name}, sua consulta foi agendada com sucesso para o dia ${formatted} às ${time}. Posso confirmar o agendamento?`;
     const url = `https://wa.me/55${extractPhoneNumber(phone)}?text=${encodeURIComponent(message)}`;
-    return window.open(url, '_blank');
+
+    return window.open(url, "_blank");
   }
+
 
   async function handleStatusAppointment(appointmentId: string, status: AppointmentStatus) {
     console.log(appointmentId, status);

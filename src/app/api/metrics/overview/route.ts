@@ -1,6 +1,8 @@
 import prisma from '@/lib/prisma'
 import { auth } from "@/lib/auth"
 import { NextRequest, NextResponse } from 'next/server'
+import { getSchedulingSpecificDate } from '@/app/(panel)/dashboard/reports/_data-access/get-overview';
+import { getAllAppointments } from '@/app/(panel)/dashboard/reports/_data-access/get-all-appointments';
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {
@@ -26,97 +28,16 @@ export const GET = auth(async function GET(req) {
     const startDate = new Date(Date.UTC(startYear, startMonth - 1, startDay, 0, 0, 0, 0));
     const endDate = new Date(Date.UTC(endYear, endMonth - 1, endDay, 23, 59, 59, 999));
 
-    // Calcular data 30 dias antes de `startDate`
-    const startDatePrev = new Date(startDate);
-    startDatePrev.setDate(startDatePrev.getDate() - 30);
-    const endDatePrev = new Date(startDate);
 
-    const performanceCurrentAppointment = await prisma.appointment.findMany({
-      where: {
-        userId: clinicId,
-        status: 'COMPLETED',
-        appointmentDate: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-      include: {
-        service: {
-          select: {
-            price: true
-          }
-        }
-      }
-    });
+    const schedulingSpecificDate = await getAllAppointments(clinicId, startDate, endDate);
 
-    const previousPerformanceAppointment = await prisma.appointment.findMany({
-      where: {
-        userId: clinicId,
-        status: 'COMPLETED',
-        appointmentDate: {
-          gte: startDatePrev,
-          lte: endDatePrev,
-        },
-      },
-      include: {
-        service: {
-          select: {
-            price: true
-          }
-        }
-      }
-    });
-
-    const performanceTotalMonthCurrent = await prisma.appointment.count({
-      where: {
-        status: 'COMPLETED',
-        userId: clinicId,
-        appointmentDate: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-    });
-
-    const performanceTotalLastMonth = await prisma.appointment.count({
-      where: {
-        status: 'COMPLETED',
-        userId: clinicId,
-        appointmentDate: {
-          gte: startDatePrev,
-          lte: endDatePrev,
-        },
-      },
-    });
-
-    const totalPriceCurrent = performanceCurrentAppointment.reduce((soma, item) => soma + item.service.price.toNumber(), 0);
-    const previousTotal = previousPerformanceAppointment.reduce((soma, item) => soma + item.service.price.toNumber(), 0);
-
-    function calculatePercentChange(current: number, previous: number): number {
-      if (previous === 0 && current) return 100;
-      if (previous === 0 && current === 0) return 0;
-      return ((current - previous) / previous) * 100;
-    }
-
-    const revenueChangePercent = calculatePercentChange(totalPriceCurrent, previousTotal);
-    const appointmentChangePercent = calculatePercentChange(performanceTotalMonthCurrent, performanceTotalLastMonth);
+    const performanceTotalSpecificDate = schedulingSpecificDate.length;
+    const totalPriceSpecificDate = schedulingSpecificDate.reduce((soma, item) => soma + item.service.price.toNumber(), 0);
 
     return NextResponse.json({
-      // data: {
-      currentPeriod: {
-        appointmentsCurrent: performanceCurrentAppointment,
-        appointmentsPrevious: previousPerformanceAppointment,
-        totalRevenue: totalPriceCurrent,
-        totalCurrentAppointmentsMonth: performanceTotalMonthCurrent,
-      },
-      previousPeriod: {
-        totalRevenue: previousTotal,
-      },
-      comparison: {
-        revenueChangePercent: revenueChangePercent,
-        PercentageVariationInAppointments: appointmentChangePercent
-      },
-      // },
+      schedulingSpecificDate,
+      performanceTotalSpecificDate,
+      totalPriceSpecificDate
     });
 
   } catch (error) {

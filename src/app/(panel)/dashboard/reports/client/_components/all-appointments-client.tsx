@@ -4,7 +4,7 @@ import { Prisma } from "@/generated/prisma";
 import { CustomerTable } from "./customer-table"
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
-import { DateRangePicker } from "../../_components/date-range-picker";
+import { DateRangePicker } from "../../../../../../components/date-range-picker";
 import { RadialContent } from "./radial-content";
 import { ProgressAppointments } from "./pregress-appointments";
 
@@ -78,7 +78,7 @@ export function AllAppointmentClient() {
   return (
     <section className="space-y-4">
       <h1 className="text-2xl font-montserrat text-primary text-center">Atividade de agendamento de clientes</h1>
-      <DateRangePicker />
+      <DateRangePicker value={30} />
       <ProgressAppointments
         loading={isLoading}
         metricStatus={data?.metricStatus || null}

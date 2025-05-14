@@ -29,6 +29,21 @@ import { useQuery } from "@tanstack/react-query";
 
 
 interface ChartDataProps {
+  dailyData: DailyDataProps[];
+  summary: {
+    "7d": SummaryProps;
+    "30d": SummaryProps;
+    "90d": SummaryProps;
+  }
+}
+
+interface SummaryProps {
+  currentPeriodTotal: number;
+  previousPeriodTotal: number;
+  percentageChange: number;
+}
+
+interface DailyDataProps {
   date: string;
   current: number;
   previous: number;
@@ -50,13 +65,13 @@ const chartConfig = {
 
 
 export function BarChartMultiple() {
-  const [timeRange, setTimeRange] = React.useState("7d");
+  const [timeRange, setTimeRange] = React.useState<"7d" | "30d" | "90d">("7d");
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["revenue-by-day"],
     queryFn: async () => {
       const url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/revenue-by-day`;
       const response = await fetch(url);
-      const json = await response.json() as ChartDataProps[];
+      const json = await response.json() as ChartDataProps;
       if (!response.ok) {
         throw new Error("Erro ao buscar métricas");
       }
@@ -67,39 +82,24 @@ export function BarChartMultiple() {
     refetchInterval: 30000
   });
 
-  const now = new Date()
-  let daysToUse = 90
-  if (timeRange === "30d") {
-    daysToUse = 30
-  } else if (timeRange === "7d") {
-    daysToUse = 7
-  }
+  // Filtrar os dados com base no período selecionado
+  const getFilteredData = () => {
+    if (!data?.dailyData) return [];
 
-  // cria um mapa com os valores por data
-  const sumByDate: Record<string, number> = {}
-  data?.forEach((item) => {
-    const dateStr = new Date(item.date).toLocaleDateString("en-CA")
-    sumByDate[dateStr] = item.current // ou outro campo que você estiver usando
-  })
+    const daysToUse = parseInt(timeRange.replace("d", ""));
 
-  // gera os últimos X dias e monta os pares current/previous
-  const filteredData = Array.from({ length: daysToUse }, (_, i) => {
-    const current = new Date(now)
-    current.setDate(now.getDate() - i)
-    const currentStr = current.toLocaleDateString("en-CA")
+    // Ordenamos os dados primeiro por data
+    const sortedData = [...data.dailyData].sort((a, b) => {
+      // Comparação de datas no formato YYYY-MM-DD (pode ser comparada como string)
+      return a.date < b.date ? 1 : -1;
+    });
 
-    const previous = new Date(current)
-    previous.setDate(current.getDate() - daysToUse)
-    const previousStr = previous.toLocaleDateString("en-CA")
+    // Pegamos apenas os X dias mais recentes e invertemos para exibição cronológica
+    return sortedData.slice(0, daysToUse).reverse();
+  };
 
-    return {
-      date: currentStr,
-      current: sumByDate[currentStr] || 0,
-      previous: sumByDate[previousStr] || 0,
-    }
-  }).reverse()
-
-
+  const filteredData = getFilteredData();
+  const currentSummary = data?.summary?.[timeRange];
 
   return (
     <>
@@ -114,9 +114,22 @@ export function BarChartMultiple() {
               <CardTitle className="font-montserrat">Gráfico de Área - Interativo</CardTitle>
               <CardDescription>
                 Mostrando o total de receita dos últimos {timeRange.replace("d", "")} dias
+                {currentSummary && (
+                  <>
+                    {" "}- Variação: <span className={currentSummary.percentageChange >= 0 ? "text-green-600" : "text-red-600"}>
+                      {currentSummary.percentageChange >= 0 ? "+" : ""}{currentSummary.percentageChange.toFixed(2)}%
+                    </span>
+                  </>
+                )}
               </CardDescription>
             </div>
-            <Select value={timeRange} onValueChange={setTimeRange}>
+            <Select value={timeRange}
+              onValueChange={(value) => {
+                if (value === "7d" || value === "30d" || value === "90d") {
+                  setTimeRange(value);
+                }
+              }}
+            >
               <SelectTrigger
                 className="w-[160px] rounded-lg sm:ml-auto"
                 aria-label="Select a value"
@@ -176,11 +189,13 @@ export function BarChartMultiple() {
                   tickMargin={8}
                   minTickGap={32}
                   tickFormatter={(value) => {
-                    const date = new Date(value)
+                    // Garante que o parse da data seja consistente
+                    const [year, month, day] = value.split('-').map(Number);
+                    const date = new Date(year, month - 1, day);
                     return date.toLocaleDateString("en-US", {
                       month: "short",
                       day: "numeric",
-                    })
+                    });
                   }}
                 />
                 <ChartTooltip
@@ -188,10 +203,13 @@ export function BarChartMultiple() {
                   content={
                     <ChartTooltipContent
                       labelFormatter={(value) => {
-                        return new Date(value).toLocaleDateString("en-US", {
+                        // Garante que o parse da data seja consistente
+                        const [year, month, day] = value.split('-').map(Number);
+                        const date = new Date(year, month - 1, day);
+                        return date.toLocaleDateString("en-US", {
                           month: "short",
                           day: "numeric",
-                        })
+                        });
                       }}
                       indicator="dot"
                     />

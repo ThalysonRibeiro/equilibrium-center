@@ -10,10 +10,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { DateRange } from "react-day-picker"
 import { useRouter } from "next/navigation"
 
-export function DateRangePicker() {
+export function DateRangePicker({ value }: { value: number }) {
   const router = useRouter();
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: addDays(new Date(), -30),
+    from: addDays(new Date(), -value),
     to: new Date(),
   })
 

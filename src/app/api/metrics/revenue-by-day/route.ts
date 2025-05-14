@@ -1,6 +1,7 @@
-import prisma from '@/lib/prisma'
-import { auth } from "@/lib/auth"
-import { NextRequest, NextResponse } from 'next/server'
+import { auth } from "@/lib/auth";
+import { NextResponse } from 'next/server';
+import { getAppointmentsByDay } from '@/app/(panel)/dashboard/reports/_data-access/get-revenue-by-day';
+import { getAllAppointments } from "@/app/(panel)/dashboard/reports/_data-access/get-all-appointments";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {
@@ -13,57 +14,82 @@ export const GET = auth(async function GET(req) {
   }
 
   try {
-    const end = new Date();
-    const start = new Date(end);
-    start.setDate(end.getDate() - 90);
+    const today = new Date();
 
-    const startDate = new Date(start.setUTCHours(0, 0, 0, 0));
-    const endDate = new Date(end.setUTCHours(23, 59, 59, 999));
+    // Buscamos dados de 180 dias para comportar todas as comparações possíveis
+    // (90 dias atuais + 90 dias anteriores para comparação)
+    const endDate = new Date(today.setUTCHours(23, 59, 59, 999));
+    const startDate = new Date(today);
+    startDate.setDate(startDate.getDate() - 180);
+    startDate.setUTCHours(0, 0, 0, 0);
 
-    const appointments = await prisma.appointment.findMany({
-      where: {
-        userId: clinicId,
-        status: 'COMPLETED',
-        appointmentDate: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
-      include: {
-        service: {
-          select: { price: true }
-        }
-      }
-    });
+    // Buscando todos os appointments no intervalo completo de 180 dias
+    const appointments = await getAllAppointments(clinicId, startDate, endDate);
 
     // Cria um mapa com soma dos valores por dia
     const sumByDate: Record<string, number> = {};
-
     appointments.forEach(appt => {
       const date = appt.appointmentDate.toLocaleDateString('en-CA'); // YYYY-MM-DD
       const price = appt.service.price.toNumber();
       sumByDate[date] = (sumByDate[date] || 0) + price;
     });
 
-    const result = [];
+    // Preparando dados diários para os últimos 90 dias
+    const dailyData = [];
+    for (let i = 0; i < 90; i++) {
+      const currentDay = new Date();
+      currentDay.setDate(currentDay.getDate() - i);
+      const currentDayStr = currentDay.toLocaleDateString('en-CA');
 
-    for (let i = 0; i < 45; i++) {
-      const current = new Date();
-      current.setDate(current.getDate() - i);
-      const currentStr = current.toLocaleDateString('en-CA');
+      // Dia correspondente no período anterior (mesmos 90 dias do ano anterior)
+      const previousDay = new Date(currentDay);
+      previousDay.setDate(previousDay.getDate() - 90);
+      const previousDayStr = previousDay.toLocaleDateString('en-CA');
 
-      const previous = new Date(current);
-      previous.setDate(previous.getDate() - 45);
-      const previousStr = previous.toLocaleDateString('en-CA');
-
-      result.push({
-        date: currentStr,
-        current: sumByDate[currentStr] || 0,
-        previous: sumByDate[previousStr] || 0,
+      dailyData.push({
+        date: currentDayStr,
+        current: sumByDate[currentDayStr] || 0,
+        previous: sumByDate[previousDayStr] || 0,
       });
     }
 
-    return NextResponse.json(result.reverse()); // opcional: do mais antigo pro mais recente
+    // Calcula totais para diferentes períodos
+    const calculatePeriodTotals = (days: number) => {
+      let currentPeriodTotal = 0;
+      let previousPeriodTotal = 0;
+
+      for (let i = 0; i < days; i++) {
+        const currentDay = new Date();
+        currentDay.setDate(currentDay.getDate() - i);
+        const currentDayStr = currentDay.toLocaleDateString('en-CA');
+        currentPeriodTotal += sumByDate[currentDayStr] || 0;
+
+        const previousDay = new Date(currentDay);
+        previousDay.setDate(previousDay.getDate() - days);
+        const previousDayStr = previousDay.toLocaleDateString('en-CA');
+        previousPeriodTotal += sumByDate[previousDayStr] || 0;
+      }
+
+      return {
+        currentPeriodTotal,
+        previousPeriodTotal,
+        percentageChange: previousPeriodTotal > 0
+          ? ((currentPeriodTotal - previousPeriodTotal) / previousPeriodTotal) * 100
+          : 0
+      };
+    };
+
+    // Calcula os totais para os diferentes períodos de tempo
+    const summary = {
+      "7d": calculatePeriodTotals(7),
+      "30d": calculatePeriodTotals(30),
+      "90d": calculatePeriodTotals(90)
+    };
+
+    return NextResponse.json({
+      dailyData: dailyData.reverse(), // Ordenar do mais antigo para o mais recente
+      summary
+    });
   } catch (error) {
     console.error("Erro ao buscar métricas:", error);
     return NextResponse.json({ error: "Falha ao buscar métricas!" }, { status: 400 });

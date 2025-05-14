@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import getSession from "@/lib/getSession";
 import { BarChartMultiple } from "./_components/bar-chart-multiple";
-import { DateRangePicker } from "./_components/date-range-picker";
+import { DateRangePicker } from "../../../../components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { PerformanceCards } from "./_components/performance-cards";
 import { DownloadIcon } from "lucide-react";
