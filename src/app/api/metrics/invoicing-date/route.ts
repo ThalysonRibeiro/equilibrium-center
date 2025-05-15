@@ -21,7 +21,58 @@ export const GET = auth(async function GET(req) {
 
   try {
 
-    const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED', });
+    const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED' });
+
+
+    // Filtrar para os períodos específicos
+    const specificDate = appointments.filter(appt => {
+      const appointmentDate = new Date(appt.appointmentDate);
+      return appointmentDate >= startDate && appointmentDate <= endDate;
+    });
+
+    const totalAppointmentSpecificDate = specificDate.length;
+    const totalInvoicingspecificDate = specificDate.reduce((acc, item) => acc + item.service.price.toNumber(), 0)
+
+
+
+    // Objeto para armazenar os totais por mês
+    const sumByMonth: Record<string, number> = {};
+    appointments.forEach(appt => {
+      const date = new Date(appt.appointmentDate);
+      // Formato YYYY-MM para agrupar por mês
+      const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+      const price = appt.service.price.toNumber();
+
+      // Acumular os valores por mês
+      sumByMonth[monthKey] = (sumByMonth[monthKey] || 0) + price;
+    });
+
+    // Criar array para os últimos 12 meses
+    const monthlyData = [];
+    const monthNames = [
+      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
+    ];
+
+    for (let i = 0; i < 6; i++) {
+      const currentDate = new Date();
+      currentDate.setMonth(currentDate.getMonth() - i);
+
+      const year = currentDate.getFullYear();
+      const month = currentDate.getMonth();
+      const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
+
+      monthlyData.push({
+        month: monthNames[month],
+        // year: year,
+        total: sumByMonth[monthKey] || 0
+      });
+    }
+
+    const totalSixMonth = monthlyData.reduce((acc, item) => acc + item.total, 0);
+
+
+
 
 
     // Métricas para todos os agendamentos
@@ -32,11 +83,22 @@ export const GET = auth(async function GET(req) {
     );
 
     return NextResponse.json({
-      appointments,
-      totalAppointments,
-      totalInvoicing,
-      startDate: startDate,
-      endDate: endDate,
+      forSpecificDate: {
+        specificDate,
+        totalAppointmentSpecificDate,
+        totalInvoicingspecificDate,
+        startDateConsultation: startDate,
+        endDateConsultation: endDate,
+      },
+      sixMonth: {
+        monthlyData,
+        totalSixMonth,
+      },
+      totalRevenue: {
+        totalAppointments,
+        totalInvoicing,
+        appointments,
+      }
     });
 
   } catch (error) {
