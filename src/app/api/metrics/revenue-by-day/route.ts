@@ -14,36 +14,49 @@ export const GET = auth(async function GET(req) {
 
   try {
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
 
-    // Buscamos dados de 180 dias para comportar todas as comparações possíveis
-    // (90 dias atuais + 90 dias anteriores para comparação)
-    const endDate = new Date(today.setUTCHours(23, 59, 59, 999));
+    const endDate = new Date(today);
+    endDate.setHours(23, 59, 59, 999);
+
     const startDate = new Date(today);
     startDate.setDate(startDate.getDate() - 180);
-    startDate.setUTCHours(0, 0, 0, 0);
 
-    // Buscando todos os appointments no intervalo completo de 180 dias
-    const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED', });
+    const formatDate = (date: Date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
 
-    // Cria um mapa com soma dos valores por dia
-    const sumByDate: Record<string, number> = {};
-    appointments.forEach(appt => {
-      const date = appt.appointmentDate.toLocaleDateString('en-CA'); // YYYY-MM-DD
-      const price = appt.service.price.toNumber();
-      sumByDate[date] = (sumByDate[date] || 0) + price;
+    const appointments = await getAppointments({
+      userId: clinicId,
+      startDate,
+      endDate,
+      status: 'COMPLETED',
     });
 
-    // Preparando dados diários para os últimos 90 dias
-    const dailyData = [];
-    for (let i = 0; i < 90; i++) {
-      const currentDay = new Date();
-      currentDay.setDate(currentDay.getDate() - i);
-      const currentDayStr = currentDay.toLocaleDateString('en-CA');
+    const sumByDate: Record<string, number> = {};
+    appointments.forEach(appt => {
 
-      // Dia correspondente no período anterior (mesmos 90 dias do ano anterior)
+      const dateString = appt.appointmentDate.toISOString().split('T')[0];
+
+      const price = appt.service.price.toNumber();
+      sumByDate[dateString] = (sumByDate[dateString] || 0) + price;
+    });
+
+    const dailyData = [];
+    const baseToday = new Date(today);
+
+    for (let i = 0; i < 90; i++) {
+      const currentDay = new Date(baseToday);
+      currentDay.setDate(currentDay.getDate() - i);
+
+      const currentDayStr = currentDay.toISOString().split('T')[0];
+
       const previousDay = new Date(currentDay);
       previousDay.setDate(previousDay.getDate() - 90);
-      const previousDayStr = previousDay.toLocaleDateString('en-CA');
+      const previousDayStr = previousDay.toISOString().split('T')[0];
 
       dailyData.push({
         date: currentDayStr,
@@ -52,20 +65,19 @@ export const GET = auth(async function GET(req) {
       });
     }
 
-    // Calcula totais para diferentes períodos
     const calculatePeriodTotals = (days: number) => {
       let currentPeriodTotal = 0;
       let previousPeriodTotal = 0;
 
       for (let i = 0; i < days; i++) {
-        const currentDay = new Date();
+        const currentDay = new Date(baseToday);
         currentDay.setDate(currentDay.getDate() - i);
-        const currentDayStr = currentDay.toLocaleDateString('en-CA');
+        const currentDayStr = currentDay.toISOString().split('T')[0];
         currentPeriodTotal += sumByDate[currentDayStr] || 0;
 
         const previousDay = new Date(currentDay);
         previousDay.setDate(previousDay.getDate() - days);
-        const previousDayStr = previousDay.toLocaleDateString('en-CA');
+        const previousDayStr = previousDay.toISOString().split('T')[0];
         previousPeriodTotal += sumByDate[previousDayStr] || 0;
       }
 
@@ -78,7 +90,6 @@ export const GET = auth(async function GET(req) {
       };
     };
 
-    // Calcula os totais para os diferentes períodos de tempo
     const summary = {
       "7d": calculatePeriodTotals(7),
       "30d": calculatePeriodTotals(30),
@@ -86,7 +97,7 @@ export const GET = auth(async function GET(req) {
     };
 
     return NextResponse.json({
-      dailyData: dailyData.reverse(), // Ordenar do mais antigo para o mais recente
+      dailyData: dailyData.reverse(),
       summary
     });
   } catch (error) {
