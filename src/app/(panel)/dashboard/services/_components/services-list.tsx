@@ -10,6 +10,7 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { toast } from "sonner";
 import { updateStatusService } from "../_actions/update-status-service";
 import { useIsMobile } from "@/app/hooks/useMobile";
+import { FormatHour } from "@/utils/formatHour";
 
 export interface ServicesListProps {
   services: ServiceProps[];
@@ -98,7 +99,7 @@ export function ServicesList({ services }: ServicesListProps) {
                   <div className="flex items-center justify-between rounded-md space-x-2 px-2 w-full h-9 border text-sm lg:text-base">
                     <span className="font-medium line-clamp-1 w-1/2">{service.name}</span>
                     <span className="font-medium line-clamp-1">
-                      {Math.floor(service.duration / 60)}:{String(service.duration % 60).padStart(2, '0')}
+                      {FormatHour(service.duration)}
                     </span>
                     <span className="font-medium text-green-500 justify-items-end">{formatCurrency(service.price)}</span>
                   </div>
