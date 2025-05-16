@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import { ForSpecificDateProps } from '../../types/invoicing-date';
 import { img_base64 } from './img-logo-base64';
 import { Download } from 'lucide-react';
+import { FormatHour } from '@/utils/formatHour';
+import { formatCurrency } from '@/utils/formatCurrency';
 
 interface GeneratePDFProps {
   data: ForSpecificDateProps | undefined;
@@ -46,15 +48,15 @@ export default function GeneratePDFInvoicingDate({ data }: GeneratePDFProps) {
         const columns = [
           { header: 'Nome', dataKey: 'name' },
           { header: 'Serviço', dataKey: 'service' },
-          { header: 'Duração (min)', dataKey: 'duration' },
-          { header: 'Preço (R$)', dataKey: 'price' },
+          { header: 'Duração', dataKey: 'duration' },
+          { header: 'Preço', dataKey: 'price' },
         ];
 
         const rows = data.specificDate.map(item => ({
-          name: item.name,
+          name: item.name.toUpperCase(),
           service: item.service.name,
-          duration: item.service.duration,
-          price: Number(item.service.price).toFixed(2).replace('.', ','),
+          duration: FormatHour(item.service.duration),
+          price: formatCurrency(item.service.price),
         }));
 
         autoTable(doc, {

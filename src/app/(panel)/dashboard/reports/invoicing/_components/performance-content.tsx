@@ -1,4 +1,4 @@
-
+"use client"
 import { formatCurrency } from "@/utils/formatCurrency";
 import { ForSpecificDateProps } from "../../types/invoicing-date";
 import {
@@ -20,12 +20,15 @@ import {
 
 import { DateRangePicker } from "@/components/date-range-picker";
 import GeneratePDFInvoicingDate from "../../_components/generatePDF/generate-pdf-invoicing-date";
+import { useIsMobile } from "@/app/hooks/useMobile";
+import { FormatHour } from "@/utils/formatHour";
 
 interface PerformanceContentProps {
   data: ForSpecificDateProps | undefined;
 }
 
 export function PerformanceContent({ data }: PerformanceContentProps) {
+  const isMobile = useIsMobile(868);
   function calculateDays() {
     const startDate = new Date(data?.startDateConsultation || "");
     const endDate = new Date(data?.endDateConsultation || "");
@@ -81,10 +84,20 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
                 <TableBody>
                   {data?.specificDate.map(appointment => (
                     <TableRow key={appointment.id}>
-                      <TableCell className="capitalize border-e">{appointment.name}</TableCell>
-                      <TableCell className="capitalize border-e truncate max-w-35">{appointment.service.name}</TableCell>
-                      <TableCell className="text-right border-e">{appointment.service.duration} Min</TableCell>
-                      <TableCell className="text-right">{formatCurrency(appointment.service.price.toString())}</TableCell>
+                      <TableCell className="text-[12px] capitalize border-e">
+                        {isMobile ? (
+                          <>{appointment.name.split(" ")[0].toLowerCase()}</>
+                        ) : (
+                          <>{appointment.name.toLowerCase()}</>
+                        )}
+                      </TableCell>
+                      <TableCell className="text-[12px] capitalize border-e truncate max-w-35">
+                        {appointment.service.name.toLowerCase()}
+                      </TableCell>
+                      <TableCell className="text-[12px] text-right border-e">
+                        {FormatHour(appointment.service.duration)}
+                      </TableCell>
+                      <TableCell className="text-[12px] text-right">{formatCurrency(appointment.service.price.toString())}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

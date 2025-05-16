@@ -15,17 +15,6 @@ export function InvoicingContent() {
   const endDateString = searchParams.get('end-date') as string;
 
   const {
-    data: invoicing,
-    isLoading: isLoadingOverview,
-    refetch: refetchOverview,
-  } = useQuery({
-    queryKey: ["get-metrics-invoicing"],
-    queryFn: () => fetchData<InvoiceProps>("metrics/invoicing"),
-    staleTime: 80000,
-    refetchInterval: 90000
-  });
-
-  const {
     data: invoicingDate,
     isLoading: isLoadinginvoicingDate,
     refetch: refetchinvoicingDate,
