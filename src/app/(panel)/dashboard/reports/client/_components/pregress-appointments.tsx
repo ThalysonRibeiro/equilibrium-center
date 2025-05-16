@@ -8,8 +8,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { MetricStatusProps } from "./all-appointments-client";
 import { LoadingUI } from "@/components/ui/loading-ui";
+import { MetricStatusProps } from "../../types/allApponitments";
 
 interface ProgressAppointmentsProps {
   metricStatus: MetricStatusProps | null;
@@ -21,7 +21,9 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
   return (
     <>
       {loading ? (
-        <LoadingUI />
+        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        </div>
       ) : (
         <article>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
@@ -93,8 +95,9 @@ interface CardMetricsStatusProps {
 
 function CardMetricsStatus({ title, countValue, percentage, width, max, color }: CardMetricsStatusProps) {
   return (
-    <Card className="text-sm text-primary">
+    <Card className="text-sm text-primary relative">
       <CardHeader>
+        <div className={`absolute top-0 right-0 ${color} w-full h-2 rounded-t-lg`}></div>
         <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>

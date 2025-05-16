@@ -19,7 +19,7 @@ export default async function Reports() {
     <main className="max-h-[cal(100vh-20rem)] h-full">
 
       <div className="flex flex-col lg:flex-row items-center justify-between mb-3">
-        <h1 className="text-xl font-montserrat text-primary flex-1">Dashboard - Visão geral</h1>
+        <h1 className="text-xl font-montserrat text-primary flex-1">Dashboard - Visão geral últimos 30 dias</h1>
       </div>
 
       <PerformanceCards />

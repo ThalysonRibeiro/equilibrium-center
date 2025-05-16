@@ -1,51 +1,12 @@
 "use client"
 
-import { Prisma } from "@/generated/prisma";
 import { CustomerTable } from "./customer-table"
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { DateRangePicker } from "../../../../../../components/date-range-picker";
-import { RadialContent } from "./radial-content";
 import { ProgressAppointments } from "./pregress-appointments";
+import { AllAppointmentProps } from "../../types/allApponitments";
 
-
-interface AllAppointmentProps {
-  tartDate: Date;
-  endDate: Date;
-  allAppointments: AppointmentWithService[];
-  countAllAppointments: number;
-  metricStatus: MetricStatusProps;
-}
-
-export type AppointmentWithService = Prisma.AppointmentGetPayload<{
-  include: {
-    service: {
-      select: {
-        name: true,
-        price: true,
-        duration: true,
-      }
-    }
-  }
-}>;
-export interface MetricStatusProps {
-  countByStatus: CountByStatusProps;
-  percentageByStatus: CercentageByStatusProps;
-}
-type CountByStatusProps = {
-  countPending: number;
-  countScheduled: number;
-  countCompleted: number;
-  countNo_show: number;
-  countCancelled: number;
-}
-type CercentageByStatusProps = {
-  countPending: string;
-  countScheduled: string;
-  countCompleted: string;
-  countNo_show: string;
-  countCancelled: string;
-}
 
 export function AllAppointmentClient() {
   const searchParams = useSearchParams();

@@ -72,6 +72,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       setLoadingSlots(false);
       return json; // Retornar o array com horarios que já tem bloqueado desse Dia e dessa clinica.
 
+
     } catch (err) {
       console.log(err)
       setLoadingSlots(false);
@@ -293,7 +294,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                       onSelecTime={(time) => setSelectedTime(time)}
                       clinicTimes={clinic.times}
                       blockedTimes={blockedTimes}
-                      availableTimesSlots={availableTimeSlots}
+                      availableTimeSlots={availableTimeSlots}
                       selectedTime={selectedTime}
                       selectedDate={selectedDate}
                       requiredSlots={

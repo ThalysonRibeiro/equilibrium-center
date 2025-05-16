@@ -10,13 +10,13 @@ interface ScheduleTimeListProps {
   selectedTime: string;
   requiredSlots: number;
   blockedTimes: string[];
-  availableTimesSlots: TimeSlot[];
+  availableTimeSlots: TimeSlot[];
   clinicTimes: string[];
   onSelecTime: (time: string) => void;
 }
 
 export function ScheduleTimeList({
-  availableTimesSlots,
+  availableTimeSlots,
   blockedTimes,
   clinicTimes,
   requiredSlots,
@@ -28,14 +28,14 @@ export function ScheduleTimeList({
 
   return (
     <div className="grid grid-cols-4 md:grid-cols-5 gap-2">
-      {availableTimesSlots.map(slot => {
+      {availableTimeSlots.map(slot => {
 
         const sequenceOK = isSlotSequenceAvailable(
           slot.time,
           requiredSlots,
           clinicTimes,
-          blockedTimes
-        );
+          blockedTimes,
+        )
         const slotIsPast = dateIsToday && isSlotInThePast(slot.time);
         const slotEnabled = slot.available && sequenceOK && !slotIsPast;
 

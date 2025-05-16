@@ -22,6 +22,7 @@ export const GET = auth(async function GET(req) {
   try {
 
     const appointments = await getAppointments({ userId: clinicId, startDate, endDate, status: 'COMPLETED' });
+    const appointmentsForSixMonth = await getAppointments({ userId: clinicId, status: 'COMPLETED' });
 
 
     // Filtrar para os períodos específicos
@@ -37,7 +38,7 @@ export const GET = auth(async function GET(req) {
 
     // Objeto para armazenar os totais por mês
     const sumByMonth: Record<string, number> = {};
-    appointments.forEach(appt => {
+    appointmentsForSixMonth.forEach(appt => {
       const date = new Date(appt.appointmentDate);
       // Formato YYYY-MM para agrupar por mês
       const monthKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
@@ -71,9 +72,7 @@ export const GET = auth(async function GET(req) {
 
     const totalSixMonth = monthlyData.reduce((acc, item) => acc + item.total, 0);
 
-
-
-
+    // monthlyData.reverse();
 
     // Métricas para todos os agendamentos
     const totalAppointments = appointments.length;

@@ -41,6 +41,9 @@ export async function GET(request: NextRequest) {
         appointmentDate: {
           gte: startDate,
           lte: endDate
+        },
+        status: {
+          not: 'CANCELLED'
         }
       },
       include: {
@@ -54,7 +57,7 @@ export async function GET(request: NextRequest) {
       const startIndex = user.times.indexOf(apt.time);
 
       if (startIndex !== -1) {
-        for (let i = 0; i < requiredSlots; i++) {
+        for (let i = 0; i < requiredSlots + 1; i++) {
           const blokedSlot = user.times[startIndex + i];
           if (blokedSlot) {
             blockedSlots.add(blokedSlot);
@@ -64,6 +67,7 @@ export async function GET(request: NextRequest) {
     }
 
     const blockedtimes = Array.from(blockedSlots);
+    console.log("blokedtimes: ", blockedtimes);
 
     return NextResponse.json(blockedtimes)
 

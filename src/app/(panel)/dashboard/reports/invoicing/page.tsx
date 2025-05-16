@@ -1,7 +1,5 @@
+import { InvoicingContent } from "./_components/invoicing-content";
+
 export default function Invoicing() {
-  return (
-    <section>
-      invoicing
-    </section>
-  )
+  return <InvoicingContent />
 }

@@ -10,12 +10,12 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Appointment } from "@/generated/prisma"
-import { AppointmentWithService } from "./all-appointments-client"
 import { format } from "date-fns";
 import { formatCurrency } from "@/utils/formatCurrency";
 import clsx from "clsx";
 import { useIsMobile } from "@/app/hooks/useMobile";
 import { LoadingUI } from "@/components/ui/loading-ui";
+import { AppointmentWithService } from "../../types/allApponitments";
 
 
 interface CustomerTableProps {
@@ -49,7 +49,9 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
   return (
     <>
       {loading ? (
-        <LoadingUI />
+        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
+          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        </div>
       ) : (
         <Table className="h-full rounded-lg bg-white text-gray-700 text-[10px] md:text-[12px] xl:text-base">
           <TableHeader>

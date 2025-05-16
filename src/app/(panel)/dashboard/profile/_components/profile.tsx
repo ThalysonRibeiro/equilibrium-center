@@ -69,7 +69,7 @@ export function ProfileContent(
   function generateTimeSlots(): string[] {
     const hours: string[] = [];
 
-    for (let i = 6; i <= 23.5; i++) {
+    for (let i = 6; i <= 23; i++) {
       for (let j = 0; j < 2; j++) {
         const hour = i.toString().padStart(2, "0");
         const minute = (j * 30).toString().padStart(2, "0")
