@@ -32,7 +32,7 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="relative w-full h-100 flex justify-center gap-1 p-3 text-primary border rounded">
+        <div className="relative w-full h-100 flex justify-center gap-1 p-3 pt-6 text-primary border rounded">
           <div className="absolute w-[97%] h-[90%] opacity-80 flex flex-col justify-between  text-[10px]">
             <div>
               <p>100%</p>
@@ -51,7 +51,7 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
             </div>
           </div>
 
-          <div className="w-[95%] flex gap-3">
+          <div className="w-[95%] grid grid-cols-6 gap-3 px-3">
             {chartData.map(item => {
 
               return (
