@@ -240,7 +240,7 @@ export function ProfileContent(
                       </Button>
                     </DialogTrigger>
 
-                    <DialogContent className="boder border-corprimary">
+                    <DialogContent className="bg-white">
                       <DialogHeader>
                         <DialogTitle className="text-center">Horários da clinica</DialogTitle>
                         <DialogDescription className="text-center">
@@ -258,7 +258,7 @@ export function ProfileContent(
                             <Button
                               key={hour}
                               onClick={() => togglreHour(hour)}
-                              className={cn("border border-corprimary", selectedHours.includes(hour) && 'border-corsecondary bg-corsecondary')}
+                              className={cn("border bg-white text-primary hover:text-white hover:bg-accent", selectedHours.includes(hour) && 'bg-primary hover:bg-accent text-white')}
                             >
                               {hour}
                             </Button>
@@ -267,7 +267,7 @@ export function ProfileContent(
 
                       </section>
                       <Button
-                        className="bg-corprimary hover:bg-corsecondary transition-colors duration-300"
+                        className="hover:bg-accent transition-colors duration-300"
                         onClick={() => setDialogIsOpen(false)}
                       >
                         Fechar modal
@@ -310,7 +310,7 @@ export function ProfileContent(
 
                 <Button
                   type="submit"
-                  className="w-full bg-corsecondary hover:bg-corprimary transition-colors duration-300"
+                  className="w-full hover:bg-accent transition-colors duration-300"
                 >
                   Salvar alterações
                 </Button>
@@ -324,6 +324,9 @@ export function ProfileContent(
         <Button onClick={handleLogout} variant={"destructive"}>
           Sair da conta
         </Button>
+      </section>
+      <section>
+        <h1>escrever avaliação da aplicação</h1>
       </section>
     </div>
   )
