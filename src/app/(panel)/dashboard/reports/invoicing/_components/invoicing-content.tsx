@@ -12,20 +12,20 @@ import { useEffect } from "react"
 
 export function InvoicingContent() {
   const searchParams = useSearchParams();
-  const startDateString = searchParams.get('start-date') as string;
-  const endDateString = searchParams.get('end-date') as string;
-  const shouldFetch = !!startDateString && !!endDateString;
+  const startDate = searchParams.get('start-date') as string;
+  const endDate = searchParams.get('end-date') as string;
+  const shouldFetch = !!startDate && !!endDate;
 
   const {
     data: invoicingDate,
     isLoading: isLoadinginvoicingDate,
     refetch: refetchinvoicingDate,
   } = useQuery({
-    queryKey: ["get-metrics-invoicing-date", startDateString, endDateString],
+    queryKey: ["get-metrics-invoicing-date", startDate, endDate],
     queryFn: () =>
       fetchData<InvoicingDateProps>("metrics/invoicing-date", {
-        "start-date": startDateString,
-        "end-date": endDateString,
+        "start-date": startDate,
+        "end-date": endDate,
       }),
     enabled: shouldFetch,
     staleTime: 80000,
@@ -33,10 +33,10 @@ export function InvoicingContent() {
   });
 
   useEffect(() => {
-    if (startDateString && endDateString) {
+    if (startDate && endDate) {
       refetchinvoicingDate(); // força a query se os parâmetros estiverem prontos
     }
-  }, [startDateString, endDateString, refetchinvoicingDate]);
+  }, [startDate, endDate, refetchinvoicingDate]);
 
   if (!invoicingDate) return null
 
