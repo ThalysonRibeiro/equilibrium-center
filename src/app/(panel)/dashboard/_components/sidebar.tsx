@@ -13,7 +13,7 @@ import {
   Banknote, CalendarCheck2, ChevronLeft,
   ChevronRight,
   CircleDollarSign,
-  FileStack, Folder,
+  Folder,
   List,
   Settings,
   User,
@@ -264,11 +264,6 @@ const navigationItems = [
             href: "/dashboard/reports/client",
             label: "Clientes",
             icon: <User className="w-6 h-6" />
-          },
-          {
-            href: "/dashboard/reports/generated",
-            label: "Relatórios Gerados",
-            icon: <FileStack className="w-6 h-6" />
           },
           {
             href: "/dashboard/reports/invoicing",
