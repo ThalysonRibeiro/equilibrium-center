@@ -1,10 +1,13 @@
-
 export async function fetchData<T>(
   endpoint: string,
   params?: Record<string, string | number>
 ): Promise<T> {
   const query = params
-    ? "?" + new URLSearchParams(params as Record<string, string>).toString()
+    ? "?" + new URLSearchParams(
+      Object.fromEntries(
+        Object.entries(params).map(([key, value]) => [key, String(value)])
+      )
+    ).toString()
     : "";
 
   const url = `${process.env.NEXT_PUBLIC_URL}/api/${endpoint}${query}`;
@@ -16,4 +19,4 @@ export async function fetchData<T>(
   }
 
   return data as T;
-};
+}

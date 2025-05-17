@@ -17,18 +17,42 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-
 import { DateRangePicker } from "@/components/date-range-picker";
 import GeneratePDFInvoicingDate from "../../_components/generatePDF/generate-pdf-invoicing-date";
 import { useIsMobile } from "@/app/hooks/useMobile";
 import { FormatHour } from "@/utils/formatHour";
+import { AppointmentsProps } from "../../types/invoicing";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PerformanceContentProps {
-  data: ForSpecificDateProps | undefined;
+  data: ForSpecificDateProps;
 }
 
 export function PerformanceContent({ data }: PerformanceContentProps) {
+  if (!data) {
+    return
+  }
+
   const isMobile = useIsMobile(868);
+
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPages: number = 20;
+
+  const totalPages = Math.ceil(data?.specificDate.length / itemsPerPages);
+  const dataPage = data?.specificDate.slice(
+    (currentPage - 1) * itemsPerPages,
+    currentPage * itemsPerPages
+  );
+
+  function changePage(page: number) {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page)
+    }
+  }
+
   function calculateDays() {
     const startDate = new Date(data?.startDateConsultation || "");
     const endDate = new Date(data?.endDateConsultation || "");
@@ -39,6 +63,7 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
     return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
   }
   const dates = calculateDays();
+
 
   return (
     <section className="">
@@ -56,7 +81,7 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
           <CardContent>
             <div>
               <Table>
-                <TableHeader className="bg-green-400">
+                <TableHeader className="bg-cyan-600">
                   <TableRow className="text-xl">
                     <TableHead>Agendamentos</TableHead>
                     <TableHead className="text-right">Faturamento</TableHead>
@@ -82,7 +107,8 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {data?.specificDate.map(appointment => (
+
+                  {dataPage.map((appointment) => (
                     <TableRow key={appointment.id}>
                       <TableCell className="text-[12px] capitalize border-e">
                         {isMobile ? (
@@ -104,8 +130,26 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
               </Table>
             </div>
           </CardContent>
-          <CardFooter>
-            <p>1 2 3 4</p>
+          <CardFooter className="flex items-center justify-center">
+            {itemsPerPages < 20 && (
+              <div className="flex gap-3">
+                <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+                  <ChevronLeft />
+                </Button>
+                {[...Array(totalPages)].map((_, index) => (
+                  <Button
+                    key={index}
+                    onClick={() => changePage(index + 1)}
+                    className={cn("bg-transparent text-primary rounded-full border", currentPage === index + 1 && "bg-primary text-white")}
+                  >
+                    {index + 1}
+                  </Button>
+                ))}
+                <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
+                  <ChevronRight />
+                </Button>
+              </div>
+            )}
           </CardFooter>
         </Card>
       </div>

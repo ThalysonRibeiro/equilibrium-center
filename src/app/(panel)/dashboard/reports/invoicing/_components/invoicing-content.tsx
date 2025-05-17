@@ -8,11 +8,13 @@ import { useSearchParams } from "next/navigation"
 import { useQuery } from "@tanstack/react-query"
 import { fetchData } from "@/utils/fetch-data"
 import { InvoiceProps } from "../../types/invoicing"
+import { useEffect } from "react"
 
 export function InvoicingContent() {
   const searchParams = useSearchParams();
   const startDateString = searchParams.get('start-date') as string;
   const endDateString = searchParams.get('end-date') as string;
+  const shouldFetch = !!startDateString && !!endDateString;
 
   const {
     data: invoicingDate,
@@ -25,10 +27,19 @@ export function InvoicingContent() {
         "start-date": startDateString,
         "end-date": endDateString,
       }),
-    enabled: !!startDateString && !!endDateString,
+    enabled: shouldFetch,
     staleTime: 80000,
     refetchInterval: 90000
   });
+
+  useEffect(() => {
+    if (startDateString && endDateString) {
+      refetchinvoicingDate(); // força a query se os parâmetros estiverem prontos
+    }
+  }, [startDateString, endDateString, refetchinvoicingDate]);
+
+  if (!invoicingDate) return null
+
 
   return (
     <main className="space-y-4">
@@ -40,7 +51,9 @@ export function InvoicingContent() {
         </div>
       ) : (
         <>
-          <PerformanceContent data={invoicingDate?.forSpecificDate} />
+          {invoicingDate?.forSpecificDate && (
+            <PerformanceContent data={invoicingDate?.forSpecificDate} />
+          )}
         </>
       )}
       {isLoadinginvoicingDate ? (
