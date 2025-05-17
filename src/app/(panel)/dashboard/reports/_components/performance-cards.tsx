@@ -1,35 +1,12 @@
 "use client"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+
 import { useQuery } from "@tanstack/react-query";
-import { TrendingDown, TrendingUp } from "lucide-react";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { InvoiceProps } from "../types/invoicing";
 import { CardPerformance } from "@/components/card-performance";
 import { fetchData } from "@/utils/fetch-data";
 
 export function PerformanceCards() {
-  // const { data, isLoading, refetch } = useQuery({
-  //   queryKey: ["get-metrics-overview",],
-  //   queryFn: async () => {
-  //     const url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/invoicing`;
-  //     const response = await fetch(url);
-  //     const json = await response.json() as InvoiceProps;
-
-  //     if (!response.ok) {
-  //       throw new Error("Erro ao buscar métricas");
-  //     }
-
-  //     return json;
-  //   },
-  //   staleTime: 20000, // 20 segundos de staletime
-  //   refetchInterval: 30000
-  // })
 
   const {
     data,

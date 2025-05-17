@@ -1,20 +1,15 @@
-import { ScrollArea } from "@/components/ui/scroll-area"
 import {
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
+  TableBody, TableCell,
   TableFooter,
   TableHead,
   TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { Appointment } from "@/generated/prisma"
+  TableRow
+} from "@/components/ui/table";
 import { format } from "date-fns";
 import { formatCurrency } from "@/utils/formatCurrency";
 import clsx from "clsx";
 import { useIsMobile } from "@/app/hooks/useMobile";
-import { LoadingUI } from "@/components/ui/loading-ui";
 import { AppointmentWithService } from "../../types/allApponitments";
 
 

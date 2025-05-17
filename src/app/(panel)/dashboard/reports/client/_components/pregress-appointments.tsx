@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { LoadingUI } from "@/components/ui/loading-ui";
 import { MetricStatusProps } from "../../types/allApponitments";
 
 interface ProgressAppointmentsProps {
@@ -38,7 +37,7 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
               </CardContent>
             </Card>
             <CardMetricsStatus
-              title={"Pendendte"}
+              title={"Pendente"}
               countValue={metricStatus?.countByStatus.countPending || 0}
               percentage={metricStatus?.percentageByStatus.countPending || "0%"}
               width={metricStatus?.countByStatus.countPending || 0}

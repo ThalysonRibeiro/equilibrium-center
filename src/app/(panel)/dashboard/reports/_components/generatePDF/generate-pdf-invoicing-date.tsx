@@ -63,7 +63,7 @@ export default function GeneratePDFInvoicingDate({ data }: GeneratePDFProps) {
           startY: startYTable,
           columns,
           body: rows,
-          styles: { fontSize: 12 },
+          styles: { fontSize: 8 },
           headStyles: { fillColor: [200, 200, 200] },
         });
 

@@ -6,40 +6,38 @@ import { useSearchParams } from "next/navigation";
 import { DateRangePicker } from "../../../../../../components/date-range-picker";
 import { ProgressAppointments } from "./pregress-appointments";
 import { AllAppointmentProps } from "../../types/allApponitments";
+import { fetchData } from "@/utils/fetch-data";
+import GeneratePDFAppointments from "../../_components/generatePDF/generate-pdf-appointments";
 
 
 export function AllAppointmentClient() {
   const searchParams = useSearchParams();
-  const startDateString = searchParams.get('start-date');
-  const endDateString = searchParams.get('end-date');
-  const { data, isLoading } = useQuery({
+  const startDateString = searchParams.get('start-date') as string;
+  const endDateString = searchParams.get('end-date') as string;
+
+  const {
+    data,
+    isLoading
+  } = useQuery({
     queryKey: ["get-metrics-appointments", startDateString, endDateString],
-    queryFn: async () => {
-      let activeStartDate = startDateString;
-      let activeEndDate = endDateString;
-      let url: string;
-      if (!startDateString || !endDateString) {
-        url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/all-appointments`;
-      } else {
-        url = `${process.env.NEXT_PUBLIC_URL}/api/metrics/all-appointments?start-date=${activeStartDate}&end-date=${activeEndDate}`;
-      }
-      const response = await fetch(url);
-      const json = await response.json() as AllAppointmentProps;
-
-      if (!response.ok) {
-        throw new Error("Erro ao buscar métricas");
-      }
-
-      return json;
-    },
-    staleTime: 20000,
-    refetchInterval: 30000
+    queryFn: async () =>
+      fetchData<AllAppointmentProps>("metrics/all-appointments", {
+        "start-date": startDateString,
+        "end-date": endDateString,
+      }),
+    enabled: !!startDateString && !!endDateString,
+    staleTime: 80000,
+    refetchInterval: 90000
   })
+
 
   return (
     <section className="space-y-4">
       <h1 className="text-2xl font-montserrat text-primary text-center">Atividade de agendamento de clientes</h1>
-      <DateRangePicker value={30} />
+      <div className="flex items-center justify-between">
+        <DateRangePicker value={30} />
+        <GeneratePDFAppointments data={data} />
+      </div>
       <ProgressAppointments
         loading={isLoading}
         metricStatus={data?.metricStatus || null}

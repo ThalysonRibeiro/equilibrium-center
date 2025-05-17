@@ -59,7 +59,7 @@ export default function GeneratePDFForSixMonth({ chartData, totalSixMonth }: Gen
           startY: startYTable,
           columns,
           body: rows,
-          styles: { fontSize: 12 },
+          styles: { fontSize: 8 },
           headStyles: { fillColor: [200, 200, 200] },
         });
 
