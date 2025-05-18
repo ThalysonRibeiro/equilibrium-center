@@ -18,7 +18,7 @@ export function ButtonPickerAppointment() {
     <input
       id="start"
       type="date"
-      className="px-2 border-2 rounded-md text-sm md:text-base"
+      className="px-2 border-2 rounded-md text-sm md:text-base border-primary"
       value={selectedDate}
       onChange={handleChangeDate}
     />
