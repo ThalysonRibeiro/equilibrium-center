@@ -55,7 +55,6 @@ export function AppointmentList({ times }: AppointmentListProps) {
       }
       if (!activeStatus) {
         activeStatus = "PENDING,SCHEDULED"
-        // PENDING,SCHEDULED,COMPLETED,NO_SHOW,CANCELLED
       }
 
       const url = `${process.env.NEXT_PUBLIC_URL}/api/clinic/appointments?date=${activeDate}&status=${activeStatus}`;
@@ -75,7 +74,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
 
   if (data && data.length > 0) {
     for (const appointment of data) {
-      const requiredSlots = Math.ceil(appointment.service.duration / 30);
+      const requiredSlots = Math.ceil(appointment.service.duration / 30) + 1;
       const startIndex = times.indexOf(appointment.time);
 
       if (startIndex !== -1) {
@@ -122,7 +121,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-xl md:text-2xl font-montserrat">
+          <CardTitle className="text-lg xl:text-2xl font-montserrat">
             Agendamentos
           </CardTitle>
           <ButtonPickerAppointment />
@@ -153,7 +152,9 @@ export function AppointmentList({ times }: AppointmentListProps) {
                         <div className="flex gap-3">
                           <div className="font-bold">{slot}</div>
                           <div>
-                            <div className="text-sm line-clamp-1">{occupant.name}</div>
+                            <div className="text-sm font-montserrat font-extrabold capitalize line-clamp-1">
+                              {occupant.name.toLowerCase()}
+                            </div>
                             <div className="text-sm">{occupant.phone}</div>
                           </div>
                         </div>
@@ -161,10 +162,10 @@ export function AppointmentList({ times }: AppointmentListProps) {
                           <Select onValueChange={(value: AppointmentStatus) => {
                             handleStatusAppointment(occupant.id, value)
                           }}>
-                            <SelectTrigger className="w-[185px]">
+                            <SelectTrigger className="w-[185px] border-primary/50">
                               <SelectValue placeholder={statusMap[occupant.status]} />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="border-primary/50">
                               <SelectItem value="PENDING">Pendente</SelectItem>
                               <SelectItem value="SCHEDULED">Confimado</SelectItem>
                               <SelectItem value="COMPLETED">Completo</SelectItem>
