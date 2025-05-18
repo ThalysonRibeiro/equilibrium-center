@@ -59,7 +59,6 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
                   <ProgressBar
                     width={item.total}
                     max={totalSixMonth}
-                    color="bg-ring"
                     numberValue={item.total}
                   />
                   <p className="text-center">{item.month.slice(0, 3)}</p>
@@ -80,11 +79,10 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
 interface ProgressProps extends ComponentProps<'div'> {
   width: number;
   max: number;
-  color: string;
   numberValue: number;
 }
 
-export function ProgressBar({ width, max, color, numberValue, className, ...props }: ProgressProps) {
+export function ProgressBar({ width, max, numberValue, className, ...props }: ProgressProps) {
   const [currentWidth, setCurrentWidth] = useState(0);
 
   useEffect(() => {
@@ -100,7 +98,7 @@ export function ProgressBar({ width, max, color, numberValue, className, ...prop
   return (
     <div className={twMerge("w-full h-full rotate-180", className)} {...props}>
       <div
-        className={`${color} rounded-b-md h-full transition-all duration-700 ease-in-out`}
+        className={`bg-gradient-to-b from-violet-600 via-blue-500 to-cyan-500 rounded-b-md h-full transition-all duration-700 ease-in-out`}
         style={{ height: `${percent}%` }}
       />
       <p className="rotate-180 text-center font-montserrat">{numberValue}</p>
