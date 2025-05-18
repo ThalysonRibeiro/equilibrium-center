@@ -213,7 +213,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
             className=" hover:bg-accent w-full"
           >
             {loading ?
-              <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-accent rounded-full animate-spin" />
               : `${serviceId ? "Atualizar serviço" : "Cadastrar serviço"}`}
 
           </Button>
