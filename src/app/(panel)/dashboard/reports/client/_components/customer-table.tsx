@@ -130,7 +130,7 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
             </Table>
           </CardContent>
           <CardFooter className="flex items-center justify-center">
-            {itemsPerPages < 20 && (
+            {appointment.length > itemsPerPages && (
               <div className="flex gap-3">
                 <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
                   <ChevronLeft />
