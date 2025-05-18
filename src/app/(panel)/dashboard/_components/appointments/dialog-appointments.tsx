@@ -23,22 +23,22 @@ export function DialogAppointments({ appointment }: DialogAppointmentsProps) {
 
       <div className="py-4">
         {appointment && (
-          <article>
-            <p className="font-lato"><span className="font-montserrat">Horario agendado: </span>{appointment.time}</p>
-            <p className="mb-2 font-lato"><span className="font-montserrat">Data do agendamento: </span>
+          <article className="font-montserrat">
+            <p><span>Horario agendado: </span>{appointment.time}</p>
+            <p className="mb-2"><span>Data do agendamento: </span>
               {new Intl.DateTimeFormat('pt-BR', {
                 timeZone: "UTC",
                 year: "numeric",
                 month: "2-digit",
                 day: "2-digit",
               }).format(new Date(appointment.appointmentDate))}</p>
-            <p className="font-lato"><span className="font-montserrat">Nome: </span>{appointment.name}</p>
-            <p className="font-lato"><span className="font-montserrat">Telefone: </span>{appointment.phone}</p>
-            <p className="font-lato"><span className="font-montserrat">Email: </span>{appointment.email}</p>
+            <p><span>Nome: </span>{appointment.name}</p>
+            <p><span>Telefone: </span>{appointment.phone}</p>
+            <p><span>Email: </span>{appointment.email}</p>
 
             <section className="bg-gray-100 border border-corprimary/50 mt-4 p-2 rounded-md">
-              <p className="font-lato"><span className="font-montserrat">Serviço: </span>{appointment.service.name}</p>
-              <p className="font-lato"><span className="font-montserrat">Valor: </span>{formatCurrency(appointment.service.price.toString())}</p>
+              <p><span>Serviço: </span>{appointment.service.name}</p>
+              <p><span>Valor: </span>{formatCurrency(appointment.service.price.toString())}</p>
             </section>
 
           </article>
