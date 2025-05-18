@@ -7,7 +7,7 @@ export interface InvoiceProps {
   comparison: ComparisonProps;
 }
 
-interface MetricsTotalInvoicingProps {
+export interface MetricsTotalInvoicingProps {
   appointments: AppointmentsProps[];
   totalAppointments: number;
   totalInvoicing: number;
