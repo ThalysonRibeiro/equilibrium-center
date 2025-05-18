@@ -218,8 +218,8 @@ export function BarChartMultiple() {
                 <Area
                   type="monotone"
                   dataKey="current"
-                  stroke="oklch(0.696 0.17 162.48)"
-                  fill="oklch(0.696 0.17 162.48)"
+                  stroke="oklch(62.3% 0.214 259.815)"
+                  fill="oklch(62.3% 0.214 259.815)"
                   name="Período Atual"
                 />
                 <Area
