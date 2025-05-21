@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
 import { AppointmentStatus } from '@/generated/prisma';
 import { getAppointments } from '@/lib/prisma/get-appointments';
+import { createCustomerRanking, groupAppointmentsByClient } from '@/utils/rank-clients';
 
 
 export const GET = auth(async function GET(req) {
@@ -35,6 +36,9 @@ export const GET = auth(async function GET(req) {
     const allAppointments = await getAppointments({ userId: clinicId, startDate, endDate });
 
     const countAllAppointments = allAppointments.length;
+
+    // Obter todos os clientes agrupados com seus agendamentos
+    const groupedCustomers = createCustomerRanking(allAppointments);
 
     const statuses: AppointmentStatus[] = ['PENDING', 'SCHEDULED', 'COMPLETED', 'NO_SHOW', 'CANCELLED'] as const;
     type Status = typeof statuses[number];
@@ -84,10 +88,11 @@ export const GET = auth(async function GET(req) {
       endDate,
       allAppointments,
       countAllAppointments,
+      groupedCustomers,
       metricStatus: {
         countByStatus,
         percentageByStatus
-      }
+      },
     });
 
   } catch (error) {
