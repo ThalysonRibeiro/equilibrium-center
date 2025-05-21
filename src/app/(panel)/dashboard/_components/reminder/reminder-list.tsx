@@ -35,7 +35,7 @@ export function ReminderList({ reminder }: ReminderListProps) {
     <div className="flex flex-col gap-3">
       <Card>
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-lx md:text-2xl font-montserrat">
+          <CardTitle className="text-lg xl:text-2xl font-montserrat">
             Lembretes
           </CardTitle>
 

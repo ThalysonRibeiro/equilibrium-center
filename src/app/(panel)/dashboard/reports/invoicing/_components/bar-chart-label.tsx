@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { formatCurrency } from "@/utils/formatCurrency";
+import { formatCurrency, formatShortNumber } from "@/utils/formatCurrency";
 import GeneratePDFForSixMonth from "../../_components/generatePDF/generate-pdf-invoicing-six-month";
 
 interface BarProps {
@@ -24,7 +24,7 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
     <Card>
       <CardHeader>
         <CardTitle className="font-montserrat flex justify-between items-center">
-          Faturamento dos últomos 6 meses
+          Faturamento dos últimos 6 meses
           <GeneratePDFForSixMonth chartData={chartData} totalSixMonth={totalSixMonth} />
         </CardTitle>
         <CardDescription>
@@ -60,6 +60,7 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
                     width={item.total}
                     max={totalSixMonth}
                     numberValue={item.total}
+                    month={item.month.slice(0, 3)}
                   />
                   <p className="text-center">{item.month.slice(0, 3)}</p>
                 </div>
@@ -70,7 +71,7 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
         </div>
       </CardContent>
       <CardFooter>
-        <p>Receita gerada nos últomos 6 meses: <span className="text-md md:text-2xl font-montserrat font-black">{formatCurrency(String(totalSixMonth))}</span></p>
+        <p>Receita gerada nos últimos 6 meses: <span className="text-md md:text-2xl font-montserrat font-bold">{formatCurrency(String(totalSixMonth))}</span></p>
       </CardFooter>
     </Card>
   )
@@ -80,28 +81,40 @@ interface ProgressProps extends ComponentProps<'div'> {
   width: number;
   max: number;
   numberValue: number;
+  month?: string;
 }
 
-export function ProgressBar({ width, max, numberValue, className, ...props }: ProgressProps) {
+export function ProgressBar({ width, max, numberValue, month, className, ...props }: ProgressProps) {
   const [currentWidth, setCurrentWidth] = useState(0);
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setCurrentWidth(width);
-    }, 100); // pequeno delay para garantir que a transição ocorra
-
-    return () => clearTimeout(timeout);
-  }, [width]);
+    if (currentWidth !== width) {
+      const timeout = setTimeout(() => {
+        setCurrentWidth(width);
+      }, 100);
+      return () => clearTimeout(timeout);
+    }
+  }, [width])
 
   const percent = (currentWidth / max) * 100;
 
   return (
-    <div className={twMerge("w-full h-full rotate-180", className)} {...props}>
+    <div className={twMerge("relative group w-full h-full rotate-180", className)} {...props}>
       <div
         className={`bg-gradient-to-b from-violet-600 via-blue-500 to-cyan-500 rounded-b-md h-full transition-all duration-700 ease-in-out`}
         style={{ height: `${percent}%` }}
       />
-      <p className="rotate-180 text-center font-montserrat">{numberValue}</p>
+      <div className="bg-white rounded-md border border-blue-500 z-10 w-fit h-fit px-3 py-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        <div className="flex items-center gap-1">
+          <p className="rotate-180 text-center text-xs font-bold">{formatShortNumber(numberValue)}</p>
+          <div className="w-3 h-3 bg-blue-500 rounded" />
+        </div>
+        {month && (
+          <div className="rotate-180">
+            <p className="text-xs">{month}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

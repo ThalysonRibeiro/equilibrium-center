@@ -237,7 +237,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   <FormControl>
                     <DateTimePicker
                       initialDate={new Date()}
-                      className="w-full rounded border p-2"
+                      className="rounded-md border px-2 py-1"
                       onChange={(date) => {
                         if (date) {
                           field.onChange(date)

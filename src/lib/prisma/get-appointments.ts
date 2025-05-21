@@ -6,6 +6,7 @@ type GetAppointmentsOptions = {
   startDate?: Date;
   endDate?: Date;
   serviceFields?: {
+    id?: boolean;
     name?: boolean;
     price?: boolean;
     duration?: boolean;
@@ -18,7 +19,7 @@ export async function getAppointments({
   status,
   startDate,
   endDate,
-  serviceFields = { name: true, price: true, duration: true },
+  serviceFields = { id: true, name: true, price: true, duration: true },
   order = 'desc'
 }: GetAppointmentsOptions) {
   const where: any = { userId };

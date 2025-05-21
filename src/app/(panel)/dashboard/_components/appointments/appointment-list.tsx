@@ -152,7 +152,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
                         <div className="flex gap-3">
                           <div className="font-bold">{slot}</div>
                           <div>
-                            <div className="text-sm font-montserrat font-extrabold capitalize line-clamp-1">
+                            <div className="text-sm font-montserrat font-bold capitalize line-clamp-1">
                               {occupant.name.toLowerCase()}
                             </div>
                             <div className="text-sm">{occupant.phone}</div>

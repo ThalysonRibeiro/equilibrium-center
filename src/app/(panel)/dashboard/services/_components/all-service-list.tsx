@@ -21,19 +21,19 @@ export function AllServiceList({ services }: ServicesListProps) {
     <section className="mx-auto">
       <Card>
         <CardHeader className="flex flex-row justify-between items-center space-y-0">
-          <CardTitle className="text-xl text-gray-700">Todos os Serviços</CardTitle>
+          <CardTitle className="text-xl font-montserrat">Todos os Serviços</CardTitle>
         </CardHeader>
 
         <CardContent>
-          <section className="space-y-2 mt-5">
+          <section className="space-y-2 mt-5 text-primary">
             {services.map(service => (
               <article
                 key={service.id}
                 className="flex items-center justify-between gap-2"
               >
                 <div className="flex items-center justify-between rounded-md space-x-2 px-2 w-full h-9 border text-sm lg:text-base">
-                  <span className="font-medium text-gray-700 line-clamp-1">{service.name}</span>
-                  <span className="font-medium text-green-500">{formatCurrency(service.price)}</span>
+                  <span className="font-semibold line-clamp-1">{service.name}</span>
+                  <span className="font-semibold text-green-500">{formatCurrency(service.price)}</span>
                 </div>
 
                 <div className="space-x-2 flex items-center justify-end">

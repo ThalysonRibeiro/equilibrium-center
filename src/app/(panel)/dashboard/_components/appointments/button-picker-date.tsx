@@ -1,26 +1,43 @@
+"use client"
+
 import { useState } from "react"
-import { format } from "date-fns";
-import { useRouter } from "next/navigation";
+import { format, parseISO } from "date-fns"
+import { useRouter } from "next/navigation"
+import { Calendar } from "@/components/ui/calendar"
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
+import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 
 export function ButtonPickerAppointment() {
-  const [selectedDate, setSelectedDate] = useState(format(new Date(), "yyyy-MM-dd"));
-  const router = useRouter();
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const router = useRouter()
 
-  function handleChangeDate(event: React.ChangeEvent<HTMLInputElement>) {
-    setSelectedDate(event.target.value)
+  function handleSelect(date: Date | undefined) {
+    if (!date) return
 
+    setSelectedDate(date)
+
+    const formatted = format(date, "yyyy-MM-dd")
     const url = new URL(window.location.href)
-    url.searchParams.set("date", event.target.value);
+    url.searchParams.set("date", formatted)
     router.push(url.toString())
-
   }
+
   return (
-    <input
-      id="start"
-      type="date"
-      className="px-2 border-2 rounded-md text-sm md:text-base border-primary"
-      value={selectedDate}
-      onChange={handleChangeDate}
-    />
+    <Popover>
+      <PopoverTrigger asChild>
+        <button className="border px-2 py-1 rounded-md">
+          {format(selectedDate, "dd/MM/yyyy")}
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0">
+        <Calendar
+          mode="single"
+          selected={selectedDate}
+          onSelect={handleSelect}
+          initialFocus
+        />
+      </PopoverContent>
+    </Popover>
   )
 }

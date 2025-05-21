@@ -27,11 +27,11 @@ export function CardPerformance({ title, description, titleContent, percent, tot
           {typeof percent === "number" && (
             <div className="border rounded-md px-2 py-1 inline-flex items-center text-sm font-normal">
               {percent >= 100 ? (
-                <span className="text-green-500 font-semibold inline-flex items-center">
+                <span className="text-green-500 inline-flex items-center">
                   <TrendingUp className="w-4 h-4 mr-1" /> +{percent.toFixed(2)}%
                 </span>
               ) : (
-                <span className="text-red-500 font-semibold inline-flex items-center">
+                <span className="text-red-500 inline-flex items-center">
                   <TrendingDown className="w-4 h-4 mr-1" /> {percent.toFixed(2)}%
                 </span>
               )}

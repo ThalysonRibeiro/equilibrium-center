@@ -17,14 +17,14 @@ export function CardTotalINvoicing({ data }: { data: InvoiceProps }) {
       </CardHeader>
       <CardContent className="flex items-center justify-between">
         <div>
-          <p className="text-2xl lg:text-3xl font-black">
+          <p className="text-2xl lg:text-3xl font-bold">
             {formatCurrency(data?.metricsTotalInvoicing.totalInvoicing.toString())}
           </p>
         </div>
         <div>
           <p className="font-montserrat lg:text-xl">
             Total de agendamentos:{' '}
-            <span className="text-2xl font-black">
+            <span className="text-2xl font-bold">
               {data.metricsTotalInvoicing.totalAppointments}
             </span>
           </p>

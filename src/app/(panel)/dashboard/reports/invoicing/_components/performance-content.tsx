@@ -57,7 +57,7 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow className="text-3xl font-extrabold">
+              <TableRow className="text-3xl font-bold">
                 <TableCell>{data?.totalAppointmentSpecificDate}</TableCell>
                 <TableCell className="text-right">{formatCurrency(String(data?.totalInvoicingspecificDate))}</TableCell>
               </TableRow>

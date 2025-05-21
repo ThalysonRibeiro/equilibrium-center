@@ -67,7 +67,9 @@ export function InvoicingContent() {
   if (!invoicingDate || !invoicing) {
     return (
       <main className="text-center mt-10 text-muted-foreground">
-        Nenhum dado encontrado para o período selecionado.
+        <div className="w-full h-[calc(100vh-20vh)] border rounded-lg bg-white flex items-center justify-center gap-4">
+          Carregando dados...  <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        </div>
       </main>
     );
   }
@@ -76,24 +78,12 @@ export function InvoicingContent() {
     <main className="space-y-4">
       <h1 className="text-2xl font-montserrat text-primary text-center">Faturamento</h1>
 
-      {isLoadinginvoicing ? (
-        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-        </div>
-      ) : (
-        <CardTotalINvoicing data={invoicing} />
-      )}
+      <CardTotalINvoicing data={invoicing} />
 
-      {isLoadinginvoicingDate ? (
-        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-        </div>
-      ) : (
-        <BarChartLabel
-          chartData={invoicingDate?.sixMonth.monthlyData || []}
-          totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
-        />
-      )}
+      <BarChartLabel
+        chartData={invoicingDate?.sixMonth.monthlyData || []}
+        totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
+      />
 
       <Card>
         <CardHeader>
@@ -108,17 +98,9 @@ export function InvoicingContent() {
           </CardDescription>
         </CardHeader>
 
-        {isLoadinginvoicingDate ? (
-          <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-          </div>
-        ) : (
-          <>
-            {invoicingDate?.forSpecificDate && (
-              <PerformanceContent data={invoicingDate?.forSpecificDate} />
-            )}
-          </>
-        )}
+
+        <PerformanceContent data={invoicingDate?.forSpecificDate} />
+
       </Card>
 
 

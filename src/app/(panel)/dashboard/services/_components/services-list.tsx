@@ -97,11 +97,11 @@ export function ServicesList({ services }: ServicesListProps) {
                   className="flex items-center justify-between gap-2"
                 >
                   <div className="flex items-center justify-between rounded-md space-x-2 px-2 w-full h-9 border text-sm lg:text-base">
-                    <span className="font-medium line-clamp-1 w-1/2">{service.name}</span>
-                    <span className="font-medium line-clamp-1">
+                    <span className="font-semibold line-clamp-1 w-1/2">{service.name}</span>
+                    <span className="font-semibold line-clamp-1">
                       {FormatHour(service.duration)}
                     </span>
-                    <span className="font-medium text-green-500 justify-items-end">{formatCurrency(service.price)}</span>
+                    <span className="font-semibold text-green-500 justify-items-end">{formatCurrency(service.price)}</span>
                   </div>
 
                   <div className="space-x-2 flex items-center">
