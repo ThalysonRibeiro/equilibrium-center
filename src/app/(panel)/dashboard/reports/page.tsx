@@ -4,7 +4,7 @@ import { BarChartMultiple } from "./_components/bar-chart-multiple";
 import { DateRangePicker } from "../../../../components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { PerformanceCards } from "./_components/performance-cards";
-import { DownloadIcon } from "lucide-react";
+import { ContentOfTheWeek } from "./_components/Content-ofTheWeek";
 
 
 export default async function Reports() {
@@ -16,15 +16,15 @@ export default async function Reports() {
 
 
   return (
-    <main className="max-h-[cal(100vh-20rem)] h-full">
+    <main className="space-y-4">
 
       <div className="flex flex-col lg:flex-row items-center justify-between mb-3">
         <h1 className="text-xl font-montserrat text-primary flex-1">Dashboard - Visão geral últimos 30 dias</h1>
       </div>
 
       <PerformanceCards />
-
       <BarChartMultiple />
+      <ContentOfTheWeek />
     </main>
   )
 }
