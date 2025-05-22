@@ -34,6 +34,10 @@ export const GET = auth(async function GET(req) {
 
     // Uma única consulta que busca TODOS os agendamentos completados
     const allCompletedAppointments = await getAppointments({ userId: clinicId, status: 'COMPLETED', });
+    const allCancelledAppointments = await getAppointments({ userId: clinicId, status: 'CANCELLED', });
+
+    const possibleLosses = allCancelledAppointments.reduce((acc, cur) => acc + cur.service.price.toNumber(), 0);
+    const totalAppointmentCancelled = allCancelledAppointments.length;
 
     // Métricas para todos os agendamentos
     const totalAppointments = allCompletedAppointments.length;
@@ -88,6 +92,8 @@ export const GET = auth(async function GET(req) {
         appointments: allCompletedAppointments,
         totalAppointments,
         totalInvoicing,
+        possibleLosses,
+        totalAppointmentCancelled
       },
       currentPeriod: {
         appointments: currentPeriodAppointments,
