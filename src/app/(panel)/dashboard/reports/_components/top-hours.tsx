@@ -35,7 +35,7 @@ export function TopHours({ data }: TopHoursProps) {
               <Trophy
                 className="text-[#C0C0C0] w-15 h-15"
               />
-              <p className="font-bold">{data.hours[1].time}</p>
+              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
               <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
             </div>
 
@@ -43,7 +43,7 @@ export function TopHours({ data }: TopHoursProps) {
               <Trophy
                 className="text-[#FFD700] w-25 h-25"
               />
-              <p className="font-bold">{data.hours[0].time}</p>
+              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[0].time}</p>
               <p className="text-xs">Agendamentos: {data.hours[0].count}</p>
             </div>
 
@@ -51,7 +51,7 @@ export function TopHours({ data }: TopHoursProps) {
               <Trophy
                 className="text-[#CD7F32] w-15 h-15"
               />
-              <p className="font-bold">{data.hours[2].time}</p>
+              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
               <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
             </div>
           </div>
@@ -64,12 +64,12 @@ export function TopHours({ data }: TopHoursProps) {
 
       {data.hours.length > 2 && (
         <CardFooter>
-          <div className="w-full grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          <div className="w-full grid md:gap-4 gap-2 grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
             {data.hours.slice(3).map(hour => (
-              <div key={hour.time} className="flex flex-col items-center justify-center p-2">
-                <Medal />
-                <p className="font-bold">{hour.time}</p>
-                <p className="text-xs">Agendamentos: {hour.count}</p>
+              <div key={hour.time} className="flex flex-col items-center justify-center p-2 rounded-md bg-ring border text-white">
+                <Medal className="w-8 h-8" />
+                <p className="font-bold px-2 py-0.5 ">{hour.time}</p>
+                <p className="text-xs font-semibold">Agendamentos: {hour.count}</p>
               </div>
             ))}
           </div>
