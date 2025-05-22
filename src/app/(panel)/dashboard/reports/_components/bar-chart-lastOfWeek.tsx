@@ -2,7 +2,7 @@
 import {
   Card,
   CardContent,
-  CardDescription, CardFooter, CardHeader,
+  CardDescription, CardHeader,
   CardTitle
 } from "@/components/ui/card";
 
@@ -43,7 +43,7 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
                   key={daysOfWeekWithCount.daysOfWeek}
                   daysOfWeek={daysOfWeekWithCount.daysOfWeek}
                   max={data.appointmentsOfWeek}
-                  width={daysOfWeekWithCount.count + 2}
+                  width={daysOfWeekWithCount.count}
                   numberValue={10}
                   count={formatShortNumber(daysOfWeekWithCount.count)}
                 />
