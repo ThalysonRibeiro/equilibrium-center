@@ -11,6 +11,8 @@ export interface MetricsTotalInvoicingProps {
   appointments: AppointmentsProps[];
   totalAppointments: number;
   totalInvoicing: number;
+  possibleLosses: number;
+  totalAppointmentCancelled: number;
 }
 
 export interface AppointmentsProps {
