@@ -16,6 +16,7 @@ import {
   TableRow
 } from "@/components/ui/table";
 import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { formatCurrency } from "@/utils/formatCurrency";
 import clsx from "clsx";
 import { useIsMobile } from "@/app/hooks/useMobile";
@@ -98,26 +99,30 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
                 </TableRow>
               </TableHeader>
               <TableBody className="">
-                {dataPage.map(item => (
-                  <TableRow key={item.id}>
-                    <TableCell className="border-l border-r font-medium">
-                      {format(new Date(item.appointmentDate), "dd/MM/yyyy")}
-                    </TableCell>
-                    <TableCell className={clsx("border-r font-semibold uppercase line-clamp-1", `${colorStatus(item.status)}`)}>
-                      {statusMap[item.status]}
-                    </TableCell>
-                    <TableCell className="border-r">
-                      {item.name}
-                    </TableCell>
-                    <TableCell className="border-r">
-                      {item.time}
-                    </TableCell>
-                    {!isMobile && (<TableCell className="border-r">{item.phone}</TableCell>)}
-                    <TableCell className="text-right border-r">
-                      {item.service.price.toString()}
-                    </TableCell>
-                  </TableRow>
-                ))}
+                {dataPage.map(item => {
+
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell className="border-l border-r font-medium">
+                        {/* {format(new Date(item.appointmentDate), "dd/MM/yyyy")} */}
+                        {formatInTimeZone(item.appointmentDate, 'UTC', "dd/MM/yyyy")}
+                      </TableCell>
+                      <TableCell className={clsx("border-r font-semibold uppercase line-clamp-1", `${colorStatus(item.status)}`)}>
+                        {statusMap[item.status]}
+                      </TableCell>
+                      <TableCell className="border-r">
+                        {item.name}
+                      </TableCell>
+                      <TableCell className="border-r">
+                        {item.time}
+                      </TableCell>
+                      {!isMobile && (<TableCell className="border-r">{item.phone}</TableCell>)}
+                      <TableCell className="text-right border-r">
+                        {item.service.price.toString()}
+                      </TableCell>
+                    </TableRow>
+                  )
+                })}
               </TableBody>
               <TableFooter>
                 <TableRow className="bg-gray-200">
