@@ -5,7 +5,6 @@ export interface AllAppointmentProps {
   endDate: Date;
   allAppointments: AppointmentWithService[];
   countAllAppointments: number;
-  groupedCustomers: GroupedCustomersProps[];
   metricStatus: MetricStatusProps;
 }
 
@@ -20,13 +19,6 @@ export type AppointmentWithService = Prisma.AppointmentGetPayload<{
     }
   }
 }>;
-
-interface GroupedCustomersProps {
-  name: string;
-  email: string;
-  phone: string;
-  quantidade: number;
-}
 
 export interface MetricStatusProps {
   countByStatus: CountByStatusProps;
