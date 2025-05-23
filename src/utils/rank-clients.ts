@@ -30,13 +30,13 @@ export function groupAppointmentsByClient(allAppointments: Appointment[]) {
         // Array com todos os appointments deste cliente
         appointments: [appointment],
         // Contador para ranking
-        quantidade: 1
+        count: 1
       });
     } else {
       // Cliente já existe, adicionar este appointment ao array
       const cliente = clientesMap.get(chave);
       cliente.appointments.push(appointment);
-      cliente.quantidade += 1;
+      cliente.count += 1;
 
       // Atualizar name se o atual for "Cliente sem name" e tiver um name melhor disponível
       if ((cliente.name.trim === "Cliente sem name") && (appointment.name || appointment.name)) {
@@ -45,9 +45,9 @@ export function groupAppointmentsByClient(allAppointments: Appointment[]) {
     }
   });
 
-  // Converter Map para array e ordenar por quantidade de appointments (ranking)
+  // Converter Map para array e ordenar por count de appointments (ranking)
   const clientesAgrupados = Array.from(clientesMap.values());
-  clientesAgrupados.sort((a, b) => b.quantidade - a.quantidade);
+  clientesAgrupados.sort((a, b) => b.count - a.count);
 
   return clientesAgrupados;
 }
@@ -64,6 +64,6 @@ export function createCustomerRanking(allAppointments: Appointment[]) {
     name: cliente.name.trim(),
     email: cliente.email,
     phone: cliente.phone,
-    quantidade: cliente.quantidade
+    count: cliente.count
   }));
 }
