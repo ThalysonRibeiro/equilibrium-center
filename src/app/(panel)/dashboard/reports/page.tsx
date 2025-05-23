@@ -5,6 +5,8 @@ import { DateRangePicker } from "../../../../components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { PerformanceCards } from "./_components/performance-cards";
 import { ContentOfTheWeekAndRank } from "./_components/Content-ofTheWeek-and-rank";
+import { Suspense } from "react";
+import { LoadingUI } from "@/components/ui/loading-ui";
 
 
 export default async function Reports() {
@@ -16,15 +18,21 @@ export default async function Reports() {
 
 
   return (
-    <main className="space-y-4">
-
-      <div className="flex flex-col lg:flex-row items-center justify-between mb-3">
-        <h1 className="text-xl font-montserrat text-primary flex-1">Dashboard - Visão geral últimos 30 dias</h1>
+    <Suspense fallback={
+      <div className="w-full h-full flex justify-center items-center">
+        <LoadingUI />
       </div>
+    }>
+      <main className="space-y-4">
 
-      <PerformanceCards />
-      <BarChartMultiple />
-      <ContentOfTheWeekAndRank />
-    </main>
+        <h1 className="text-2xl font-semibold text-primary text-center">
+          Dashboard - Visão geral últimos 30 dias
+        </h1>
+
+        <PerformanceCards />
+        <BarChartMultiple />
+        <ContentOfTheWeekAndRank />
+      </main>
+    </Suspense>
   )
 }
