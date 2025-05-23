@@ -55,9 +55,5 @@ export const GET = auth(async function GET(req) {
 
 
 
-  return NextResponse.json({
-    topService
-    // allServices,
-    // appointments
-  })
+  return NextResponse.json(topService)
 })
