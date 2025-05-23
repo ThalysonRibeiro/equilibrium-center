@@ -5,10 +5,12 @@ import { twMerge } from "tailwind-merge";
 interface ProgressProps extends ComponentProps<'div'> {
   width: number;
   max: number;
-  color: string;
+  color?: string;
 }
 
-export function Progress({ width, max, color, className, ...props }: ProgressProps) {
+const colorDefault = "bg-gradient-to-r from-violet-600 via-blue-500 to-cyan-500"
+
+export function Progress({ width, max, color = colorDefault, className, ...props }: ProgressProps) {
   const [currentWidth, setCurrentWidth] = useState(0);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ export function Progress({ width, max, color, className, ...props }: ProgressPro
   const percent = (currentWidth / max) * 100;
 
   return (
-    <div className={twMerge("bg-gray-200 w-full h-3 rounded overflow-hidden", className)} {...props}>
+    <div className={twMerge("bg-gray-200 w-full h-2.5 rounded overflow-hidden", className)} {...props}>
       <div
         className={`${color} rounded h-full transition-all duration-700 ease-in-out`}
         style={{ width: `${percent}%` }}
