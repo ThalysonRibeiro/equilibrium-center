@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export function RadialProgress({ progress = 10, size = 120, stroke = 10 }) {
+export function RadialProgress({ progress = 10, size = 100, stroke = 10, color = "#22c55e" }) {
   const [currentProgress, setCurrentProgress] = useState(0);
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
@@ -32,7 +32,7 @@ export function RadialProgress({ progress = 10, size = 120, stroke = 10 }) {
         cx={size / 2}
         cy={size / 2}
         r={radius}
-        stroke="#22c55e" // Tailwind green-500
+        stroke={color} // Tailwind green-500
         strokeWidth={stroke}
         fill="none"
         strokeDasharray={circumference}
