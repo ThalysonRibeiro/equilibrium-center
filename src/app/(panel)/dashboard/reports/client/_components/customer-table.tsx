@@ -99,30 +99,26 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
                 </TableRow>
               </TableHeader>
               <TableBody className="">
-                {dataPage.map(item => {
-
-                  return (
-                    <TableRow key={item.id}>
-                      <TableCell className="border-l border-r font-medium">
-                        {/* {format(new Date(item.appointmentDate), "dd/MM/yyyy")} */}
-                        {formatInTimeZone(item.appointmentDate, 'UTC', "dd/MM/yyyy")}
-                      </TableCell>
-                      <TableCell className={clsx("border-r font-semibold uppercase line-clamp-1", `${colorStatus(item.status)}`)}>
-                        {statusMap[item.status]}
-                      </TableCell>
-                      <TableCell className="border-r">
-                        {item.name}
-                      </TableCell>
-                      <TableCell className="border-r">
-                        {item.time}
-                      </TableCell>
-                      {!isMobile && (<TableCell className="border-r">{item.phone}</TableCell>)}
-                      <TableCell className="text-right border-r">
-                        {item.service.price.toString()}
-                      </TableCell>
-                    </TableRow>
-                  )
-                })}
+                {dataPage.map(item => (
+                  <TableRow key={item.id}>
+                    <TableCell className="border-l border-r font-medium">
+                      {formatInTimeZone(item.appointmentDate, 'UTC', "dd/MM/yyyy")}
+                    </TableCell>
+                    <TableCell className={clsx("border-r font-semibold uppercase line-clamp-1", `${colorStatus(item.status)}`)}>
+                      {statusMap[item.status]}
+                    </TableCell>
+                    <TableCell className="border-r truncate lg:w-1/3 max-w-35">
+                      {item.name}
+                    </TableCell>
+                    <TableCell className="border-r">
+                      {item.time}
+                    </TableCell>
+                    {!isMobile && (<TableCell className="border-r">{item.phone}</TableCell>)}
+                    <TableCell className="text-right border-r">
+                      {item.service.price.toString()}
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
               <TableFooter>
                 <TableRow className="bg-gray-200">
@@ -137,19 +133,20 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
           <CardFooter className="flex items-center justify-center">
             {appointment.length > itemsPerPages && (
               <div className="flex gap-3">
-                <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+                <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
                   <ChevronLeft />
                 </Button>
                 {[...Array(totalPages)].map((_, index) => (
                   <Button
                     key={index}
+                    variant={"ghost"}
                     onClick={() => changePage(index + 1)}
-                    className={cn("bg-transparent text-primary rounded-full border", currentPage === index + 1 && "bg-primary text-white")}
+                    className={cn("hover:bg-gray-100 hover:text-primary", currentPage === index + 1 && "font-bold text-lg")}
                   >
                     {index + 1}
                   </Button>
                 ))}
-                <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
+                <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
                   <ChevronRight />
                 </Button>
               </div>
