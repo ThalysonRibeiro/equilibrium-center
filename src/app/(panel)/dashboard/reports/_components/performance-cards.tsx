@@ -5,6 +5,7 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { InvoiceProps } from "../types/invoicing";
 import { CardPerformance } from "@/components/card-performance";
 import { fetchData } from "@/utils/fetch-data";
+import { LoadingUI } from "@/components/ui/loading-ui";
 
 export function PerformanceCards() {
 
@@ -23,14 +24,9 @@ export function PerformanceCards() {
   return (
     <>
       {isLoadingInvoicing ? (
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
-          <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-          </div>
-          <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-            <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-          </div>
-        </section>
+        <div className="w-full h-full flex justify-center items-center">
+          <LoadingUI />
+        </div>
       ) : (
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3 text-primary">
 

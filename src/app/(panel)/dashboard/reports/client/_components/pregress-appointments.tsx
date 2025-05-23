@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/card"
 import { MetricStatusProps } from "../../types/allApponitments";
 import { RadialProgress } from "@/components/radial-progress";
+import { LoadingUI } from "@/components/ui/loading-ui";
 
 interface ProgressAppointmentsProps {
   metricStatus: MetricStatusProps | null;
@@ -21,8 +22,8 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
   return (
     <>
       {loading ? (
-        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        <div className="w-full h-full flex justify-center items-center">
+          <LoadingUI />
         </div>
       ) : (
         <article>

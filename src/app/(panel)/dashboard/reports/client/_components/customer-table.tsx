@@ -25,6 +25,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { LoadingUI } from "@/components/ui/loading-ui";
 
 
 interface CustomerTableProps {
@@ -73,8 +74,8 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
   return (
     <>
       {loading ? (
-        <div className="w-full h-50 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        <div className="w-full h-full flex justify-center items-center">
+          <LoadingUI />
         </div>
       ) : (
         <Card>
@@ -87,15 +88,15 @@ export function CustomerTable({ appointment, loading }: CustomerTableProps) {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <Table className="h-full rounded-lg bg-white text-gray-700 text-[10px] md:text-[12px] xl:text-base">
+            <Table className="h-full rounded-lg bg-white text-[10px] md:text-[12px] xl:text-base">
               <TableHeader>
                 <TableRow className="bg-cyan-600">
-                  <TableHead className="text-gray-700 uppercase">Data</TableHead>
-                  <TableHead className="text-gray-700 uppercase">Status</TableHead>
-                  <TableHead className="text-gray-700 uppercase">Nome</TableHead>
-                  <TableHead className="text-gray-700 uppercase">Hora</TableHead>
-                  {!isMobile && (<TableHead className="text-gray-700 uppercase">telefone</TableHead>)}
-                  <TableHead className="text-gray-700 uppercase text-right">Valor</TableHead>
+                  <TableHead className="uppercase">Data</TableHead>
+                  <TableHead className="uppercase">Status</TableHead>
+                  <TableHead className="uppercase">Nome</TableHead>
+                  <TableHead className="uppercase">Hora</TableHead>
+                  {!isMobile && (<TableHead className="uppercase">telefone</TableHead>)}
+                  <TableHead className="uppercase text-right">Valor</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody className="">
