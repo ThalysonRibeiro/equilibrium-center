@@ -5,13 +5,13 @@ import { formatCurrency } from "@/utils/formatCurrency";
 
 export function CardTotalINvoicing({ data }: { data: InvoiceProps }) {
   return (
-    <Card className="bg-emerald-100 border-emerald-300">
+    <Card>
       <CardHeader>
         <CardTitle className="font-montserrat text-2xl lg:text-3xl inline-flex justify-between">
           Receita Total
           <GeneratePDFTotalInvoicing data={data.metricsTotalInvoicing} />
         </CardTitle>
-        <CardDescription className="text-lg text-emerald-600">
+        <CardDescription>
           Desde o início da operação
         </CardDescription>
       </CardHeader>
