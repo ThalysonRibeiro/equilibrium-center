@@ -12,6 +12,7 @@ import GeneratePDFInvoicingDate from "../../_components/generatePDF/generate-pdf
 import { addDays, format } from "date-fns"
 import { InvoiceProps } from "../../types/invoicing"
 import { CardTotalINvoicing } from "./card-total-invoicing"
+import { TopServicesContent } from "./topServices-content"
 
 export function InvoicingContent() {
   const searchParams = useSearchParams();
@@ -67,7 +68,7 @@ export function InvoicingContent() {
   if (!invoicingDate || !invoicing) {
     return (
       <main className="text-center mt-10 text-muted-foreground">
-        <div className="w-full h-[calc(100vh-20vh)] border rounded-lg bg-white flex items-center justify-center gap-4">
+        <div className="w-full rounded-l flex items-center justify-center gap-4">
           Carregando dados...  <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
         </div>
       </main>
@@ -76,14 +77,17 @@ export function InvoicingContent() {
 
   return (
     <main className="space-y-4">
-      <h1 className="text-2xl font-montserrat text-primary text-center">Faturamento</h1>
+      <h1 className="text-2xl font-semibold text-primary text-center">Metricas de Faturamento</h1>
 
       <CardTotalINvoicing data={invoicing} />
+
 
       <BarChartLabel
         chartData={invoicingDate?.sixMonth.monthlyData || []}
         totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
       />
+
+      <TopServicesContent />
 
       <Card>
         <CardHeader>
@@ -98,9 +102,7 @@ export function InvoicingContent() {
           </CardDescription>
         </CardHeader>
 
-
         <PerformanceContent data={invoicingDate?.forSpecificDate} />
-
       </Card>
 
 
