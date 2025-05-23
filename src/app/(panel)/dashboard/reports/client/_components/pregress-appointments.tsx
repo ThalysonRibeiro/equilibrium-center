@@ -9,6 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { MetricStatusProps } from "../../types/allApponitments";
+import { RadialProgress } from "@/components/radial-progress";
 
 interface ProgressAppointmentsProps {
   metricStatus: MetricStatusProps | null;
@@ -25,33 +26,19 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
         </div>
       ) : (
         <article>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3">
-            <Card className="text-sm lg:text-base text-primary">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+            <Card>
               <CardHeader>
-                <CardTitle className="inline-flex justify-between font-montserrat">
-                  Total de Agendamentos <Activity />
+                <CardTitle className="text-primary text-sm inline-flex justify-between font-montserrat">
+                  Total de<br />
+                  Agendamentos
                 </CardTitle>
               </CardHeader>
-              <CardContent>
+              <CardContent className="flex items-center justify-between">
                 <span className="text-5xl font-montserrat">{countAllAppointments}</span>
+                <Activity className="w-8 h-8" />
               </CardContent>
             </Card>
-            <CardMetricsStatus
-              title={"Pendente"}
-              countValue={metricStatus?.countByStatus.countPending || 0}
-              percentage={metricStatus?.percentageByStatus.countPending || "0%"}
-              width={metricStatus?.countByStatus.countPending || 0}
-              max={countAllAppointments}
-              color="bg-yellow-500"
-            />
-            <CardMetricsStatus
-              title={"Confirmado"}
-              countValue={metricStatus?.countByStatus.countScheduled || 0}
-              percentage={metricStatus?.percentageByStatus.countScheduled || "0%"}
-              width={metricStatus?.countByStatus.countScheduled || 0}
-              max={countAllAppointments}
-              color="bg-blue-500"
-            />
             <CardMetricsStatus
               title={"Completo"}
               countValue={metricStatus?.countByStatus.countCompleted || 0}
@@ -59,6 +46,7 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
               width={metricStatus?.countByStatus.countCompleted || 0}
               max={countAllAppointments}
               color="bg-green-500"
+              colorRadial="oklch(72.3% 0.219 149.579)"
             />
             <CardMetricsStatus
               title={"Não comparecido"}
@@ -67,15 +55,18 @@ export function ProgressAppointments({ metricStatus, countAllAppointments, loadi
               width={metricStatus?.countByStatus.countNo_show || 0}
               max={countAllAppointments}
               color="bg-orange-500"
+              colorRadial="oklch(70.5% 0.213 47.604)"
             />
             <CardMetricsStatus
               title={"Cancelado"}
               countValue={metricStatus?.countByStatus.countCancelled || 0}
-              percentage={metricStatus?.percentageByStatus.countCancelled || "0%"}
+              percentage={metricStatus?.percentageByStatus.countCancelled || "0"}
               width={metricStatus?.countByStatus.countCancelled || 0}
               max={countAllAppointments}
               color="bg-red-500"
+              colorRadial="oklch(63.7% 0.237 25.331)"
             />
+
           </div>
         </article>
       )}
@@ -90,26 +81,25 @@ interface CardMetricsStatusProps {
   width: number,
   max: number,
   color: string,
+  colorRadial: string,
 }
 
-function CardMetricsStatus({ title, countValue, percentage, width, max, color }: CardMetricsStatusProps) {
+function CardMetricsStatus({ title, countValue, percentage, width, max, color, colorRadial }: CardMetricsStatusProps) {
   return (
     <Card className="text-sm text-primary relative">
       <CardHeader>
-        <div className={`absolute top-0 right-0 ${color} w-full h-2 rounded-t-lg`}></div>
-        <CardTitle>{title}</CardTitle>
+        <div className={`absolute top-0 left-0 ${color} w-2 h-full rounded-l-lg`}></div>
+        <CardTitle>
+          {title}
+          <p className="font-montserrat">Total: <span className="text-2xl">{countValue}</span></p>
+        </CardTitle>
       </CardHeader>
-      <CardContent>
-        <p className="font-montserrat">Total: <span className="text-2xl">{countValue}</span></p>
-        <p className="font-montserrat">Margem: <span className="text-2xl">{percentage}</span></p>
-      </CardContent>
-      <CardFooter>
-        <Progress
-          width={width}
-          max={max}
-          color={color}
+      <CardContent className="flex flex-col items-center justify-center">
+        <RadialProgress
+          progress={Number(percentage.replace("%", ""))}
+          color={colorRadial}
         />
-      </CardFooter>
+      </CardContent>
     </Card>
   )
 }
