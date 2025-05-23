@@ -106,7 +106,7 @@ export function ProgressBar({ width, max, daysOfWeek, count, className, ...props
         className={`bg-gradient-to-b from-violet-600 via-blue-500 to-cyan-500 rounded-b-md h-full transition-all duration-700 ease-in-out`}
         style={{ height: `${percent}%` }}
       />
-      <p className="pr-0.5 text-xs text-center rotate-180">
+      <p className="pr-0.5 font-semibold text-center rotate-180">
         {count}
       </p>
     </div>
