@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { useQuery } from "@tanstack/react-query";
+import { LoadingUI } from "@/components/ui/loading-ui"
 
 
 interface ChartDataProps {
@@ -104,8 +105,8 @@ export function BarChartMultiple() {
   return (
     <>
       {isLoading ? (
-        <div className="w-full h-100 border rounded-lg bg-white flex items-center justify-center">
-          <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+        <div className="w-full h-full flex justify-center items-center">
+          <LoadingUI />
         </div>
       ) : (
         <Card>
