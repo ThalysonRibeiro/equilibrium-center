@@ -103,19 +103,20 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
       <CardFooter className="flex items-center justify-center">
         {data?.specificDate.length > itemsPerPages && (
           <div className="flex gap-3">
-            <Button onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+            <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
               <ChevronLeft />
             </Button>
             {[...Array(totalPages)].map((_, index) => (
               <Button
                 key={index}
+                variant={"ghost"}
                 onClick={() => changePage(index + 1)}
-                className={cn("bg-transparent text-primary rounded-full border", currentPage === index + 1 && "bg-primary text-white")}
+                className={cn("hover:bg-gray-100 hover:text-primary", currentPage === index + 1 && "font-bold text-lg")}
               >
                 {index + 1}
               </Button>
             ))}
-            <Button onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
+            <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
               <ChevronRight />
             </Button>
           </div>
