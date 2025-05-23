@@ -32,40 +32,43 @@ export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="relative w-full h-100 flex justify-center gap-1 p-3 pt-6 text-primary border rounded">
-          <div className="absolute w-[97%] h-[90%] opacity-80 flex flex-col justify-between  text-[10px]">
-            <div>
-              <p>100%</p>
-            </div>
-            <div>
-              <p>75%</p><hr />
-            </div>
-            <div>
-              <p>50%</p><hr />
-            </div>
-            <div>
-              <p>25%</p><hr />
-            </div>
-            <div>
-              <p>0%</p>
-            </div>
+        <div className="relative flex w-full h-100 text-primary py-5">
+
+          <div className="w-full h-[90%] opacity-50 pl-7 absolute flex flex-col justify-between">
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+          </div>
+          <div className="opacity-80 flex flex-col justify-between text-center text-[9px] w-7 h-full">
+            <p>100%</p>
+            <p>75%</p>
+            <p>50%</p>
+            <p>25%</p>
+            <p>0%</p>
           </div>
 
-          <div className="w-[95%] grid grid-cols-6 gap-3 px-3">
-            {chartData.map(item => {
-
-              return (
-                <div key={item.month} className="w-full h-full max-h-[95%]">
-                  <ProgressBar
-                    width={item.total}
-                    max={totalSixMonth}
-                    numberValue={item.total}
-                    month={item.month.slice(0, 3)}
-                  />
+          <div className="w-full h-full">
+            <div className="w-full h-full grid grid-cols-6 gap-3">
+              {chartData.map(item => (
+                <ProgressBar
+                  key={item.month}
+                  width={item.total}
+                  max={totalSixMonth}
+                  numberValue={item.total}
+                  month={item.month.slice(0, 3)}
+                />
+              )
+              )}
+            </div>
+            <div className="grid grid-cols-6 gap-3 w-full">
+              {chartData.map(item => (
+                <div key={item.month}>
                   <p className="text-center">{item.month.slice(0, 3)}</p>
                 </div>
-              )
-            })}
+              ))}
+            </div>
           </div>
 
         </div>
