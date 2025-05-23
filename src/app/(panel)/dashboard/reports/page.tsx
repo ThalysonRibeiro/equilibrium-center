@@ -4,7 +4,7 @@ import { BarChartMultiple } from "./_components/bar-chart-multiple";
 import { DateRangePicker } from "../../../../components/date-range-picker";
 import { Button } from "@/components/ui/button";
 import { PerformanceCards } from "./_components/performance-cards";
-import { ContentOfTheWeek } from "./_components/Content-ofTheWeek";
+import { ContentOfTheWeekAndRank } from "./_components/Content-ofTheWeek-and-rank";
 
 
 export default async function Reports() {
@@ -24,7 +24,7 @@ export default async function Reports() {
 
       <PerformanceCards />
       <BarChartMultiple />
-      <ContentOfTheWeek />
+      <ContentOfTheWeekAndRank />
     </main>
   )
 }
