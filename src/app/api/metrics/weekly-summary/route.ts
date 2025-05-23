@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
 import { getAppointments } from "@/lib/prisma/get-appointments";
-import prisma from "@/lib/prisma";
 import { groupAppointmentsByDate } from "@/utils/group-appointments-by-date";
 import { getStartAndEndOfWeek } from "@/utils/get-start-and-endOfWeek";
 
@@ -33,24 +32,9 @@ export const GET = auth(async function GET(req) {
 
     const appointmentsOfWeek = daysOfWeekWithCounts.reduce((acc, cur) => acc + cur.count, 0);
 
-    // Conta agendamentos por hora
-    const mapTimes = new Map<string, { time: string; count: number }>();
-    allCompletedAppointments.forEach(({ time }) => {
-      if (!time) return;
-      const existing = mapTimes.get(time);
-      if (existing) {
-        existing.count++;
-      } else {
-        mapTimes.set(time, { time, count: 1 });
-      }
-    });
-
-    const hours = Array.from(mapTimes.values()).sort((a, b) => b.count - a.count);
-
     return NextResponse.json({
       appointmentsOfWeek,
       daysOfWeekWithCounts,
-      hours,
     });
   } catch (error) {
     console.error("Erro ao buscar métricas:", error);
