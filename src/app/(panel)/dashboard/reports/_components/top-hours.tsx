@@ -99,12 +99,14 @@ export function TopHours({ data }: TopHoursProps) {
                 <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
               </div>
             </div>
-            <Button
-              variant={"ghost"}
-              onClick={changeVisible}
-              className="hover:bg-gray-100 hover:text-primary">
-              Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
-            </Button>
+            {data.hours.length > 3 && (
+              <Button
+                variant={"ghost"}
+                onClick={changeVisible}
+                className="hover:bg-gray-100 hover:text-primary">
+                Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
+              </Button>
+            )}
           </CardContent>
 
           {data?.hours?.length > 2 && (

@@ -118,12 +118,14 @@ export function TopCustomers({ data }: TopCustomersProps) {
                 </div>
               </div>
             </div>
-            <Button
-              variant={"ghost"}
-              onClick={changeVisible}
-              className="hover:bg-gray-100 hover:text-primary">
-              Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
-            </Button>
+            {data.groupedCustomers.length > 3 && (
+              <Button
+                variant={"ghost"}
+                onClick={changeVisible}
+                className="hover:bg-gray-100 hover:text-primary">
+                Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
+              </Button>
+            )}
           </CardContent>
 
           {isVisible && (
