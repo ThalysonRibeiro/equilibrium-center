@@ -6,76 +6,158 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
-import { WeeklySummaryProps } from "../types/weekly-summary";
-import { Medal, Trophy } from "lucide-react";
+} from "@/components/ui/card";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Medal, Trophy } from "lucide-react";
+import { RanksProps } from "../types/ranks";
+import img_trophy_gold from "@/assets/gold.png";
+import img_trophy_silver from "@/assets/silver.png";
+import img_trophy_bronze from "@/assets/bronze.png";
+import Image from "next/image";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { da } from "date-fns/locale";
 
 interface TopHoursProps {
-  data: WeeklySummaryProps;
+  data: RanksProps;
 }
 
 export function TopHours({ data }: TopHoursProps) {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPages: number = 10;
+
+  const totalPages = Math.ceil(data.hours.slice(3).length / itemsPerPages);
+  const dataItemsSlice = data.hours.slice(3);
+  const dataPage = dataItemsSlice.slice(
+    (currentPage - 1) * itemsPerPages,
+    currentPage * itemsPerPages
+  );
+
+  function changePage(page: number) {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  }
+
+  function changeVisible() {
+    setIsVisible(prev => !prev)
+  }
   return (
-    <Card className="w-full">
-      <CardHeader className="text-center">
-        <CardTitle>
-          Horários mas agendados
-        </CardTitle>
-        <CardDescription>
-          Ranking dos horários mais agendados
-        </CardDescription>
-      </CardHeader>
+    <>
+      {data?.hours.length > 0 ? (
+        <Card className="w-full">
+          <CardHeader className="text-center">
+            <CardTitle>
+              Horários mas agendados
+            </CardTitle>
+            <CardDescription>
+              Ranking dos horários mais agendados
+            </CardDescription>
+          </CardHeader>
 
-      <CardContent>
-        {data.hours.length > 0 ? (
-          <div className="flex justify-evenly items-center">
-            <div className="flex flex-col items-center justify-center p-2">
-              <Trophy
-                className="text-[#C0C0C0] w-15 h-15"
-              />
-              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
-              <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center p-2">
-              <Trophy
-                className="text-[#FFD700] w-25 h-25"
-              />
-              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[0].time}</p>
-              <p className="text-xs">Agendamentos: {data.hours[0].count}</p>
-            </div>
-
-            <div className="flex flex-col items-center justify-center p-2">
-              <Trophy
-                className="text-[#CD7F32] w-15 h-15"
-              />
-              <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
-              <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
-            </div>
-          </div>
-        ) : (
-          <p className="text-center">
-            Você ainda não tem horários com agendamentos
-          </p>
-        )}
-      </CardContent>
-
-      {data.hours.length > 2 && (
-        <CardFooter>
-          <div className="w-full grid md:gap-4 gap-2 grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-            {data.hours.slice(3).map(hour => (
-              <div key={hour.time} className="flex flex-col items-center justify-center p-2 rounded-md bg-ring border text-white">
-                <Medal className="w-8 h-8" />
-                <p className="font-bold px-2 py-0.5 ">{hour.time}</p>
-                <p className="text-xs font-semibold">Agendamentos: {hour.count}</p>
+          <CardContent>
+            <div className="flex justify-evenly items-center">
+              <div className="flex flex-col items-center justify-center p-2">
+                <Image
+                  src={img_trophy_silver}
+                  alt="imagem trofeu silver"
+                  width={100}
+                  height={100}
+                />
+                <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
+                <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
               </div>
-            ))}
-          </div>
-        </CardFooter>
-      )}
-    </Card>
 
+              <div className="flex flex-col items-center justify-center p-2">
+                <Image
+                  src={img_trophy_gold}
+                  alt="imagem trofeu gold"
+                  width={150}
+                  height={150}
+                />
+                <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[0].time}</p>
+                <p className="text-xs">Agendamentos: {data.hours[0].count}</p>
+              </div>
+
+              <div className="flex flex-col items-center justify-center p-2">
+                <Image
+                  src={img_trophy_bronze}
+                  alt="imagem trofeu btonze"
+                  width={100}
+                  height={100}
+                />
+                <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
+                <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
+              </div>
+            </div>
+            <Button
+              variant={"ghost"}
+              onClick={changeVisible}
+              className="hover:bg-gray-100 hover:text-primary">
+              Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
+            </Button>
+          </CardContent>
+
+          {data?.hours?.length > 2 && (
+            <>
+              {isVisible && (
+                <CardFooter className="flex flex-col">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="">Horário</TableHead>
+                        <TableHead className="text-right">Total de Agendamentos</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {dataPage.map(hour => (
+                        <TableRow key={hour.time}>
+                          <TableCell className="font-medium capitalize">{hour.time}</TableCell>
+                          <TableCell className="text-right">{hour.count}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+
+                  {dataItemsSlice.length > itemsPerPages && (
+                    <div className="flex gap-3">
+                      <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+                        <ChevronLeft />
+                      </Button>
+                      {[...Array(totalPages)].map((_, index) => (
+                        <Button
+                          key={index}
+                          variant={"ghost"}
+                          onClick={() => changePage(index + 1)}
+                          className={cn("hover:bg-gray-100 hover:text-primary", currentPage === index + 1 && "font-bold text-lg")}
+                        >
+                          {index + 1}
+                        </Button>
+                      ))}
+                      <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
+                        <ChevronRight />
+                      </Button>
+                    </div>
+                  )}
+                </CardFooter>
+              )}
+            </>
+          )}
+        </Card>
+      ) : (
+        <p className="text-center">
+          Você ainda não tem horários com agendamentos
+        </p>
+      )}
+    </>
   )
 }
