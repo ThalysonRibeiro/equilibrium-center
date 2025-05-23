@@ -28,6 +28,13 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
       <CardContent>
         <div className="relative flex w-full h-100 text-primary py-5">
 
+          <div className="w-full h-[90%] opacity-50 pl-7 absolute flex flex-col justify-between">
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+            <hr />
+          </div>
           <div className="opacity-80 flex flex-col justify-between text-center text-[9px] w-7 h-full">
             <p>100%</p>
             <p>75%</p>
@@ -44,7 +51,6 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
                   daysOfWeek={daysOfWeekWithCount.daysOfWeek}
                   max={data.appointmentsOfWeek}
                   width={daysOfWeekWithCount.count}
-                  numberValue={10}
                   count={formatShortNumber(daysOfWeekWithCount.count)}
                 />
               ))}
@@ -75,12 +81,11 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
 interface ProgressProps extends ComponentProps<'div'> {
   width: number;
   max: number;
-  numberValue: number;
   daysOfWeek: string;
   count: string;
 }
 
-export function ProgressBar({ width, max, numberValue, daysOfWeek, count, className, ...props }: ProgressProps) {
+export function ProgressBar({ width, max, daysOfWeek, count, className, ...props }: ProgressProps) {
   const [currentWidth, setCurrentWidth] = useState(0);
 
   useEffect(() => {
