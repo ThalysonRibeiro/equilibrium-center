@@ -65,7 +65,7 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
   return (
     <div className="flex min-h-screen w-full">
       <aside
-        className={clsx("flex flex-col border-r transition-all duration-300 p-4 h-full bg-white", {
+        className={clsx("flex flex-col border-r transition-all duration-300 p-4 h-full bg-white z-10", {
           "w-20": isCollapsed,
           "w-74": !isCollapsed,
           "hidden md:flex md:fixed": true
