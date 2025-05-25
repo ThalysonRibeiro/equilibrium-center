@@ -158,9 +158,11 @@ export function TopHours({ data }: TopHoursProps) {
           )}
         </Card>
       ) : (
-        <p className="text-center bg-emerald-400 text-white p-1 rounded-lg">
-          Você ainda não tem horários com agendamentos para exibir um Rank
-        </p>
+        <div className="flex items-center justify-center w-full mt-4">
+          <p className="text-center bg-emerald-400 text-white p-2 px-3 rounded-lg">
+            Você ainda não tem horários com agendamentos para exibir um Rank
+          </p>
+        </div>
       )}
     </>
   )
