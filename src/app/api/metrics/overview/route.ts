@@ -39,7 +39,6 @@ export const GET = auth(async function GET(req) {
     });
 
   } catch (error) {
-    console.error("Erro ao buscar metrics:", error);
     return NextResponse.json({ error: "Falha ao buscar metrics!" }, { status: 400 });
   }
 });

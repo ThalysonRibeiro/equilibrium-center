@@ -1,9 +1,8 @@
 
 import { AppointmentStatus } from "@/generated/prisma";
-import { auth } from "@/lib/auth"
+import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
-import { error } from "console"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server";
 
 export const GET = auth(async function GET(req) {
   if (!req.auth) {

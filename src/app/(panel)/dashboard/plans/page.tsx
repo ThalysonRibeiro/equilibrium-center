@@ -14,13 +14,14 @@ export default async function Plans() {
   const subscription = await getSubscriptions({ userId: session.user.id! });
 
   return (
-    <div>
+    <main className="space-y-10">
+      <h1 className="text-lg text-primary text-center font-semibold">Escolha seu plano</h1>
       {subscription?.status !== "active" && (
         <GridPlans plansType={subscriptionPlans} />
       )}
       {subscription?.status === "active" && (
         <SubscriptionDetail subscription={subscription!} />
       )}
-    </div>
+    </main>
   )
 }

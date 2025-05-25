@@ -26,6 +26,8 @@ import { ButtonPickerAppointment } from "./button-picker-date";
 
 interface AppointmentListProps {
   times: string[];
+  permission: boolean;
+  planId: string;
 }
 
 export type AppointmentWithService = Prisma.AppointmentGetPayload<{
@@ -34,7 +36,7 @@ export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   }
 }>;
 
-export function AppointmentList({ times }: AppointmentListProps) {
+export function AppointmentList({ times, permission, planId }: AppointmentListProps) {
   const searchParams = useSearchParams();
   const date = searchParams.get('date');
   const statusQuery = searchParams.get('status');
@@ -91,7 +93,6 @@ export function AppointmentList({ times }: AppointmentListProps) {
 
   function confirmToWhatsapp(phone: string, name: string, date: string | Date, time: string) {
     if (!date) {
-      console.error("Data inválida");
       return;
     }
     const isoString = typeof date === "string" ? date : date.toISOString();
@@ -105,7 +106,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
 
 
   async function handleStatusAppointment(appointmentId: string, status: AppointmentStatus) {
-    console.log(appointmentId, status);
+
     const response = await changeStatusAppointment({ appointmentId, status });
 
     if (response.error) {
@@ -130,7 +131,7 @@ export function AppointmentList({ times }: AppointmentListProps) {
           <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-15rem)] pr-4">
             {isLoading ? (
               <div className="w-full h-[calc(100vh-15rem)] flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-primary rounded-full animate-spin" />
               </div>
             ) : (
               times.map(slot => {
@@ -157,42 +158,57 @@ export function AppointmentList({ times }: AppointmentListProps) {
                             </div>
                             <div className="text-sm">{occupant.phone}</div>
                           </div>
+                          {!permission && planId !== "TRIAL" && (
+                            <div className="ml-auto">
+                              <DialogTrigger asChild>
+                                <Button
+                                  variant={"ghost"}
+                                  size={"icon"}
+                                  onClick={() => setDetailAppointment(occupant)}
+                                >
+                                  <Eye />
+                                </Button>
+                              </DialogTrigger>
+                            </div>
+                          )}
                         </div>
-                        <div className="flex gap-3 items-center justify-between">
-                          <Select onValueChange={(value: AppointmentStatus) => {
-                            handleStatusAppointment(occupant.id, value)
-                          }}>
-                            <SelectTrigger className="w-[185px] border-primary/50">
-                              <SelectValue placeholder={statusMap[occupant.status]} />
-                            </SelectTrigger>
-                            <SelectContent className="border-primary/50">
-                              <SelectItem value="PENDING">Pendente</SelectItem>
-                              <SelectItem value="SCHEDULED">Confimado</SelectItem>
-                              <SelectItem value="COMPLETED">Completo</SelectItem>
-                              <SelectItem value="NO_SHOW">Não comparecimento</SelectItem>
-                              <SelectItem value="CANCELLED">Cancelado</SelectItem>
-                            </SelectContent>
-                          </Select>
-                          <div className="flex gap-2.5">
-                            <Button
-                              size={"icon"}
-                              onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
-                              className="bg-green-400 rounded-md text-white text-sm font-semibold cursor-pointer"
-                            >
-                              <FaWhatsapp />
-                            </Button>
-
-                            <DialogTrigger asChild>
+                        {(permission || planId === "TRIAL") && (
+                          <div className="flex gap-3 items-center justify-between">
+                            <Select onValueChange={(value: AppointmentStatus) => {
+                              handleStatusAppointment(occupant.id, value)
+                            }}>
+                              <SelectTrigger className="w-[185px] border-primary/50">
+                                <SelectValue placeholder={statusMap[occupant.status]} />
+                              </SelectTrigger>
+                              <SelectContent className="border-primary/50">
+                                <SelectItem value="PENDING">Pendente</SelectItem>
+                                <SelectItem value="SCHEDULED">Confimado</SelectItem>
+                                <SelectItem value="COMPLETED">Completo</SelectItem>
+                                <SelectItem value="NO_SHOW">Não comparecimento</SelectItem>
+                                <SelectItem value="CANCELLED">Cancelado</SelectItem>
+                              </SelectContent>
+                            </Select>
+                            <div className="flex gap-2.5">
                               <Button
-                                variant={"ghost"}
                                 size={"icon"}
-                                onClick={() => setDetailAppointment(occupant)}
+                                onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
+                                className="bg-green-400 rounded-md text-white text-sm font-semibold cursor-pointer"
                               >
-                                <Eye />
+                                <FaWhatsapp />
                               </Button>
-                            </DialogTrigger>
+
+                              <DialogTrigger asChild>
+                                <Button
+                                  variant={"ghost"}
+                                  size={"icon"}
+                                  onClick={() => setDetailAppointment(occupant)}
+                                >
+                                  <Eye />
+                                </Button>
+                              </DialogTrigger>
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </div>
                     </div>
                   )

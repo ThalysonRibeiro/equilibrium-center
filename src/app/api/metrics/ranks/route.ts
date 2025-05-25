@@ -1,9 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
 import { getAppointments } from "@/lib/prisma/get-appointments";
-import prisma from "@/lib/prisma";
-import { groupAppointmentsByDate } from "@/utils/group-appointments-by-date";
-import { getStartAndEndOfWeek } from "@/utils/get-start-and-endOfWeek";
 import { createCustomerRanking } from "@/utils/rank-clients";
 
 export const GET = auth(async function GET(req) {
@@ -42,7 +39,6 @@ export const GET = auth(async function GET(req) {
       hours,
     });
   } catch (error) {
-    console.error("Erro ao buscar métricas:", error);
     return NextResponse.json({ error: "Falha ao buscar métricas!" }, { status: 500 });
   }
 });

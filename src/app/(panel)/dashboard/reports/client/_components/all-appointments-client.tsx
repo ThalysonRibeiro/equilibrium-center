@@ -1,6 +1,6 @@
 "use client"
 
-import { CustomerTable } from "./customer-table"
+import { CustomerTable } from "./customer-table";
 import { useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { DateRangePicker } from "../../../../../../components/date-range-picker";
@@ -10,7 +10,7 @@ import { fetchData } from "@/utils/fetch-data";
 import GeneratePDFAppointments from "../../_components/generatePDF/generate-pdf-appointments";
 
 
-export function AllAppointmentClient() {
+export function AllAppointmentClient({ limitReport, download_pdf, planId }: { limitReport: string[], download_pdf: boolean, planId: string }) {
   const searchParams = useSearchParams();
   const startDateString = searchParams.get('start-date') as string;
   const endDateString = searchParams.get('end-date') as string;
@@ -36,14 +36,20 @@ export function AllAppointmentClient() {
       <h1 className="text-2xl font-montserrat text-primary text-center">Atividade de agendamento de clientes</h1>
       <div className="flex items-center justify-between">
         <DateRangePicker value={30} />
-        <GeneratePDFAppointments data={data} />
+        {download_pdf && (
+          <GeneratePDFAppointments data={data} />
+        )}
       </div>
-      <ProgressAppointments
-        loading={isLoading}
-        metricStatus={data?.metricStatus || null}
-        countAllAppointments={data?.countAllAppointments || 0}
-      />
-      <CustomerTable loading={isLoading} appointment={data?.allAppointments || []} />
+      {(limitReport.includes("progressAppointments") || planId === "TRIAL") && (
+        <ProgressAppointments
+          loading={isLoading}
+          metricStatus={data?.metricStatus || null}
+          countAllAppointments={data?.countAllAppointments || 0}
+        />
+      )}
+      {(limitReport.includes("customerTable") || planId === "TRIAL") && (
+        <CustomerTable loading={isLoading} appointment={data?.allAppointments || []} />
+      )}
     </section>
   )
 }

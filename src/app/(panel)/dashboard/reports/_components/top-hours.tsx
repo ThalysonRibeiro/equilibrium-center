@@ -9,14 +9,12 @@ import {
 } from "@/components/ui/card";
 import {
   Table,
-  TableBody,
-  TableCaption,
-  TableCell,
+  TableBody, TableCell,
   TableHead,
   TableHeader,
-  TableRow,
-} from "@/components/ui/table"
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp, Medal, Trophy } from "lucide-react";
+  TableRow
+} from "@/components/ui/table";
+import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
 import { RanksProps } from "../types/ranks";
 import img_trophy_gold from "@/assets/gold.png";
 import img_trophy_silver from "@/assets/silver.png";
@@ -66,16 +64,18 @@ export function TopHours({ data }: TopHoursProps) {
 
           <CardContent>
             <div className="flex justify-evenly items-center">
-              <div className="flex flex-col items-center justify-center p-2">
-                <Image
-                  src={img_trophy_silver}
-                  alt="imagem trofeu silver"
-                  width={100}
-                  height={100}
-                />
-                <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
-                <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
-              </div>
+              {data.hours.length > 1 && (
+                <div className="flex flex-col items-center justify-center p-2">
+                  <Image
+                    src={img_trophy_silver}
+                    alt="imagem trofeu silver"
+                    width={100}
+                    height={100}
+                  />
+                  <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
+                  <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
+                </div>
+              )}
 
               <div className="flex flex-col items-center justify-center p-2">
                 <Image
@@ -88,16 +88,18 @@ export function TopHours({ data }: TopHoursProps) {
                 <p className="text-xs">Agendamentos: {data.hours[0].count}</p>
               </div>
 
-              <div className="flex flex-col items-center justify-center p-2">
-                <Image
-                  src={img_trophy_bronze}
-                  alt="imagem trofeu btonze"
-                  width={100}
-                  height={100}
-                />
-                <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
-                <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
-              </div>
+              {(data.hours.length > 2 &&
+                <div className="flex flex-col items-center justify-center p-2">
+                  <Image
+                    src={img_trophy_bronze}
+                    alt="imagem trofeu btonze"
+                    width={100}
+                    height={100}
+                  />
+                  <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
+                  <p className="text-xs">Agendamentos: {data.hours[2].count}</p>
+                </div>
+              )}
             </div>
             {data.hours.length > 3 && (
               <Button
@@ -156,8 +158,8 @@ export function TopHours({ data }: TopHoursProps) {
           )}
         </Card>
       ) : (
-        <p className="text-center">
-          Você ainda não tem horários com agendamentos
+        <p className="text-center bg-emerald-400 text-white p-1 rounded-lg">
+          Você ainda não tem horários com agendamentos para exibir um Rank
         </p>
       )}
     </>

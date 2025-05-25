@@ -56,7 +56,6 @@ export async function updateService(formData: FormSchema) {
       data: "Serviçoatualizado com sucesso!"
     }
   } catch (error) {
-    console.log(error);
     return {
       error: "Falha ao atualizar serviço"
     }

@@ -6,7 +6,10 @@ import { formatCurrency } from "@/utils/formatCurrency";
 import { updateStatusService } from "../_actions/update-status-service";
 import { toast } from "sonner";
 
-export function AllServiceList({ services }: ServicesListProps) {
+interface AllServiceListProps extends Partial<ServicesListProps> { }
+
+export function AllServiceList({ services }: AllServiceListProps) {
+  if (!services) return [];
 
   async function handleStatusService(serviceId: string, status: string) {
     const response = await updateStatusService({ serviceId: serviceId, status });

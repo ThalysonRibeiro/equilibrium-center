@@ -1,14 +1,9 @@
+import { PlanDetailsProps } from "../permissions/get-plans";
+
 export const PLANS: PlansProps = {
   BASIC: { maxServices: 3 },
   NORMAL: { maxServices: 30 },
   PROFESSIONAL: { maxServices: Infinity }
-}
-
-export type PlanDetailsProps = {
-  maxServices: number | typeof Infinity;
-  reports?: number | typeof Infinity;
-  confirm_via_whatsapp?: boolean;
-  download_PDF_reports?: boolean;
 }
 
 export type PlansProps = {

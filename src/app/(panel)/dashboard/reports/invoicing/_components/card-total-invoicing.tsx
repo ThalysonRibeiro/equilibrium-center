@@ -1,15 +1,18 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import GeneratePDFTotalInvoicing from "../../_components/generatePDF/generate-pdf-total-invoicing";
-import { InvoiceProps, MetricsTotalInvoicingProps } from "../../types/invoicing";
+import { InvoiceProps } from "../../types/invoicing";
 import { formatCurrency } from "@/utils/formatCurrency";
 
-export function CardTotalINvoicing({ data }: { data: InvoiceProps }) {
+
+export function CardTotalINvoicing({ data, download_pdf }: { data: InvoiceProps, download_pdf: boolean }) {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="font-montserrat text-2xl lg:text-3xl inline-flex justify-between">
           Receita Total
-          <GeneratePDFTotalInvoicing data={data.metricsTotalInvoicing} />
+          {download_pdf && (
+            <GeneratePDFTotalInvoicing data={data.metricsTotalInvoicing} />
+          )}
         </CardTitle>
         <CardDescription>
           Desde o início da operação

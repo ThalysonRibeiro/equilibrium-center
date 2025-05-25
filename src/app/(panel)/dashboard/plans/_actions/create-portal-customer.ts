@@ -1,5 +1,4 @@
 "use server"
-import { Plan } from "@/generated/prisma";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { stripe } from "@/utils/stipe";
@@ -44,7 +43,6 @@ export async function createPortalCustomer() {
       sessionId: portalSession.url
     }
   } catch (error) {
-    console.log("Error ao tentar crair portal ", error);
     return {
       sessionId: "",
       error: "Usuário não encontrado"

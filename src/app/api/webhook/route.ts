@@ -1,5 +1,4 @@
-import prisma from '@/lib/prisma'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 import Stripe from "stripe";
 import { stripe } from "@/utils/stipe";
 import { manageSubscription } from '@/utils/manage-subscription';
@@ -11,7 +10,6 @@ export const POST = async (req: Request) => {
   if (!signature) {
     return NextResponse.error();
   }
-  console.log("iniciando... ");
 
   const text = await req.text();
   const event = stripe.webhooks.constructEvent(
@@ -58,7 +56,6 @@ export const POST = async (req: Request) => {
       break;
 
     default:
-      console.log("Evento não tratado: ", event.type);
       break;
   }
 

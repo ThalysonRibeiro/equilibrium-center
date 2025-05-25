@@ -17,15 +17,18 @@ import GeneratePDFForSixMonth from "../../_components/generatePDF/generate-pdf-i
 interface BarProps {
   chartData: MonthlyDataProps[];
   totalSixMonth: number;
+  download_pdf: boolean;
 }
 
-export function BarChartLabel({ chartData, totalSixMonth }: BarProps) {
+export function BarChartLabel({ chartData, totalSixMonth, download_pdf }: BarProps) {
   return (
     <Card>
       <CardHeader>
         <CardTitle className="font-montserrat flex justify-between items-center">
           Faturamento dos últimos 6 meses
-          <GeneratePDFForSixMonth chartData={chartData} totalSixMonth={totalSixMonth} />
+          {download_pdf && (
+            <GeneratePDFForSixMonth chartData={chartData} totalSixMonth={totalSixMonth} />
+          )}
         </CardTitle>
         <CardDescription>
           Dados gerados automaticamente dos últimos 6 meses.
@@ -99,7 +102,7 @@ export function ProgressBar({ width, max, numberValue, month, className, ...prop
     }
   }, [width])
 
-  const percent = (currentWidth / max) * 100;
+  const percent = max === 0 ? 0 : (currentWidth / max) * 100;
 
   return (
     <div className={twMerge("relative group w-full h-full rotate-180", className)} {...props}>

@@ -100,7 +100,6 @@ export function ProfileContent(
 
   async function onSubmit(values: ProfileFormData) {
     const extractValue = extractPhoneNumber(values.phone || "");
-    console.log(extractValue);
 
     const response = await updateProfile({
       name: values.name,

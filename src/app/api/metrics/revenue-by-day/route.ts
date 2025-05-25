@@ -101,7 +101,6 @@ export const GET = auth(async function GET(req) {
       summary
     });
   } catch (error) {
-    console.error("Erro ao buscar métricas:", error);
     return NextResponse.json({ error: "Falha ao buscar métricas!" }, { status: 400 });
   }
 })

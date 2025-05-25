@@ -43,7 +43,6 @@ export async function updateStatusService(formData: FormSchema) {
       data: "Serviço atualizado com sucesso!"
     }
   } catch (error) {
-    console.log();
     return {
       error: "Falha ao desativar serviço"
     }

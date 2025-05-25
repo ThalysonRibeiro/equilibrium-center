@@ -3,7 +3,6 @@ import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
 import { AppointmentStatus } from '@/generated/prisma';
 import { getAppointments } from '@/lib/prisma/get-appointments';
-import { createCustomerRanking, groupAppointmentsByClient } from '@/utils/rank-clients';
 
 
 export const GET = auth(async function GET(req) {
@@ -93,7 +92,6 @@ export const GET = auth(async function GET(req) {
     });
 
   } catch (error) {
-    console.error("Erro ao buscar métricas:", error);
     return NextResponse.json({ error: "Falha ao buscar métricas!" }, { status: 400 });
   }
 });

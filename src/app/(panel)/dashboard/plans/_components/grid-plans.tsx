@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/card";
 import { SubscriptionPlansProps } from "@/utils/plans";
 import { SubscriptionButton } from "./subscription-button";
+import { Check } from "lucide-react";
 
 interface GridPlansProps {
   plansType: SubscriptionPlansProps[];
@@ -15,7 +16,7 @@ interface GridPlansProps {
 
 export function GridPlans({ plansType }: GridPlansProps) {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-10 md:px-0">
+    <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 px-10 md:px-0">
       {plansType.map((plan, index) => (
         <Card key={plan.id}
           className={`relative flex flex-col w-full mx-auto  hover:scale-105 transition-transform duration-300
@@ -24,8 +25,8 @@ export function GridPlans({ plansType }: GridPlansProps) {
         >
           {index === 1 && (
             <div className="bg-gradient-to-br from-primary to-cyan-500 text-white py-3 text-center rounded-t-xl">
-              <p className="font-montserrat">
-                Melhor custo-benefício
+              <p className="font-montserrat uppercase">
+                Mais popular
               </p>
             </div>
           )}
@@ -42,7 +43,9 @@ export function GridPlans({ plansType }: GridPlansProps) {
             <ul>
               {plan.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm lg:text-base">
-                  <span className="text-green-600">✔</span>
+                  <span className="text-blue-600">
+                    <Check className="w-4 h-4" />
+                  </span>
                   <span>{feature}</span>
                 </li>
               ))}

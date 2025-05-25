@@ -1,6 +1,5 @@
 import { DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { AppointmentWithService } from "./appointment-list";
-import { format } from "date-fns";
 import { formatCurrency } from "@/utils/formatCurrency";
 
 

@@ -10,7 +10,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -64,23 +63,26 @@ export function TopCustomers({ data }: TopCustomersProps) {
           </CardHeader>
           <CardContent>
             <div className="flex justify-evenly items-center">
-              <div className="relative group flex flex-col items-center justify-center p-2">
-                <Image
-                  src={img_trophy_silver}
-                  alt="imagem trofeu silver"
-                  width={100}
-                  height={100}
-                />
-                <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
-                  {data.groupedCustomers[1].name.split(" ")[0].toLowerCase()}
-                </p>
-                <p className="text-xs">Agendamentos: {data.groupedCustomers[1].count}</p>
-                <div className="bg-white p-2 border rounded-lg text-xs w-fit h-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="capitalize">{data.groupedCustomers[1].name.toLowerCase()}</p>
-                  <p>{data.groupedCustomers[1].email}</p>
-                  <p>{data.groupedCustomers[1].phone}</p>
+
+              {data.groupedCustomers.length > 1 && (
+                <div className="relative group flex flex-col items-center justify-center p-2">
+                  <Image
+                    src={img_trophy_silver}
+                    alt="imagem trofeu silver"
+                    width={100}
+                    height={100}
+                  />
+                  <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
+                    {data.groupedCustomers[1].name.split(" ")[0].toLowerCase()}
+                  </p>
+                  <p className="text-xs">Agendamentos: {data.groupedCustomers[1].count}</p>
+                  <div className="bg-white p-2 border rounded-lg text-xs w-fit h-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="capitalize">{data.groupedCustomers[1].name.toLowerCase()}</p>
+                    <p>{data.groupedCustomers[1].email}</p>
+                    <p>{data.groupedCustomers[1].phone}</p>
+                  </div>
                 </div>
-              </div>
+              )}
 
               <div className="relative group flex flex-col items-center justify-center p-2">
                 <Image
@@ -100,23 +102,26 @@ export function TopCustomers({ data }: TopCustomersProps) {
                 </div>
               </div>
 
-              <div className="relative group flex flex-col items-center justify-center p-2">
-                <Image
-                  src={img_trophy_bronze}
-                  alt="imagem trofeu silver"
-                  width={100}
-                  height={100}
-                />
-                <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
-                  {data.groupedCustomers[2].name.split(" ")[0].toLowerCase()}
-                </p>
-                <p className="text-xs">Agendamentos: {data.groupedCustomers[2].count}</p>
-                <div className="bg-white p-2 border rounded-lg text-xs w-fit h-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <p className="capitalize">{data.groupedCustomers[2].name.toLowerCase()}</p>
-                  <p>{data.groupedCustomers[2].email}</p>
-                  <p>{data.groupedCustomers[2].phone}</p>
+              {data.groupedCustomers.length > 2 && (
+                <div className="relative group flex flex-col items-center justify-center p-2">
+                  <Image
+                    src={img_trophy_bronze}
+                    alt="imagem trofeu silver"
+                    width={100}
+                    height={100}
+                  />
+                  <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
+                    {data.groupedCustomers[2].name.split(" ")[0].toLowerCase()}
+                  </p>
+                  <p className="text-xs">Agendamentos: {data.groupedCustomers[2].count}</p>
+                  <div className="bg-white p-2 border rounded-lg text-xs w-fit h-fit absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <p className="capitalize">{data.groupedCustomers[2].name.toLowerCase()}</p>
+                    <p>{data.groupedCustomers[2].email}</p>
+                    <p>{data.groupedCustomers[2].phone}</p>
+                  </div>
                 </div>
-              </div>
+              )}
+
             </div>
             {data.groupedCustomers.length > 3 && (
               <Button
@@ -176,8 +181,8 @@ export function TopCustomers({ data }: TopCustomersProps) {
           )}
         </Card>
       ) : (
-        <p className="text-center">
-          Você ainda não tem clientes com agendamentos
+        <p className="text-center bg-emerald-400 text-white p-1 rounded-lg">
+          Você ainda não tem clientes com agendamentos para exibir um Rank
         </p>
       )}
 

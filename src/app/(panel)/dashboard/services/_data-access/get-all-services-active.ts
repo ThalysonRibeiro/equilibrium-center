@@ -27,7 +27,6 @@ export async function getAllServicesActive({ userId }: { userId: string }) {
       data: servicesData
     }
   } catch (error) {
-    console.log(error);
     return {
       error: "Falha ao buscar servoços"
     }

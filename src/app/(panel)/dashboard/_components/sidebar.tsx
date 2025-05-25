@@ -31,9 +31,11 @@ import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
 interface SidebarDashboardProps {
-  children: React.ReactNode
-  user: UserProps
+  children: React.ReactNode;
+  user: UserProps;
+  permission: string;
 }
+
 
 interface UserProps {
   id: string;
@@ -50,7 +52,7 @@ interface UserProps {
   updatedAt: string;
 }
 
-export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
+export function SidebarDashboard({ children, user, permission }: SidebarDashboardProps) {
   const { update } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -95,12 +97,12 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
 
         {/* sidebar recolhida */}
         {isCollapsed && (
-          <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
+          <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} permission={permission} />
         )}
 
         <Collapsible open={!isCollapsed}>
           <CollapsibleContent>
-            <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
+            <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} permission={permission} />
           </CollapsibleContent>
         </Collapsible>
 
@@ -152,7 +154,7 @@ export function SidebarDashboard({ children, user }: SidebarDashboardProps) {
               <SheetDescription>Menu administrativo</SheetDescription>
               <div className="flex flex-col justify-between h-full">
 
-                <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} />
+                <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} permission={permission} />
 
                 <SheetFooter className="p-0">
                   <SideBarFooter handleLogout={handleLogout} isCollapsed={isCollapsed} user={user} />
@@ -195,9 +197,11 @@ function SidebarLinks({ href, icon, label, isCollapsed, pathname }: SidebarLinks
   )
 }
 
-type NavigationItemsMapProps = Partial<SidebarLinksProps> & {};
+type NavigationItemsMapProps = Partial<SidebarLinksProps> & {
+  permission: string;
+};
 
-function NavigationItemsMap({ isCollapsed, pathname }: NavigationItemsMapProps) {
+function NavigationItemsMap({ isCollapsed, pathname, permission }: NavigationItemsMapProps) {
   return (
     <nav className="grid gap-2 text-base">
       {navigationItems.map(link => (
@@ -218,21 +222,26 @@ function NavigationItemsMap({ isCollapsed, pathname }: NavigationItemsMapProps) 
                 isCollapsed={isCollapsed as boolean}
                 icon={item.icon}
               />
-              {item.subLinks && item.subLinks.length > 0 && (
-                <div className={`${isCollapsed ? "mt-0.5" : "ml-6 pl-1 mt-0.5 border-l"}`}>
-                  {item?.subLinks?.map(item => (
-                    <div className="mt-0.5" key={item.href}>
-                      <SidebarLinks
-                        key={item.href}
-                        href={item.href}
-                        label={item.label}
-                        pathname={pathname as string}
-                        isCollapsed={isCollapsed as boolean}
-                        icon={item.icon}
-                      />
+              {["TRIAL", "NORMAL", "PROFESSIONAL"].includes(permission) && (
+                <>
+                  {item.subLinks && item.subLinks.length > 0 && (
+                    <div className={`${isCollapsed ? "mt-0.5" : "ml-6 pl-1 mt-0.5 border-l"}`}>
+                      {item?.subLinks?.map(item => (
+                        <div className="mt-0.5" key={item.href}>
+                          <SidebarLinks
+                            key={item.href}
+                            href={item.href}
+                            label={item.label}
+                            pathname={pathname as string}
+                            isCollapsed={isCollapsed as boolean}
+                            icon={item.icon}
+                          />
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>)}
+                  )}
+                </>
+              )}
             </div>
           ))}
         </div>
@@ -309,7 +318,7 @@ interface SideBarFooterProps {
 
 function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) {
   return (
-    <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between bg-gray-50 p-1 rounded-lg`}>
+    <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between ${isCollapsed ? "" : 'bg-accent text-white'} p-1 rounded-lg`}>
       <div className="h-full flex items-center gap-1">
         <div className="w-12 rounded-lg overflow-hidden">
           <Image
@@ -331,9 +340,8 @@ function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) 
         </div>}
       </div>
       <Button
-        variant={"destructive"}
         onClick={handleLogout}
-        className="w-fit"
+        className="w-fit cursor-pointer"
       >
         Sair
       </Button>

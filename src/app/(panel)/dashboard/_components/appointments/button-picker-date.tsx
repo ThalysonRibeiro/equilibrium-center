@@ -1,12 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { format, parseISO } from "date-fns"
+import { format } from "date-fns"
 import { useRouter } from "next/navigation"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover"
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
 
 export function ButtonPickerAppointment() {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date())

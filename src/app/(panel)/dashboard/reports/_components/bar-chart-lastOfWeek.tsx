@@ -95,9 +95,11 @@ export function ProgressBar({ width, max, daysOfWeek, count, className, ...props
       }, 100);
       return () => clearTimeout(timeout);
     }
-  }, [width])
+  }, [width]);
 
-  const percent = (currentWidth / max) * 100;
+
+
+  const percent = max === 0 ? 0 : (currentWidth / max) * 100;
 
   return (
     <div className={twMerge("relative w-full h-full rotate-180", className)} {...props}>

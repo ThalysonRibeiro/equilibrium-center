@@ -5,10 +5,6 @@ import { SessionAuthProvider } from "@/components/session-auth";
 import { Toaster } from "sonner";
 import { QueryClientContext } from "@/providers/queryclient";
 
-// Títulos: Montserrat (peso 600-700)
-// Texto: Lato
-
-
 const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],

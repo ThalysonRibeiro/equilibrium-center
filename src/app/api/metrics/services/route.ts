@@ -1,8 +1,6 @@
 import { auth } from "@/lib/auth";
 import { NextResponse } from 'next/server';
 import { getAppointments } from "@/lib/prisma/get-appointments";
-import prisma from "@/lib/prisma";
-import { count } from "console";
 
 type ServiceWithCounting = {
   id: string;

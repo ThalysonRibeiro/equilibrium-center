@@ -2,11 +2,9 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+  CardDescription, CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 
 import { useQuery } from "@tanstack/react-query";
 import { ServiceCard } from "./card-service";
@@ -18,7 +16,7 @@ import { formatDuration } from "@/utils/formatHour";
 
 
 
-export function TopServicesContent() {
+export function TopServicesContent({ download_pdf }: { download_pdf: boolean }) {
   const {
     data: topServices = [],
     isLoading: isLoadingTopServices,

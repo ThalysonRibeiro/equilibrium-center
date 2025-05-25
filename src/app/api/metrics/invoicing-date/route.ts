@@ -101,7 +101,6 @@ export const GET = auth(async function GET(req) {
     });
 
   } catch (error) {
-    console.error("Erro ao buscar metricaws:", error);
     return NextResponse.json({ error: "Falha ao buscar metricas!" }, { status: 400 });
   }
 });

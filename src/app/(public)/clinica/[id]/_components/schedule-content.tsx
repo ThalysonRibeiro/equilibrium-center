@@ -74,7 +74,6 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
 
     } catch (err) {
-      console.log(err)
       setLoadingSlots(false);
       return [];
     }

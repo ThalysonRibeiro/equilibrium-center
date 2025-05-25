@@ -1,13 +1,10 @@
 "use client"
-import { Progress } from "@/components/ui/progress"
-import { Activity } from "lucide-react"
+import { Activity } from "lucide-react";
 import {
   Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
+  CardContent, CardHeader,
+  CardTitle
+} from "@/components/ui/card";
 import { MetricStatusProps } from "../../types/allApponitments";
 import { RadialProgress } from "@/components/radial-progress";
 import { LoadingUI } from "@/components/ui/loading-ui";

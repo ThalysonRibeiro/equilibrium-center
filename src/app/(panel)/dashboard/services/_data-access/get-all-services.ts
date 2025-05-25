@@ -29,7 +29,6 @@ export async function getAllServices({ userId }: { userId: string }) {
       total: totalService
     }
   } catch (error) {
-    console.log(error);
     return {
       error: "Falha ao buscar servoços"
     }

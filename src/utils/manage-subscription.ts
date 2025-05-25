@@ -1,4 +1,3 @@
-import Stripe from "stripe";
 import { stripe } from "@/utils/stipe";
 import { Plan } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
@@ -49,7 +48,6 @@ export async function manageSubscription(
       });
 
     } catch (error) {
-      console.log("Erro ao salvar assinatura no banco", error);
       return Response.json({ error: "Falha ao atualizar no banco a assinatura" }, { status: 400 });
     }
   } else {

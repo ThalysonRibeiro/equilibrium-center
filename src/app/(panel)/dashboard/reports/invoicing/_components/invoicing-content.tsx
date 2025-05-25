@@ -14,7 +14,7 @@ import { InvoiceProps } from "../../types/invoicing"
 import { CardTotalINvoicing } from "./card-total-invoicing"
 import { TopServicesContent } from "./topServices-content"
 
-export function InvoicingContent() {
+export function InvoicingContent({ limitReport, download_pdf, planId }: { limitReport: string[], download_pdf: boolean, planId: string }) {
   const searchParams = useSearchParams();
   let startDate;
   let endDate;
@@ -69,7 +69,12 @@ export function InvoicingContent() {
     return (
       <main className="text-center mt-10 text-muted-foreground">
         <div className="w-full rounded-l flex items-center justify-center gap-4">
-          Carregando dados...  <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
+          <span className="text-xl font-semibold">
+            Carregando
+            <span className="animate-pulse">.</span>
+            <span className="animate-pulse delay-150">.</span>
+            <span className="animate-pulse delay-300">.</span>
+          </span>
         </div>
       </main>
     );
@@ -79,33 +84,41 @@ export function InvoicingContent() {
     <main className="space-y-4">
       <h1 className="text-2xl font-semibold text-primary text-center">Metricas de Faturamento</h1>
 
-      <CardTotalINvoicing data={invoicing} />
+      {(limitReport.includes("cardTotalINvoicing") || planId === "TRIAL") && (
+        <CardTotalINvoicing data={invoicing} download_pdf={download_pdf} />
+      )}
 
+      {(limitReport.includes("barChartLabel") || planId === "TRIAL") && (
+        <BarChartLabel
+          chartData={invoicingDate?.sixMonth.monthlyData || []}
+          totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
+          download_pdf={download_pdf}
+        />
+      )}
 
-      <BarChartLabel
-        chartData={invoicingDate?.sixMonth.monthlyData || []}
-        totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
-      />
+      {(limitReport.includes("topServicesContent") || planId === "TRIAL") && (
+        <TopServicesContent download_pdf={download_pdf} />
+      )}
 
-      <TopServicesContent />
+      {(limitReport.includes("performanceContent") || planId === "TRIAL") && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex justify-between items-center">
+              <DateRangePicker value={30} />
+              {download_pdf && (
+                <GeneratePDFInvoicingDate data={invoicingDate.forSpecificDate} />
+              )}
+            </CardTitle>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex justify-between items-center">
-            <DateRangePicker value={30} />
-            <GeneratePDFInvoicingDate data={invoicingDate.forSpecificDate} />
-          </CardTitle>
+            <CardDescription>
+              Métricas de faturamento por data específica
+              {days !== null && <> — Consulta equivalente a <span>{days}</span> dias</>}
+            </CardDescription>
+          </CardHeader>
 
-          <CardDescription>
-            Métricas de faturamento por data específica
-            {days !== null && <> — Consulta equivalente a <span>{days}</span> dias</>}
-          </CardDescription>
-        </CardHeader>
-
-        <PerformanceContent data={invoicingDate?.forSpecificDate} />
-      </Card>
-
-
+          <PerformanceContent data={invoicingDate?.forSpecificDate} />
+        </Card>
+      )}
     </main>
   );
 }

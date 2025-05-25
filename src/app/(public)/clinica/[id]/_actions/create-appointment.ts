@@ -48,7 +48,6 @@ export async function createNewAppointment(formData: FormSchema) {
       data: newAppointment
     }
   } catch (error) {
-    console.log(error);
     return {
       error: "Erro ao realizar agendamento"
     }

@@ -11,9 +11,12 @@ import { toast } from "sonner";
 import { updateStatusService } from "../_actions/update-status-service";
 import { useIsMobile } from "@/app/hooks/useMobile";
 import { FormatHour } from "@/utils/formatHour";
+import { PLAN_PROP, ResultPermissionProps } from "@/utils/permissions/canPermission";
+import Link from "next/link";
 
 export interface ServicesListProps {
   services: ServiceProps[];
+  permission: ResultPermissionProps;
 }
 
 export interface ServiceProps {
@@ -27,10 +30,35 @@ export interface ServiceProps {
   updatedAt: Date;
 }
 
-export function ServicesList({ services }: ServicesListProps) {
+export function ServicesList({ services, permission }: ServicesListProps) {
   const isMobile = useIsMobile(1024);
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [editingService, setEditingService] = useState<null | ServiceProps>(null);
+
+  // const servicesList = permission.hasPermission ? services : services.slice(0, 3);
+
+  const getServicesForPlan = (permission: { hasPermission: boolean; planId: PLAN_PROP }) => {
+    switch (permission.planId) {
+      case "EXPIRED":
+        return []; // Nenhum serviço disponível
+
+      case "TRIAL":
+      case "PROFESSIONAL":
+        return services; // Ilimitado
+
+      case "NORMAL":
+        return services.slice(0, 30);
+
+      case "BASIC":
+        return services.slice(0, 3);
+
+      default:
+        return []; // Fallback seguro
+    }
+  };
+
+  const servicesList = getServicesForPlan(permission);
+
 
   async function handleStatusService(serviceId: string, status: string) {
     const response = await updateStatusService({ serviceId: serviceId, status });
@@ -59,11 +87,20 @@ export function ServicesList({ services }: ServicesListProps) {
         <Card>
           <CardHeader className="flex flex-row justify-between items-center space-y-0">
             <CardTitle className="text-xl font-montserrat">Serviços Ativo</CardTitle>
-            <DialogTrigger asChild>
-              <Button className="hover:bg-accent">
-                <Plus className="w-4 h-4" />
+            {permission.hasPermission && (
+              <DialogTrigger asChild>
+                <Button className="hover:bg-accent">
+                  <Plus className="w-4 h-4" />
+                </Button>
+              </DialogTrigger>
+            )}
+            {!permission.hasPermission && (
+              <Button variant={"link"}>
+                <Link href={"/dashboard/plans"} className="text-red-500">
+                  Limite de servoços atingindos
+                </Link>
               </Button>
-            </DialogTrigger>
+            )}
 
             <DialogContent
               className="bg-white"
@@ -91,7 +128,7 @@ export function ServicesList({ services }: ServicesListProps) {
 
           <CardContent>
             <section className="space-y-4 mt-5">
-              {services.map(service => (
+              {servicesList.map(service => (
                 <article
                   key={service.id}
                   className="flex items-center justify-between gap-2"

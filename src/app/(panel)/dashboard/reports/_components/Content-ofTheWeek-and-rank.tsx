@@ -2,14 +2,13 @@
 import { useQuery } from "@tanstack/react-query";
 import { BarChartLastOfWeek } from "./bar-chart-lastOfWeek";
 import { TopHours } from "./top-hours";
-import { fetchData } from "@/utils/fetch-data";
 import { WeeklySummaryProps } from "../types/weekly-summary";
 import { LoadingUI } from "@/components/ui/loading-ui";
 import { RanksProps } from "../types/ranks";
 import { TopCustomers } from "./top-customers";
 import { createQueryFetcher } from "@/utils/createQueryFetcher";
 
-export function ContentOfTheWeekAndRank() {
+export function ContentOfTheWeekAndRank({ limitReport, planId }: { limitReport: string[], planId: string }) {
 
   const {
     data: weeklySummary,
@@ -43,13 +42,19 @@ export function ContentOfTheWeekAndRank() {
     <section className="space-y-4 w-full mb-4">
       {weeklySummary && (
         <>
-          <BarChartLastOfWeek data={weeklySummary} />
+          {(limitReport.includes("barChartLastOfWeek") || planId === "TRIAL") && (
+            <BarChartLastOfWeek data={weeklySummary} />
+          )}
         </>
       )}
       {topCustomersAndHours && (
         <div className="flex gap-4 flex-col xl:flex-row">
-          <TopCustomers data={topCustomersAndHours} />
-          <TopHours data={topCustomersAndHours} />
+          {(limitReport.includes("topCustomers") || planId === "TRIAL") && (
+            <TopCustomers data={topCustomersAndHours} />
+          )}
+          {(limitReport.includes("topHours") || planId === "TRIAL") && (
+            <TopHours data={topCustomersAndHours} />
+          )}
         </div>
       )}
     </section>
