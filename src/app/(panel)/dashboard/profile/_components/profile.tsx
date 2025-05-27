@@ -25,19 +25,18 @@ import {
 
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import Image from "next/image"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { useState } from "react"
 import { cn } from "@/lib/utils"
-import img_test from "@/assets/3.png"
 import { Prisma } from "@/generated/prisma"
 import { updateProfile } from "../_actions/update-profile"
 import { toast } from "sonner"
 import { extractPhoneNumber, formatPhone } from "@/utils/fomatPhone"
-import { signOut, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
+import { AvatarProfile } from "./profile-avatar"
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -69,7 +68,7 @@ export function ProfileContent(
   function generateTimeSlots(): string[] {
     const hours: string[] = [];
 
-    for (let i = 6; i <= 23; i++) {
+    for (let i = 5; i <= 23; i++) {
       for (let j = 0; j < 2; j++) {
         const hour = i.toString().padStart(2, "0");
         const minute = (j * 30).toString().padStart(2, "0")
@@ -119,12 +118,6 @@ export function ProfileContent(
 
   }
 
-  async function handleLogout() {
-    await signOut();
-    await update();
-    router.replace("/")
-  }
-
   return (
     <div className="mx-auto">
       <Form {...form}>
@@ -133,14 +126,10 @@ export function ProfileContent(
             <CardHeader>Meu Perfil</CardHeader>
             <CardContent className="space-y-6">
               <div className="flex justify-center">
-                <div className="bg-gray-300 relative w-40 h-40 rounded-full overflow-hidden">
-                  <Image
-                    src={user?.image ? user?.image : img_test}
-                    alt="imagem de perfil"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
+                <AvatarProfile
+                  avatarUrl={user?.image || null}
+                  userId={user?.id!}
+                />
               </div>
 
               <div className="space-y-4">
@@ -319,14 +308,6 @@ export function ProfileContent(
           </Card>
         </form>
       </Form>
-      <section className="mt-4">
-        <Button onClick={handleLogout} variant={"destructive"}>
-          Sair da conta
-        </Button>
-      </section>
-      <section>
-        <h1>escrever avaliação da aplicação</h1>
-      </section>
     </div>
   )
 }
