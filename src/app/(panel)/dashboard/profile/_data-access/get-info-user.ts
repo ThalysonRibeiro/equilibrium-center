@@ -13,6 +13,7 @@ export async function getUserData({ userId }: GetUserDataProps) {
       where: { id: userId },
       include: {
         subscription: true,
+        assessments: true,
       }
     });
     if (!user) return null
