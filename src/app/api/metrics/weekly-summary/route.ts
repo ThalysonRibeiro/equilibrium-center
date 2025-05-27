@@ -22,9 +22,10 @@ export const GET = auth(async function GET(req) {
     // Filtra só agendamentos da semana atual
     const appointmentsThisWeek = allCompletedAppointments.filter(({ appointmentDate }) => {
       if (!appointmentDate) return false;
-      const date = new Date(appointmentDate);
+      const date = new Date(appointmentDate); // já está no formato UTC
       return date >= start && date <= end;
     });
+
 
     // Agrupa e garante todos os dias da semana
     const grouped = groupAppointmentsByDate(appointmentsThisWeek, start);
