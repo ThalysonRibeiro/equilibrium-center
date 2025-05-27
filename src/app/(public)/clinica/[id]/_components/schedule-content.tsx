@@ -16,6 +16,7 @@ import { Label } from "@/components/ui/label"
 import { ScheduleTimeList } from "./schedule-time-list"
 import { createNewAppointment } from "../_actions/create-appointment"
 import { toast } from "sonner"
+import { LoadingUI } from "@/components/ui/loading-ui"
 
 type UserWithServiceAndSubscription = Prisma.UserGetPayload<{
   include: {
@@ -283,9 +284,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 <Label>Horários disponíeis</Label>
                 <div className="bg-gray-100 p-2 rounded-md border">
                   {loadingSlots ? (
-                    <div className="flex items-center justify-center">
-                      <div className="w-12 h-12 border-4 border-t-4 border-gray-300 border-t-accent rounded-full animate-spin" />
-                    </div>
+                    <LoadingUI />
                   ) : availableTimeSlots.length === 0 ? (
                     <p>Nenhum horário disponivel</p>
                   ) : (
