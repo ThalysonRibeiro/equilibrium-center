@@ -34,17 +34,17 @@ export default async function Dashboard() {
         <ButtonCopyLink userId={session.user.id!} />
       </div>
 
-      {subscription?.subscriptionStatus === "EXPIRED" && (
+      {/* {subscription?.subscriptionStatus === "EXPIRED" && (
         <LabelSubscription expired={true} />
-      )}
+      )} */}
 
-      {subscription?.subscriptionStatus === "TRIAL" && (
+      {/* {subscription?.subscriptionStatus === "TRIAL" && (
         <div className="bg-green-500 text-white text-sm md:text-base px-3 py-1 rounded-md my-4">
           <p className="font-semibold">
             {subscription.message}
           </p>
         </div>
-      )}
+      )} */}
 
       {subscription?.subscriptionStatus !== "EXPIRED" && (
         <section className="grid grid-cols-1 gap-4 lg:grid-cols-2 mt-4">
