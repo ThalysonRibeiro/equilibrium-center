@@ -28,7 +28,7 @@ export function groupAppointmentsByDate(
     current.setDate(weekStart.getDate() + i);
     const dateKey = current.toISOString().split("T")[0];
 
-    const dayIndex = current.getDay(); // Corrige a correspondência do dia da semana
+    const dayIndex = current.getUTCDay(); // Corrige a correspondência do dia da semana
 
     map.set(dateKey, {
       appointmentDate: current,
