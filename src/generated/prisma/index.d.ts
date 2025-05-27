@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Assessments
+ * 
+ */
+export type Assessments = $Result.DefaultSelection<Prisma.$AssessmentsPayload>
+/**
  * Model Report
  * 
  */
@@ -104,8 +109,8 @@ export const AppointmentStatus: typeof $Enums.AppointmentStatus
  * @example
  * ```
  * const prisma = new PrismaClient()
- * // Fetch zero or more Reports
- * const reports = await prisma.report.findMany()
+ * // Fetch zero or more Assessments
+ * const assessments = await prisma.assessments.findMany()
  * ```
  *
  *
@@ -125,8 +130,8 @@ export class PrismaClient<
    * @example
    * ```
    * const prisma = new PrismaClient()
-   * // Fetch zero or more Reports
-   * const reports = await prisma.report.findMany()
+   * // Fetch zero or more Assessments
+   * const assessments = await prisma.assessments.findMany()
    * ```
    *
    *
@@ -223,6 +228,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.assessments`: Exposes CRUD operations for the **Assessments** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Assessments
+    * const assessments = await prisma.assessments.findMany()
+    * ```
+    */
+  get assessments(): Prisma.AssessmentsDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.report`: Exposes CRUD operations for the **Report** model.
     * Example usage:
     * ```ts
@@ -761,6 +776,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Assessments: 'Assessments',
     Report: 'Report',
     Appointment: 'Appointment',
     Reminder: 'Reminder',
@@ -789,10 +805,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "report" | "appointment" | "reminder" | "service" | "subscription" | "user" | "account" | "session" | "verificationToken" | "authenticator"
+      modelProps: "assessments" | "report" | "appointment" | "reminder" | "service" | "subscription" | "user" | "account" | "session" | "verificationToken" | "authenticator"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Assessments: {
+        payload: Prisma.$AssessmentsPayload<ExtArgs>
+        fields: Prisma.AssessmentsFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.AssessmentsFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.AssessmentsFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          findFirst: {
+            args: Prisma.AssessmentsFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.AssessmentsFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          findMany: {
+            args: Prisma.AssessmentsFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>[]
+          }
+          create: {
+            args: Prisma.AssessmentsCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          createMany: {
+            args: Prisma.AssessmentsCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.AssessmentsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>[]
+          }
+          delete: {
+            args: Prisma.AssessmentsDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          update: {
+            args: Prisma.AssessmentsUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          deleteMany: {
+            args: Prisma.AssessmentsDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.AssessmentsUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AssessmentsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>[]
+          }
+          upsert: {
+            args: Prisma.AssessmentsUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AssessmentsPayload>
+          }
+          aggregate: {
+            args: Prisma.AssessmentsAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateAssessments>
+          }
+          groupBy: {
+            args: Prisma.AssessmentsGroupByArgs<ExtArgs>
+            result: $Utils.Optional<AssessmentsGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.AssessmentsCountArgs<ExtArgs>
+            result: $Utils.Optional<AssessmentsCountAggregateOutputType> | number
+          }
+        }
+      }
       Report: {
         payload: Prisma.$ReportPayload<ExtArgs>
         fields: Prisma.ReportFieldRefs
@@ -1617,6 +1707,7 @@ export namespace Prisma {
     omit?: Prisma.GlobalOmitConfig
   }
   export type GlobalOmitConfig = {
+    assessments?: AssessmentsOmit
     report?: ReportOmit
     appointment?: AppointmentOmit
     reminder?: ReminderOmit
@@ -1835,6 +1926,1111 @@ export namespace Prisma {
   /**
    * Models
    */
+
+  /**
+   * Model Assessments
+   */
+
+  export type AggregateAssessments = {
+    _count: AssessmentsCountAggregateOutputType | null
+    _avg: AssessmentsAvgAggregateOutputType | null
+    _sum: AssessmentsSumAggregateOutputType | null
+    _min: AssessmentsMinAggregateOutputType | null
+    _max: AssessmentsMaxAggregateOutputType | null
+  }
+
+  export type AssessmentsAvgAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type AssessmentsSumAggregateOutputType = {
+    rating: number | null
+  }
+
+  export type AssessmentsMinAggregateOutputType = {
+    id: string | null
+    message: string | null
+    rating: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AssessmentsMaxAggregateOutputType = {
+    id: string | null
+    message: string | null
+    rating: number | null
+    userId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type AssessmentsCountAggregateOutputType = {
+    id: number
+    message: number
+    rating: number
+    userId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type AssessmentsAvgAggregateInputType = {
+    rating?: true
+  }
+
+  export type AssessmentsSumAggregateInputType = {
+    rating?: true
+  }
+
+  export type AssessmentsMinAggregateInputType = {
+    id?: true
+    message?: true
+    rating?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AssessmentsMaxAggregateInputType = {
+    id?: true
+    message?: true
+    rating?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type AssessmentsCountAggregateInputType = {
+    id?: true
+    message?: true
+    rating?: true
+    userId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type AssessmentsAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Assessments to aggregate.
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assessments to fetch.
+     */
+    orderBy?: AssessmentsOrderByWithRelationInput | AssessmentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: AssessmentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Assessments
+    **/
+    _count?: true | AssessmentsCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: AssessmentsAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AssessmentsSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: AssessmentsMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: AssessmentsMaxAggregateInputType
+  }
+
+  export type GetAssessmentsAggregateType<T extends AssessmentsAggregateArgs> = {
+        [P in keyof T & keyof AggregateAssessments]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateAssessments[P]>
+      : GetScalarType<T[P], AggregateAssessments[P]>
+  }
+
+
+
+
+  export type AssessmentsGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AssessmentsWhereInput
+    orderBy?: AssessmentsOrderByWithAggregationInput | AssessmentsOrderByWithAggregationInput[]
+    by: AssessmentsScalarFieldEnum[] | AssessmentsScalarFieldEnum
+    having?: AssessmentsScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: AssessmentsCountAggregateInputType | true
+    _avg?: AssessmentsAvgAggregateInputType
+    _sum?: AssessmentsSumAggregateInputType
+    _min?: AssessmentsMinAggregateInputType
+    _max?: AssessmentsMaxAggregateInputType
+  }
+
+  export type AssessmentsGroupByOutputType = {
+    id: string
+    message: string
+    rating: number
+    userId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: AssessmentsCountAggregateOutputType | null
+    _avg: AssessmentsAvgAggregateOutputType | null
+    _sum: AssessmentsSumAggregateOutputType | null
+    _min: AssessmentsMinAggregateOutputType | null
+    _max: AssessmentsMaxAggregateOutputType | null
+  }
+
+  type GetAssessmentsGroupByPayload<T extends AssessmentsGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<AssessmentsGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof AssessmentsGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], AssessmentsGroupByOutputType[P]>
+            : GetScalarType<T[P], AssessmentsGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type AssessmentsSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assessments"]>
+
+  export type AssessmentsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assessments"]>
+
+  export type AssessmentsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["assessments"]>
+
+  export type AssessmentsSelectScalar = {
+    id?: boolean
+    message?: boolean
+    rating?: boolean
+    userId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type AssessmentsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "message" | "rating" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["assessments"]>
+  export type AssessmentsInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AssessmentsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AssessmentsIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+
+  export type $AssessmentsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Assessments"
+    objects: {
+      user: Prisma.$UserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      message: string
+      rating: number
+      userId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["assessments"]>
+    composites: {}
+  }
+
+  type AssessmentsGetPayload<S extends boolean | null | undefined | AssessmentsDefaultArgs> = $Result.GetResult<Prisma.$AssessmentsPayload, S>
+
+  type AssessmentsCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<AssessmentsFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: AssessmentsCountAggregateInputType | true
+    }
+
+  export interface AssessmentsDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Assessments'], meta: { name: 'Assessments' } }
+    /**
+     * Find zero or one Assessments that matches the filter.
+     * @param {AssessmentsFindUniqueArgs} args - Arguments to find a Assessments
+     * @example
+     * // Get one Assessments
+     * const assessments = await prisma.assessments.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends AssessmentsFindUniqueArgs>(args: SelectSubset<T, AssessmentsFindUniqueArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Assessments that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {AssessmentsFindUniqueOrThrowArgs} args - Arguments to find a Assessments
+     * @example
+     * // Get one Assessments
+     * const assessments = await prisma.assessments.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends AssessmentsFindUniqueOrThrowArgs>(args: SelectSubset<T, AssessmentsFindUniqueOrThrowArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Assessments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsFindFirstArgs} args - Arguments to find a Assessments
+     * @example
+     * // Get one Assessments
+     * const assessments = await prisma.assessments.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends AssessmentsFindFirstArgs>(args?: SelectSubset<T, AssessmentsFindFirstArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Assessments that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsFindFirstOrThrowArgs} args - Arguments to find a Assessments
+     * @example
+     * // Get one Assessments
+     * const assessments = await prisma.assessments.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends AssessmentsFindFirstOrThrowArgs>(args?: SelectSubset<T, AssessmentsFindFirstOrThrowArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Assessments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Assessments
+     * const assessments = await prisma.assessments.findMany()
+     * 
+     * // Get first 10 Assessments
+     * const assessments = await prisma.assessments.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const assessmentsWithIdOnly = await prisma.assessments.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends AssessmentsFindManyArgs>(args?: SelectSubset<T, AssessmentsFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Assessments.
+     * @param {AssessmentsCreateArgs} args - Arguments to create a Assessments.
+     * @example
+     * // Create one Assessments
+     * const Assessments = await prisma.assessments.create({
+     *   data: {
+     *     // ... data to create a Assessments
+     *   }
+     * })
+     * 
+     */
+    create<T extends AssessmentsCreateArgs>(args: SelectSubset<T, AssessmentsCreateArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Assessments.
+     * @param {AssessmentsCreateManyArgs} args - Arguments to create many Assessments.
+     * @example
+     * // Create many Assessments
+     * const assessments = await prisma.assessments.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends AssessmentsCreateManyArgs>(args?: SelectSubset<T, AssessmentsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Assessments and returns the data saved in the database.
+     * @param {AssessmentsCreateManyAndReturnArgs} args - Arguments to create many Assessments.
+     * @example
+     * // Create many Assessments
+     * const assessments = await prisma.assessments.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Assessments and only return the `id`
+     * const assessmentsWithIdOnly = await prisma.assessments.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AssessmentsCreateManyAndReturnArgs>(args?: SelectSubset<T, AssessmentsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Assessments.
+     * @param {AssessmentsDeleteArgs} args - Arguments to delete one Assessments.
+     * @example
+     * // Delete one Assessments
+     * const Assessments = await prisma.assessments.delete({
+     *   where: {
+     *     // ... filter to delete one Assessments
+     *   }
+     * })
+     * 
+     */
+    delete<T extends AssessmentsDeleteArgs>(args: SelectSubset<T, AssessmentsDeleteArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Assessments.
+     * @param {AssessmentsUpdateArgs} args - Arguments to update one Assessments.
+     * @example
+     * // Update one Assessments
+     * const assessments = await prisma.assessments.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends AssessmentsUpdateArgs>(args: SelectSubset<T, AssessmentsUpdateArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Assessments.
+     * @param {AssessmentsDeleteManyArgs} args - Arguments to filter Assessments to delete.
+     * @example
+     * // Delete a few Assessments
+     * const { count } = await prisma.assessments.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends AssessmentsDeleteManyArgs>(args?: SelectSubset<T, AssessmentsDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Assessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Assessments
+     * const assessments = await prisma.assessments.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends AssessmentsUpdateManyArgs>(args: SelectSubset<T, AssessmentsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Assessments and returns the data updated in the database.
+     * @param {AssessmentsUpdateManyAndReturnArgs} args - Arguments to update many Assessments.
+     * @example
+     * // Update many Assessments
+     * const assessments = await prisma.assessments.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Assessments and only return the `id`
+     * const assessmentsWithIdOnly = await prisma.assessments.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AssessmentsUpdateManyAndReturnArgs>(args: SelectSubset<T, AssessmentsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Assessments.
+     * @param {AssessmentsUpsertArgs} args - Arguments to update or create a Assessments.
+     * @example
+     * // Update or create a Assessments
+     * const assessments = await prisma.assessments.upsert({
+     *   create: {
+     *     // ... data to create a Assessments
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Assessments we want to update
+     *   }
+     * })
+     */
+    upsert<T extends AssessmentsUpsertArgs>(args: SelectSubset<T, AssessmentsUpsertArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Assessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsCountArgs} args - Arguments to filter Assessments to count.
+     * @example
+     * // Count the number of Assessments
+     * const count = await prisma.assessments.count({
+     *   where: {
+     *     // ... the filter for the Assessments we want to count
+     *   }
+     * })
+    **/
+    count<T extends AssessmentsCountArgs>(
+      args?: Subset<T, AssessmentsCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], AssessmentsCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Assessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends AssessmentsAggregateArgs>(args: Subset<T, AssessmentsAggregateArgs>): Prisma.PrismaPromise<GetAssessmentsAggregateType<T>>
+
+    /**
+     * Group by Assessments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {AssessmentsGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends AssessmentsGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: AssessmentsGroupByArgs['orderBy'] }
+        : { orderBy?: AssessmentsGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, AssessmentsGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAssessmentsGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Assessments model
+   */
+  readonly fields: AssessmentsFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Assessments.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__AssessmentsClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Assessments model
+   */
+  interface AssessmentsFieldRefs {
+    readonly id: FieldRef<"Assessments", 'String'>
+    readonly message: FieldRef<"Assessments", 'String'>
+    readonly rating: FieldRef<"Assessments", 'Int'>
+    readonly userId: FieldRef<"Assessments", 'String'>
+    readonly createdAt: FieldRef<"Assessments", 'DateTime'>
+    readonly updatedAt: FieldRef<"Assessments", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Assessments findUnique
+   */
+  export type AssessmentsFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter, which Assessments to fetch.
+     */
+    where: AssessmentsWhereUniqueInput
+  }
+
+  /**
+   * Assessments findUniqueOrThrow
+   */
+  export type AssessmentsFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter, which Assessments to fetch.
+     */
+    where: AssessmentsWhereUniqueInput
+  }
+
+  /**
+   * Assessments findFirst
+   */
+  export type AssessmentsFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter, which Assessments to fetch.
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assessments to fetch.
+     */
+    orderBy?: AssessmentsOrderByWithRelationInput | AssessmentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assessments.
+     */
+    cursor?: AssessmentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assessments.
+     */
+    distinct?: AssessmentsScalarFieldEnum | AssessmentsScalarFieldEnum[]
+  }
+
+  /**
+   * Assessments findFirstOrThrow
+   */
+  export type AssessmentsFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter, which Assessments to fetch.
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assessments to fetch.
+     */
+    orderBy?: AssessmentsOrderByWithRelationInput | AssessmentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Assessments.
+     */
+    cursor?: AssessmentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assessments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Assessments.
+     */
+    distinct?: AssessmentsScalarFieldEnum | AssessmentsScalarFieldEnum[]
+  }
+
+  /**
+   * Assessments findMany
+   */
+  export type AssessmentsFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter, which Assessments to fetch.
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Assessments to fetch.
+     */
+    orderBy?: AssessmentsOrderByWithRelationInput | AssessmentsOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Assessments.
+     */
+    cursor?: AssessmentsWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Assessments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Assessments.
+     */
+    skip?: number
+    distinct?: AssessmentsScalarFieldEnum | AssessmentsScalarFieldEnum[]
+  }
+
+  /**
+   * Assessments create
+   */
+  export type AssessmentsCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Assessments.
+     */
+    data: XOR<AssessmentsCreateInput, AssessmentsUncheckedCreateInput>
+  }
+
+  /**
+   * Assessments createMany
+   */
+  export type AssessmentsCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Assessments.
+     */
+    data: AssessmentsCreateManyInput | AssessmentsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Assessments createManyAndReturn
+   */
+  export type AssessmentsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * The data used to create many Assessments.
+     */
+    data: AssessmentsCreateManyInput | AssessmentsCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Assessments update
+   */
+  export type AssessmentsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Assessments.
+     */
+    data: XOR<AssessmentsUpdateInput, AssessmentsUncheckedUpdateInput>
+    /**
+     * Choose, which Assessments to update.
+     */
+    where: AssessmentsWhereUniqueInput
+  }
+
+  /**
+   * Assessments updateMany
+   */
+  export type AssessmentsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Assessments.
+     */
+    data: XOR<AssessmentsUpdateManyMutationInput, AssessmentsUncheckedUpdateManyInput>
+    /**
+     * Filter which Assessments to update
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * Limit how many Assessments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Assessments updateManyAndReturn
+   */
+  export type AssessmentsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * The data used to update Assessments.
+     */
+    data: XOR<AssessmentsUpdateManyMutationInput, AssessmentsUncheckedUpdateManyInput>
+    /**
+     * Filter which Assessments to update
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * Limit how many Assessments to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Assessments upsert
+   */
+  export type AssessmentsUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Assessments to update in case it exists.
+     */
+    where: AssessmentsWhereUniqueInput
+    /**
+     * In case the Assessments found by the `where` argument doesn't exist, create a new Assessments with this data.
+     */
+    create: XOR<AssessmentsCreateInput, AssessmentsUncheckedCreateInput>
+    /**
+     * In case the Assessments was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<AssessmentsUpdateInput, AssessmentsUncheckedUpdateInput>
+  }
+
+  /**
+   * Assessments delete
+   */
+  export type AssessmentsDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    /**
+     * Filter which Assessments to delete.
+     */
+    where: AssessmentsWhereUniqueInput
+  }
+
+  /**
+   * Assessments deleteMany
+   */
+  export type AssessmentsDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Assessments to delete
+     */
+    where?: AssessmentsWhereInput
+    /**
+     * Limit how many Assessments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Assessments without action
+   */
+  export type AssessmentsDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Report
@@ -7637,6 +8833,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     report?: boolean | User$reportArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
+    assessments?: boolean | User$assessmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -7701,6 +8898,7 @@ export namespace Prisma {
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     report?: boolean | User$reportArgs<ExtArgs>
     Authenticator?: boolean | User$AuthenticatorArgs<ExtArgs>
+    assessments?: boolean | User$assessmentsArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -7717,6 +8915,7 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       report: Prisma.$ReportPayload<ExtArgs>[]
       Authenticator: Prisma.$AuthenticatorPayload<ExtArgs>[]
+      assessments: Prisma.$AssessmentsPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -8135,6 +9334,7 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     report<T extends User$reportArgs<ExtArgs> = {}>(args?: Subset<T, User$reportArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReportPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     Authenticator<T extends User$AuthenticatorArgs<ExtArgs> = {}>(args?: Subset<T, User$AuthenticatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuthenticatorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    assessments<T extends User$assessmentsArgs<ExtArgs> = {}>(args?: Subset<T, User$assessmentsArgs<ExtArgs>>): Prisma__AssessmentsClient<$Result.GetResult<Prisma.$AssessmentsPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -8750,6 +9950,25 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AuthenticatorScalarFieldEnum | AuthenticatorScalarFieldEnum[]
+  }
+
+  /**
+   * User.assessments
+   */
+  export type User$assessmentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Assessments
+     */
+    select?: AssessmentsSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Assessments
+     */
+    omit?: AssessmentsOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AssessmentsInclude<ExtArgs> | null
+    where?: AssessmentsWhereInput
   }
 
   /**
@@ -13139,6 +14358,18 @@ export namespace Prisma {
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
+  export const AssessmentsScalarFieldEnum: {
+    id: 'id',
+    message: 'message',
+    rating: 'rating',
+    userId: 'userId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type AssessmentsScalarFieldEnum = (typeof AssessmentsScalarFieldEnum)[keyof typeof AssessmentsScalarFieldEnum]
+
+
   export const ReportScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -13326,6 +14557,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
@@ -13368,20 +14613,6 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
-   */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-  /**
-   * Reference to a field of type 'Int[]'
-   */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
-    
-
-
-  /**
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -13418,6 +14649,68 @@ export namespace Prisma {
    * Deep Input Types
    */
 
+
+  export type AssessmentsWhereInput = {
+    AND?: AssessmentsWhereInput | AssessmentsWhereInput[]
+    OR?: AssessmentsWhereInput[]
+    NOT?: AssessmentsWhereInput | AssessmentsWhereInput[]
+    id?: StringFilter<"Assessments"> | string
+    message?: StringFilter<"Assessments"> | string
+    rating?: IntFilter<"Assessments"> | number
+    userId?: StringFilter<"Assessments"> | string
+    createdAt?: DateTimeFilter<"Assessments"> | Date | string
+    updatedAt?: DateTimeFilter<"Assessments"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }
+
+  export type AssessmentsOrderByWithRelationInput = {
+    id?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+  }
+
+  export type AssessmentsWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId?: string
+    AND?: AssessmentsWhereInput | AssessmentsWhereInput[]
+    OR?: AssessmentsWhereInput[]
+    NOT?: AssessmentsWhereInput | AssessmentsWhereInput[]
+    message?: StringFilter<"Assessments"> | string
+    rating?: IntFilter<"Assessments"> | number
+    createdAt?: DateTimeFilter<"Assessments"> | Date | string
+    updatedAt?: DateTimeFilter<"Assessments"> | Date | string
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
+  }, "id" | "userId">
+
+  export type AssessmentsOrderByWithAggregationInput = {
+    id?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: AssessmentsCountOrderByAggregateInput
+    _avg?: AssessmentsAvgOrderByAggregateInput
+    _max?: AssessmentsMaxOrderByAggregateInput
+    _min?: AssessmentsMinOrderByAggregateInput
+    _sum?: AssessmentsSumOrderByAggregateInput
+  }
+
+  export type AssessmentsScalarWhereWithAggregatesInput = {
+    AND?: AssessmentsScalarWhereWithAggregatesInput | AssessmentsScalarWhereWithAggregatesInput[]
+    OR?: AssessmentsScalarWhereWithAggregatesInput[]
+    NOT?: AssessmentsScalarWhereWithAggregatesInput | AssessmentsScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Assessments"> | string
+    message?: StringWithAggregatesFilter<"Assessments"> | string
+    rating?: IntWithAggregatesFilter<"Assessments"> | number
+    userId?: StringWithAggregatesFilter<"Assessments"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Assessments"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Assessments"> | Date | string
+  }
 
   export type ReportWhereInput = {
     AND?: ReportWhereInput | ReportWhereInput[]
@@ -13803,6 +15096,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     report?: ReportListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
+    assessments?: XOR<AssessmentsNullableScalarRelationFilter, AssessmentsWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
@@ -13828,6 +15122,7 @@ export namespace Prisma {
     sessions?: SessionOrderByRelationAggregateInput
     report?: ReportOrderByRelationAggregateInput
     Authenticator?: AuthenticatorOrderByRelationAggregateInput
+    assessments?: AssessmentsOrderByWithRelationInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -13856,6 +15151,7 @@ export namespace Prisma {
     sessions?: SessionListRelationFilter
     report?: ReportListRelationFilter
     Authenticator?: AuthenticatorListRelationFilter
+    assessments?: XOR<AssessmentsNullableScalarRelationFilter, AssessmentsWhereInput> | null
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -14165,6 +15461,68 @@ export namespace Prisma {
     credentialDeviceType?: StringWithAggregatesFilter<"Authenticator"> | string
     credentialBackedUp?: BoolWithAggregatesFilter<"Authenticator"> | boolean
     transports?: StringNullableWithAggregatesFilter<"Authenticator"> | string | null
+  }
+
+  export type AssessmentsCreateInput = {
+    id?: string
+    message: string
+    rating: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutAssessmentsInput
+  }
+
+  export type AssessmentsUncheckedCreateInput = {
+    id?: string
+    message: string
+    rating: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssessmentsUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAssessmentsNestedInput
+  }
+
+  export type AssessmentsUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssessmentsCreateManyInput = {
+    id?: string
+    message: string
+    rating: number
+    userId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssessmentsUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssessmentsUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    userId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ReportCreateInput = {
@@ -14573,6 +15931,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -14598,6 +15957,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
@@ -14623,6 +15983,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -14648,6 +16009,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -15000,6 +16362,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -15014,6 +16387,89 @@ export namespace Prisma {
   export type UserScalarRelationFilter = {
     is?: UserWhereInput
     isNot?: UserWhereInput
+  }
+
+  export type AssessmentsCountOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AssessmentsAvgOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type AssessmentsMaxOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AssessmentsMinOrderByAggregateInput = {
+    id?: SortOrder
+    message?: SortOrder
+    rating?: SortOrder
+    userId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type AssessmentsSumOrderByAggregateInput = {
+    rating?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type ReportCountOrderByAggregateInput = {
@@ -15050,38 +16506,6 @@ export namespace Prisma {
     fileUrl?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-  }
-
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type EnumAppointmentStatusFilter<$PrismaModel = never> = {
@@ -15183,17 +16607,6 @@ export namespace Prisma {
     not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -15266,22 +16679,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -15412,6 +16809,11 @@ export namespace Prisma {
     every?: AuthenticatorWhereInput
     some?: AuthenticatorWhereInput
     none?: AuthenticatorWhereInput
+  }
+
+  export type AssessmentsNullableScalarRelationFilter = {
+    is?: AssessmentsWhereInput | null
+    isNot?: AssessmentsWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -15705,9 +17107,9 @@ export namespace Prisma {
     counter?: SortOrder
   }
 
-  export type UserCreateNestedOneWithoutReportInput = {
-    create?: XOR<UserCreateWithoutReportInput, UserUncheckedCreateWithoutReportInput>
-    connectOrCreate?: UserCreateOrConnectWithoutReportInput
+  export type UserCreateNestedOneWithoutAssessmentsInput = {
+    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
     connect?: UserWhereUniqueInput
   }
 
@@ -15715,8 +17117,30 @@ export namespace Prisma {
     set?: string
   }
 
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type UserUpdateOneRequiredWithoutAssessmentsNestedInput = {
+    create?: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAssessmentsInput
+    upsert?: UserUpsertWithoutAssessmentsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssessmentsInput, UserUpdateWithoutAssessmentsInput>, UserUncheckedUpdateWithoutAssessmentsInput>
+  }
+
+  export type UserCreateNestedOneWithoutReportInput = {
+    create?: XOR<UserCreateWithoutReportInput, UserUncheckedCreateWithoutReportInput>
+    connectOrCreate?: UserCreateOrConnectWithoutReportInput
+    connect?: UserWhereUniqueInput
   }
 
   export type UserUpdateOneRequiredWithoutReportNestedInput = {
@@ -15799,14 +17223,6 @@ export namespace Prisma {
     decrement?: Decimal | DecimalJsLike | number | string
     multiply?: Decimal | DecimalJsLike | number | string
     divide?: Decimal | DecimalJsLike | number | string
-  }
-
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -15926,6 +17342,12 @@ export namespace Prisma {
     connect?: AuthenticatorWhereUniqueInput | AuthenticatorWhereUniqueInput[]
   }
 
+  export type AssessmentsCreateNestedOneWithoutUserInput = {
+    create?: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AssessmentsCreateOrConnectWithoutUserInput
+    connect?: AssessmentsWhereUniqueInput
+  }
+
   export type SubscriptionUncheckedCreateNestedOneWithoutUserInput = {
     create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
     connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
@@ -15979,6 +17401,12 @@ export namespace Prisma {
     connectOrCreate?: AuthenticatorCreateOrConnectWithoutUserInput | AuthenticatorCreateOrConnectWithoutUserInput[]
     createMany?: AuthenticatorCreateManyUserInputEnvelope
     connect?: AuthenticatorWhereUniqueInput | AuthenticatorWhereUniqueInput[]
+  }
+
+  export type AssessmentsUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AssessmentsCreateOrConnectWithoutUserInput
+    connect?: AssessmentsWhereUniqueInput
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
@@ -16102,6 +17530,16 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
+  export type AssessmentsUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AssessmentsCreateOrConnectWithoutUserInput
+    upsert?: AssessmentsUpsertWithoutUserInput
+    disconnect?: AssessmentsWhereInput | boolean
+    delete?: AssessmentsWhereInput | boolean
+    connect?: AssessmentsWhereUniqueInput
+    update?: XOR<XOR<AssessmentsUpdateToOneWithWhereWithoutUserInput, AssessmentsUpdateWithoutUserInput>, AssessmentsUncheckedUpdateWithoutUserInput>
+  }
+
   export type SubscriptionUncheckedUpdateOneWithoutUserNestedInput = {
     create?: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
     connectOrCreate?: SubscriptionCreateOrConnectWithoutUserInput
@@ -16210,6 +17648,16 @@ export namespace Prisma {
     deleteMany?: AuthenticatorScalarWhereInput | AuthenticatorScalarWhereInput[]
   }
 
+  export type AssessmentsUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+    connectOrCreate?: AssessmentsCreateOrConnectWithoutUserInput
+    upsert?: AssessmentsUpsertWithoutUserInput
+    disconnect?: AssessmentsWhereInput | boolean
+    delete?: AssessmentsWhereInput | boolean
+    connect?: AssessmentsWhereUniqueInput
+    update?: XOR<XOR<AssessmentsUpdateToOneWithWhereWithoutUserInput, AssessmentsUpdateWithoutUserInput>, AssessmentsUncheckedUpdateWithoutUserInput>
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -16274,6 +17722,17 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -16302,7 +17761,7 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
     notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -16310,7 +17769,23 @@ export namespace Prisma {
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -16374,33 +17849,6 @@ export namespace Prisma {
     _sum?: NestedDecimalFilter<$PrismaModel>
     _min?: NestedDecimalFilter<$PrismaModel>
     _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -16522,6 +17970,122 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type UserCreateWithoutAssessmentsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    address?: string | null
+    phone?: string | null
+    status?: boolean
+    timeZone?: string | null
+    stripe_customer_id?: string | null
+    subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscription?: SubscriptionCreateNestedOneWithoutUserInput
+    service?: ServiceCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    reminder?: ReminderCreateNestedManyWithoutUserInput
+    appointment?: AppointmentCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    report?: ReportCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutAssessmentsInput = {
+    id?: string
+    name?: string | null
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    address?: string | null
+    phone?: string | null
+    status?: boolean
+    timeZone?: string | null
+    stripe_customer_id?: string | null
+    subscriptionId?: string | null
+    times?: UserCreatetimesInput | string[]
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    subscription?: SubscriptionUncheckedCreateNestedOneWithoutUserInput
+    service?: ServiceUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    reminder?: ReminderUncheckedCreateNestedManyWithoutUserInput
+    appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutAssessmentsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+  }
+
+  export type UserUpsertWithoutAssessmentsInput = {
+    update: XOR<UserUpdateWithoutAssessmentsInput, UserUncheckedUpdateWithoutAssessmentsInput>
+    create: XOR<UserCreateWithoutAssessmentsInput, UserUncheckedCreateWithoutAssessmentsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAssessmentsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAssessmentsInput, UserUncheckedUpdateWithoutAssessmentsInput>
+  }
+
+  export type UserUpdateWithoutAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    timeZone?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscription?: SubscriptionUpdateOneWithoutUserNestedInput
+    service?: ServiceUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    reminder?: ReminderUpdateManyWithoutUserNestedInput
+    appointment?: AppointmentUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    report?: ReportUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutAssessmentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: BoolFieldUpdateOperationsInput | boolean
+    timeZone?: NullableStringFieldUpdateOperationsInput | string | null
+    stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
+    times?: UserUpdatetimesInput | string[]
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    subscription?: SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+    service?: ServiceUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    reminder?: ReminderUncheckedUpdateManyWithoutUserNestedInput
+    appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type UserCreateWithoutReportInput = {
     id?: string
     name?: string | null
@@ -16544,6 +18108,7 @@ export namespace Prisma {
     appointment?: AppointmentCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReportInput = {
@@ -16568,6 +18133,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReportInput = {
@@ -16608,6 +18174,7 @@ export namespace Prisma {
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReportInput = {
@@ -16632,6 +18199,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAppointmentInput = {
@@ -16656,6 +18224,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAppointmentInput = {
@@ -16680,6 +18249,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAppointmentInput = {
@@ -16747,6 +18317,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAppointmentInput = {
@@ -16771,6 +18342,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ServiceUpsertWithoutAppointmentInput = {
@@ -16828,6 +18400,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutReminderInput = {
@@ -16852,6 +18425,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutReminderInput = {
@@ -16892,6 +18466,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutReminderInput = {
@@ -16916,6 +18491,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutServiceInput = {
@@ -16940,6 +18516,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutServiceInput = {
@@ -16964,6 +18541,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutServiceInput = {
@@ -17040,6 +18618,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutServiceInput = {
@@ -17064,6 +18643,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type AppointmentUpsertWithWhereUniqueWithoutServiceInput = {
@@ -17121,6 +18701,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSubscriptionInput = {
@@ -17145,6 +18726,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSubscriptionInput = {
@@ -17185,6 +18767,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSubscriptionInput = {
@@ -17209,6 +18792,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type SubscriptionCreateWithoutUserInput = {
@@ -17452,6 +19036,27 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AssessmentsCreateWithoutUserInput = {
+    id?: string
+    message: string
+    rating: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssessmentsUncheckedCreateWithoutUserInput = {
+    id?: string
+    message: string
+    rating: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type AssessmentsCreateOrConnectWithoutUserInput = {
+    where: AssessmentsWhereUniqueInput
+    create: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+  }
+
   export type SubscriptionUpsertWithoutUserInput = {
     update: XOR<SubscriptionUpdateWithoutUserInput, SubscriptionUncheckedUpdateWithoutUserInput>
     create: XOR<SubscriptionCreateWithoutUserInput, SubscriptionUncheckedCreateWithoutUserInput>
@@ -17677,6 +19282,33 @@ export namespace Prisma {
     transports?: StringNullableFilter<"Authenticator"> | string | null
   }
 
+  export type AssessmentsUpsertWithoutUserInput = {
+    update: XOR<AssessmentsUpdateWithoutUserInput, AssessmentsUncheckedUpdateWithoutUserInput>
+    create: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
+    where?: AssessmentsWhereInput
+  }
+
+  export type AssessmentsUpdateToOneWithWhereWithoutUserInput = {
+    where?: AssessmentsWhereInput
+    data: XOR<AssessmentsUpdateWithoutUserInput, AssessmentsUncheckedUpdateWithoutUserInput>
+  }
+
+  export type AssessmentsUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AssessmentsUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    message?: StringFieldUpdateOperationsInput | string
+    rating?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutAccountsInput = {
     id?: string
     name?: string | null
@@ -17699,6 +19331,7 @@ export namespace Prisma {
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -17723,6 +19356,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -17763,6 +19397,7 @@ export namespace Prisma {
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -17787,6 +19422,7 @@ export namespace Prisma {
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
@@ -17811,6 +19447,7 @@ export namespace Prisma {
     appointment?: AppointmentCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
@@ -17835,6 +19472,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
     Authenticator?: AuthenticatorUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -17875,6 +19513,7 @@ export namespace Prisma {
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -17899,6 +19538,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
     Authenticator?: AuthenticatorUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAuthenticatorInput = {
@@ -17923,6 +19563,7 @@ export namespace Prisma {
     appointment?: AppointmentCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     report?: ReportCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAuthenticatorInput = {
@@ -17947,6 +19588,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     report?: ReportUncheckedCreateNestedManyWithoutUserInput
+    assessments?: AssessmentsUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAuthenticatorInput = {
@@ -17987,6 +19629,7 @@ export namespace Prisma {
     appointment?: AppointmentUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     report?: ReportUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAuthenticatorInput = {
@@ -18011,6 +19654,7 @@ export namespace Prisma {
     appointment?: AppointmentUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     report?: ReportUncheckedUpdateManyWithoutUserNestedInput
+    assessments?: AssessmentsUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type AppointmentCreateManyServiceInput = {

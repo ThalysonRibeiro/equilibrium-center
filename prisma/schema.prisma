@@ -22,6 +22,17 @@ enum AppointmentStatus {
   CANCELLED
 }
 
+model Assessments {
+  id      String @id @default(cuid())
+  message String
+  rating  Int
+  userId  String @unique
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Report {
   id          String   @id @default(cuid())
   userId      String
@@ -114,6 +125,7 @@ model User {
   sessions      Session[]
   report        Report[]
   Authenticator Authenticator[]
+  assessments   Assessments?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
