@@ -23,8 +23,9 @@ import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react'
-import { handleRegister } from "../_actions/login";
-import { FaGithub, FaDiscord } from "react-icons/fa6";
+import { handleRegister, LoginType } from "../_actions/login";
+import { FaGithub, FaDiscord, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa6";
+import { FcGoogle } from "react-icons/fc";
 import img_bg_modal from "@/assets/1.png";
 
 
@@ -58,7 +59,7 @@ export function Header() {
     { href: "/contatos", label: "Contatos" },
   ];
 
-  async function handdleLogin(provider: string) {
+  async function handdleLogin(provider: LoginType) {
     await handleRegister(provider);
     setDialogIsOpen(false)
   }
@@ -107,6 +108,14 @@ export function Header() {
               GitHub
               <FaGithub />
             </Button>
+
+            <Button
+              onClick={() => handdleLogin("google")}
+              className="border border-corprimary hover:bg-corprimary w-50"
+            >
+              Google
+              <FcGoogle />
+            </Button>
           </section>
 
 
@@ -117,7 +126,7 @@ export function Header() {
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="border-corprimary h-70 overflow-hidden bg-background/70  backdrop-blur-lg">
+            <DialogContent className="border-corprimary overflow-hidden bg-background/70  backdrop-blur-lg">
               <DialogHeader>
                 <DialogTitle className="text-center text-corprimary text-3xl font-mansalva text-shadow-md">Entrar ou registrar</DialogTitle>
                 <DialogDescription className="text-center text-corprimary">
@@ -133,7 +142,7 @@ export function Header() {
                   className="objecti-cover"
                 />
               </div>
-              <section className="relative py-4 flex gap-4 w-full items-center justify-between">
+              <section className="relative py-4 flex flex-col gap-4 w-full items-center justify-between">
 
                 <Button
                   onClick={() => handdleLogin("discord")}
@@ -149,6 +158,14 @@ export function Header() {
                 >
                   GitHub
                   <FaGithub />
+                </Button>
+
+                <Button
+                  onClick={() => handdleLogin("google")}
+                  className="border border-corprimary hover:bg-corprimary w-50"
+                >
+                  Google
+                  <FcGoogle />
                 </Button>
               </section>
             </DialogContent>
