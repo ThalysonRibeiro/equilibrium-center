@@ -59,7 +59,7 @@ export function ProfileContent(
 
   const form = useProfileForm({
     name: user?.name || null,
-    addess: user?.address || null,
+    address: user?.address || null,
     phone: user?.phone || null,
     status: user?.status as boolean,
     timeZone: user?.timeZone || null
@@ -102,7 +102,7 @@ export function ProfileContent(
 
     const response = await updateProfile({
       name: values.name,
-      addess: values.addess,
+      address: values.address,
       phone: values.phone,
       status: values.status === 'active' ? true : false,
       timeZone: values.timeZone,
@@ -138,11 +138,11 @@ export function ProfileContent(
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Nome completo</FormLabel>
+                      <FormLabel>Nome da clinica/profissional <br /> será exibido na pagina de agendamentos</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Digite o nome da clinica"
+                          placeholder="Digite o nome da clinica."
                         />
                       </FormControl>
                       <FormMessage />
@@ -153,14 +153,14 @@ export function ProfileContent(
 
                 <FormField
                   control={form.control}
-                  name="addess"
+                  name="address"
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel>Endereço completo</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder="Digite o endereço da clinica"
+                          placeholder="Digite o endereço da clinica. ex: rua centro, 00"
                         />
                       </FormControl>
                       <FormMessage />
