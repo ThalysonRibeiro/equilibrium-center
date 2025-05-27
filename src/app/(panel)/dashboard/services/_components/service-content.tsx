@@ -17,20 +17,13 @@ export async function ServicesContent({ userId }: ServicesContentProps) {
   return (
     <section className="space-y-4">
 
-      {permission.planId === "TRIAL" && (
-        <div>
-          <h3>
-            Você está no seu periodo de teste!
-          </h3>
-        </div>
-      )}
-
-      {!permission.hasPermission && (
+      {/* {!permission.hasPermission && (
         <LabelSubscription expired={permission.expired} />
-      )}
+      )} */}
+
       <ServicesList services={services.data || []} permission={permission} />
 
-      {(permission.planId === "NORMAL" || permission.planId === "PROFESSIONAL") &&
+      {(permission.planId === "TRIAL" || permission.planId === "NORMAL" || permission.planId === "PROFESSIONAL") &&
         <AllServiceList services={allServices.data || []} />
       }
     </section>
