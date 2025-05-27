@@ -117,7 +117,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
         "md:ml-74": !isCollapsed
       })}>
 
-        <header className="md:hidden flex items-center justify-between border-b px-2 md:px-6 h-20 z-10 sticky bg-white">
+        <header className="md:hidden flex items-center justify-between border-b px-2 md:px-6 h-20 z-10 sticky top-0 bg-white">
           <Sheet>
             <div className="flex items-center gap-2">
               <SheetTrigger asChild>
