@@ -77,7 +77,9 @@ export function BarChartLabel({ chartData, totalSixMonth, download_pdf }: BarPro
         </div>
       </CardContent>
       <CardFooter>
-        <p>Receita gerada nos últimos 6 meses: <span className="text-md md:text-2xl font-montserrat font-bold">{formatCurrency(String(totalSixMonth))}</span></p>
+        <p>
+          Receita gerada nos últimos 6 meses: <span className="text-md md:text-2xl font-montserrat font-bold">{formatCurrency(String(totalSixMonth))}</span>
+        </p>
       </CardFooter>
     </Card>
   )
@@ -110,13 +112,14 @@ export function ProgressBar({ width, max, numberValue, month, className, ...prop
         className={`bg-gradient-to-b from-violet-600 via-blue-500 to-cyan-500 rounded-b-md h-full transition-all duration-700 ease-in-out`}
         style={{ height: `${percent}%` }}
       />
-      <div className="bg-white rounded-md border border-blue-500 z-10 w-fit h-fit px-3 py-4 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="flex flex-col items-end bg-white rounded-md border border-blue-500 z-10 w-20 h-fit px-3 py-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <div className="flex items-center gap-1">
-          <p className="rotate-180 text-center text-xs font-bold">{formatShortNumber(numberValue)}</p>
-          <div className="w-3 h-3 bg-blue-500 rounded" />
+          <p className="rotate-180 text-center text-xs font-bold">R$ {formatShortNumber(numberValue)}</p>
+          <div className="w-1 h-3 bg-blue-500 rounded" />
         </div>
         {month && (
-          <div className="rotate-180">
+          <div className="rotate-180 flex gap-1 items-center">
+            <div className="w-1 h-3 bg-indigo-500 rounded" />
             <p className="text-xs">{month}</p>
           </div>
         )}
