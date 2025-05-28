@@ -149,7 +149,8 @@
   /* Vermelho */
 
   /* Bordas e inputs */
-  --border: var(--secondary-dark);
+  /* --border: var(--secondary-dark); */
+  --border: oklch(87.2% 0.01 258.338);
   /* Bege suave #E1D3C1 */
   --input: var(--secondary-dark);
   /* Bege suave #E1D3C1 */
