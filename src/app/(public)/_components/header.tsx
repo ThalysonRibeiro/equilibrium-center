@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/logo-3.png";
 import {
   Sheet,
   SheetContent,
@@ -18,7 +18,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -26,7 +25,7 @@ import { useSession } from 'next-auth/react'
 import { handleRegister, LoginType } from "../_actions/login";
 import { FaGithub, FaDiscord, FaGoogle, FaFacebook, FaInstagram } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
-import img_bg_modal from "@/assets/1.png";
+import img_bg_modal from "@/assets/formas.png";
 
 
 interface NavItemsProps {
@@ -56,7 +55,10 @@ export function Header() {
 
   const navItems: NavItemsProps[] = [
     { href: "/", label: "Profissionais" },
-    { href: "/contatos", label: "Contatos" },
+    { href: "/", label: "Características" },
+    { href: "/", label: "Preços" },
+    { href: "/", label: "Testemunhos" },
+    { href: "/", label: "Perguntas frequentes" },
   ];
 
   async function handdleLogin(provider: LoginType) {
@@ -68,10 +70,11 @@ export function Header() {
     <>
       {navItems.map(link => (
         <Button
-          key={link.href}
+          key={link.label}
           onClick={() => setIsOpen(false)}
           asChild
-          className="bg-transparent hover:bg-transparent text-corprimary hover:text-corsecondary shadow-none"
+          variant={"ghost"}
+          className=" hover:bg-transparent text-primary font-montserrat hover:text-accent"
         >
           <Link href={link.href}>
             {link.label}
@@ -81,7 +84,7 @@ export function Header() {
 
       {status === 'loading' ? (
         <>
-          <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-corsecondary rounded-full animate-spin" />
+          <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
         </>
       ) : session ? (
         <>
@@ -95,7 +98,7 @@ export function Header() {
           <section className="w-full md:hidden space-y-4">
             <Button
               onClick={() => handdleLogin("discord")}
-              className="border border-corprimary bg-white w-50 text-indigo-500 hover:bg-corprimary"
+              className="bg-white w-50 text-indigo-500 hover:bg-white cursor-pointer"
             >
               Discord
               <FaDiscord />
@@ -103,7 +106,7 @@ export function Header() {
 
             <Button
               onClick={() => handdleLogin("github")}
-              className="border border-corprimary hover:bg-corprimary w-50"
+              className="bg-black w-50 hover:bg-black cursor-pointer"
             >
               GitHub
               <FaGithub />
@@ -111,7 +114,7 @@ export function Header() {
 
             <Button
               onClick={() => handdleLogin("google")}
-              className="border border-corprimary hover:bg-corprimary w-50"
+              className="bg-white text-primary hover:bg-white w-50 cursor-pointer"
             >
               Google
               <FcGoogle />
@@ -121,32 +124,31 @@ export function Header() {
 
           <Dialog open={dialogIsOpen} onOpenChange={setDialogIsOpen}>
             <DialogTrigger asChild className="hidden md:block">
-              <Button className="bg-corsecondary hover:bg-corprimary">
+              <Button className="hover:bg-accent">
                 Entrar ou Registrar
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="border-corprimary overflow-hidden bg-background/70  backdrop-blur-lg">
+            <DialogContent className="overflow-hidden bg-white/80 backdrop-blur-lg">
               <DialogHeader>
-                <DialogTitle className="text-center text-corprimary text-3xl font-mansalva text-shadow-md">Entrar ou registrar</DialogTitle>
-                <DialogDescription className="text-center text-corprimary">
+                <DialogTitle className="text-center text-primary text-3xl text-shadow-md">Entrar ou registrar</DialogTitle>
+                <DialogDescription className="text-center">
                   Selecione abaixo o metodo para entrar ou se registrar
                 </DialogDescription>
               </DialogHeader>
 
-              <div className="absolute w-135 h-100 -z-10 ">
+              <div className="absolute w-135 h-90 -z-10 ">
                 <Image
                   src={img_bg_modal}
                   alt="image modal login or register"
                   fill
-                  className="objecti-cover"
+                  className="object-contain"
                 />
               </div>
               <section className="relative py-4 flex flex-col gap-4 w-full items-center justify-between">
-
                 <Button
                   onClick={() => handdleLogin("discord")}
-                  className="border border-corprimary bg-white w-50 text-indigo-500 hover:bg-corprimary"
+                  className="bg-white w-1/2 text-indigo-500 hover:bg-white cursor-pointer border"
                 >
                   Discord
                   <FaDiscord />
@@ -154,7 +156,7 @@ export function Header() {
 
                 <Button
                   onClick={() => handdleLogin("github")}
-                  className="border border-corprimary hover:bg-corprimary w-50"
+                  className="bg-black w-1/2 hover:bg-black cursor-pointer border"
                 >
                   GitHub
                   <FaGithub />
@@ -162,7 +164,7 @@ export function Header() {
 
                 <Button
                   onClick={() => handdleLogin("google")}
-                  className="border border-corprimary hover:bg-corprimary w-50"
+                  className="bg-white text-primary hover:bg-white w-1/2 cursor-pointer border"
                 >
                   Google
                   <FcGoogle />
@@ -170,9 +172,6 @@ export function Header() {
               </section>
             </DialogContent>
           </Dialog>
-
-
-
 
         </div>
       )}
@@ -183,18 +182,22 @@ export function Header() {
     <header
       className={`fixed top-0 right-0 left-0 z-[999] py-4 px-6 ${bgVisible && 'bg-white/90'}`}
     >
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex  lg:justify-between justify-between  md:justify-center items-center">
         <Link
           href="/"
-          className="inline-flex items-center justify-center gap-2"
+          className="hidden lg:inline-flex items-center justify-center gap-2"
         >
-          <Image
-            src={logo}
-            alt="logo"
-            width={60}
-            height={60}
-          />
-          <p className="text-corsecondary uppercase">Equilibrium <br /> Center</p>
+          <div className="relative w-15 h-13">
+            <Image
+              src={logo}
+              alt="logo"
+              quality={100}
+              priority
+              fill
+              className="bg-contain"
+            />
+          </div>
+          <p className="text-primary uppercase">Equilibrium <br /> Center</p>
         </Link>
 
         <nav className="hidden md:flex items-center">
@@ -212,16 +215,7 @@ export function Header() {
             </Button>
           </SheetTrigger>
           <SheetContent side="right" className="p-4 w-[240px] sm:w-300px] z-[9999]">
-            <SheetTitle>Menu</SheetTitle>
-            <SheetHeader>
-              <Image
-                src={logo}
-                alt="logo"
-                width={60}
-                height={60}
-              />
-            </SheetHeader>
-            <SheetDescription>Veja nossos links</SheetDescription>
+            <SheetTitle className="text-primary">Menu</SheetTitle>
             <nav className="flex flex-col md:flex-row items-start">
               <NavLinks />
             </nav>
