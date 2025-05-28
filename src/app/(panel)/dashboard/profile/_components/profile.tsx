@@ -138,7 +138,7 @@ export function ProfileContent(
                   name="name"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Nome da clinica/profissional <br /> será exibido na pagina de agendamentos</FormLabel>
+                      <FormLabel>Nome da clinica ou do profissional</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
