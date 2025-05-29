@@ -22,7 +22,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import img_logo from "@/assets/logo2.svg";
+import img_logo from "@/assets/logo-3.png";
 import {
   Collapsible,
   CollapsibleContent
@@ -67,14 +67,14 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
   return (
     <div className="flex min-h-screen w-full">
       <aside
-        className={clsx("flex flex-col border-r transition-all duration-300 p-4 h-full bg-white z-10", {
+        className={clsx("flex flex-col border-r transition-all duration-300 p-4 h-full z-10", {
           "w-20": isCollapsed,
           "w-74": !isCollapsed,
           "hidden md:flex md:fixed": true
         })}
       >
         <div className="flex items-center rounded-lg mb-2">
-          <div className="w-20">
+          <div className="w-13">
             <Image
               src={img_logo}
               alt="logo"
@@ -86,7 +86,12 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
               }}
             />
           </div>
-          {!isCollapsed && <p className="uppercase font-montserrat text-primary">Equilibrium <br /> Center</p>}
+          {!isCollapsed && <p className="uppercase font-montserrat font-semibold text-primary">
+            Equilibrium <br />
+            <span className="text-accent">
+              Center
+            </span>
+          </p>}
         </div>
         <Button
           className="hover:bg-accent self-end mb-2"
@@ -117,7 +122,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
         "md:ml-74": !isCollapsed
       })}>
 
-        <header className="md:hidden flex items-center justify-between border-b px-2 md:px-6 h-20 z-10 sticky top-0 bg-white">
+        <header className="md:hidden flex items-center justify-between border-b px-2 md:px-6 h-20 z-10 sticky top-0 bg-white shadow">
           <Sheet>
             <div className="flex items-center gap-2">
               <SheetTrigger asChild>
@@ -148,7 +153,11 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
                       }}
                     />
                   </div>
-                  <p className="text-primary uppercase font-montserrat">Equilibrium <br /> Center</p>
+                  <p className="text-primary uppercase font-montserrat">Equilibrium <br />
+                    <span className="text-accent">
+                      Center
+                    </span>
+                  </p>
                 </div>
               </SheetTitle>
               <SheetDescription>Menu administrativo</SheetDescription>
@@ -190,7 +199,7 @@ function SidebarLinks({ href, icon, label, isCollapsed, pathname }: SidebarLinks
         "bg-accent text-white": pathname === href,
         "text-primary": pathname !== href,
       })}>
-        <span className="w-6 h-6 text-muted">{icon}</span>
+        <span className="w-6 h-6">{icon}</span>
         {!isCollapsed && <span>{label}</span>}
       </div>
     </Link>
@@ -320,18 +329,14 @@ function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) 
   return (
     <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between ${isCollapsed ? "" : 'bg-accent text-white'} p-1 rounded-lg`}>
       <div className="h-full flex items-center gap-1">
-        <div className="w-12 rounded-lg overflow-hidden">
+        <div className="w-12 h-10 rounded-lg overflow-hidden relative">
           <Image
             src={user?.image as string}
             alt="logo"
             priority
             quality={100}
-            width={48}
-            height={48}
-            style={{
-              width: 'auto',
-              height: 'auto',
-            }}
+            fill
+            className="object-cover"
           />
         </div>
         {!isCollapsed && <div className="flex flex-col items-start w-full">
