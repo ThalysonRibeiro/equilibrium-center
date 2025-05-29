@@ -34,7 +34,7 @@ export function CardAssessments({ user, edit, editAssessment, timeRemaining }: C
       <CardHeader>
         <CardTitle className="flex lg:items-center flex-col lg:flex-row md:justify-between">
           <div className="flex items-center gap-3">
-            <Avatar>
+            <Avatar className="w-10 h-10">
               <AvatarImage src={user?.image ?? ""} />
               <AvatarFallback>
                 {user?.name?.split(" ")[0]?.[0]}
