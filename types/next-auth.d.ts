@@ -1,3 +1,4 @@
+import { Plan } from "@/generated/prisma";
 import { DefaultSession } from "next-auth";
 
 declare module 'next-auth' {
@@ -15,6 +16,7 @@ interface User {
   address?: string;
   phone?: string;
   status: boolean;
+  plan: Plan;
   stripe_customer_id?: string;
   createdAt: string;
   updatedAt: string;
