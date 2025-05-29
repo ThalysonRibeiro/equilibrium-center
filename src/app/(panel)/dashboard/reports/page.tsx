@@ -52,10 +52,10 @@ export default async function Reports() {
           Dashboard - Visão geral últimos 30 dias
         </h1>
 
-        {((permissionReports?.limitReport || []).includes("performanceCards") || subscription.planId === "TRIAL") && (
+        {(permissionReports?.limitReport || []).includes("performanceCards") && (
           <PerformanceCards />
         )}
-        {((permissionReports?.limitReport || []).includes("barChartMultiple") || subscription.planId === "TRIAL") && (
+        {(permissionReports?.limitReport || []).includes("barChartMultiple") && (
           <BarChartMultiple />
         )}
 
