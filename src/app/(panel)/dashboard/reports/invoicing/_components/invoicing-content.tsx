@@ -84,11 +84,11 @@ export function InvoicingContent({ limitReport, download_pdf, planId }: { limitR
     <main className="space-y-4">
       <h1 className="text-2xl font-semibold text-primary text-center">Metricas de Faturamento</h1>
 
-      {(limitReport.includes("cardTotalINvoicing") || planId === "TRIAL") && (
+      {limitReport.includes("cardTotalINvoicing") && planId !== "EXPIRED" && (
         <CardTotalINvoicing data={invoicing} download_pdf={download_pdf} />
       )}
 
-      {(limitReport.includes("barChartLabel") || planId === "TRIAL") && (
+      {limitReport.includes("barChartLabel") && planId !== "EXPIRED" && (
         <BarChartLabel
           chartData={invoicingDate?.sixMonth.monthlyData || []}
           totalSixMonth={invoicingDate?.sixMonth.totalSixMonth || 0}
@@ -96,11 +96,11 @@ export function InvoicingContent({ limitReport, download_pdf, planId }: { limitR
         />
       )}
 
-      {(limitReport.includes("topServicesContent") || planId === "TRIAL") && (
+      {limitReport.includes("topServicesContent") && planId !== "EXPIRED" && (
         <TopServicesContent download_pdf={download_pdf} />
       )}
 
-      {(limitReport.includes("performanceContent") || planId === "TRIAL") && (
+      {limitReport.includes("performanceContent") && planId !== "EXPIRED" && (
         <Card>
           <CardHeader>
             <CardTitle className="flex justify-between items-center">
