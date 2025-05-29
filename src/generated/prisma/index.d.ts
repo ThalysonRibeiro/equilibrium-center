@@ -76,7 +76,9 @@ export namespace $Enums {
   export const Plan: {
   BASIC: 'BASIC',
   NORMAL: 'NORMAL',
-  PROFESSIONAL: 'PROFESSIONAL'
+  PROFESSIONAL: 'PROFESSIONAL',
+  TRIAL: 'TRIAL',
+  EXPIRED: 'EXPIRED'
 };
 
 export type Plan = (typeof Plan)[keyof typeof Plan]
@@ -8614,6 +8616,7 @@ export namespace Prisma {
     status: boolean | null
     timeZone: string | null
     stripe_customer_id: string | null
+    plan: $Enums.Plan | null
     subscriptionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8630,6 +8633,7 @@ export namespace Prisma {
     status: boolean | null
     timeZone: string | null
     stripe_customer_id: string | null
+    plan: $Enums.Plan | null
     subscriptionId: string | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -8646,6 +8650,7 @@ export namespace Prisma {
     status: number
     timeZone: number
     stripe_customer_id: number
+    plan: number
     subscriptionId: number
     times: number
     createdAt: number
@@ -8665,6 +8670,7 @@ export namespace Prisma {
     status?: true
     timeZone?: true
     stripe_customer_id?: true
+    plan?: true
     subscriptionId?: true
     createdAt?: true
     updatedAt?: true
@@ -8681,6 +8687,7 @@ export namespace Prisma {
     status?: true
     timeZone?: true
     stripe_customer_id?: true
+    plan?: true
     subscriptionId?: true
     createdAt?: true
     updatedAt?: true
@@ -8697,6 +8704,7 @@ export namespace Prisma {
     status?: true
     timeZone?: true
     stripe_customer_id?: true
+    plan?: true
     subscriptionId?: true
     times?: true
     createdAt?: true
@@ -8787,6 +8795,7 @@ export namespace Prisma {
     status: boolean
     timeZone: string | null
     stripe_customer_id: string | null
+    plan: $Enums.Plan
     subscriptionId: string | null
     times: string[]
     createdAt: Date
@@ -8821,6 +8830,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: boolean
     stripe_customer_id?: boolean
+    plan?: boolean
     subscriptionId?: boolean
     times?: boolean
     createdAt?: boolean
@@ -8848,6 +8858,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: boolean
     stripe_customer_id?: boolean
+    plan?: boolean
     subscriptionId?: boolean
     times?: boolean
     createdAt?: boolean
@@ -8865,6 +8876,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: boolean
     stripe_customer_id?: boolean
+    plan?: boolean
     subscriptionId?: boolean
     times?: boolean
     createdAt?: boolean
@@ -8882,13 +8894,14 @@ export namespace Prisma {
     status?: boolean
     timeZone?: boolean
     stripe_customer_id?: boolean
+    plan?: boolean
     subscriptionId?: boolean
     times?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "subscriptionId" | "times" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "plan" | "subscriptionId" | "times" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
     service?: boolean | User$serviceArgs<ExtArgs>
@@ -8928,6 +8941,7 @@ export namespace Prisma {
       status: boolean
       timeZone: string | null
       stripe_customer_id: string | null
+      plan: $Enums.Plan
       subscriptionId: string | null
       times: string[]
       createdAt: Date
@@ -9374,6 +9388,7 @@ export namespace Prisma {
     readonly status: FieldRef<"User", 'Boolean'>
     readonly timeZone: FieldRef<"User", 'String'>
     readonly stripe_customer_id: FieldRef<"User", 'String'>
+    readonly plan: FieldRef<"User", 'Plan'>
     readonly subscriptionId: FieldRef<"User", 'String'>
     readonly times: FieldRef<"User", 'String[]'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
@@ -14451,6 +14466,7 @@ export namespace Prisma {
     status: 'status',
     timeZone: 'timeZone',
     stripe_customer_id: 'stripe_customer_id',
+    plan: 'plan',
     subscriptionId: 'subscriptionId',
     times: 'times',
     createdAt: 'createdAt',
@@ -15084,6 +15100,7 @@ export namespace Prisma {
     status?: BoolFilter<"User"> | boolean
     timeZone?: StringNullableFilter<"User"> | string | null
     stripe_customer_id?: StringNullableFilter<"User"> | string | null
+    plan?: EnumPlanFilter<"User"> | $Enums.Plan
     subscriptionId?: StringNullableFilter<"User"> | string | null
     times?: StringNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -15110,6 +15127,7 @@ export namespace Prisma {
     status?: SortOrder
     timeZone?: SortOrderInput | SortOrder
     stripe_customer_id?: SortOrderInput | SortOrder
+    plan?: SortOrder
     subscriptionId?: SortOrderInput | SortOrder
     times?: SortOrder
     createdAt?: SortOrder
@@ -15139,6 +15157,7 @@ export namespace Prisma {
     status?: BoolFilter<"User"> | boolean
     timeZone?: StringNullableFilter<"User"> | string | null
     stripe_customer_id?: StringNullableFilter<"User"> | string | null
+    plan?: EnumPlanFilter<"User"> | $Enums.Plan
     subscriptionId?: StringNullableFilter<"User"> | string | null
     times?: StringNullableListFilter<"User">
     createdAt?: DateTimeFilter<"User"> | Date | string
@@ -15165,6 +15184,7 @@ export namespace Prisma {
     status?: SortOrder
     timeZone?: SortOrderInput | SortOrder
     stripe_customer_id?: SortOrderInput | SortOrder
+    plan?: SortOrder
     subscriptionId?: SortOrderInput | SortOrder
     times?: SortOrder
     createdAt?: SortOrder
@@ -15188,6 +15208,7 @@ export namespace Prisma {
     status?: BoolWithAggregatesFilter<"User"> | boolean
     timeZone?: StringNullableWithAggregatesFilter<"User"> | string | null
     stripe_customer_id?: StringNullableWithAggregatesFilter<"User"> | string | null
+    plan?: EnumPlanWithAggregatesFilter<"User"> | $Enums.Plan
     subscriptionId?: StringNullableWithAggregatesFilter<"User"> | string | null
     times?: StringNullableListFilter<"User">
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -15919,6 +15940,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -15945,6 +15967,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -15971,6 +15994,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15997,6 +16021,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16023,6 +16048,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -16040,6 +16066,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16057,6 +16084,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16856,6 +16884,7 @@ export namespace Prisma {
     status?: SortOrder
     timeZone?: SortOrder
     stripe_customer_id?: SortOrder
+    plan?: SortOrder
     subscriptionId?: SortOrder
     times?: SortOrder
     createdAt?: SortOrder
@@ -16873,6 +16902,7 @@ export namespace Prisma {
     status?: SortOrder
     timeZone?: SortOrder
     stripe_customer_id?: SortOrder
+    plan?: SortOrder
     subscriptionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -16889,6 +16919,7 @@ export namespace Prisma {
     status?: SortOrder
     timeZone?: SortOrder
     stripe_customer_id?: SortOrder
+    plan?: SortOrder
     subscriptionId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -17981,6 +18012,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18006,6 +18038,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18047,6 +18080,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18072,6 +18106,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18097,6 +18132,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18122,6 +18158,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18163,6 +18200,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18188,6 +18226,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18213,6 +18252,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18238,6 +18278,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18306,6 +18347,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18331,6 +18373,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18389,6 +18432,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18414,6 +18458,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18455,6 +18500,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18480,6 +18526,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18505,6 +18552,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18530,6 +18578,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18607,6 +18656,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18632,6 +18682,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18690,6 +18741,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18715,6 +18767,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -18756,6 +18809,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -18781,6 +18835,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19320,6 +19375,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19345,6 +19401,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19386,6 +19443,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19411,6 +19469,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19436,6 +19495,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19461,6 +19521,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19502,6 +19563,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19527,6 +19589,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19552,6 +19615,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19577,6 +19641,7 @@ export namespace Prisma {
     status?: boolean
     timeZone?: string | null
     stripe_customer_id?: string | null
+    plan?: $Enums.Plan
     subscriptionId?: string | null
     times?: UserCreatetimesInput | string[]
     createdAt?: Date | string
@@ -19618,6 +19683,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19643,6 +19709,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
     stripe_customer_id?: NullableStringFieldUpdateOperationsInput | string | null
+    plan?: EnumPlanFieldUpdateOperationsInput | $Enums.Plan
     subscriptionId?: NullableStringFieldUpdateOperationsInput | string | null
     times?: UserUpdatetimesInput | string[]
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string

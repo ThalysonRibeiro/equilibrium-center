@@ -195,6 +195,7 @@ exports.Prisma.UserScalarFieldEnum = {
   status: 'status',
   timeZone: 'timeZone',
   stripe_customer_id: 'stripe_customer_id',
+  plan: 'plan',
   subscriptionId: 'subscriptionId',
   times: 'times',
   createdAt: 'createdAt',
@@ -267,7 +268,9 @@ exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
 exports.Plan = exports.$Enums.Plan = {
   BASIC: 'BASIC',
   NORMAL: 'NORMAL',
-  PROFESSIONAL: 'PROFESSIONAL'
+  PROFESSIONAL: 'PROFESSIONAL',
+  TRIAL: 'TRIAL',
+  EXPIRED: 'EXPIRED'
 };
 
 exports.Prisma.ModelName = {

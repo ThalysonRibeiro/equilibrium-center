@@ -12,6 +12,8 @@ enum Plan {
   BASIC
   NORMAL
   PROFESSIONAL
+  TRIAL
+  EXPIRED
 }
 
 enum AppointmentStatus {
@@ -113,6 +115,7 @@ model User {
   status             Boolean   @default(true)
   timeZone           String?   @default("")
   stripe_customer_id String?
+  plan               Plan      @default(TRIAL)
 
   subscriptionId String?
   subscription   Subscription?
