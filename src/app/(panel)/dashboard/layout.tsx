@@ -4,6 +4,7 @@ import getSession from "@/lib/getSession";
 import { Toaster } from "sonner";
 import { checkSubscription } from "@/utils/permissions/checkSubscription";
 import { LabelSubscription } from "@/components/ui/label-subscription";
+import { TrialCountdown } from "./_components/trialCountdown";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
@@ -24,9 +25,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
         )}
         {permission?.subscriptionStatus === "TRIAL" && (
           <div className="bg-green-500 text-white text-sm md:text-base px-3 py-4 rounded-md my-4">
-            <p className="font-semibold">
-              {permission.message}
-            </p>
+            <TrialCountdown trialEndDate={permission?.trialEndDate ?? ""} />
           </div>
         )}
         {children}
