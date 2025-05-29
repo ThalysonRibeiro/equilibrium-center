@@ -35,19 +35,22 @@ export function AllAppointmentClient({ limitReport, download_pdf, planId }: { li
     <section className="space-y-4">
       <h1 className="text-2xl font-montserrat text-primary text-center">Atividade de agendamento de clientes</h1>
       <div className="flex items-center justify-between">
-        <DateRangePicker value={30} />
+        {planId !== "EXPIRED" && (
+          <DateRangePicker value={30} />
+        )}
         {download_pdf && (
           <GeneratePDFAppointments data={data} />
         )}
       </div>
-      {(limitReport.includes("progressAppointments") || planId === "TRIAL") && (
+      {limitReport.includes("progressAppointments") && planId !== "EXPIRED" && (
         <ProgressAppointments
           loading={isLoading}
           metricStatus={data?.metricStatus || null}
           countAllAppointments={data?.countAllAppointments || 0}
         />
       )}
-      {(limitReport.includes("customerTable") || planId === "TRIAL") && (
+
+      {limitReport.includes("customerTable") && planId !== "EXPIRED" && (
         <CustomerTable loading={isLoading} appointment={data?.allAppointments || []} />
       )}
     </section>
