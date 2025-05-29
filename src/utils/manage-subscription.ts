@@ -38,6 +38,12 @@ export async function manageSubscription(
         id: subscriptionId
       }
     });
+    await prisma.user.update({
+      where: { id: findUSer.id },
+      data: {
+        plan: "EXPIRED"
+      }
+    });
     return;
   }
 
@@ -45,6 +51,13 @@ export async function manageSubscription(
     try {
       await prisma.subscription.create({
         data: subscriptionData
+      });
+
+      await prisma.user.update({
+        where: { id: findUSer.id },
+        data: {
+          plan: subscriptionData.plan
+        }
       });
 
     } catch (error) {
