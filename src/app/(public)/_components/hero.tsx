@@ -1,10 +1,8 @@
-import { Button } from "@/components/ui/button";
 import Image from "next/image";
-
-import img_hero from "@/assets/img-hero.jpg";
+import img_hero from "@/assets/woman-posing-with-bathrobe-spa.png";
 import { BgHero } from "./bg-hero";
-import { EDIT_COOLDOWN_DAYS } from "@/app/(panel)/dashboard/profile/edit-cooldwn-days";
-import { Check, CheckCircle, CheckCircle2 } from "lucide-react";
+import { Check } from "lucide-react";
+import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
 
 export function Hero() {
   return (
@@ -17,11 +15,11 @@ export function Hero() {
 
           <article className="text-primary z-10 pt-5 space-y-5 max-w-3xl lg:w-1/2 w-full flex flex-col justify-center">
             <h1 className="text-shadow-md font-montserrat">
-              <span className="text-ring font-semibold text-6xl">
+              <span className="text-accent font-semibold lg:text-7xl text-6xl">
                 Otimize sua prática
               </span>
               <br className="md:block hidden" />
-              <span className="font-semibold text-6xl lg:ml-0 ml-2">
+              <span className="font-semibold lg:text-7xl text-6xl lg:ml-0 ml-2">
                 de massoterapia
               </span>
             </h1>
@@ -31,9 +29,9 @@ export function Hero() {
             </p>
 
             <div
-              className="p-4 bg-ring rounded-3xl w-fit  text-white font-semibold shadow-md hover:shadow-lg"
+              className="p-4 bg-accent rounded-3xl w-fit  text-white font-semibold shadow-md hover:shadow-lg"
             >
-              Comece seu test gratuito de {EDIT_COOLDOWN_DAYS} dias
+              Comece seu test gratuito de {TRIAL_DAYS} dias
             </div>
 
             <div className="lg:hidden w-fit border border-dashed border-ring rounded-full flex gap-2.5 items-center justify-center text-center font-semibold md:text-xl p-2 uppercase text-primary">
@@ -55,13 +53,13 @@ export function Hero() {
 
           <article className="hidden lg:block relative w-1/2">
 
-            <div className="absolute top-15 left-10 z-10 border border-dashed border-ring rounded-full flex gap-2.5 items-center justify-center text-center font-semibold text-xl p-2 uppercase text-primary bg-white/40 backdrop-blur-xl">
-              <p>50% no primeiro mês</p>
+            <div className="absolute bottom-5 left-5 z-10 border border-dashed border-ring rounded-full flex gap-2.5 items-center justify-center text-center font-semibold text-xl p-2 uppercase text-primary bg-white/40 backdrop-blur-xl">
+              <p>50% off no primeiro mês</p>
               <p>use: MAS50OFF</p>
             </div>
 
 
-            <div className="relative w-full h-125 border-15 border-ring rounded-4xl">
+            <div className="relative w-full h-125 rounded-4xl shadow-lg">
               <Image
                 src={img_hero}
                 alt="imagem do hero inlustratica"
