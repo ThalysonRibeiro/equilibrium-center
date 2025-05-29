@@ -160,3 +160,27 @@
     @apply bg-background text-foreground;
   }
 }
+
+.floatingMenu {
+  animation: reveal 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+}
+
+@keyframes reveal {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes revealout {
+  from {
+    transform: translateY(0%);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
