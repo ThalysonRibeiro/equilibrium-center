@@ -180,7 +180,7 @@ export function Header() {
 
   return (
     <header
-      className={`fixed top-0 right-0 left-0 z-[999] py-4 px-6 ${bgVisible && 'bg-white/90'}`}
+      className={`fixed top-0 right-0 left-0 z-[999] py-4 px-6 ${bgVisible && 'bg-white shadow'}`}
     >
       <div className="container mx-auto flex  lg:justify-between justify-between  md:justify-center items-center">
         <Link
