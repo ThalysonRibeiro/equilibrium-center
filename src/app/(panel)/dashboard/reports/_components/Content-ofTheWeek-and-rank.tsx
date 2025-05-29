@@ -42,17 +42,17 @@ export function ContentOfTheWeekAndRank({ limitReport, planId }: { limitReport: 
     <section className="space-y-4 w-full mb-4">
       {weeklySummary && (
         <>
-          {(limitReport.includes("barChartLastOfWeek") || planId === "TRIAL") && (
+          {limitReport.includes("barChartLastOfWeek") && planId !== "EXPIRED" && (
             <BarChartLastOfWeek data={weeklySummary} />
           )}
         </>
       )}
       {topCustomersAndHours && (
         <div className="flex gap-4 flex-col xl:flex-row">
-          {(limitReport.includes("topCustomers") || planId === "TRIAL") && (
+          {limitReport.includes("topCustomers") && planId !== "EXPIRED" && (
             <TopCustomers data={topCustomersAndHours} />
           )}
-          {(limitReport.includes("topHours") || planId === "TRIAL") && (
+          {limitReport.includes("topHours") && planId !== "EXPIRED" && (
             <TopHours data={topCustomersAndHours} />
           )}
         </div>
