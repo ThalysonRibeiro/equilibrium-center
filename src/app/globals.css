@@ -4,208 +4,113 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* Cores principais do sistema */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-
-  /* Fontes personalizadas para o Equilibrium Center */
   --font-sans: var(--font-body), var(--font-geist-sans);
   --font-heading: var(--font-heading);
   --font-mono: var(--font-geist-mono);
 
-  /* Configurações da barra lateral */
   --color-sidebar-ring: var(--sidebar-ring);
-  /* Lilás relaxante #A68DAD */
   --color-sidebar-border: var(--sidebar-border);
-  /* Verde-água #75BFB2 */
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  /* Branco-pérola #F5F5F5 */
   --color-sidebar-accent: var(--sidebar-accent);
-  /* Lilás relaxante #A68DAD */
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  /* #333333 */
   --color-sidebar-primary: var(--sidebar-primary);
-  /* Verde-água #75BFB2 */
   --color-sidebar-foreground: var(--sidebar-foreground);
-  /* Branco-pérola #F5F5F5 */
   --color-sidebar: var(--sidebar);
-  /* Azul-petróleo #145266 */
-
-  /* Cores para gráficos */
   --color-chart-5: var(--chart-5);
-  /* Dourado #D4B483 */
   --color-chart-4: var(--chart-4);
-  /* Azul-acinzentado #7A93AC */
   --color-chart-3: var(--chart-3);
-  /* Lilás #A68DAD */
   --color-chart-2: var(--chart-2);
-  /* Verde-água #75BFB2 */
   --color-chart-1: var(--chart-1);
-  /* Azul-petróleo #145266 */
-
-  /* Cores de interface */
   --color-ring: var(--ring);
-  /* Verde-água #75BFB2 */
   --color-input: var(--input);
-  /* Bege suave #E1D3C1 */
   --color-border: var(--border);
-  /* Bege suave #E1D3C1 */
   --color-destructive: var(--destructive);
-  /* Vermelho */
   --color-accent-foreground: var(--accent-foreground);
-  /* Branco-pérola #F5F5F5 */
   --color-accent: var(--accent);
-  /* Lilás relaxante #A68DAD */
   --color-muted-foreground: var(--muted-foreground);
-  /* #666666 */
   --color-muted: var(--muted);
-  /* Bege suave #E1D3C1 */
   --color-secondary-foreground: var(--secondary-foreground);
-  /* Branco-pérola #F5F5F5 */
   --color-secondary: var(--secondary);
-  /* Azul-acinzentado #7A93AC */
   --color-primary-foreground: var(--primary-foreground);
-  /* Branco-pérola #F5F5F5 */
   --color-primary: var(--primary);
-  /* Azul-petróleo #145266 */
   --color-popover-foreground: var(--popover-foreground);
-  /* #333333 */
   --color-popover: var(--popover);
-  /* Branco */
   --color-card-foreground: var(--card-foreground);
-  /* Azul-petróleo #145266 */
   --color-card: var(--card);
-  /* Branco */
 
-  /* Raios de borda */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
 
-  /* Referências às fontes */
   --font-body: --font-montserrat, sans-serif;
   --font-heading: --font-lato, serif;
   --font-montserrat: var(--font-body);
   --font-lato: var(--font-heading);
 
-  /* Variáveis de espaçamento de texto */
   --letter-spacing-tight: -0.025em;
   --letter-spacing-normal: 0em;
   --letter-spacing-wide: 0.025em;
+
   --line-height-tight: 1.2;
   --line-height-normal: 1.6;
   --line-height-relaxed: 1.8;
 }
 
 :root {
-  /* Configurações do sistema */
   --radius: 0.625rem;
 
-  /* Cores de fundo e texto principais */
   --background: var(--secondary-light);
-  /* Areia claro #F0E6D9 */
   --foreground: var(--text-dark);
-  /* #333333 */
 
-  /* Componentes card */
   --card: oklch(1 0 0);
-  /* Branco */
   --card-foreground: var(--primary-dark);
-  /* Azul-petróleo #145266 */
 
-  /* Componentes popover */
   --popover: oklch(1 0 0);
-  /* Branco */
   --popover-foreground: var(--text-dark);
-  /* #333333 */
 
-  /* Cores primárias */
   --primary: var(--primary-dark);
-  /* Azul-petróleo #145266 */
   --primary-foreground: var(--neutral);
-  /* Branco-pérola #F5F5F5 */
 
-  /* Cores secundárias */
   --secondary: var(--secondary-mid);
-  /* Azul-acinzentado #7A93AC */
   --secondary-foreground: var(--neutral);
-  /* Branco-pérola #F5F5F5 */
 
-  /* Cores suaves/atenuadas */
   --muted: var(--secondary-dark);
-  /* Bege suave #E1D3C1 */
   --muted-foreground: var(--text-mid);
-  /* #666666 */
 
-  /* Cores de destaque */
   --accent: var(--primary-light);
-  /* Lilás relaxante #A68DAD */
   --accent-foreground: var(--neutral);
-  /* Branco-pérola #F5F5F5 */
 
-  /* Cor de destruição/erro */
   --destructive: oklch(0.577 0.245 27.325);
-  /* Vermelho */
 
-  /* Bordas e inputs */
-  /* --border: var(--secondary-dark); */
   --border: oklch(87.2% 0.01 258.338);
-  /* Bege suave #E1D3C1 */
   --input: var(--secondary-dark);
-  /* Bege suave #E1D3C1 */
   --ring: var(--primary-mid);
-  /* Verde-água #75BFB2 */
-
-  /* Cores para gráficos */
   --chart-1: 198 65% 24%;
-  /* Azul-petróleo #145266 */
   --chart-2: 168 38% 60%;
-  /* Verde-água #75BFB2 */
   --chart-3: 285 19% 62%;
-  /* Lilás #A68DAD */
   --chart-4: 209 20% 58%;
-  /* Azul-acinzentado #7A93AC */
   --chart-5: 39 50% 67%;
-  /* Dourado #D4B483 */
 
-  /* Sidebar */
   --sidebar: var(--primary-dark);
-  /* Azul-petróleo #145266 */
   --sidebar-foreground: var(--neutral);
-  /* Branco-pérola #F5F5F5 */
   --sidebar-primary: var(--primary-mid);
-  /* Verde-água #75BFB2 */
   --sidebar-primary-foreground: var(--text-dark);
-  /* #333333 */
   --sidebar-accent: var(--accent);
-  /* Lilás relaxante #A68DAD */
   --sidebar-accent-foreground: var(--neutral);
-  /* Branco-pérola #F5F5F5 */
   --sidebar-border: var(--primary-mid);
-  /* Verde-água #75BFB2 */
   --sidebar-ring: var(--accent);
-  /* Lilás relaxante #A68DAD */
-
-  /* Cores definidas do Equilibrium Center */
   --primary-dark: #145266;
-  /* Azul-petróleo profundo */
   --primary-mid: #75BFB2;
-  /* Verde-água suave */
-  --primary-light: #A68DAD;
-  /* Lilás relaxante */
-  --secondary-light: #F0E6D9;
-  /* Areia claro */
+  --primary-light: oklch(77.7% 0.152 181.912);
+  --secondary-light: oklch(1 0 0);
   --secondary-mid: #7A93AC;
-  /* Azul-acinzentado */
   --secondary-dark: #E1D3C1;
-  /* Bege suave */
   --accent-gold: #D4B483;
-  /* Dourado sutil */
   --neutral: #F5F5F5;
-  /* Branco-pérola */
 
-  /* Cores para textos */
   --text-dark: #333333;
   --text-mid: #666666;
   --text-light: #999999;
