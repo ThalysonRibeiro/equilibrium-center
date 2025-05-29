@@ -5,6 +5,7 @@ export type Feature = {
 };
 
 export type FAQItem = {
+  id: string;
   question: string;
   answer: string;
 };

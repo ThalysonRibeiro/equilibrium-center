@@ -10,23 +10,12 @@ export type PlanDetailsProps = {
   download_PDF_reports?: boolean;
 }
 
-
-
 const PLANS_LIMITS: PlansProps = {
   BASIC: {
     maxServices: 3,
     reports: [
       "performanceCards",
-      // "barChartMultiple",
       "barChartLastOfWeek",
-      // "topCustomers",
-      // "topHours",
-      // "progressAppointments",
-      // "customerTable",
-      // "cardTotalINvoicing",
-      // "barChartLabel",
-      // "topServicesContent",
-      // "performanceContent",
     ],
     confirm_via_whatsapp: false,
     download_PDF_reports: false,
@@ -37,13 +26,9 @@ const PLANS_LIMITS: PlansProps = {
       "performanceCards",
       "barChartMultiple",
       "barChartLastOfWeek",
-      // "topCustomers",
-      // "topHours",
       "progressAppointments",
       "customerTable",
       "cardTotalINvoicing",
-      // "barChartLabel",
-      // "topServicesContent",
       "performanceContent",
     ],
     confirm_via_whatsapp: true,
@@ -66,8 +51,33 @@ const PLANS_LIMITS: PlansProps = {
     ],
     confirm_via_whatsapp: true,
     download_PDF_reports: true,
-  }
+  },
+  TRIAL: {
+    maxServices: Infinity,
+    reports: [
+      "performanceCards",
+      "barChartMultiple",
+      "barChartLastOfWeek",
+      "topCustomers",
+      "topHours",
+      "progressAppointments",
+      "customerTable",
+      "cardTotalINvoicing",
+      "barChartLabel",
+      "topServicesContent",
+      "performanceContent",
+    ],
+    confirm_via_whatsapp: true,
+    download_PDF_reports: true,
+  }, // <- aqui copia as mesmas permissões
+  EXPIRED: {
+    maxServices: 0,
+    reports: [],
+    confirm_via_whatsapp: false,
+    download_PDF_reports: false,
+  },
 }
+
 
 export async function getPlan(planId: Plan) {
   return PLANS_LIMITS[planId]

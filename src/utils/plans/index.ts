@@ -3,13 +3,17 @@ import { PlanDetailsProps } from "../permissions/get-plans";
 export const PLANS: PlansProps = {
   BASIC: { maxServices: 3 },
   NORMAL: { maxServices: 30 },
-  PROFESSIONAL: { maxServices: Infinity }
+  PROFESSIONAL: { maxServices: Infinity },
+  TRIAL: { maxServices: Infinity },
+  EXPIRED: { maxServices: 0 },
 }
 
 export type PlansProps = {
   BASIC: PlanDetailsProps;
   NORMAL: PlanDetailsProps;
   PROFESSIONAL: PlanDetailsProps;
+  TRIAL: PlanDetailsProps;
+  EXPIRED: PlanDetailsProps;
 }
 
 export interface SubscriptionPlansProps {
