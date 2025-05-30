@@ -55,17 +55,19 @@ export const GET = auth(async function GET(req) {
       'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
     ];
 
+    // Abordagem mais segura usando o primeiro dia do mês
     for (let i = 0; i < 6; i++) {
-      const currentDate = new Date();
-      currentDate.setMonth(currentDate.getMonth() - i);
+      const targetDate = new Date();
+      targetDate.setDate(1); // Define para o primeiro dia do mês
+      targetDate.setMonth(targetDate.getMonth() - i);
 
-      const year = currentDate.getFullYear();
-      const month = currentDate.getMonth();
+      const year = targetDate.getFullYear();
+      const month = targetDate.getMonth();
       const monthKey = `${year}-${String(month + 1).padStart(2, '0')}`;
 
       monthlyData.push({
         month: monthNames[month],
-        // year: year,
+        year: year,
         total: sumByMonth[monthKey] || 0
       });
     }
