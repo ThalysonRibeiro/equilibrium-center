@@ -111,6 +111,7 @@ model User {
   emailVerified      DateTime?
   image              String?
   address            String?   @default("")
+  description        String?   @default("")
   phone              String?   @default("")
   status             Boolean   @default(true)
   timeZone           String?   @default("")

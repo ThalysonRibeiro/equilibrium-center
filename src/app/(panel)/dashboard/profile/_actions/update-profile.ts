@@ -8,6 +8,7 @@ import { z } from "zod";
 const formSchema = z.object({
   name: z.string().min(1, { message: "O nome é obrigatório" }),
   address: z.string().optional(),
+  description: z.string().optional(),
   phone: z.string().optional(),
   status: z.boolean(),
   timeZone: z.string(),
@@ -40,6 +41,7 @@ export async function updateProfile(formData: FormSchema) {
       data: {
         name: formData.name,
         address: formData.address,
+        description: formData.description,
         phone: formData.phone,
         status: formData.status,
         timeZone: formData.timeZone,

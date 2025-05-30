@@ -37,6 +37,7 @@ import { extractPhoneNumber, formatPhone } from "@/utils/fomatPhone"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { AvatarProfile } from "./profile-avatar"
+import { Textarea } from "@/components/ui/textarea"
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -60,6 +61,7 @@ export function ProfileContent(
   const form = useProfileForm({
     name: user?.name || null,
     address: user?.address || null,
+    description: user?.description || null,
     phone: user?.phone || null,
     status: user?.status as boolean,
     timeZone: user?.timeZone || null
@@ -103,6 +105,7 @@ export function ProfileContent(
     const response = await updateProfile({
       name: values.name,
       address: values.address,
+      description: values.description,
       phone: values.phone,
       status: values.status === 'active' ? true : false,
       timeZone: values.timeZone,
@@ -161,6 +164,25 @@ export function ProfileContent(
                         <Input
                           {...field}
                           placeholder="Digite o endereço da clinica. ex: rua centro, 00"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+
+                <FormField
+                  control={form.control}
+                  name="description"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Descrição</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          {...field}
+                          placeholder="Descrição da clinica."
+                          className="max-h-30 h-25"
                         />
                       </FormControl>
                       <FormMessage />
