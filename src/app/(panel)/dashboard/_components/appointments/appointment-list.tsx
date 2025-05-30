@@ -192,7 +192,7 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
                               <Button
                                 size={"icon"}
                                 onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
-                                className="bg-green-400 rounded-md text-white text-sm font-semibold cursor-pointer"
+                                className="bg-green-400 hover:bg-accent rounded-md text-white text-sm font-semibold cursor-pointer"
                               >
                                 <FaWhatsapp />
                               </Button>
