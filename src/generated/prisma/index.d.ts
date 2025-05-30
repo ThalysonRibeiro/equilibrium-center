@@ -8612,6 +8612,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     address: string | null
+    description: string | null
     phone: string | null
     status: boolean | null
     timeZone: string | null
@@ -8629,6 +8630,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     address: string | null
+    description: string | null
     phone: string | null
     status: boolean | null
     timeZone: string | null
@@ -8646,6 +8648,7 @@ export namespace Prisma {
     emailVerified: number
     image: number
     address: number
+    description: number
     phone: number
     status: number
     timeZone: number
@@ -8666,6 +8669,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     address?: true
+    description?: true
     phone?: true
     status?: true
     timeZone?: true
@@ -8683,6 +8687,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     address?: true
+    description?: true
     phone?: true
     status?: true
     timeZone?: true
@@ -8700,6 +8705,7 @@ export namespace Prisma {
     emailVerified?: true
     image?: true
     address?: true
+    description?: true
     phone?: true
     status?: true
     timeZone?: true
@@ -8791,6 +8797,7 @@ export namespace Prisma {
     emailVerified: Date | null
     image: string | null
     address: string | null
+    description: string | null
     phone: string | null
     status: boolean
     timeZone: string | null
@@ -8826,6 +8833,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     address?: boolean
+    description?: boolean
     phone?: boolean
     status?: boolean
     timeZone?: boolean
@@ -8854,6 +8862,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     address?: boolean
+    description?: boolean
     phone?: boolean
     status?: boolean
     timeZone?: boolean
@@ -8872,6 +8881,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     address?: boolean
+    description?: boolean
     phone?: boolean
     status?: boolean
     timeZone?: boolean
@@ -8890,6 +8900,7 @@ export namespace Prisma {
     emailVerified?: boolean
     image?: boolean
     address?: boolean
+    description?: boolean
     phone?: boolean
     status?: boolean
     timeZone?: boolean
@@ -8901,7 +8912,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "plan" | "subscriptionId" | "times" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "address" | "description" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "plan" | "subscriptionId" | "times" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     subscription?: boolean | User$subscriptionArgs<ExtArgs>
     service?: boolean | User$serviceArgs<ExtArgs>
@@ -8937,6 +8948,7 @@ export namespace Prisma {
       emailVerified: Date | null
       image: string | null
       address: string | null
+      description: string | null
       phone: string | null
       status: boolean
       timeZone: string | null
@@ -9384,6 +9396,7 @@ export namespace Prisma {
     readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly image: FieldRef<"User", 'String'>
     readonly address: FieldRef<"User", 'String'>
+    readonly description: FieldRef<"User", 'String'>
     readonly phone: FieldRef<"User", 'String'>
     readonly status: FieldRef<"User", 'Boolean'>
     readonly timeZone: FieldRef<"User", 'String'>
@@ -14462,6 +14475,7 @@ export namespace Prisma {
     emailVerified: 'emailVerified',
     image: 'image',
     address: 'address',
+    description: 'description',
     phone: 'phone',
     status: 'status',
     timeZone: 'timeZone',
@@ -15096,6 +15110,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
+    description?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     status?: BoolFilter<"User"> | boolean
     timeZone?: StringNullableFilter<"User"> | string | null
@@ -15123,6 +15138,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     status?: SortOrder
     timeZone?: SortOrderInput | SortOrder
@@ -15153,6 +15169,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     image?: StringNullableFilter<"User"> | string | null
     address?: StringNullableFilter<"User"> | string | null
+    description?: StringNullableFilter<"User"> | string | null
     phone?: StringNullableFilter<"User"> | string | null
     status?: BoolFilter<"User"> | boolean
     timeZone?: StringNullableFilter<"User"> | string | null
@@ -15180,6 +15197,7 @@ export namespace Prisma {
     emailVerified?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
     address?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     status?: SortOrder
     timeZone?: SortOrderInput | SortOrder
@@ -15204,6 +15222,7 @@ export namespace Prisma {
     emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
     address?: StringNullableWithAggregatesFilter<"User"> | string | null
+    description?: StringNullableWithAggregatesFilter<"User"> | string | null
     phone?: StringNullableWithAggregatesFilter<"User"> | string | null
     status?: BoolWithAggregatesFilter<"User"> | boolean
     timeZone?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -15936,6 +15955,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -15963,6 +15983,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -15990,6 +16011,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16017,6 +16039,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16044,6 +16067,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -16062,6 +16086,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16080,6 +16105,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16880,6 +16906,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     address?: SortOrder
+    description?: SortOrder
     phone?: SortOrder
     status?: SortOrder
     timeZone?: SortOrder
@@ -16898,6 +16925,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     address?: SortOrder
+    description?: SortOrder
     phone?: SortOrder
     status?: SortOrder
     timeZone?: SortOrder
@@ -16915,6 +16943,7 @@ export namespace Prisma {
     emailVerified?: SortOrder
     image?: SortOrder
     address?: SortOrder
+    description?: SortOrder
     phone?: SortOrder
     status?: SortOrder
     timeZone?: SortOrder
@@ -18008,6 +18037,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18034,6 +18064,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18076,6 +18107,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18102,6 +18134,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18128,6 +18161,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18154,6 +18188,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18196,6 +18231,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18222,6 +18258,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18248,6 +18285,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18274,6 +18312,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18343,6 +18382,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18369,6 +18409,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18428,6 +18469,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18454,6 +18496,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18496,6 +18539,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18522,6 +18566,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18548,6 +18593,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18574,6 +18620,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18652,6 +18699,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18678,6 +18726,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18737,6 +18786,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18763,6 +18813,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -18805,6 +18856,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -18831,6 +18883,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19371,6 +19424,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19397,6 +19451,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19439,6 +19494,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19465,6 +19521,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19491,6 +19548,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19517,6 +19575,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19559,6 +19618,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19585,6 +19645,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19611,6 +19672,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19637,6 +19699,7 @@ export namespace Prisma {
     emailVerified?: Date | string | null
     image?: string | null
     address?: string | null
+    description?: string | null
     phone?: string | null
     status?: boolean
     timeZone?: string | null
@@ -19679,6 +19742,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
@@ -19705,6 +19769,7 @@ export namespace Prisma {
     emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
     address?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     status?: BoolFieldUpdateOperationsInput | boolean
     timeZone?: NullableStringFieldUpdateOperationsInput | string | null
