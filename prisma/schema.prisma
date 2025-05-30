@@ -111,6 +111,10 @@ model User {
   emailVerified      DateTime?
   image              String?
   address            String?   @default("")
+  city               String?   @default("")
+  state              String?   @default("")
+  cep                String?   @default("")
+  number             String?   @default("")
   description        String?   @default("")
   phone              String?   @default("")
   status             Boolean   @default(true)

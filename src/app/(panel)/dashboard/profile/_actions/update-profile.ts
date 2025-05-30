@@ -10,6 +10,10 @@ const formSchema = z.object({
   address: z.string().optional(),
   description: z.string().optional(),
   phone: z.string().optional(),
+  city: z.string().optional(),
+  state: z.string().optional(),
+  cep: z.string().optional(),
+  number: z.string().optional(),
   status: z.boolean(),
   timeZone: z.string(),
   times: z.array(z.string())
@@ -43,6 +47,10 @@ export async function updateProfile(formData: FormSchema) {
         address: formData.address,
         description: formData.description,
         phone: formData.phone,
+        city: formData.city,
+        state: formData.state,
+        cep: formData.cep,
+        number: formData.number,
         status: formData.status,
         timeZone: formData.timeZone,
         times: formData.times || []
