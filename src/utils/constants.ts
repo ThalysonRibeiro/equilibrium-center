@@ -3,7 +3,7 @@ import { FAQItem, Feature } from "../../types/features";
 export const FEATURES: Feature[] = [
   {
     title: "Gestão de Clientes",
-    description: "Organize registros, notas e preferências de clientes em um local seguro.",
+    description: "Organize registros e preferências de clientes em um local seguro.",
     icon: "users",
   },
   {
@@ -18,7 +18,7 @@ export const FEATURES: Feature[] = [
   },
   {
     title: "Análise de negócios",
-    description: "Obtenha insights sobre seu negócio com ferramentas de relatórios poderosas.",
+    description: "Obtenha insights sobre seu negócio com ferramentas de relatórios.",
     icon: "bar-chart",
   },
 ];

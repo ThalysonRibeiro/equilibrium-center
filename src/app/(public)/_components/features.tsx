@@ -43,7 +43,7 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           {FEATURES.map((feature, index) => (
             <div
               key={index}
@@ -73,18 +73,6 @@ export function Features() {
                 Center foi criado especificamente para massoterapeutas, com recursos especializados que dão suporte ao seu fluxo de trabalho exclusivo
               </p>
               <ul className="space-y-4">
-                <li className="flex items-center">
-                  <Check className="text-white rounded-full p-0.5 w-4 h-4 bg-ring mr-1" />
-                  <span className="text-gray-700">Anotações SOAP e acompanhamento do tratamento</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="text-white rounded-full p-0.5 w-4 h-4 bg-ring mr-1" />
-                  <span className="text-gray-700">Formulários especializados de admissão de clientes</span>
-                </li>
-                <li className="flex items-center">
-                  <Check className="text-white rounded-full p-0.5 w-4 h-4 bg-ring mr-1" />
-                  <span className="text-gray-700">Gestão de salas e recursos</span>
-                </li>
                 <li className="flex items-center">
                   <Check className="text-white rounded-full p-0.5 w-4 h-4 bg-ring mr-1" />
                   <span className="text-gray-700">Configurações de disponibilidade específicas do terapeuta</span>
