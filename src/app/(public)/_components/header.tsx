@@ -12,6 +12,8 @@ import { Menu } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useSession } from 'next-auth/react';
 import { useIsMobile } from "@/app/hooks/useMobile";
+import { scrollTosection } from "@/utils/scrollTosection";
+import { Session } from "next-auth";
 
 
 interface NavItemsProps {
@@ -38,43 +40,73 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-
+  function scrollSection(link: string) {
+    scrollTosection(link, "smooth");
+    setIsOpen(false)
+  }
 
   const navItems: NavItemsProps[] = [
-    { href: "/", label: "Profissionais" },
-    { href: "/", label: "Características" },
-    { href: "/", label: "Preços" },
-    { href: "/", label: "Testemunhos" },
-    { href: "/", label: "Perguntas frequentes" },
-    { href: "/login", label: "Login" },
+    { href: "#hero", label: "Inicio" },
+    { href: "#features", label: "Características" },
+    { href: "#price", label: "Preços" },
+    { href: "#testimonial", label: "Testemunhos" },
+    { href: "#faq", label: "FAQ" },
+    { href: "/professionals", label: "Profissionais" },
+    // { href: "/login", label: "Login" },
   ];
 
   const NavLinks = () => (
     <>
-      {navItems.map(link => (
-        <Button
-          key={link.label}
-          onClick={() => setIsOpen(false)}
-          asChild
-          variant={"link"}
-          className=" hover:bg-transparent text-primary font-montserrat hover:text-accent"
-        >
-          <Link href={link.href}>
+      {navItems.map((link) => {
+        const isAnchor = link.href.startsWith("#");
+
+        return isAnchor ? (
+          <Button
+            key={link.label}
+            variant="link"
+            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            onClick={() => scrollSection(link.href.replace("#", ""))}
+          >
             {link.label}
-          </Link>
-        </Button>
-      ))}
+          </Button>
+        ) : (
+          <Button
+            key={link.label}
+            asChild
+            variant="link"
+            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+          >
+            <Link href={link.href}>{link.label}</Link>
+          </Button>
+        );
+      })}
 
       {status === 'loading' ? (
         <>
           <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
         </>
-      ) : session && (
+      ) : session ? (
         <>
-          <Link href="/dashboard" className="w-full text-center font-semibold rounded-md bg-corprimary hover:bg-corsecondary py-1 px-2">
-            Acessar Clinica
-          </Link>
+          <Button
+            asChild
+            variant="link"
+            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+          >
+            <Link href="/dashboard">
+              Acessar Clinica
+            </Link>
+          </Button>
         </>
+      ) : (
+        <Button
+          asChild
+          variant="link"
+          className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+        >
+          <Link href="/login">
+            Login
+          </Link>
+        </Button>
       )}
     </>
   );
@@ -102,7 +134,7 @@ export function Header() {
   }
 
   if (headerVisible) {
-    return <FloatingMenu navItems={navItems} isOpen={setIsOpen} />
+    return <FloatingMenu navItems={navItems} session={session} status={status} />
   }
 
   return (
@@ -137,26 +169,65 @@ export function Header() {
 
 interface FloatingMenuProps {
   navItems: NavItemsProps[];
-  isOpen: Dispatch<SetStateAction<boolean>>;
+  session: Session | null;
+  status: "loading" | "authenticated" | "unauthenticated"
 }
 
-export function FloatingMenu({ navItems, isOpen }: FloatingMenuProps) {
+export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
   return (
     <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-999 bg-white rounded-2xl py-1 px-2 border shadow hidden md:block w-fit floatingMenu hover:border-accent">
       <div className="flex gap-2">
-        {navItems.map(link => (
-          <Button
-            key={link.label}
-            onClick={() => isOpen(false)}
-            asChild
-            variant={"link"}
-            className=" hover:bg-transparent text-primary font-montserrat hover:text-accent"
-          >
-            <Link href={link.href}>
+        {navItems.map((link) => {
+          const isAnchor = link.href.startsWith("#");
+
+          return isAnchor ? (
+            <Button
+              key={link.label}
+              variant="link"
+              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+              onClick={() => scrollTosection(link.href.replace("#", ""), "smooth")}
+            >
               {link.label}
+            </Button>
+          ) : (
+            <Button
+              key={link.label}
+              asChild
+              variant="link"
+              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            >
+              <Link href={link.href}>{link.label}</Link>
+            </Button>
+          );
+
+        })}
+        {status === 'loading' ? (
+          <>
+            <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+          </>
+        ) : session ? (
+          <>
+            <Button
+              asChild
+              variant="link"
+              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            >
+              <Link href="/dashboard">
+                Acessar Clinica
+              </Link>
+            </Button>
+          </>
+        ) : (
+          <Button
+            asChild
+            variant="link"
+            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+          >
+            <Link href="/login">
+              Login
             </Link>
           </Button>
-        ))}
+        )}
       </div>
     </div>
   )
