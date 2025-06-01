@@ -161,26 +161,45 @@
   }
 }
 
-.floatingMenu {
-  animation: reveal 0.5s cubic-bezier(0.85, 0, 0.15, 1);
-}
-
-@keyframes reveal {
-  from {
-    transform: translateY(-100%);
+@layer utilities {
+  .floatingMenu {
+    animation: reveal 0.5s cubic-bezier(0.85, 0, 0.15, 1);
   }
 
-  to {
-    transform: translateY(0%);
-  }
-}
+  @keyframes reveal {
+    from {
+      transform: translateY(-100%);
+    }
 
-@keyframes revealout {
-  from {
-    transform: translateY(0%);
+    to {
+      transform: translateY(0%);
+    }
   }
 
-  to {
-    transform: translateY(-100%);
+  @keyframes revealout {
+    from {
+      transform: translateY(0%);
+    }
+
+    to {
+      transform: translateY(-100%);
+    }
+  }
+
+
+  @keyframes float {
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 2s ease-in-out infinite;
   }
 }
