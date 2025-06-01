@@ -7,6 +7,19 @@ export async function getProfessionals() {
     const professionals = await prisma.user.findMany({
       where: {
         status: true,
+      },
+      include: {
+        service: {
+          where: {
+            status: true
+          },
+          select: {
+            name: true
+          }
+        }
+      },
+      orderBy: {
+        plan: "asc"
       }
     });
 
