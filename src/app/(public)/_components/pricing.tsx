@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export function Pricing() {
   return (
-    <section className="bg-white h-auto py-6 px-6 sm:px-1 flex flex-col items-center justify-center gap-6">
+    <section id="price" className="bg-white h-auto py-6 px-6 sm:px-1 flex flex-col items-center justify-center gap-6">
       <h2 className="text-primary text-3xl text-center font-bold">
         Preços simples e transparentes
       </h2>

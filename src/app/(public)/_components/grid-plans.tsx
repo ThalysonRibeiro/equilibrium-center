@@ -1,4 +1,4 @@
-import { SubscriptionButton } from "@/app/(panel)/dashboard/plans/_components/subscription-button";
+"use client"
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,6 +11,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SubscriptionPlansProps } from "@/utils/plans";
 import { Check } from "lucide-react";
+import { redirect } from "next/navigation";
 
 interface GridPlansProps {
   plansType: SubscriptionPlansProps[];
@@ -53,6 +54,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
           </CardContent>
           <CardFooter className="absolute bottom-5 w-full">
             <Button
+              onClick={() => redirect("/login")}
               variant={"ghost"}
               className={`${index === 1 ? "bg-ring text-white" : "hover:bg-transparent hover:text-ring border border-ring"} w-full`}
             >
