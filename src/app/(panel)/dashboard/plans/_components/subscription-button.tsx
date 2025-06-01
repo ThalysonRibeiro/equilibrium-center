@@ -25,7 +25,7 @@ export function SubscriptionButton({ type }: SubscriptionButtonProps) {
   return (
     <Button
       variant={"ghost"}
-      className={`${type === "NORMAL" ? "bg-ring text-white" : "hover:bg-transparent hover:text-ring border border-ring"} cursor-pointer w-full`}
+      className={`${type === "NORMAL" ? "bg-accent text-white" : "text-accent border border-accent"} cursor-pointer w-full`}
       onClick={handleCreateBilling}
     >
       Assinar

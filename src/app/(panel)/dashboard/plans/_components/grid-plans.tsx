@@ -42,7 +42,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
             <ul>
               {plan.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm lg:text-base">
-                  <span className="text-blue-600">
+                  <span className="text-teal-600">
                     <Check className="w-4 h-4" />
                   </span>
                   <span>{feature}</span>
