@@ -24,7 +24,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
         <Card key={plan.id}
           className={`relative flex flex-col w-full mx-auto md:hover:scale-105 transition-transform duration-300 shadow-md
           ${index === 1 && "md:scale-110 md:hover:scale-115 "}
-          ${index === 1 ? "border border-ring" : "border-gray-200"}`}
+          ${index === 1 ? "border border-accent" : "border-gray-200"}`}
         >
           <CardHeader>
             <CardTitle className="font-bold font-montserrat text-center">
@@ -43,7 +43,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
             <ul>
               {plan.features.map((feature, index) => (
                 <li key={index} className="flex items-start gap-2 text-sm lg:text-base">
-                  <span className="text-blue-600">
+                  <span className="text-teal-600">
                     <Check className="w-4 h-4" />
                   </span>
                   <span>{feature}</span>
@@ -56,7 +56,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
             <Button
               onClick={() => redirect("/login")}
               variant={"ghost"}
-              className={`${index === 1 ? "bg-ring text-white" : "hover:bg-transparent hover:text-ring border border-ring"} w-full`}
+              className={`${index === 1 ? "bg-accent text-white" : "text-accent border border-accent"} w-full`}
             >
               Iniciar teste gratuito
             </Button>
