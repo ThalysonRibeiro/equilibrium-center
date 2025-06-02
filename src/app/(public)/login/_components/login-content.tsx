@@ -13,6 +13,7 @@ import { FaDiscord, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
 import Link from "next/link";
+import { ExternalLink } from "lucide-react";
 
 
 export function LoginContent() {
@@ -22,7 +23,7 @@ export function LoginContent() {
   }
 
   return (
-    <Card className=" max-w-125 w-full">
+    <Card className=" max-w-125 w-full bg-transparent">
       <CardHeader className="text-center text-accent">
         <CardTitle className="text-3xl font-semibold font-montserrat">
           Bem vindo
@@ -64,14 +65,11 @@ export function LoginContent() {
 
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Link href={""} className="hover:text-accent capitalize">
-          política de Privacidade
+        <Link href={""} className="hover:text-accent capitalize flex items-center gap-1">
+          <ExternalLink className="w-4 h-4" />  política de Privacidade
         </Link>
-        <Link href={""} className="hover:text-accent capitalize">
-          Termos de Serviço
-        </Link>
-        <Link href={""} className="hover:text-accent capitalize">
-          Política de Cookies
+        <Link href={""} className="hover:text-accent capitalize flex items-center gap-1">
+          <ExternalLink className="w-4 h-4" /> Termos de Serviço
         </Link>
       </CardFooter>
     </Card>
