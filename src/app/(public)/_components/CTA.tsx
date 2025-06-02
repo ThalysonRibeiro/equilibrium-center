@@ -1,5 +1,7 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
+import { redirect } from "next/navigation";
 
 export function CTA() {
   return (
@@ -13,6 +15,7 @@ export function CTA() {
         </p>
         <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
           <Button
+            onClick={() => redirect("/login")}
             variant="outline"
             size="lg"
             className="border-white bg-white text-teal-700 hover:bg-teal-600"
