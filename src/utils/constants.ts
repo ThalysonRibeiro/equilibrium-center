@@ -1,4 +1,5 @@
 import { FAQItem, Feature } from "../../types/features";
+import { TRIAL_DAYS } from "./permissions/trial-limits";
 
 export const FEATURES: Feature[] = [
   {
@@ -95,31 +96,33 @@ export const FAQ_ITEMS: FAQItem[] = [
   {
     id: "1",
     question: "Como funciona o teste grátis?",
-    answer: "Você tem 14 dias para testar todos os recursos do plano escolhido, sem precisar colocar cartão de crédito. Pode cancelar a qualquer momento antes de acabar o teste, sem pagar nada por isso.",
+    answer: `Você tem ${TRIAL_DAYS} dias para experimentar todos os recursos do plano Profissional, sem precisar cadastrar cartão de crédito. Aproveite esse tempo para conhecer tudo que a plataforma oferece.`,
   },
   {
     id: "2",
     question: "Os dados dos meus clientes estão seguros?",
-    answer: "Sim! A segurança é prioridade por aqui. Usamos criptografia avançada, armazenamento conforme as normas da HIPAA e acesso super controlado. Seus dados e os dos seus clientes nunca são compartilhados.",
+    answer: "Sim! A segurança é prioridade por aqui. Utilizamos criptografia de ponta, armazenamento conforme a LGPD e controle rigoroso de acesso. Seus dados — e os dos seus clientes — estão sempre protegidos e nunca são compartilhados.",
   },
   {
     id: "3",
-    question: "Consigo importar meus clientes atuais?",
-    answer: "Claro! É só usar nossa ferramenta de importação para arquivos CSV ou Excel. E se precisar de ajuda, nossa equipe está pronta para dar aquela força – sem custo extra.",
+    question: "É possível agendar com terapeutas específicos?",
+    answer: "Sim! Seus clientes podem escolher o terapeuta, o tipo de atendimento e o melhor horário, de acordo com a disponibilidade. E você controla o que aparece para eles no agendamento.",
   },
   {
     id: "4",
-    question: "Como funcionam os pagamentos online?",
-    answer: "A gente integra com plataformas como Stripe e PayPal, então você pode receber com cartão, carteiras digitais e outros meios. O dinheiro vai direto pra sua conta, só com a taxa padrão de cada operadora.",
+    question: "Qual tipo de suporte está disponível?",
+    answer: "Todos os planos contam com suporte por e-mail, com resposta em até 24h. Nos planos Profissional e Clínica, você também tem acesso ao chat ao vivo e suporte personalizado para tirar dúvidas e começar com o pé direito.",
   },
   {
     id: "5",
-    question: "Dá pra agendar com terapeutas específicos?",
-    answer: "Dá sim! O cliente pode escolher o terapeuta, o tipo de atendimento e o horário, tudo com base no que estiver disponível no momento. E você escolhe o que aparece pra eles.",
+    question: "Consigo controlar meus atendimentos e ganhos?",
+    answer: "Sim! Você pode cadastrar seus serviços, acompanhar todos os agendamentos e ter relatórios financeiros detalhados por semana, mês, semestre, ano ou datas específicas. Tudo de forma simples e visual.",
   },
   {
     id: "6",
-    question: "Que tipo de suporte vocês oferecem?",
-    answer: "Todos os planos têm suporte por e-mail e a gente responde em até 24h. Se você tiver um plano Profissional ou Clínica, também tem acesso ao chat ao vivo e ajuda personalizada pra começar com tudo.",
-  },
+    question: "Posso personalizar os serviços que ofereço?",
+    answer: "Pode sim! Você pode cadastrar diferentes tipos de atendimento, definir duração, preços e ainda escolher quais ficam visíveis para os clientes na hora do agendamento.",
+  }
+
 ];
+

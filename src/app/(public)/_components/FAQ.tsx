@@ -5,12 +5,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion"
 import { FAQ_ITEMS } from "@/utils/constants"
-import { CircleHelp, Phone } from "lucide-react"
+import { CircleHelp, Mail, Phone } from "lucide-react"
 import Link from "next/link"
 
 export function FAQ() {
   return (
-    <section className="bg-gray-50 py-6 sm:px-1 flex flex-col items-center justify-center gap-6">
+    <section id="faq" className="bg-gray-50 py-6 sm:px-1 flex flex-col items-center justify-center gap-6">
       <div className="container mx-auto px-6">
         <h2 className="text-primary text-3xl text-center font-bold">
           Perguntas frequentes
@@ -39,8 +39,8 @@ export function FAQ() {
           </p>
           <div className="inline-flex items-center justify-center space-x-4">
             <Link href="#" className="text-ring hover:text-accent font-medium flex items-center">
-              <Phone className="text-ring" />
-              Agende uma ligação
+              <Mail className="text-ring" />
+              Entre em contato
             </Link>
             <Link href="#" className="text-ring hover:text-accent font-medium flex items-center">
               <CircleHelp className="text-white fill-ring" />
