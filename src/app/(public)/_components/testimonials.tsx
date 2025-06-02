@@ -71,7 +71,7 @@ export async function Testimonials() {
 
             <div className="md:col-span-2">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Junte-se a mais de {'500'} profissionais de massoterapia que confiam no Equilibrium
+                Junte-se a mais de {newArray.length + 100} profissionais de massoterapia que confiam no Equilibrium
                 Center
               </h3>
               <p className="text-gray-700">
