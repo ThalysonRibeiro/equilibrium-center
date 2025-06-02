@@ -1,12 +1,12 @@
-"use server"
+"use server";
 
-import { Plan } from "@/generated/prisma";
 import { auth } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { stripe } from "@/utils/stipe";
+import { planMap, stripeToDatabasePlan, StripePlan } from "@/utils/plans/plans";
 
 interface SubscriptionProps {
-  type: Plan;
+  type: StripePlan;
 }
 
 export async function createSubscription({ type }: SubscriptionProps) {
@@ -16,35 +16,45 @@ export async function createSubscription({ type }: SubscriptionProps) {
   if (!userId) {
     return {
       sessionId: "",
-      error: "Falha ao ativar plano."
-    }
+      error: "Falha ao ativar plano.",
+    };
   }
+
   const findUser = await prisma.user.findFirst({
-    where: {
-      id: userId
-    }
+    where: { id: userId },
   });
+
   if (!findUser) {
     return {
       sessionId: "",
-      error: "Falha ao ativar plano."
-    }
+      error: "Falha ao ativar plano.",
+    };
   }
+
   let customerId = findUser.stripe_customer_id;
 
   if (!customerId) {
-    const stripeCusmtomer = await stripe.customers.create({
-      email: findUser.email
+    const stripeCustomer = await stripe.customers.create({
+      email: findUser.email,
     });
+
     await prisma.user.update({
-      where: {
-        id: userId
-      },
+      where: { id: userId },
       data: {
-        stripe_customer_id: stripeCusmtomer.id
-      }
+        stripe_customer_id: stripeCustomer.id,
+      },
     });
-    customerId = stripeCusmtomer.id;
+
+    customerId = stripeCustomer.id;
+  }
+
+  const price = planMap[type];
+
+  if (!price) {
+    return {
+      sessionId: "",
+      error: "Plano inválido.",
+    };
   }
 
   try {
@@ -54,28 +64,36 @@ export async function createSubscription({ type }: SubscriptionProps) {
       billing_address_collection: "required",
       line_items: [
         {
-          price: type === "BASIC" ? process.env.STRIPE_PLAN_BASIC
-            : type === "NORMAL" ? process.env.STRIPE_PLAN_NORMAL
-              : process.env.STRIPE_PLAN_PROFESSIONAL,
-          quantity: 1
-        }
+          price,
+          quantity: 1,
+        },
       ],
       metadata: {
-        type: type
+        type,
       },
       mode: "subscription",
       allow_promotion_codes: true,
       success_url: process.env.STRIPE_SUCCESS_URL,
-      cancel_url: process.env.STRIPE_CANCEL_URL
+      cancel_url: process.env.STRIPE_CANCEL_URL,
+    });
+
+    // Atualiza o plano do usuário no banco (tipo lógico)
+    await prisma.user.update({
+      where: { id: userId },
+      data: {
+        plan: stripeToDatabasePlan[type], // ex: "BASIC"
+      },
     });
 
     return {
-      sessionId: stripeCheckoutSession.id
-    }
+      sessionId: stripeCheckoutSession.id,
+    };
   } catch (error) {
+    console.error(error);
+
     return {
       sessionId: "",
-      error: "Falha ao ativar plano."
-    }
+      error: "Erro ao criar sessão de pagamento.",
+    };
   }
 }

@@ -12,6 +12,8 @@ import { subscriptionPlans } from "@/utils/plans";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { createPortalCustomer } from "../_actions/create-portal-customer";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 interface SubscriptionDetailProps {
   subscription: Subscription;
@@ -34,13 +36,22 @@ export function SubscriptionDetail({ subscription }: SubscriptionDetailProps) {
     window.location.href = portal.sessionId;
   }
 
+  const expiresAtRaw: Date | null = subscription.expiresAt;
+  if (!expiresAtRaw) {
+    return <p>Data de expiração não disponível</p>;
+  }
+  const expiresAt = new Date(expiresAtRaw);
+  const formattedDate = format(expiresAt, "dd 'de' MMMM 'de' yyyy", { locale: ptBR });
+
   return (
     <Card className="w-full mx-auto">
       <CardHeader>
         <CardTitle className="font-montserrat text-2xl">
           Plano atual
         </CardTitle>
-        <CardDescription>Sua assinatura está ativa</CardDescription>
+        <CardDescription>
+          Sua assinatura é válida até <strong>{formattedDate}</strong>
+        </CardDescription>
       </CardHeader>
 
       <CardContent>

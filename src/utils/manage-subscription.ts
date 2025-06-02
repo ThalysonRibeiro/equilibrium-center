@@ -23,13 +23,20 @@ export async function manageSubscription(
   }
 
   const subscription = await stripe.subscriptions.retrieve(subscriptionId);
+  const item = subscription.items.data[0];
+  const expirationDate = item?.current_period_end
+    ? new Date(item.current_period_end * 1000)
+    : null;
+
+
 
   const subscriptionData = {
     id: subscription.id,
     userId: findUSer.id,
     status: subscription.status,
     priceId: subscription.items.data[0].price.id,
-    plan: type ?? "NORMAL"
+    plan: type ?? "NORMAL",
+    expiresAt: expirationDate,
   }
 
   if (subscriptionId && deleteAction) {

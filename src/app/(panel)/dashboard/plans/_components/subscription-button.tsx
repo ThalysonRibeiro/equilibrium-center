@@ -4,9 +4,10 @@ import { Plan } from "@/generated/prisma";
 import { createSubscription } from "../_actions/create-subscriptions";
 import { toast } from "sonner";
 import { getStripeJs } from "@/utils/stripe-js";
+import { StripePlan } from "@/utils/plans/plans";
 
 interface SubscriptionButtonProps {
-  type: Plan
+  type: StripePlan;
 }
 
 export function SubscriptionButton({ type }: SubscriptionButtonProps) {
@@ -25,7 +26,12 @@ export function SubscriptionButton({ type }: SubscriptionButtonProps) {
   return (
     <Button
       variant={"ghost"}
-      className={`${type === "NORMAL" ? "bg-accent text-white" : "text-accent border border-accent"} cursor-pointer w-full`}
+      className={`
+        ${type === "NORMAL" || type === "NORMAL6" || type === "NORMAL12"
+          ? "bg-accent text-white"
+          : "text-accent border border-accent"}
+           cursor-pointer w-full
+           `}
       onClick={handleCreateBilling}
     >
       Assinar

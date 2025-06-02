@@ -4,6 +4,7 @@ import { stripe } from "@/utils/stipe";
 import { manageSubscription } from '@/utils/manage-subscription';
 import { Plan } from '@/generated/prisma';
 import { revalidatePath } from 'next/cache';
+import { StripePlan, stripeToDatabasePlan } from '@/utils/plans/plans';
 
 export const POST = async (req: Request) => {
   const signature = req.headers.get("stripe-signature");
@@ -41,15 +42,17 @@ export const POST = async (req: Request) => {
 
     case "checkout.session.completed":
       const checkoutSession = event.data.object as Stripe.Checkout.Session;
-      const type = checkoutSession?.metadata?.type ? checkoutSession?.metadata.type : "NORMAL"
+      const rawType = checkoutSession?.metadata?.type ?? "NORMAL";
 
       if (checkoutSession.subscription && checkoutSession.customer) {
+        const planType = stripeToDatabasePlan[rawType as StripePlan] ?? "NORMAL";
+
         await manageSubscription(
           checkoutSession.subscription.toString(),
           checkoutSession.customer.toString(),
           true,
           false,
-          type as Plan
+          planType
         );
       }
       revalidatePath("/dashboard/plans");
