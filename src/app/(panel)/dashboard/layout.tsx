@@ -5,13 +5,14 @@ import { Toaster } from "sonner";
 import { checkSubscription } from "@/utils/permissions/checkSubscription";
 import { LabelSubscription } from "@/components/ui/label-subscription";
 import { TrialCountdown } from "./_components/trialCountdown";
+import { CookieConsent } from "@/components/cookieConsent";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   const session = await getSession();
   if (!session) {
     redirect('/')
   }
-  const permission = await checkSubscription(session.user.id)
+  const permission = await checkSubscription(session.user.id);
 
   return (
     <>
@@ -28,6 +29,7 @@ export default async function DashboardLayout({ children }: { children: React.Re
             <TrialCountdown trialEndDate={permission?.trialEndDate ?? ""} />
           </div>
         )}
+        <CookieConsent />
         {children}
       </SidebarDashboard>
     </>
