@@ -14,6 +14,7 @@ import { useSession } from 'next-auth/react';
 import { useIsMobile } from "@/app/hooks/useMobile";
 import { scrollTosection } from "@/utils/scrollTosection";
 import { Session } from "next-auth";
+import { redirect, usePathname } from "next/navigation";
 
 
 interface NavItemsProps {
@@ -22,6 +23,7 @@ interface NavItemsProps {
 }
 
 export function Header() {
+  const pathname = usePathname();
   const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [headerVisible, setHeaderVisible] = useState<boolean>(false);
@@ -52,7 +54,6 @@ export function Header() {
     { href: "#testimonial", label: "Testemunhos" },
     { href: "#faq", label: "FAQ" },
     { href: "/professionals", label: "Profissionais" },
-    // { href: "/login", label: "Login" },
   ];
 
   const NavLinks = () => (
@@ -65,7 +66,12 @@ export function Header() {
             key={link.label}
             variant="link"
             className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
-            onClick={() => scrollSection(link.href.replace("#", ""))}
+            onClick={() => {
+              if (pathname === "/privacy-policy" || pathname === "/cookies-policy" || pathname === "/terms-of-service") {
+                redirect("/")
+              }
+              scrollSection(link.href.replace("#", ""))
+            }}
           >
             {link.label}
           </Button>
