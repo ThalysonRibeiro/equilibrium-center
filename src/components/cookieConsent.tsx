@@ -22,11 +22,11 @@ export function CookieConsent() {
 
   return (
     <div
-      className="fixed bottom-4 left-4 right-4 max-w-3xl mx-auto bg-white border border-gray-300 shadow-lg rounded-lg p-4 z-[9999]"
+      className="fixed bottom-4 left-4 right-4 floatingCookies max-w-7xl mx-auto bg-white border border-gray-300 shadow-lg rounded-lg p-4 z-[9999]"
       role="dialog"
       aria-label="Aviso de cookies"
     >
-      <div className="absolute bottom-0 bg-white border p-3 flex flex-col md:flex-row items-end">
+      <div className="bg-white flex flex-col md:flex-row items-end">
         <div className="p-4">
           <h3 className="font-semibold">
             Preferências de cookies
