@@ -1,6 +1,7 @@
-import { Mail, MapPin, PhoneCall } from "lucide-react";
+"use client"
+import { scrollTosection } from "@/utils/scrollTosection";
+import { Mail } from "lucide-react";
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa6";
 
 export function Footer() {
   return (
@@ -15,7 +16,7 @@ export function Footer() {
             <p className="mb-4 text-gray-400 max-w-xs">
               Simplificando o gerenciamento de clínicas de massoterapia com um software elegante e fácil de usar.
             </p>
-            <div className="flex space-x-4">
+            {/* <div className="flex space-x-4">
               <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
                 <FaFacebook size={20} />
               </Link>
@@ -28,75 +29,94 @@ export function Footer() {
               <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
                 <FaYoutube size={20} />
               </Link>
-            </div>
+            </div> */}
           </div>
 
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">Links rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#features" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <button
+                  onClick={() => scrollTosection("hero", "smooth")}
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
+                  Inicio
+                </button >
+              </li>
+              <li>
+                <button
+                  onClick={() => scrollTosection("features", "smooth")}
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Características
-                </Link>
+                </button >
               </li>
               <li>
-                <Link href="#pricing" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <button
+                  onClick={() => scrollTosection("pricing", "smooth")}
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Preços
-                </Link>
+                </button >
               </li>
               <li>
-                <Link href="#testimonials" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <button
+                  onClick={() => scrollTosection("testimonials", "smooth")}
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Testemunhos
-                </Link>
+                </button >
               </li>
               <li>
-                <Link href="#faq" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <button
+                  onClick={() => scrollTosection("faq", "smooth")}
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Perguntas frequentes
-                </Link>
+                </button >
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Recursos</h4>
+            <h4 className="text-lg font-semibold text-white mb-4">
+              Recursos
+            </h4>
             <ul className="space-y-2">
               <li>
-                <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                  Blogue
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <Link
+                  href={"/help-center"}
+                  target="_blank"
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Central de Ajuda
                 </Link>
               </li>
               <li>
-                <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
+                <Link
+                  href={"/case-studies"}
+                  target="_blank"
+                  className="text-gray-400 hover:text-teal-400 transition-colors"
+                >
                   Estudos de caso
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                  Webinars
                 </Link>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Contact Us</h4>
+            <h4 className="text-lg font-semibold text-white mb-4">
+              Contate-nos
+            </h4>
             <ul className="space-y-3">
               <li className="flex items-start">
                 <Mail size={18} className="mr-2 mt-1 text-teal-400" />
-                <span>support@serenebook.com</span>
-              </li>
-              <li className="flex items-start">
-                <PhoneCall size={18} className="mr-2 mt-1 text-teal-400" />
-                <span>+55 (65) 98127-8291</span>
-              </li>
-              <li className="flex items-start">
-                <MapPin size={18} className="mr-2 mt-1 text-teal-400" />
-                <span>Rua José do Patrocínio, 4374<br />Natal-RN, CEP 59125-102</span>
+                <Link
+                  href={"mailto:rafinha.head@gmail.com"}
+                  className="font-semibold ml-1 hover:text-accent underline"
+                >
+                  rafinha.head@gmail.com
+                </Link>
               </li>
             </ul>
           </div>
@@ -108,13 +128,22 @@ export function Footer() {
               &copy; {new Date().getFullYear()} Equilibrium Center. Todos os direitos reservados.
             </p>
             <div className="flex space-x-6">
-              <Link href="#" className="text-sm text-gray-500 hover:text-teal-400 transition-colors">
+              <Link
+                href={"/privacy-policy"}
+                className="text-sm text-gray-500 hover:text-teal-400 transition-colors"
+              >
                 política de Privacidade
               </Link>
-              <Link href="#" className="text-sm text-gray-500 hover:text-teal-400 transition-colors">
+              <Link
+                href={"/terms-of-service"}
+                className="text-sm text-gray-500 hover:text-teal-400 transition-colors"
+              >
                 Termos de Serviço
               </Link>
-              <Link href="#" className="text-sm text-gray-500 hover:text-teal-400 transition-colors">
+              <Link
+                href={"/cookies-policy"}
+                className="text-sm text-gray-500 hover:text-teal-400 transition-colors"
+              >
                 Política de Cookies
               </Link>
             </div>
