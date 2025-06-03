@@ -4,6 +4,7 @@ import "./globals.css";
 import { SessionAuthProvider } from "@/components/session-auth";
 import { Toaster } from "sonner";
 import { QueryClientContext } from "@/providers/queryclient";
+import { CookieConsent } from "@/components/cookieConsent";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -38,6 +39,7 @@ export default function RootLayout({
               position="top-right"
               richColors
             />
+            <CookieConsent />
             {children}
           </QueryClientContext>
         </SessionAuthProvider>
