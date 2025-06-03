@@ -65,10 +65,10 @@ export function LoginContent() {
 
       </CardContent>
       <CardFooter className="flex justify-between">
-        <Link href={""} className="hover:text-accent capitalize flex items-center gap-1">
+        <Link href={"/privacy-policy"} target="_blank" className="hover:text-accent capitalize flex items-center gap-1">
           <ExternalLink className="w-4 h-4" />  política de Privacidade
         </Link>
-        <Link href={""} className="hover:text-accent capitalize flex items-center gap-1">
+        <Link href={"/terms-of-service"} target="_blank" className="hover:text-accent capitalize flex items-center gap-1">
           <ExternalLink className="w-4 h-4" /> Termos de Serviço
         </Link>
       </CardFooter>
