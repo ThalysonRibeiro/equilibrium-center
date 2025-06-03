@@ -82,7 +82,7 @@ export function FormContact({ label = false }: FormContactProps) {
 
   return (
     <div className="mx-auto py-2">
-      <Card className="bg-transparent border-gray-600">
+      <Card>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <CardContent>
@@ -97,7 +97,6 @@ export function FormContact({ label = false }: FormContactProps) {
                         <Input
                           {...field}
                           placeholder="Digite seu nome."
-                          className="bg-gray-100"
                         />
                       </FormControl>
                       <FormMessage />
@@ -115,7 +114,6 @@ export function FormContact({ label = false }: FormContactProps) {
                         <Input
                           {...field}
                           placeholder="Digite seu email."
-                          className="bg-gray-100"
                         />
                       </FormControl>
                       <FormMessage />
@@ -133,7 +131,7 @@ export function FormContact({ label = false }: FormContactProps) {
                         <Textarea
                           {...field}
                           placeholder="Descreva sua mensagem."
-                          className="h-28 max-h-32 bg-gray-100"
+                          className="h-28 max-h-32"
                         />
                       </FormControl>
                       <FormMessage />
