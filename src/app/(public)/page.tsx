@@ -7,7 +7,6 @@ import { Testimonials } from "./_components/testimonials";
 import { FAQ } from "./_components/FAQ";
 import { CTA } from "./_components/CTA";
 import { Footer } from "./_components/footer";
-import { CookieConsent } from "@/components/cookieConsent";
 
 export const revalidate = 120;
 
@@ -17,8 +16,6 @@ export default async function Home() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="relative">
-        <CookieConsent />
-
         <Hero />
         <Features />
         <Pricing />
