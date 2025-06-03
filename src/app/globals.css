@@ -166,6 +166,10 @@
     animation: reveal 0.5s cubic-bezier(0.85, 0, 0.15, 1);
   }
 
+  .floatingCookies {
+    animation: revealout 0.5s cubic-bezier(0.85, 0, 0.15, 1);
+  }
+
   @keyframes reveal {
     from {
       transform: translateY(-100%);
@@ -178,11 +182,11 @@
 
   @keyframes revealout {
     from {
-      transform: translateY(0%);
+      transform: translateY(100%);
     }
 
     to {
-      transform: translateY(-100%);
+      transform: translateY(-10%);
     }
   }
 
