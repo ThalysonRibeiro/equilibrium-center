@@ -18,7 +18,10 @@ import {
   Settings,
   User,
   BarChart3,
-  MessageCircleQuestion
+  MessageCircleQuestion,
+  Users,
+  UserPen,
+  UserCheck
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -274,14 +277,19 @@ const navigationItems = [
         icon: <Folder className="w-6 h-6" />
       },
       {
+        href: "/dashboard/clients",
+        label: "Clientes",
+        icon: <UserPen className="w-6 h-6" />
+      },
+      {
         href: "/dashboard/reports",
         label: "Relatorios",
         icon: <BarChart3 className="w-6 h-6" />,
         subLinks: [
           {
-            href: "/dashboard/reports/client",
+            href: "/dashboard/reports/clients",
             label: "Clientes",
-            icon: <User className="w-6 h-6" />
+            icon: <UserCheck className="w-6 h-6" />
           },
           {
             href: "/dashboard/reports/invoicing",
