@@ -4150,8 +4150,18 @@ export namespace Prisma {
 
   export type AggregateAppointment = {
     _count: AppointmentCountAggregateOutputType | null
+    _avg: AppointmentAvgAggregateOutputType | null
+    _sum: AppointmentSumAggregateOutputType | null
     _min: AppointmentMinAggregateOutputType | null
     _max: AppointmentMaxAggregateOutputType | null
+  }
+
+  export type AppointmentAvgAggregateOutputType = {
+    age: number | null
+  }
+
+  export type AppointmentSumAggregateOutputType = {
+    age: number | null
   }
 
   export type AppointmentMinAggregateOutputType = {
@@ -4159,6 +4169,15 @@ export namespace Prisma {
     name: string | null
     email: string | null
     phone: string | null
+    age: number | null
+    dateOfBirth: Date | null
+    symptoms: string | null
+    secondary: string | null
+    complaints: string | null
+    useOfAnyMedication: boolean | null
+    bePregnant: boolean | null
+    eatingRoutine: boolean | null
+    physicalActivities: string | null
     appointmentDate: Date | null
     time: string | null
     status: $Enums.AppointmentStatus | null
@@ -4173,6 +4192,15 @@ export namespace Prisma {
     name: string | null
     email: string | null
     phone: string | null
+    age: number | null
+    dateOfBirth: Date | null
+    symptoms: string | null
+    secondary: string | null
+    complaints: string | null
+    useOfAnyMedication: boolean | null
+    bePregnant: boolean | null
+    eatingRoutine: boolean | null
+    physicalActivities: string | null
     appointmentDate: Date | null
     time: string | null
     status: $Enums.AppointmentStatus | null
@@ -4187,6 +4215,15 @@ export namespace Prisma {
     name: number
     email: number
     phone: number
+    age: number
+    dateOfBirth: number
+    symptoms: number
+    secondary: number
+    complaints: number
+    useOfAnyMedication: number
+    bePregnant: number
+    eatingRoutine: number
+    physicalActivities: number
     appointmentDate: number
     time: number
     status: number
@@ -4198,11 +4235,28 @@ export namespace Prisma {
   }
 
 
+  export type AppointmentAvgAggregateInputType = {
+    age?: true
+  }
+
+  export type AppointmentSumAggregateInputType = {
+    age?: true
+  }
+
   export type AppointmentMinAggregateInputType = {
     id?: true
     name?: true
     email?: true
     phone?: true
+    age?: true
+    dateOfBirth?: true
+    symptoms?: true
+    secondary?: true
+    complaints?: true
+    useOfAnyMedication?: true
+    bePregnant?: true
+    eatingRoutine?: true
+    physicalActivities?: true
     appointmentDate?: true
     time?: true
     status?: true
@@ -4217,6 +4271,15 @@ export namespace Prisma {
     name?: true
     email?: true
     phone?: true
+    age?: true
+    dateOfBirth?: true
+    symptoms?: true
+    secondary?: true
+    complaints?: true
+    useOfAnyMedication?: true
+    bePregnant?: true
+    eatingRoutine?: true
+    physicalActivities?: true
     appointmentDate?: true
     time?: true
     status?: true
@@ -4231,6 +4294,15 @@ export namespace Prisma {
     name?: true
     email?: true
     phone?: true
+    age?: true
+    dateOfBirth?: true
+    symptoms?: true
+    secondary?: true
+    complaints?: true
+    useOfAnyMedication?: true
+    bePregnant?: true
+    eatingRoutine?: true
+    physicalActivities?: true
     appointmentDate?: true
     time?: true
     status?: true
@@ -4279,6 +4351,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: AppointmentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: AppointmentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: AppointmentMinAggregateInputType
@@ -4309,6 +4393,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: AppointmentCountAggregateInputType | true
+    _avg?: AppointmentAvgAggregateInputType
+    _sum?: AppointmentSumAggregateInputType
     _min?: AppointmentMinAggregateInputType
     _max?: AppointmentMaxAggregateInputType
   }
@@ -4318,6 +4404,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age: number | null
+    dateOfBirth: Date | null
+    symptoms: string | null
+    secondary: string | null
+    complaints: string | null
+    useOfAnyMedication: boolean | null
+    bePregnant: boolean | null
+    eatingRoutine: boolean | null
+    physicalActivities: string | null
     appointmentDate: Date
     time: string
     status: $Enums.AppointmentStatus
@@ -4326,6 +4421,8 @@ export namespace Prisma {
     createdAt: Date
     updatedAt: Date
     _count: AppointmentCountAggregateOutputType | null
+    _avg: AppointmentAvgAggregateOutputType | null
+    _sum: AppointmentSumAggregateOutputType | null
     _min: AppointmentMinAggregateOutputType | null
     _max: AppointmentMaxAggregateOutputType | null
   }
@@ -4349,6 +4446,15 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    age?: boolean
+    dateOfBirth?: boolean
+    symptoms?: boolean
+    secondary?: boolean
+    complaints?: boolean
+    useOfAnyMedication?: boolean
+    bePregnant?: boolean
+    eatingRoutine?: boolean
+    physicalActivities?: boolean
     appointmentDate?: boolean
     time?: boolean
     status?: boolean
@@ -4365,6 +4471,15 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    age?: boolean
+    dateOfBirth?: boolean
+    symptoms?: boolean
+    secondary?: boolean
+    complaints?: boolean
+    useOfAnyMedication?: boolean
+    bePregnant?: boolean
+    eatingRoutine?: boolean
+    physicalActivities?: boolean
     appointmentDate?: boolean
     time?: boolean
     status?: boolean
@@ -4381,6 +4496,15 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    age?: boolean
+    dateOfBirth?: boolean
+    symptoms?: boolean
+    secondary?: boolean
+    complaints?: boolean
+    useOfAnyMedication?: boolean
+    bePregnant?: boolean
+    eatingRoutine?: boolean
+    physicalActivities?: boolean
     appointmentDate?: boolean
     time?: boolean
     status?: boolean
@@ -4397,6 +4521,15 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     phone?: boolean
+    age?: boolean
+    dateOfBirth?: boolean
+    symptoms?: boolean
+    secondary?: boolean
+    complaints?: boolean
+    useOfAnyMedication?: boolean
+    bePregnant?: boolean
+    eatingRoutine?: boolean
+    physicalActivities?: boolean
     appointmentDate?: boolean
     time?: boolean
     status?: boolean
@@ -4406,7 +4539,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "appointmentDate" | "time" | "status" | "serviceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "age" | "dateOfBirth" | "symptoms" | "secondary" | "complaints" | "useOfAnyMedication" | "bePregnant" | "eatingRoutine" | "physicalActivities" | "appointmentDate" | "time" | "status" | "serviceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     service?: boolean | ServiceDefaultArgs<ExtArgs>
@@ -4431,6 +4564,15 @@ export namespace Prisma {
       name: string
       email: string
       phone: string
+      age: number | null
+      dateOfBirth: Date | null
+      symptoms: string | null
+      secondary: string | null
+      complaints: string | null
+      useOfAnyMedication: boolean | null
+      bePregnant: boolean | null
+      eatingRoutine: boolean | null
+      physicalActivities: string | null
       appointmentDate: Date
       time: string
       status: $Enums.AppointmentStatus
@@ -4867,6 +5009,15 @@ export namespace Prisma {
     readonly name: FieldRef<"Appointment", 'String'>
     readonly email: FieldRef<"Appointment", 'String'>
     readonly phone: FieldRef<"Appointment", 'String'>
+    readonly age: FieldRef<"Appointment", 'Int'>
+    readonly dateOfBirth: FieldRef<"Appointment", 'DateTime'>
+    readonly symptoms: FieldRef<"Appointment", 'String'>
+    readonly secondary: FieldRef<"Appointment", 'String'>
+    readonly complaints: FieldRef<"Appointment", 'String'>
+    readonly useOfAnyMedication: FieldRef<"Appointment", 'Boolean'>
+    readonly bePregnant: FieldRef<"Appointment", 'Boolean'>
+    readonly eatingRoutine: FieldRef<"Appointment", 'Boolean'>
+    readonly physicalActivities: FieldRef<"Appointment", 'String'>
     readonly appointmentDate: FieldRef<"Appointment", 'DateTime'>
     readonly time: FieldRef<"Appointment", 'String'>
     readonly status: FieldRef<"Appointment", 'AppointmentStatus'>
@@ -14483,6 +14634,15 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     phone: 'phone',
+    age: 'age',
+    dateOfBirth: 'dateOfBirth',
+    symptoms: 'symptoms',
+    secondary: 'secondary',
+    complaints: 'complaints',
+    useOfAnyMedication: 'useOfAnyMedication',
+    bePregnant: 'bePregnant',
+    eatingRoutine: 'eatingRoutine',
+    physicalActivities: 'physicalActivities',
     appointmentDate: 'appointmentDate',
     time: 'time',
     status: 'status',
@@ -14685,6 +14845,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'AppointmentStatus'
    */
   export type EnumAppointmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentStatus'>
@@ -14709,13 +14876,6 @@ export namespace Prisma {
    * Reference to a field of type 'Decimal[]'
    */
   export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -14895,6 +15055,15 @@ export namespace Prisma {
     name?: StringFilter<"Appointment"> | string
     email?: StringFilter<"Appointment"> | string
     phone?: StringFilter<"Appointment"> | string
+    age?: IntNullableFilter<"Appointment"> | number | null
+    dateOfBirth?: DateTimeNullableFilter<"Appointment"> | Date | string | null
+    symptoms?: StringNullableFilter<"Appointment"> | string | null
+    secondary?: StringNullableFilter<"Appointment"> | string | null
+    complaints?: StringNullableFilter<"Appointment"> | string | null
+    useOfAnyMedication?: BoolNullableFilter<"Appointment"> | boolean | null
+    bePregnant?: BoolNullableFilter<"Appointment"> | boolean | null
+    eatingRoutine?: BoolNullableFilter<"Appointment"> | boolean | null
+    physicalActivities?: StringNullableFilter<"Appointment"> | string | null
     appointmentDate?: DateTimeFilter<"Appointment"> | Date | string
     time?: StringFilter<"Appointment"> | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -14911,6 +15080,15 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    age?: SortOrderInput | SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    symptoms?: SortOrderInput | SortOrder
+    secondary?: SortOrderInput | SortOrder
+    complaints?: SortOrderInput | SortOrder
+    useOfAnyMedication?: SortOrderInput | SortOrder
+    bePregnant?: SortOrderInput | SortOrder
+    eatingRoutine?: SortOrderInput | SortOrder
+    physicalActivities?: SortOrderInput | SortOrder
     appointmentDate?: SortOrder
     time?: SortOrder
     status?: SortOrder
@@ -14930,6 +15108,15 @@ export namespace Prisma {
     name?: StringFilter<"Appointment"> | string
     email?: StringFilter<"Appointment"> | string
     phone?: StringFilter<"Appointment"> | string
+    age?: IntNullableFilter<"Appointment"> | number | null
+    dateOfBirth?: DateTimeNullableFilter<"Appointment"> | Date | string | null
+    symptoms?: StringNullableFilter<"Appointment"> | string | null
+    secondary?: StringNullableFilter<"Appointment"> | string | null
+    complaints?: StringNullableFilter<"Appointment"> | string | null
+    useOfAnyMedication?: BoolNullableFilter<"Appointment"> | boolean | null
+    bePregnant?: BoolNullableFilter<"Appointment"> | boolean | null
+    eatingRoutine?: BoolNullableFilter<"Appointment"> | boolean | null
+    physicalActivities?: StringNullableFilter<"Appointment"> | string | null
     appointmentDate?: DateTimeFilter<"Appointment"> | Date | string
     time?: StringFilter<"Appointment"> | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -14946,6 +15133,15 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    age?: SortOrderInput | SortOrder
+    dateOfBirth?: SortOrderInput | SortOrder
+    symptoms?: SortOrderInput | SortOrder
+    secondary?: SortOrderInput | SortOrder
+    complaints?: SortOrderInput | SortOrder
+    useOfAnyMedication?: SortOrderInput | SortOrder
+    bePregnant?: SortOrderInput | SortOrder
+    eatingRoutine?: SortOrderInput | SortOrder
+    physicalActivities?: SortOrderInput | SortOrder
     appointmentDate?: SortOrder
     time?: SortOrder
     status?: SortOrder
@@ -14954,8 +15150,10 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: AppointmentCountOrderByAggregateInput
+    _avg?: AppointmentAvgOrderByAggregateInput
     _max?: AppointmentMaxOrderByAggregateInput
     _min?: AppointmentMinOrderByAggregateInput
+    _sum?: AppointmentSumOrderByAggregateInput
   }
 
   export type AppointmentScalarWhereWithAggregatesInput = {
@@ -14966,6 +15164,15 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Appointment"> | string
     email?: StringWithAggregatesFilter<"Appointment"> | string
     phone?: StringWithAggregatesFilter<"Appointment"> | string
+    age?: IntNullableWithAggregatesFilter<"Appointment"> | number | null
+    dateOfBirth?: DateTimeNullableWithAggregatesFilter<"Appointment"> | Date | string | null
+    symptoms?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    secondary?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    complaints?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    useOfAnyMedication?: BoolNullableWithAggregatesFilter<"Appointment"> | boolean | null
+    bePregnant?: BoolNullableWithAggregatesFilter<"Appointment"> | boolean | null
+    eatingRoutine?: BoolNullableWithAggregatesFilter<"Appointment"> | boolean | null
+    physicalActivities?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
     appointmentDate?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     time?: StringWithAggregatesFilter<"Appointment"> | string
     status?: EnumAppointmentStatusWithAggregatesFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -15748,6 +15955,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -15762,6 +15978,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -15776,6 +16001,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -15790,6 +16024,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -15804,6 +16047,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -15818,6 +16070,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -15830,6 +16091,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -16692,6 +16962,48 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type BoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type EnumAppointmentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.AppointmentStatus | EnumAppointmentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.AppointmentStatus[] | ListEnumAppointmentStatusFieldRefInput<$PrismaModel>
@@ -16704,11 +17016,25 @@ export namespace Prisma {
     isNot?: ServiceWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type AppointmentCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    age?: SortOrder
+    dateOfBirth?: SortOrder
+    symptoms?: SortOrder
+    secondary?: SortOrder
+    complaints?: SortOrder
+    useOfAnyMedication?: SortOrder
+    bePregnant?: SortOrder
+    eatingRoutine?: SortOrder
+    physicalActivities?: SortOrder
     appointmentDate?: SortOrder
     time?: SortOrder
     status?: SortOrder
@@ -16718,11 +17044,24 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type AppointmentAvgOrderByAggregateInput = {
+    age?: SortOrder
+  }
+
   export type AppointmentMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    age?: SortOrder
+    dateOfBirth?: SortOrder
+    symptoms?: SortOrder
+    secondary?: SortOrder
+    complaints?: SortOrder
+    useOfAnyMedication?: SortOrder
+    bePregnant?: SortOrder
+    eatingRoutine?: SortOrder
+    physicalActivities?: SortOrder
     appointmentDate?: SortOrder
     time?: SortOrder
     status?: SortOrder
@@ -16737,6 +17076,15 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     phone?: SortOrder
+    age?: SortOrder
+    dateOfBirth?: SortOrder
+    symptoms?: SortOrder
+    secondary?: SortOrder
+    complaints?: SortOrder
+    useOfAnyMedication?: SortOrder
+    bePregnant?: SortOrder
+    eatingRoutine?: SortOrder
+    physicalActivities?: SortOrder
     appointmentDate?: SortOrder
     time?: SortOrder
     status?: SortOrder
@@ -16744,6 +17092,66 @@ export namespace Prisma {
     userId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type AppointmentSumOrderByAggregateInput = {
+    age?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type BoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type EnumAppointmentStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -16880,22 +17288,6 @@ export namespace Prisma {
     not?: NestedEnumPlanFilter<$PrismaModel> | $Enums.Plan
   }
 
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type SubscriptionCountOrderByAggregateInput = {
     id?: SortOrder
     status?: SortOrder
@@ -16937,35 +17329,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPlanFilter<$PrismaModel>
     _max?: NestedEnumPlanFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type StringNullableListFilter<$PrismaModel = never> = {
@@ -17113,35 +17476,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type AccountProviderProviderAccountIdCompoundUniqueInput = {
     provider: string
     providerAccountId: string
@@ -17201,22 +17535,6 @@ export namespace Prisma {
 
   export type AccountSumOrderByAggregateInput = {
     expires_at?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -17368,6 +17686,26 @@ export namespace Prisma {
     connect?: ServiceWhereUniqueInput
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableBoolFieldUpdateOperationsInput = {
+    set?: boolean | null
+  }
+
   export type EnumAppointmentStatusFieldUpdateOperationsInput = {
     set?: $Enums.AppointmentStatus
   }
@@ -17478,10 +17816,6 @@ export namespace Prisma {
 
   export type EnumPlanFieldUpdateOperationsInput = {
     set?: $Enums.Plan
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
@@ -17616,10 +17950,6 @@ export namespace Prisma {
     create?: XOR<AssessmentsCreateWithoutUserInput, AssessmentsUncheckedCreateWithoutUserInput>
     connectOrCreate?: AssessmentsCreateOrConnectWithoutUserInput
     connect?: AssessmentsWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type UserUpdatetimesInput = {
@@ -17869,14 +18199,6 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -18007,11 +18329,118 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedBoolNullableFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
+  }
+
   export type NestedEnumAppointmentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.AppointmentStatus | EnumAppointmentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.AppointmentStatus[] | ListEnumAppointmentStatusFieldRefInput<$PrismaModel>
     notIn?: $Enums.AppointmentStatus[] | ListEnumAppointmentStatusFieldRefInput<$PrismaModel>
     not?: NestedEnumAppointmentStatusFilter<$PrismaModel> | $Enums.AppointmentStatus
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
+    not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedBoolNullableFilter<$PrismaModel>
+    _max?: NestedBoolNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumAppointmentStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -18071,17 +18500,6 @@ export namespace Prisma {
     not?: NestedEnumPlanFilter<$PrismaModel> | $Enums.Plan
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type NestedEnumPlanWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Plan | EnumPlanFieldRefInput<$PrismaModel>
     in?: $Enums.Plan[] | ListEnumPlanFieldRefInput<$PrismaModel>
@@ -18090,89 +18508,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPlanFilter<$PrismaModel>
     _max?: NestedEnumPlanFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type UserCreateWithoutAssessmentsInput = {
@@ -18867,6 +19202,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -18880,6 +19224,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -18995,6 +19348,15 @@ export namespace Prisma {
     name?: StringFilter<"Appointment"> | string
     email?: StringFilter<"Appointment"> | string
     phone?: StringFilter<"Appointment"> | string
+    age?: IntNullableFilter<"Appointment"> | number | null
+    dateOfBirth?: DateTimeNullableFilter<"Appointment"> | Date | string | null
+    symptoms?: StringNullableFilter<"Appointment"> | string | null
+    secondary?: StringNullableFilter<"Appointment"> | string | null
+    complaints?: StringNullableFilter<"Appointment"> | string | null
+    useOfAnyMedication?: BoolNullableFilter<"Appointment"> | boolean | null
+    bePregnant?: BoolNullableFilter<"Appointment"> | boolean | null
+    eatingRoutine?: BoolNullableFilter<"Appointment"> | boolean | null
+    physicalActivities?: StringNullableFilter<"Appointment"> | string | null
     appointmentDate?: DateTimeFilter<"Appointment"> | Date | string
     time?: StringFilter<"Appointment"> | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -19270,6 +19632,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -19283,6 +19654,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -20087,6 +20467,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -20100,6 +20489,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -20113,6 +20511,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -20126,6 +20533,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -20171,6 +20587,15 @@ export namespace Prisma {
     name: string
     email: string
     phone: string
+    age?: number | null
+    dateOfBirth?: Date | string | null
+    symptoms?: string | null
+    secondary?: string | null
+    complaints?: string | null
+    useOfAnyMedication?: boolean | null
+    bePregnant?: boolean | null
+    eatingRoutine?: boolean | null
+    physicalActivities?: string | null
     appointmentDate: Date | string
     time: string
     status?: $Enums.AppointmentStatus
@@ -20310,6 +20735,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -20323,6 +20757,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -20336,6 +20779,15 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     phone?: StringFieldUpdateOperationsInput | string
+    age?: NullableIntFieldUpdateOperationsInput | number | null
+    dateOfBirth?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    symptoms?: NullableStringFieldUpdateOperationsInput | string | null
+    secondary?: NullableStringFieldUpdateOperationsInput | string | null
+    complaints?: NullableStringFieldUpdateOperationsInput | string | null
+    useOfAnyMedication?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    bePregnant?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    eatingRoutine?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    physicalActivities?: NullableStringFieldUpdateOperationsInput | string | null
     appointmentDate?: DateTimeFieldUpdateOperationsInput | Date | string
     time?: StringFieldUpdateOperationsInput | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus

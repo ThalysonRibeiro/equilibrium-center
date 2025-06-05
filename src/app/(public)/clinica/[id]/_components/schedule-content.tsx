@@ -17,6 +17,9 @@ import { ScheduleTimeList } from "./schedule-time-list"
 import { createNewAppointment } from "../_actions/create-appointment"
 import { toast } from "sonner"
 import { LoadingUI } from "@/components/ui/loading-ui"
+import { Textarea } from "@/components/ui/textarea"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import img_bg from "@/assets/bg-3.png";
 
 type UserWithServiceAndSubscription = Prisma.UserGetPayload<{
   include: {
@@ -108,16 +111,53 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   }, [selectedDate, clinic.times, fetchBlockedTimes, selectedTime])
 
+  function calculateAge(nascimento: Date): number {
+    const today = new Date();
+    let theAge = today.getFullYear() - nascimento.getFullYear();
+    const month = today.getMonth() - nascimento.getMonth();
+
+    if (month < 0 || (month === 0 && today.getDate() < nascimento.getDate())) {
+      theAge--;
+    }
+
+    return theAge < 0 ? 0 : theAge;
+  }
+
+  useEffect(() => {
+    const subscription = form.watch((value, { name }) => {
+      if (name === 'dateOfBirth' && value.dateOfBirth) {
+        const theDateOfBirth = new Date(value.dateOfBirth);
+        const ageCalculated = calculateAge(theDateOfBirth);
+
+        form.setValue('age', ageCalculated);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [form]);
 
   async function handleRegisterAppointmnent(formData: AppoitmentFormData) {
     if (!selectedTime) {
       return;
     }
 
+    const useOfAnyMedication = formData?.useOfAnyMedication === "yes" ? true : false;
+    const bePregnant = formData?.bePregnant === "yes" ? true : false;
+    const eatingRoutine = formData?.eatingRoutine === "yes" ? true : false;
+
     const response = await createNewAppointment({
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
+      age: formData.age,
+      dateOfBirth: formData.dateOfBirth,
+      symptoms: formData.symptoms,
+      secondary: formData.secondary,
+      complaints: formData.complaints,
+      useOfAnyMedication: useOfAnyMedication,
+      bePregnant: bePregnant,
+      eatingRoutine: eatingRoutine,
+      physicalActivities: formData.physicalActivities,
       time: selectedTime,
       date: formData.date,
       serviceId: formData.serviceId,
@@ -136,12 +176,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   return (
     <div className="min-h-screen flex flex-col text-primary mb-6">
-      <div className="h-32 bg-primary" />
 
-      <section className="container mx-auto px-4 -mt-20">
+      <div className="h-32 bg-gradient-to-br from-teal-300 to-teal-500 shadow" />
+
+      <section className="container mx-auto px-4 -mt-24">
         <div className="max-w-2xl mx-auto">
           <article className="flex flex-col items-center">
-            <div className="relative w-48 h-48 rounded-full overflow-hidden border-4">
+            <div className="relative w-48 h-48 rounded-full overflow-hidden border-6 border-white">
               <Image
                 src={clinic.image ? clinic.image : img_test}
                 alt="foto da clinica"
@@ -153,12 +194,16 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
             <h1 className="text-2xl font-montserrat">
               {clinic.name}
             </h1>
-            <div className="flex items-center gap-2 mb-2">
-              <MapPin className="w-5 h-5" />
-              <span>
+            <div className="mb-2">
+              <span className="text-sm flex">
+                <MapPin className="w-5 h-5" />
                 {clinic.address ? clinic.address : "Endereço não informado"}
+                {clinic.number ? `, nº ${clinic.number}` : ""}
+                {clinic.city && clinic.state ? ` - ${clinic.city}-${clinic.state}` : ""}
+                {clinic.cep ? `, CEP ${clinic.cep}` : ""}
               </span>
             </div>
+
           </article>
         </div>
       </section>
@@ -175,7 +220,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               name="name"
               render={({ field }) => (
                 <FormItem className="my-2">
-                  <FormLabel>Nome completo</FormLabel>
+                  <FormLabel>Nome completo*</FormLabel>
                   <FormControl>
                     <Input
                       id="name"
@@ -193,7 +238,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               name="email"
               render={({ field }) => (
                 <FormItem className="my-2">
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Email*</FormLabel>
                   <FormControl>
                     <Input
                       id="email"
@@ -211,7 +256,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               name="phone"
               render={({ field }) => (
                 <FormItem className="my-2">
-                  <FormLabel>Telefone</FormLabel>
+                  <FormLabel>Telefone*</FormLabel>
                   <FormControl>
                     <Input
                       {...field}
@@ -228,12 +273,219 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               )}
             />
 
+            <div className="flex gap-3">
+              <FormField
+                control={form.control}
+                name="age"
+                render={({ field }) => (
+                  <FormItem className="my-2">
+                    <FormLabel>Idade</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        id="age"
+                        type="number"
+                        readOnly
+                        placeholder="0"
+                        className="w-20"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="dateOfBirth"
+                render={({ field }) => (
+                  <FormItem className="my-2">
+                    <FormLabel>Data de nascimento</FormLabel>
+                    <FormControl>
+                      <DateTimePicker
+                        initialDate={new Date()}
+                        minDate={new Date(1900, 0, 1)}
+                        activeYear={true}
+                        className="rounded-md border px-2 py-1 w-full"
+                        onChange={(date) => {
+                          field.onChange(date)
+                          console.log(field.value);
+
+                          console.log("Data escolhida:", date)
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+            </div>
+
+            <FormField
+              control={form.control}
+              name="symptoms"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Quais são suas principais queixas e sintomas?</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      id="symptoms"
+                      placeholder="Descreva Quais são suas principais queixas e sintomas"
+                      className="max-h-30 h-10"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="secondary"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Quais são suas queixas ou sintomas secundários?</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      id="secondary"
+                      placeholder="Descreva Quais são suas queixas ou sintomas secundários?"
+                      className="max-h-30 h-10"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="complaints"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Qual é o histórico dessas queixas?</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      id="complaints"
+                      placeholder="Descreva Qual é o histórico dessas queixas?"
+                      className="max-h-30 h-10"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <h2 className="font-semibold">
+              Você teve ou tem qualquer um dos itens abaixo relacionados (assinale)
+            </h2>
+
+            <FormField
+              control={form.control}
+              name="useOfAnyMedication"
+              render={({ field }) => (
+                <FormItem className="flex">
+                  <FormLabel>Faz uso de alguma medicação?</FormLabel>
+                  <FormControl className="flex">
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="yes" id="yes" />
+                        <Label htmlFor="yes">sim</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="not" id="not" />
+                        <Label htmlFor="not">não</Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="bePregnant"
+              render={({ field }) => (
+                <FormItem className="flex">
+                  <FormLabel>Está ou pode estar grávida?</FormLabel>
+                  <FormControl className="flex">
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="true" id="true" />
+                        <Label htmlFor="yes">sim</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="false" id="false" />
+                        <Label htmlFor="not">não</Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="eatingRoutine"
+              render={({ field }) => (
+                <FormItem className="flex">
+                  <FormLabel>Faz atividades físicas?</FormLabel>
+                  <FormControl className="flex">
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="true" id="true" />
+                        <Label htmlFor="yes">sim</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="false" id="false" />
+                        <Label htmlFor="not">não</Label>
+                      </div>
+                    </RadioGroup>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="physicalActivities"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Como é sua rotina alimentar?</FormLabel>
+                  <FormControl>
+                    <Textarea
+                      {...field}
+                      id="physicalActivities"
+                      placeholder="Descreva Como é sua rotina alimentar"
+                      className="max-h-30 h-10"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <FormField
               control={form.control}
               name="date"
               render={({ field }) => (
                 <FormItem className="flex items-center gap-2 space-y-1">
-                  <FormLabel>Data do agendamento</FormLabel>
+                  <FormLabel>Data do agendamento*</FormLabel>
                   <FormControl>
                     <DateTimePicker
                       initialDate={new Date()}
@@ -256,7 +508,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               name="serviceId"
               render={({ field }) => (
                 <FormItem className="">
-                  <FormLabel>Selecione o serviço</FormLabel>
+                  <FormLabel>Selecione o serviço*</FormLabel>
                   <FormControl>
                     <Select onValueChange={(value) => {
                       field.onChange(value)
@@ -281,7 +533,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
             {selectedServiceId && (
               <div className="space-y-2">
-                <Label>Horários disponíeis</Label>
+                <Label>Horários disponíeis*</Label>
                 <div className="bg-gray-100 p-2 rounded-md border">
                   {loadingSlots ? (
                     <LoadingUI />
@@ -323,9 +575,17 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 A clinica está fechada nesse momento
               </p>
             )}
-
           </form>
         </Form>
+      </section>
+
+      <section className="max-w-2xl mx-auto w-full mt-6 space-y-2 px-4 text-[12px]">
+        <p>
+          Sua Terapia será conduzida de forma estritamente confidencial. As informações pessoais passadas durante todo o procedimento da terapia, bem como essa ficha de Anamnese, não serão divulgadas para ninguém.
+        </p>
+        <p>
+          Ao assinar esse formulário, você reconhece que leu e concordou com o que está exposto acima, bem como, que está ciente que o sucesso terapêutico também depende do seguimento das recomendações profissionais concedidas.
+        </p>
       </section>
 
     </div>

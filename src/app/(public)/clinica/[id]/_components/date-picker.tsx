@@ -6,12 +6,14 @@ import { format } from "date-fns"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
+import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
 
 interface DateTimePickerProps {
   minDate?: Date
   className?: string
   initialDate?: Date
-  onChange: (date: Date) => void
+  onChange: (date: Date) => void;
+  activeYear?: boolean;
 }
 
 export function DateTimePicker({
@@ -19,15 +21,38 @@ export function DateTimePicker({
   minDate,
   initialDate,
   onChange,
+  activeYear = false
 }: DateTimePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(initialDate ?? new Date())
-  const [open, setOpen] = useState(false)
+  const [date, setDate] = useState<Date | undefined>(initialDate ?? new Date());
+  const [open, setOpen] = useState(false);
+  const [selectedYear, setSelectedYear] = useState(date?.getFullYear());
 
   function handleChange(newDate: Date | undefined) {
-    if (!newDate) return
-    setDate(newDate)
-    onChange(newDate)
-    setOpen(false)
+    if (!newDate) return;
+
+    // Se há um ano selecionado, preserve-o
+    if (selectedYear && selectedYear !== newDate.getFullYear()) {
+      const dateWithSelectedYear = new Date(selectedYear, newDate.getMonth(), newDate.getDate());
+      setDate(dateWithSelectedYear);
+      onChange(dateWithSelectedYear);
+    } else {
+      setDate(newDate);
+      onChange(newDate);
+    }
+    setOpen(false);
+  }
+
+  const handleYearChange = (y: string) => {
+    const newYear = parseInt(y);
+    setSelectedYear(newYear);
+
+    // Preserve o mês e dia atuais se existirem, senão use valores padrão
+    const currentMonth = date?.getMonth() ?? 0;
+    const currentDay = date?.getDate() ?? 1;
+
+    const newDate = new Date(newYear, currentMonth, currentDay);
+    setDate(newDate);
+    onChange(newDate);
   }
 
   return (
@@ -40,6 +65,23 @@ export function DateTimePicker({
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">
+        {activeYear && (
+          <div className="p-2">
+            <Select onValueChange={handleYearChange} value={selectedYear?.toString()}>
+              <SelectTrigger className="w-fit">Ano: {selectedYear}</SelectTrigger>
+              <SelectContent className="max-h-[200px] overflow-y-auto">
+                {Array.from({ length: 125 }, (_, i) => {
+                  const y = 2025 - i;
+                  return (
+                    <SelectItem key={y} value={y.toString()}>
+                      {y}
+                    </SelectItem>
+                  );
+                })}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
         <Calendar
           mode="single"
           selected={date}
@@ -47,6 +89,8 @@ export function DateTimePicker({
           initialFocus
           locale={ptBR}
           fromDate={minDate ?? new Date()}
+          // Força o calendário a mostrar o ano selecionado
+          defaultMonth={date}
         />
       </PopoverContent>
     </Popover>
