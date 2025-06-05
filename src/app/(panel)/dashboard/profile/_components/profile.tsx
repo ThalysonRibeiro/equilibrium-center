@@ -281,7 +281,7 @@ export function ProfileContent(
                   control={form.control}
                   name="cep"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem className="flex gap-2">
                       <FormLabel>CEP</FormLabel>
                       <FormControl>
                         <InputOTP
@@ -324,6 +324,8 @@ export function ProfileContent(
                           <Input
                             {...field}
                             placeholder="Digite o Estado"
+                            readOnly
+                            disabled
                           />
                         </FormControl>
                         <FormMessage />
@@ -341,6 +343,8 @@ export function ProfileContent(
                           <Input
                             {...field}
                             placeholder="Digite a cidade"
+                            readOnly
+                            disabled
                           />
                         </FormControl>
                         <FormMessage />
@@ -355,7 +359,6 @@ export function ProfileContent(
                   <FormField
                     control={form.control}
                     name="address"
-                    // disabled={true}
                     render={({ field }) => (
                       <FormItem className="w-full">
                         <FormLabel>Endereço completo</FormLabel>
