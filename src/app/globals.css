@@ -86,7 +86,7 @@
   --destructive: oklch(0.577 0.245 27.325);
 
   --border: oklch(87.2% 0.01 258.338);
-  --input: var(--secondary-dark);
+  --input: oklch(87.2% 0.01 258.338);
   --ring: var(--primary-mid);
   --chart-1: 198 65% 24%;
   --chart-2: 168 38% 60%;
