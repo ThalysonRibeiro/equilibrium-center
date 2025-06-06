@@ -106,7 +106,8 @@ export function TopHours({ data }: TopHoursProps) {
                 variant={"ghost"}
                 onClick={changeVisible}
                 className="hover:bg-gray-100 hover:text-primary">
-                Lista completa {isVisible ? <ChevronUp /> : <ChevronDown />}
+                {isVisible ? "Recolher lista" : "Lista completa"}
+                {isVisible ? <ChevronUp /> : <ChevronDown />}
               </Button>
             )}
           </CardContent>

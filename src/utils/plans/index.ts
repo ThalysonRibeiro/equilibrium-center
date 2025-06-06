@@ -50,7 +50,8 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte padrão",
       "Relatórios",
-      "Confirmação de agendamentos via WhatsApp"
+      "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
     ]
   },
   {
@@ -65,8 +66,9 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte prioritário",
       "Relatórios avançados",
-      "Download de relatórios em PDF",
       "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
+      "Download de relatórios em PDF",
     ]
   },
   {
@@ -93,7 +95,8 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte padrão",
       "Relatórios",
-      "Confirmação de agendamentos via WhatsApp"
+      "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
     ]
   },
   {
@@ -108,8 +111,9 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte prioritário",
       "Relatórios avançados",
-      "Download de relatórios em PDF",
       "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
+      "Download de relatórios em PDF",
     ]
   },
   {
@@ -136,7 +140,8 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte padrão",
       "Relatórios",
-      "Confirmação de agendamentos via WhatsApp"
+      "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
     ]
   },
   {
@@ -151,8 +156,9 @@ export const subscriptionPlans: SubscriptionPlansProps[] = [
       "Agendamentos ilimitados",
       "Suporte prioritário",
       "Relatórios avançados",
-      "Download de relatórios em PDF",
       "Confirmação de agendamentos via WhatsApp",
+      "Download de detalhes do cliente em PDF",
+      "Download de relatórios em PDF",
     ]
   },
 ]

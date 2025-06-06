@@ -23,18 +23,13 @@ import { toast } from "sonner";
 import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { DialogAppointments } from "./dialog-appointments";
 import { ButtonPickerAppointment } from "./button-picker-date";
+import { AppointmentWithService } from "../../reports/types/allApponitments";
 
 interface AppointmentListProps {
   times: string[];
   permission: boolean;
   planId: string;
 }
-
-export type AppointmentWithService = Prisma.AppointmentGetPayload<{
-  include: {
-    service: true
-  }
-}>;
 
 export function AppointmentList({ times, permission, planId }: AppointmentListProps) {
   const searchParams = useSearchParams();
@@ -227,7 +222,7 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
           </ScrollArea>
         </CardContent>
       </Card>
-      <DialogAppointments appointment={detailAppointment} />
+      <DialogAppointments appointment={detailAppointment} permission={planId} />
     </Dialog>
   )
 }

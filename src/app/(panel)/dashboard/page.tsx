@@ -40,7 +40,7 @@ export default async function Dashboard() {
           <Appointments
             userId={session.user.id!}
             permission={permission.hasPermission}
-            planId={subscription?.subscriptionStatus}
+            planId={subscription?.planId}
           />
           <Reminders userId={session.user.id!} />
         </section>

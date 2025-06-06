@@ -7,6 +7,7 @@ import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { cn } from "@/lib/utils"
 import { Select, SelectContent, SelectItem, SelectTrigger } from "@/components/ui/select"
+import { Calendar1 } from "lucide-react"
 
 interface DateTimePickerProps {
   minDate?: Date
@@ -59,9 +60,10 @@ export function DateTimePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button
-          className={cn("border", !date && "text-muted-foreground", className)}
+          className={cn("border flex justify-around", !date && "text-muted-foreground", className)}
         >
           {date ? format(date, "dd/MM/yyyy", { locale: ptBR }) : <span>Escolha a data</span>}
+          <Calendar1 />
         </button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0">

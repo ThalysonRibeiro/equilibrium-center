@@ -277,15 +277,15 @@ const navigationItems = [
         icon: <Folder className="w-6 h-6" />
       },
       {
+        href: "/dashboard/clients",
+        label: "Clientes",
+        icon: <UserCheck className="w-6 h-6" />
+      },
+      {
         href: "/dashboard/reports",
         label: "Relatorios",
         icon: <BarChart3 className="w-6 h-6" />,
         subLinks: [
-          {
-            href: "/dashboard/reports/clients",
-            label: "Clientes",
-            icon: <UserCheck className="w-6 h-6" />
-          },
           {
             href: "/dashboard/reports/invoicing",
             label: "Faturamento",

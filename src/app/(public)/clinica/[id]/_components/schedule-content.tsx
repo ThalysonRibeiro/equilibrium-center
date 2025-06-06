@@ -177,12 +177,19 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   return (
     <div className="min-h-screen flex flex-col text-primary mb-6">
 
-      <div className="h-32 bg-gradient-to-br from-teal-300 to-teal-500 shadow" />
+      <section className="w-full h-80 flex items-center justify-center mx-auto px-4 relative inset-0">
+        <div className="h-80 -z-[1] bg-gradient-to-br from-teal-300/80 to-teal-500/80 shadow absolute inset-0" />
 
-      <section className="container mx-auto px-4 -mt-24">
+        <Image
+          className="object-cover absolute w-full h-80 -z-[2] inset-0"
+          src={clinic.image ? clinic.image : img_test}
+          alt="imagem de fundo da clinica"
+          width={1280}
+          height={280}
+        />
         <div className="max-w-2xl mx-auto">
-          <article className="flex flex-col items-center">
-            <div className="relative w-48 h-48 rounded-full overflow-hidden border-6 border-white">
+          <article className="flex flex-col items-center gap-2">
+            <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-white">
               <Image
                 src={clinic.image ? clinic.image : img_test}
                 alt="foto da clinica"
@@ -191,11 +198,12 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               />
             </div>
 
-            <h1 className="text-2xl font-montserrat">
+            <h1 className="text-4xl text-white  font-semibold">
               {clinic.name}
             </h1>
+            <h2 className="text-center text-sm text-white line-clamp-2">{clinic.description}</h2>
             <div className="mb-2">
-              <span className="text-sm flex">
+              <span className="text-white flex">
                 <MapPin className="w-5 h-5" />
                 {clinic.address ? clinic.address : "Endereço não informado"}
                 {clinic.number ? `, nº ${clinic.number}` : ""}
@@ -215,79 +223,21 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
             onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
             className="mx-4 space-y-6 bg-white p-6 rounded-md border"
           >
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className="my-2">
-                  <FormLabel>Nome completo*</FormLabel>
-                  <FormControl>
-                    <Input
-                      id="name"
-                      placeholder="Digite seu nome completo..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="my-2">
-                  <FormLabel>Email*</FormLabel>
-                  <FormControl>
-                    <Input
-                      id="email"
-                      placeholder="Digite seu email"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem className="my-2">
-                  <FormLabel>Telefone*</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      id="phone"
-                      placeholder="(00) 00000-0000"
-                      onChange={(e) => {
-                        const formattedValue = formatPhone(e.target.value);
-                        field.onChange(formattedValue)
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <div className="flex gap-3">
+            <h3 className="font-semibold text-lg text-center">
+              Informações pessoais
+            </h3>
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
               <FormField
                 control={form.control}
-                name="age"
+                name="name"
                 render={({ field }) => (
                   <FormItem className="my-2">
-                    <FormLabel>Idade</FormLabel>
+                    <FormLabel>Nome completo*</FormLabel>
                     <FormControl>
                       <Input
+                        id="name"
+                        placeholder="Digite seu nome completo..."
                         {...field}
-                        id="age"
-                        type="number"
-                        readOnly
-                        placeholder="0"
-                        className="w-20"
                       />
                     </FormControl>
                     <FormMessage />
@@ -297,21 +247,36 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
               <FormField
                 control={form.control}
-                name="dateOfBirth"
+                name="email"
                 render={({ field }) => (
                   <FormItem className="my-2">
-                    <FormLabel>Data de nascimento</FormLabel>
+                    <FormLabel>Email*</FormLabel>
                     <FormControl>
-                      <DateTimePicker
-                        initialDate={new Date()}
-                        minDate={new Date(1900, 0, 1)}
-                        activeYear={true}
-                        className="rounded-md border px-2 py-1 w-full"
-                        onChange={(date) => {
-                          field.onChange(date)
-                          console.log(field.value);
+                      <Input
+                        id="email"
+                        placeholder="Digite seu email"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                          console.log("Data escolhida:", date)
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem className="my-2">
+                    <FormLabel>Telefone*</FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        id="phone"
+                        placeholder="(00) 00000-0000"
+                        onChange={(e) => {
+                          const formattedValue = formatPhone(e.target.value);
+                          field.onChange(formattedValue)
                         }}
                       />
                     </FormControl>
@@ -320,7 +285,56 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 )}
               />
 
+              <div className="flex gap-3">
+                <FormField
+                  control={form.control}
+                  name="age"
+                  render={({ field }) => (
+                    <FormItem className="my-2 w-1/2">
+                      <FormLabel>Idade</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          id="age"
+                          type="number"
+                          readOnly
+                          placeholder="0"
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="dateOfBirth"
+                  render={({ field }) => (
+                    <FormItem className="my-2 w-1/2">
+                      <FormLabel>Data de nascimento</FormLabel>
+                      <FormControl>
+                        <DateTimePicker
+                          initialDate={new Date()}
+                          minDate={new Date(1900, 0, 1)}
+                          activeYear={true}
+                          className="rounded-md border px-2 py-1"
+                          onChange={(date) => {
+                            field.onChange(date)
+                            console.log(field.value);
+
+                            console.log("Data escolhida:", date)
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
             </div>
+
+            <h3 className="font-semibold text-lg text-center">
+              Informações Clínicas
+            </h3>
 
             <FormField
               control={form.control}
@@ -379,87 +393,89 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               )}
             />
 
-            <h2 className="font-semibold">
-              Você teve ou tem qualquer um dos itens abaixo relacionados (assinale)
-            </h2>
+            <h3 className="font-semibold text-lg text-center">
+              Informações Adicionais
+            </h3>
+            <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:justify-between">
+              <FormField
+                control={form.control}
+                name="useOfAnyMedication"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Faz uso de alguma medicação?</FormLabel>
+                    <FormControl className="flex md:justify-center gap-4">
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="yes" id="yes" />
+                          <Label htmlFor="yes">sim</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="not" id="not" />
+                          <Label htmlFor="not">não</Label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="useOfAnyMedication"
-              render={({ field }) => (
-                <FormItem className="flex">
-                  <FormLabel>Faz uso de alguma medicação?</FormLabel>
-                  <FormControl className="flex">
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="yes" id="yes" />
-                        <Label htmlFor="yes">sim</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="not" id="not" />
-                        <Label htmlFor="not">não</Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="bePregnant"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Está ou pode estar grávida?</FormLabel>
+                    <FormControl className="flex md:justify-center gap-4">
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="true" id="true" />
+                          <Label htmlFor="yes">sim</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="false" id="false" />
+                          <Label htmlFor="not">não</Label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="bePregnant"
-              render={({ field }) => (
-                <FormItem className="flex">
-                  <FormLabel>Está ou pode estar grávida?</FormLabel>
-                  <FormControl className="flex">
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="true" id="true" />
-                        <Label htmlFor="yes">sim</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="false" id="false" />
-                        <Label htmlFor="not">não</Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="eatingRoutine"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Faz atividades físicas?</FormLabel>
+                    <FormControl className="flex md:justify-center gap-4">
+                      <RadioGroup
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="true" id="true" />
+                          <Label htmlFor="yes">sim</Label>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <RadioGroupItem value="false" id="false" />
+                          <Label htmlFor="not">não</Label>
+                        </div>
+                      </RadioGroup>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="eatingRoutine"
-              render={({ field }) => (
-                <FormItem className="flex">
-                  <FormLabel>Faz atividades físicas?</FormLabel>
-                  <FormControl className="flex">
-                    <RadioGroup
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="true" id="true" />
-                        <Label htmlFor="yes">sim</Label>
-                      </div>
-                      <div className="flex items-center space-x-2">
-                        <RadioGroupItem value="false" id="false" />
-                        <Label htmlFor="not">não</Label>
-                      </div>
-                    </RadioGroup>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            </div>
 
             <FormField
               control={form.control}
@@ -480,56 +496,61 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               )}
             />
 
-            <FormField
-              control={form.control}
-              name="date"
-              render={({ field }) => (
-                <FormItem className="flex items-center gap-2 space-y-1">
-                  <FormLabel>Data do agendamento*</FormLabel>
-                  <FormControl>
-                    <DateTimePicker
-                      initialDate={new Date()}
-                      className="rounded-md border px-2 py-1"
-                      onChange={(date) => {
-                        if (date) {
-                          field.onChange(date)
-                          setSelectedTime("");
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            <h3 className="font-semibold text-lg text-center">
+              Agendamento
+            </h3>
+            <div className="w-full grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="date"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Data do agendamento*</FormLabel>
+                    <FormControl>
+                      <DateTimePicker
+                        initialDate={new Date()}
+                        className="rounded-md border px-2 py-1"
+                        onChange={(date) => {
+                          if (date) {
+                            field.onChange(date)
+                            setSelectedTime("");
+                          }
+                        }}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-            <FormField
-              control={form.control}
-              name="serviceId"
-              render={({ field }) => (
-                <FormItem className="">
-                  <FormLabel>Selecione o serviço*</FormLabel>
-                  <FormControl>
-                    <Select onValueChange={(value) => {
-                      field.onChange(value)
-                      setSelectedTime("");
-                    }}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Selecione um serviço" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {clinic.service.map(service => (
-                          <SelectItem key={service.id} value={service.id}>
-                            {service.name} ({Math.floor(service.duration / 60)}h {service.duration % 60}min)
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+              <FormField
+                control={form.control}
+                name="serviceId"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormLabel>Selecione o serviço*</FormLabel>
+                    <FormControl>
+                      <Select onValueChange={(value) => {
+                        field.onChange(value)
+                        setSelectedTime("");
+                      }}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Selecione um serviço" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {clinic.service.map(service => (
+                            <SelectItem key={service.id} value={service.id}>
+                              {service.name} ({Math.floor(service.duration / 60)}h {service.duration % 60}min)
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
 
             {selectedServiceId && (
               <div className="space-y-2">
@@ -575,18 +596,18 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 A clinica está fechada nesse momento
               </p>
             )}
+            <article className="max-w-2xl mx-auto w-full mt-6 space-y-2 px-4 text-[12px]">
+              <p>
+                Sua Terapia será conduzida de forma estritamente confidencial. As informações pessoais passadas durante todo o procedimento da terapia, bem como essa ficha de Anamnese, não serão divulgadas para ninguém.
+              </p>
+              <p>
+                Ao assinar esse formulário, você reconhece que leu e concordou com o que está exposto acima, bem como, que está ciente que o sucesso terapêutico também depende do seguimento das recomendações profissionais concedidas.
+              </p>
+            </article>
           </form>
         </Form>
       </section>
 
-      <section className="max-w-2xl mx-auto w-full mt-6 space-y-2 px-4 text-[12px]">
-        <p>
-          Sua Terapia será conduzida de forma estritamente confidencial. As informações pessoais passadas durante todo o procedimento da terapia, bem como essa ficha de Anamnese, não serão divulgadas para ninguém.
-        </p>
-        <p>
-          Ao assinar esse formulário, você reconhece que leu e concordou com o que está exposto acima, bem como, que está ciente que o sucesso terapêutico também depende do seguimento das recomendações profissionais concedidas.
-        </p>
-      </section>
 
     </div>
   )

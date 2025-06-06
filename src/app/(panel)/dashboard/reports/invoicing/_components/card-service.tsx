@@ -11,6 +11,7 @@ import { TopServiceProps } from '../../types/topServices';
 import { formatCurrency } from '@/utils/formatCurrency';
 import { formatDuration } from '@/utils/formatHour';
 import { Progress } from "@/components/ui/progress";
+import { abbreviateServiceName } from "@/utils/abbreviateServiceName";
 
 
 export interface ServiceCardProps {
@@ -26,8 +27,14 @@ export function ServiceCard({ service, maxCount, currentCount, maxAmount, maxDur
   return (
     <Card className="hover:scale-102 transition-transform duration-300">
       <CardHeader>
-        <CardTitle className="flex justify-between items-center font-semibold text-lg">
-          <span className="line-clamp-1">{service.name}</span>
+        <CardTitle className="relative group flex justify-between items-center font-semibold text-lg">
+          <span className="line-clamp-1">
+            {abbreviateServiceName(service.name)}
+          </span>
+          <div className="absolute bottom-full left-0 mb-1 border bg-white text-primary p-2 rounded-md shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+            {service.name}
+            <div className="bg-white w-3 h-3 border-b border-r rotate-45 absolute left-3 -bottom-1.5" />
+          </div>
           <span>{formatCurrency(service.price.toString())}</span>
         </CardTitle>
         <CardDescription>

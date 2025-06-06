@@ -12,7 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import { formatCurrency, formatShortNumber } from "@/utils/formatCurrency";
-import GeneratePDFForSixMonth from "../../_components/generatePDF/generate-pdf-invoicing-six-month";
+import GeneratePDFForSixMonth from "../../../../../../components/generatePDF/generate-pdf-invoicing-six-month";
 
 interface BarProps {
   chartData: MonthlyDataProps[];

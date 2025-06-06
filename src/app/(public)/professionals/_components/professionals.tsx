@@ -9,7 +9,7 @@ import Image from "next/image";
 import img_test from "@/assets/img-hero.jpg";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { InputSearch } from "./input-search";
+import { InputSearch } from "../../../../components/input-search";
 import { FaWhatsapp } from "react-icons/fa6";
 import { extractPhoneNumber } from "@/utils/fomatPhone";
 import { useSearchParams } from "next/navigation";

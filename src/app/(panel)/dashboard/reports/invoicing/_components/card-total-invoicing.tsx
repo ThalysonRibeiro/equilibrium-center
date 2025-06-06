@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import GeneratePDFTotalInvoicing from "../../_components/generatePDF/generate-pdf-total-invoicing";
+import GeneratePDFTotalInvoicing from "../../../../../../components/generatePDF/generate-pdf-total-invoicing";
 import { InvoiceProps } from "../../types/invoicing";
 import { formatCurrency } from "@/utils/formatCurrency";
 

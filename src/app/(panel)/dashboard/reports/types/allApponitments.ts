@@ -1,7 +1,7 @@
 import { Prisma } from "@/generated/prisma";
 
 export interface AllAppointmentProps {
-  tartDate: Date;
+  startDate: Date;
   endDate: Date;
   allAppointments: AppointmentWithService[];
   countAllAppointments: number;

@@ -50,10 +50,10 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
       <CardContent>
         <div>
           <Table>
-            <TableHeader className="bg-cyan-600">
+            <TableHeader className="bg-accent">
               <TableRow className="text-xl">
-                <TableHead>Agendamentos</TableHead>
-                <TableHead className="text-right">Faturamento</TableHead>
+                <TableHead className="text-white">Agendamentos</TableHead>
+                <TableHead className="text-right text-white">Faturamento</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -67,12 +67,12 @@ export function PerformanceContent({ data }: PerformanceContentProps) {
         <hr className="my-6" />
         <div>
           <Table>
-            <TableHeader className="bg-cyan-600">
+            <TableHeader className="bg-accent">
               <TableRow>
-                <TableHead className="w-[100px]">Cliente</TableHead>
-                <TableHead>Serviço</TableHead>
-                <TableHead className="text-right">Duração</TableHead>
-                <TableHead className="text-right">Valor</TableHead>
+                <TableHead className="w-[100px] text-white">Cliente</TableHead>
+                <TableHead className="text-white">Serviço</TableHead>
+                <TableHead className="text-right text-white">Duração</TableHead>
+                <TableHead className="text-right text-white">Valor</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

@@ -13,6 +13,7 @@ import { TopServiceProps } from "../../types/topServices";
 import { LoadingUI } from "@/components/ui/loading-ui";
 import { formatCurrency } from "@/utils/formatCurrency";
 import { formatDuration } from "@/utils/formatHour";
+import GeneratePDFTopServices from "@/components/generatePDF/generate-pdf-top-services";
 
 
 
@@ -52,6 +53,12 @@ export function TopServicesContent({ download_pdf }: { download_pdf: boolean }) 
           </CardDescription>
         </CardHeader>
         <CardContent>
+
+          {download_pdf && (
+            <div className="flex justify-end mb-4">
+              <GeneratePDFTopServices data={topServices} />
+            </div>
+          )}
           <div className="flex justify-between items-center mb-4">
             <div className="text-center">
               <p className="text-lg font-semibold">{maxCount}</p>
