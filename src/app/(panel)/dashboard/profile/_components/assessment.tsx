@@ -2,18 +2,14 @@
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-
+  CardDescription, CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import StarRating from "./starRating";
 import { Button } from "@/components/ui/button";
 import { Dispatch, SetStateAction, useState } from "react";
-import { Prisma } from "@/generated/prisma";
 import { AssessmentFormData, useAssessmentForm } from "./assessment-form";
 import { createNewAssessment } from "../_actions/create-assessment";
 import { toast } from "sonner";
@@ -40,9 +36,6 @@ export function Assessment({ user, editAssessment }: AssessmentProps) {
 
   // setAssessment(prev => ({ ...prev, rating: newRating }));
   // setAssessment(prev => ({ ...prev, message: newMessage }));
-
-
-
 
   const form = useAssessmentForm({
     defaultValues: {
@@ -99,8 +92,6 @@ export function Assessment({ user, editAssessment }: AssessmentProps) {
     }
   }
 
-  // Utilizei o site para agendar uma sessão de massagem e a experiência foi excelente do início ao fim. A plataforma é intuitiva, com um layout limpo e fácil de navegar.
-
   return (
     <div>
       <Card>
@@ -154,12 +145,12 @@ export function Assessment({ user, editAssessment }: AssessmentProps) {
                 }}
               />
               <Button
-                className="w-full"
+                className="w-full hover:bg-accent"
                 type="submit"
                 disabled={!form.watch("message")}
               >
                 {loading ?
-                  <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+                  <div className="w-6 h-6 border-2 border-t-2 border-gray-300 rounded-full animate-spin" />
                   : `${user?.assessments ? "Atualizar avaliação" : "Enviar avaliação"}`}
               </Button>
             </form>

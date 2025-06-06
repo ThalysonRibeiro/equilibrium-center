@@ -444,8 +444,9 @@ export function ProfileContent(
                           {hours?.map((hour) => (
                             <Button
                               key={hour}
+                              variant={"ghost"}
                               onClick={() => togglreHour(hour)}
-                              className={cn("border bg-white text-primary hover:text-white hover:bg-accent", selectedHours.includes(hour) && 'bg-primary hover:bg-accent text-white')}
+                              className={cn("border hover:text-white hover:bg-accent", selectedHours.includes(hour) && 'bg-primary hover:bg-accent text-white')}
                             >
                               {hour}
                             </Button>
@@ -497,7 +498,7 @@ export function ProfileContent(
 
                 <Button
                   type="submit"
-                  className="w-full transition-colors duration-300"
+                  className="w-full hover:bg-accent transition-colors duration-300"
                 >
                   Salvar alterações
                 </Button>

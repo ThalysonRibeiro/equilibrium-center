@@ -113,7 +113,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
 
   return (
     <>
-      <DialogHeader className="text-primary">
+      <DialogHeader>
         <DialogTitle className="font-montserrat">Novo Servoço</DialogTitle>
         <DialogDescription>
           Adicione um serviço
@@ -122,7 +122,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
 
       <Form {...form}>
         <form
-          className="space-y-2 text-primary"
+          className="space-y-2"
           onSubmit={form.handleSubmit(onSubmit)}
         >
           <div className="flex flex-col">
@@ -213,7 +213,7 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
             className=" hover:bg-accent w-full"
           >
             {loading ?
-              <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
+              <div className="w-6 h-6 border-2 border-t-2 border-gray-300 rounded-full animate-spin" />
               : `${serviceId ? "Atualizar serviço" : "Cadastrar serviço"}`}
 
           </Button>

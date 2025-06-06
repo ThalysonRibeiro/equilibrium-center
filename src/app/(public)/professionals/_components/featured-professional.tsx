@@ -23,7 +23,7 @@ export function FeaturedProfessional({ professionals }: ProfessionalsProps) {
       {featuredProfessional.length > 0 && (
         <section id="professionalsFeatured" className="pt-18 pb-6 bg-white">
           <div className="container mx-auto px-6 space-y-6 flex flex-col items-center">
-            <h2 className="text-primary text-3xl text-center mb-2 font-bold">
+            <h2 className="text-3xl text-center mb-2 font-bold">
               Clínicas em Destaque
             </h2>
             <p className="text-center mb-2">

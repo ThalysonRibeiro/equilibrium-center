@@ -46,7 +46,7 @@ export function CardLogin() {
 
           <Button
             onClick={() => handdleLogin("google")}
-            className="bg-white text-primary hover:bg-white cursor-pointer border"
+            className="bg-white hover:bg-white cursor-pointer border"
           >
             Google
             <FcGoogle />

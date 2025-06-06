@@ -65,7 +65,7 @@ export default function StarRating({ onValorChange, ratingValue }: StarRatingPro
         ))}
       </div>
 
-      <p className="text-primary">
+      <p>
         {getRatingText(hover || rating)}
       </p>
     </div>

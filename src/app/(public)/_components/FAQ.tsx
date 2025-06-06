@@ -12,7 +12,7 @@ export function FAQ() {
   return (
     <section id="faq" className="bg-gray-50 py-6 sm:px-1 flex flex-col items-center justify-center gap-6">
       <div className="container mx-auto px-6">
-        <h2 className="text-primary text-3xl text-center font-bold">
+        <h2 className="text-3xl text-center font-bold">
           Perguntas frequentes
         </h2>
         <p className="text-center">
@@ -31,18 +31,18 @@ export function FAQ() {
         </Accordion>
 
         <div className="mt-16 max-w-3xl mx-auto text-center">
-          <h3 className="text-xl text-primary font-semibold mb-4">
+          <h3 className="text-xl font-semibold mb-4">
             Ainda tem dúvidas?
           </h3>
           <p className="mb-6">
             Nossa equipe de suporte está aqui para ajudar você com qualquer dúvida que você tenha sobre nossa plataforma.
           </p>
           <div className="inline-flex items-center justify-center space-x-4">
-            <Link href="#" className="text-ring hover:text-accent font-medium flex items-center">
+            <Link href="#" className="text-ring font-medium flex items-center">
               <Mail className="text-ring" />
               Entre em contato
             </Link>
-            <Link href="#" className="text-ring hover:text-accent font-medium flex items-center">
+            <Link href="#" className="text-ring font-medium flex items-center">
               <CircleHelp className="text-white fill-ring" />
               Ver Central de Ajuda
             </Link>

@@ -83,7 +83,7 @@ export function ServicesList({ services, permission }: ServicesListProps) {
           setEditingService(null)
         }
       }}>
-      <section className="mx-auto text-primary">
+      <section className="mx-auto">
         <Card>
           <CardHeader className="flex flex-row justify-between items-center space-y-0">
             <CardTitle className="text-xl font-montserrat">Serviços Ativo</CardTitle>

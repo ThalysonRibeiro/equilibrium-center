@@ -67,10 +67,7 @@ export function SubscriptionDetail({ subscription }: SubscriptionDetailProps) {
         </div>
         <ul className="space-y-2 list-disc mx-4">
           {subscriptionInfo && subscriptionInfo.features.map((feature, index) => (
-            <li
-              key={feature}
-              className={`${index <= activeFeaturesCount ? "text-primary" : "text-gray-600 line-through"}`}
-            >
+            <li key={feature}>
               {feature}
             </li>
           ))}

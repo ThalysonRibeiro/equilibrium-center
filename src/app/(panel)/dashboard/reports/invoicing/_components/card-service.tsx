@@ -31,7 +31,7 @@ export function ServiceCard({ service, maxCount, currentCount, maxAmount, maxDur
           <span className="line-clamp-1">
             {abbreviateServiceName(service.name)}
           </span>
-          <div className="absolute bottom-full left-0 mb-1 border bg-white text-primary p-2 rounded-md shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
+          <div className="absolute bottom-full left-0 mb-1 border bg-white p-2 rounded-md shadow opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap z-10">
             {service.name}
             <div className="bg-white w-3 h-3 border-b border-r rotate-45 absolute left-3 -bottom-1.5" />
           </div>

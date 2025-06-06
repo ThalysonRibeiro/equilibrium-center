@@ -89,7 +89,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
               }}
             />
           </div>
-          {!isCollapsed && <p className="uppercase font-montserrat font-semibold text-primary">
+          {!isCollapsed && <p className="uppercase font-montserrat font-semibold">
             Equilibrium <br />
             <span className="text-accent">
               Center
@@ -138,7 +138,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
                   <List className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <h1 className="text-primary font-montserrat">Menu - Equilibrium Center</h1>
+              <h1 className="font-montserrat">Menu - Equilibrium Center</h1>
             </div>
 
             <SheetContent side="right" className="sm:max-w-xs p-3 border-l pt-10 bg-white">
@@ -156,7 +156,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
                       }}
                     />
                   </div>
-                  <p className="text-primary uppercase font-montserrat">Equilibrium <br />
+                  <p className="uppercase font-montserrat">Equilibrium <br />
                     <span className="text-accent">
                       Center
                     </span>
@@ -200,7 +200,7 @@ function SidebarLinks({ href, icon, label, isCollapsed, pathname }: SidebarLinks
     >
       <div className={clsx("flex items-center gap-2 px-3 py-2 rounded-md hover:bg-accent hover:text-white", {
         "bg-accent text-white": pathname === href,
-        "text-primary": pathname !== href,
+        "": pathname !== href,
       })}>
         <span className="w-6 h-6">{icon}</span>
         {!isCollapsed && <span>{label}</span>}

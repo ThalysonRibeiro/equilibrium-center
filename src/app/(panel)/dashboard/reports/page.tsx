@@ -48,8 +48,8 @@ export default async function Reports() {
       </div>
     }>
       <main className="space-y-4">
-        <h1 className="text-2xl font-semibold text-primary text-center">
-          Dashboard - Visão geral últimos 30 dias
+        <h1 className="text-2xl font-semibold text-center">
+          Dashboard
         </h1>
 
         {(permissionReports?.limitReport || []).includes("performanceCards") && (

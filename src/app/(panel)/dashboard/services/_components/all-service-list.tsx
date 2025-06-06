@@ -28,7 +28,7 @@ export function AllServiceList({ services }: AllServiceListProps) {
         </CardHeader>
 
         <CardContent>
-          <section className="space-y-2 mt-5 text-primary">
+          <section className="space-y-2 mt-5">
             {services.map(service => (
               <article
                 key={service.id}

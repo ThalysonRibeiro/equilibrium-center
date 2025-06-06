@@ -15,7 +15,7 @@ export default async function Plans() {
 
   return (
     <main className="space-y-10">
-      <h1 className="text-lg text-primary text-center font-semibold">Escolha seu plano</h1>
+      <h1 className="text-lg text-center font-semibold">Escolha seu plano</h1>
       {subscription?.status !== "active" && (
         <GridPlans plansType={subscriptionPlans} />
       )}

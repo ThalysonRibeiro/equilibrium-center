@@ -26,7 +26,7 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
         <CardDescription>Total de agendamentos da semana: {data?.appointmentsOfWeek}</CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="relative flex w-full h-100 text-primary py-5">
+        <div className="relative flex w-full h-100 py-5">
 
           <div className="w-full h-[90%] opacity-50 pl-7 absolute flex flex-col justify-between">
             <hr />

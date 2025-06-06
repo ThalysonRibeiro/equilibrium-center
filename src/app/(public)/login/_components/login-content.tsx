@@ -71,7 +71,7 @@ export function LoginContent() {
 
           <Button
             onClick={() => handdleLogin("google")}
-            className="bg-white text-primary hover:bg-white cursor-pointer border"
+            className="bg-white text-black hover:bg-white cursor-pointer border"
           >
             Google
             <FcGoogle />

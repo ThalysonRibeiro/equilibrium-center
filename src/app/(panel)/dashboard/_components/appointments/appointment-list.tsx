@@ -126,7 +126,7 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
           <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-15rem)] pr-4">
             {isLoading ? (
               <div className="w-full h-[calc(100vh-15rem)] flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 border-t-primary rounded-full animate-spin" />
+                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 rounded-full animate-spin" />
               </div>
             ) : (
               times.map(slot => {
@@ -172,10 +172,10 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
                             <Select onValueChange={(value: AppointmentStatus) => {
                               handleStatusAppointment(occupant.id, value)
                             }}>
-                              <SelectTrigger className="w-[185px] border-primary/50">
+                              <SelectTrigger className="w-[185px]">
                                 <SelectValue placeholder={statusMap[occupant.status]} />
                               </SelectTrigger>
-                              <SelectContent className="border-primary/50">
+                              <SelectContent>
                                 <SelectItem value="PENDING">Pendente</SelectItem>
                                 <SelectItem value="SCHEDULED">Confimado</SelectItem>
                                 <SelectItem value="COMPLETED">Completo</SelectItem>

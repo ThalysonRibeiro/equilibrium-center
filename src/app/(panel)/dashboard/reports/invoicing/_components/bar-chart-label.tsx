@@ -35,7 +35,7 @@ export function BarChartLabel({ chartData, totalSixMonth, download_pdf }: BarPro
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <div className="relative flex w-full h-100 text-primary py-5">
+        <div className="relative flex w-full h-100 py-5">
 
           <div className="w-full h-[90%] opacity-50 pl-7 absolute flex flex-col justify-between">
             <hr />

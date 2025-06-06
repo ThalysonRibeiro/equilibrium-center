@@ -66,7 +66,7 @@
   --foreground: var(--text-dark);
 
   --card: oklch(1 0 0);
-  --card-foreground: var(--primary-dark);
+  --card-foreground: var(--text-dark);
 
   --popover: oklch(1 0 0);
   --popover-foreground: var(--text-dark);

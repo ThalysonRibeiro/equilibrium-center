@@ -2,8 +2,8 @@
 
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
-import img_test from "@/assets/image-preview.png"
-import { Loader, Loader2, Upload } from "lucide-react";
+import img_test from "@/assets/image-preview.png";
+import { Loader2, Upload } from "lucide-react";
 import { toast } from "sonner";
 import { updateProfileAvatar } from "../_actions/update-avatar";
 import { useSession } from "next-auth/react";

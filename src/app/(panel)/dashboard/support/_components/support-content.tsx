@@ -29,7 +29,7 @@ export function SupportContent({ session, planId }: { session: Session | null, p
   }
   return (
     <section className="space-y-4">
-      <h1 className="text-lg text-primary text-center font-semibold">Suporte</h1>
+      <h1 className="text-lg text-center font-semibold">Suporte</h1>
       {planId === "PROFESSIONAL" && (
         <>
           <Button
@@ -46,7 +46,7 @@ export function SupportContent({ session, planId }: { session: Session | null, p
           <Separator />
         </>
       )}
-      <h2 className="text-center font-semibold text-primary">Contato por email</h2>
+      <h2 className="text-center font-semibold">Contato por email</h2>
       <p className="text-center text-sm">previsao de resposta 24h</p>
       <FormContact label />
     </section>

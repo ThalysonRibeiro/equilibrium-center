@@ -93,7 +93,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
               </CardTitle>
               <div className="mt-4">
                 <p className="text-gray-600 line-through text-lg">{plan.oldPrice}</p>
-                <p className="text-primary font-bold text-3xl">
+                <p className="font-bold text-3xl">
                   {plan.price}
                   <span className="font-normal text-base text-gray-600">
                     {period}

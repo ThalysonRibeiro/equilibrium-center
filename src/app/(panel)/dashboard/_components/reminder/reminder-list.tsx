@@ -46,7 +46,7 @@ export function ReminderList({ reminder }: ReminderListProps) {
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-[425px] text-primary bg-white">
+            <DialogContent className="sm:max-w-[425px] bg-white">
               <DialogHeader>
                 <DialogTitle>Novo Lembrete</DialogTitle>
                 <DialogDescription>Criar um novo lemrete para sua lista.</DialogDescription>

@@ -13,7 +13,7 @@ export default async function Support() {
 
 
   return (
-    <main className="px-4 text-primary space-y-4">
+    <main className="px-4 space-y-4">
       <SupportContent session={session} planId={permission.planId} />
     </main>
   )

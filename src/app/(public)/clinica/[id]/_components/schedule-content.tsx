@@ -175,7 +175,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   }
 
   return (
-    <div className="min-h-screen flex flex-col text-primary mb-6">
+    <div className="min-h-screen flex flex-col mb-6">
 
       <section className="w-full h-80 flex items-center justify-center mx-auto px-4 relative inset-0">
         <div className="h-80 -z-[1] bg-gradient-to-br from-teal-300/80 to-teal-500/80 shadow absolute inset-0" />

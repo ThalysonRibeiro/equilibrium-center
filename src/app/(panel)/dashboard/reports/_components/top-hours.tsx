@@ -105,7 +105,7 @@ export function TopHours({ data }: TopHoursProps) {
               <Button
                 variant={"ghost"}
                 onClick={changeVisible}
-                className="hover:bg-gray-100 hover:text-primary">
+              >
                 {isVisible ? "Recolher lista" : "Lista completa"}
                 {isVisible ? <ChevronUp /> : <ChevronDown />}
               </Button>
@@ -135,7 +135,7 @@ export function TopHours({ data }: TopHoursProps) {
 
                   {dataItemsSlice.length > itemsPerPages && (
                     <div className="flex gap-3">
-                      <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
+                      <Button variant={"ghost"} className="hover:bg-transparent hover:text-accent" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
                         <ChevronLeft />
                       </Button>
                       {[...Array(totalPages)].map((_, index) => (
@@ -143,12 +143,12 @@ export function TopHours({ data }: TopHoursProps) {
                           key={index}
                           variant={"ghost"}
                           onClick={() => changePage(index + 1)}
-                          className={cn("hover:bg-gray-100 hover:text-primary", currentPage === index + 1 && "font-bold text-lg")}
+                          className={cn("hover:bg-transparent hover:text-accent", currentPage === index + 1 && "font-bold text-lg")}
                         >
                           {index + 1}
                         </Button>
                       ))}
-                      <Button variant={"ghost"} className="hover:bg-gray-100 hover:text-primary" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
+                      <Button variant={"ghost"} className="hover:bg-transparent hover:text-accent" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
                         <ChevronRight />
                       </Button>
                     </div>

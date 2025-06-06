@@ -82,7 +82,7 @@ export function InvoicingContent({ limitReport, download_pdf, planId }: { limitR
 
   return (
     <main className="space-y-4">
-      <h1 className="text-2xl font-semibold text-primary text-center">Metricas de Faturamento</h1>
+      <h1 className="text-2xl font-semibold text-center">Metricas de Faturamento</h1>
 
       {limitReport.includes("cardTotalINvoicing") && planId !== "EXPIRED" && (
         <CardTotalINvoicing data={invoicing} download_pdf={download_pdf} />

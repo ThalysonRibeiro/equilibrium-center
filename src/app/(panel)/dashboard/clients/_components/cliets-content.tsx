@@ -92,7 +92,7 @@ export function ClientsContent({ planId, download_pdf, limitReport }: ClientsCon
       {isLoading ? (
         <><LoadingUI /></>
       ) : (
-        <section className="space-y-4 text-primary">
+        <section className="space-y-4">
           <div className="flex items-center justify-between">
             {planId !== "EXPIRED" && (
               <DateRangePicker value={30} />
@@ -112,7 +112,7 @@ export function ClientsContent({ planId, download_pdf, limitReport }: ClientsCon
             />
           )}
 
-          <h2 className="text-2xl font-semibold text-primary text-center">Pesquisa por cliente especifico</h2>
+          <h2 className="text-2xl font-semibold text-center">Pesquisa por cliente especifico</h2>
 
           <div className="flex gap-4">
             <InputSearch

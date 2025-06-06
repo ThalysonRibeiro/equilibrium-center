@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "lucide-react";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from 'next-auth/react';
 import { useIsMobile } from "@/app/hooks/useMobile";
 import { scrollTosection } from "@/utils/scrollTosection";
@@ -65,7 +65,7 @@ export function Header() {
           <Button
             key={link.label}
             variant="link"
-            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent"
             onClick={() => {
               if (pathname === "/privacy-policy" || pathname === "/cookies-policy" || pathname === "/terms-of-service") {
                 redirect("/")
@@ -80,7 +80,7 @@ export function Header() {
             key={link.label}
             asChild
             variant="link"
-            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent"
           >
             <Link href={link.href}>{link.label}</Link>
           </Button>
@@ -96,7 +96,7 @@ export function Header() {
           <Button
             asChild
             variant="link"
-            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent"
           >
             <Link href="/dashboard">
               Acessar Clinica
@@ -107,7 +107,7 @@ export function Header() {
         <Button
           asChild
           variant="link"
-          className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+          className="hover:bg-transparent font-montserrat hover:text-accent"
         >
           <Link href="/login">
             Login
@@ -124,13 +124,13 @@ export function Header() {
           <Button
             variant={"ghost"}
             size={"icon"}
-            className="text-corprimary hover:text-corsecondary backdrop-blur-md hover:bg-transparent border"
+            className="hover:text-accent backdrop-blur-md hover:bg-transparent border"
           >
             <Menu className="w-10 h-10" />
           </Button>
         </SheetTrigger>
         <SheetContent side="right" className="p-4 w-[240px] sm:w-300px] z-[9999]">
-          <SheetTitle className="text-primary">Menu</SheetTitle>
+          <SheetTitle>Menu</SheetTitle>
           <nav className="flex flex-col md:flex-row items-start">
             <NavLinks />
           </nav>
@@ -162,7 +162,7 @@ export function Header() {
               className="bg-contain"
             />
           </div>
-          <p className="text-primary uppercase">Equilibrium <br /> Center</p>
+          <p className="uppercase text-primary">Equilibrium <br /> Center</p>
         </Link>
 
         <nav className="hidden md:flex items-center">
@@ -190,7 +190,7 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
             <Button
               key={link.label}
               variant="link"
-              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+              className="hover:bg-transparent font-montserrat hover:text-accent"
               onClick={() => scrollTosection(link.href.replace("#", ""), "smooth")}
             >
               {link.label}
@@ -200,7 +200,7 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
               key={link.label}
               asChild
               variant="link"
-              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+              className="hover:bg-transparent font-montserrat hover:text-accent"
             >
               <Link href={link.href}>{link.label}</Link>
             </Button>
@@ -216,7 +216,7 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
             <Button
               asChild
               variant="link"
-              className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+              className="hover:bg-transparent font-montserrat hover:text-accent"
             >
               <Link href="/dashboard">
                 Acessar Clinica
@@ -227,7 +227,7 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
           <Button
             asChild
             variant="link"
-            className="hover:bg-transparent text-primary font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent"
           >
             <Link href="/login">
               Login

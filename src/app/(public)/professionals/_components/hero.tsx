@@ -30,7 +30,7 @@ export function Hero() {
         </h2>
       </div>
       <button
-        className="w-fit px-8 py-4 rounded-full text-xl font-semibold bg-white text-primary hover:bg-accent hover:text-white border-2 hover:border-white border-accent cursor-pointer transition-colors duration-500"
+        className="w-fit px-8 py-4 rounded-full text-xl font-semibold bg-white hover:bg-accent hover:text-white border-2 hover:border-white border-accent cursor-pointer transition-colors duration-500"
         onClick={() => scrollTosection("professionalsFeatured", "smooth")}
       >
         Encontre Profissionais

@@ -28,7 +28,7 @@ export function PerformanceCards() {
           <LoadingUI />
         </div>
       ) : (
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3 text-primary">
+        <section className="grid grid-cols-1 lg:grid-cols-2 gap-3 mb-3">
 
           <CardPerformance
             title="Agendamentos"

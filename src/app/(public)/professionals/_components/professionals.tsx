@@ -99,16 +99,14 @@ export function GridProfessionals({ professionals }: ProfessionalsProps) {
   return (
     <>
       {validProfessionals.length > 0 && (
-        <section className="pt-12  backdrop-blur-md bg-white/50">
+        <section className="pt-12  backdrop-blur-md bg-white">
           <div className="container mx-auto px-6 space-y-6 flex flex-col items-center">
             <h2 className={cn(
-              "text-primary text-3xl text-center mb-2 font-bold transition-colors duration-300 text-shadow-2xs",
-              textVisible && "text-white"
+              "text-3xl text-center mb-2 font-bold transition-colors duration-300",
             )}>
               Encontre a sua clínica de massagem ideal
             </h2>
             <p className={cn("text-center mb-2 transition-colors duration-300",
-              textVisible && "text-white"
             )}>
               Navegue pelo nosso abrangente diretório de clínicas de massagem e encontre a ideal para suas necessidades.
             </p>

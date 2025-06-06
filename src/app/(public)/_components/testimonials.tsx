@@ -33,7 +33,7 @@ export async function Testimonials() {
     <section id="testimonial" className="bg-white py-6 sm:px-1 flex flex-col items-center justify-center gap-6">
       <div className="container mx-auto px-6">
 
-        <h2 className="text-primary text-3xl text-center font-bold">
+        <h2 className="text-3xl text-center font-bold">
           Amado por massoterapeutas
         </h2>
         <p className="text-center">

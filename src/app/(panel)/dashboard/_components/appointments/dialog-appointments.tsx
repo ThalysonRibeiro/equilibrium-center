@@ -15,7 +15,7 @@ interface DialogAppointmentsProps {
 export function DialogAppointments({ appointment, permission }: DialogAppointmentsProps) {
 
   return (
-    <DialogContent className="bg-white text-primary">
+    <DialogContent className="bg-white">
       <DialogHeader>
         <DialogTitle className="text-center">
           Detalhes do agendamento
