@@ -3,7 +3,14 @@ import { scrollTosection } from "@/utils/scrollTosection";
 import { Mail } from "lucide-react";
 import Link from "next/link";
 
-export function Footer() {
+interface FooterProps {
+  quickLinks?: boolean;
+  professionalOrClient?: DescriptionFooter;
+}
+
+type DescriptionFooter = "professional" | "client";
+
+export function Footer({ quickLinks = true, professionalOrClient = "professional" }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-gray-300 pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6">
@@ -13,70 +20,64 @@ export function Footer() {
               Equilibrium
               <span className="text-teal-400">Center</span>
             </h3>
-            <p className="mb-4 text-gray-400 max-w-xs">
-              Simplificando o gerenciamento de clínicas de massoterapia com um software elegante e fácil de usar.
-            </p>
-            {/* <div className="flex space-x-4">
-              <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaFacebook size={20} />
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaTwitter size={20} />
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaInstagram size={20} />
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-teal-400 transition-colors">
-                <FaYoutube size={20} />
-              </Link>
-            </div> */}
+            {professionalOrClient === "professional" ? (
+              <p className="mb-4 text-gray-400 max-w-xs">
+                Simplificando o gerenciamento de clínicas de massoterapia com um software elegante e fácil de usar.
+              </p>
+            ) : (
+              <p className="mb-4 text-gray-400 max-w-xs">
+                Central de clínicas e professionals de massoterapia com um software elegante e fácil de usar.
+              </p>
+            )}
           </div>
 
-          <div>
-            <h4 className="text-lg font-semibold text-white mb-4">Links rápidos</h4>
-            <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => scrollTosection("hero", "smooth")}
-                  className="text-gray-400 hover:text-teal-400 transition-colors"
-                >
-                  Inicio
-                </button >
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollTosection("features", "smooth")}
-                  className="text-gray-400 hover:text-teal-400 transition-colors"
-                >
-                  Características
-                </button >
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollTosection("pricing", "smooth")}
-                  className="text-gray-400 hover:text-teal-400 transition-colors"
-                >
-                  Preços
-                </button >
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollTosection("testimonials", "smooth")}
-                  className="text-gray-400 hover:text-teal-400 transition-colors"
-                >
-                  Testemunhos
-                </button >
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollTosection("faq", "smooth")}
-                  className="text-gray-400 hover:text-teal-400 transition-colors"
-                >
-                  Perguntas frequentes
-                </button >
-              </li>
-            </ul>
-          </div>
+          {quickLinks && (
+            <div>
+              <h4 className="text-lg font-semibold text-white mb-4">Links rápidos</h4>
+              <ul className="space-y-2">
+                <li>
+                  <button
+                    onClick={() => scrollTosection("hero", "smooth")}
+                    className="text-gray-400 hover:text-teal-400 transition-colors"
+                  >
+                    Inicio
+                  </button >
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollTosection("features", "smooth")}
+                    className="text-gray-400 hover:text-teal-400 transition-colors"
+                  >
+                    Características
+                  </button >
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollTosection("pricing", "smooth")}
+                    className="text-gray-400 hover:text-teal-400 transition-colors"
+                  >
+                    Preços
+                  </button >
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollTosection("testimonials", "smooth")}
+                    className="text-gray-400 hover:text-teal-400 transition-colors"
+                  >
+                    Testemunhos
+                  </button >
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollTosection("faq", "smooth")}
+                    className="text-gray-400 hover:text-teal-400 transition-colors"
+                  >
+                    Perguntas frequentes
+                  </button >
+                </li>
+              </ul>
+            </div>
+          )}
 
           <div>
             <h4 className="text-lg font-semibold text-white mb-4">

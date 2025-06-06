@@ -10,7 +10,7 @@ export default async function Professionals() {
     <main className="">
       <Hero />
       <ProfessionalsContent professionals={professionals || []} />
-      <Footer />
+      <Footer quickLinks={false} professionalOrClient="client" />
     </main>
   )
 }
