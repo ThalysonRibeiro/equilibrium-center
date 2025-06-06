@@ -497,7 +497,7 @@ export function ProfileContent(
 
                 <Button
                   type="submit"
-                  className="w-full hover:bg-accent transition-colors duration-300"
+                  className="w-full transition-colors duration-300"
                 >
                   Salvar alterações
                 </Button>

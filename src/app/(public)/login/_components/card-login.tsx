@@ -13,46 +13,21 @@ import { FaDiscord, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
 import Link from "next/link";
-import { ExternalLink, Shield, Users } from "lucide-react";
-import { CardLogin } from "./card-login";
-import Image from "next/image";
-import img_logo from "@/assets/logo-3.png";
+import { ExternalLink } from "lucide-react";
 
 
-
-export function LoginContent() {
+export function CardLogin() {
   async function handdleLogin(provider: LoginType) {
     await handleRegister(provider);
   }
+
   return (
-    <Card className="max-w-100 shadow-md w-full bg-transparent">
-      <CardHeader>
-        <div className="flex w-full justify-center gap-2">
-          <div className="w-14">
-            <Image
-              src={img_logo}
-              alt="logo"
-              priority
-              quality={100}
-              style={{
-                width: 'auto',
-                height: 'auto',
-              }}
-            />
-          </div>
-          <div>
-            <span className="font-semibold capitalize text-xl">
-              Equilibrium Center
-            </span>
-            <p className="text-sm">
-              Sistema de Gestão para Clínicas
-            </p>
-          </div>
-        </div>
-        <CardTitle className="text-3xl font-semibold text-center">
+    <Card className=" max-w-100 shadow-md w-full bg-transparent">
+      <CardHeader className="text-center text-accent">
+        <CardTitle className="text-3xl font-semibold font-montserrat">
           Bem vindo
         </CardTitle>
-        <CardDescription className="text-md text-center">
+        <CardDescription className="text-md">
           Entre na sua conta ou Cadatre-se <br />
           E inicie seu teste gratuito de {TRIAL_DAYS} dias
         </CardDescription>
