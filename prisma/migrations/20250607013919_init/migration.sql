@@ -1,8 +1,20 @@
 -- CreateEnum
-CREATE TYPE "Plan" AS ENUM ('BASIC', 'NORMAL', 'PROFESSIONAL');
+CREATE TYPE "Plan" AS ENUM ('BASIC', 'NORMAL', 'PROFESSIONAL', 'TRIAL', 'EXPIRED');
 
 -- CreateEnum
 CREATE TYPE "AppointmentStatus" AS ENUM ('PENDING', 'SCHEDULED', 'COMPLETED', 'NO_SHOW', 'CANCELLED');
+
+-- CreateTable
+CREATE TABLE "Assessments" (
+    "id" TEXT NOT NULL,
+    "message" TEXT NOT NULL,
+    "rating" INTEGER NOT NULL,
+    "userId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Assessments_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "Report" (
@@ -25,6 +37,15 @@ CREATE TABLE "Appointment" (
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
     "phone" TEXT NOT NULL,
+    "age" INTEGER,
+    "dateOfBirth" TIMESTAMP(3),
+    "symptoms" TEXT,
+    "secondary" TEXT,
+    "complaints" TEXT,
+    "useOfAnyMedication" BOOLEAN,
+    "bePregnant" BOOLEAN,
+    "eatingRoutine" BOOLEAN,
+    "physicalActivities" TEXT,
     "appointmentDate" TIMESTAMP(3) NOT NULL,
     "time" TEXT NOT NULL,
     "status" "AppointmentStatus" NOT NULL DEFAULT 'PENDING',
@@ -68,6 +89,7 @@ CREATE TABLE "Subscription" (
     "plan" "Plan" NOT NULL,
     "priceId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
+    "expiresAt" TIMESTAMP(3),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -82,10 +104,16 @@ CREATE TABLE "User" (
     "emailVerified" TIMESTAMP(3),
     "image" TEXT,
     "address" TEXT DEFAULT '',
+    "city" TEXT DEFAULT '',
+    "state" TEXT DEFAULT '',
+    "cep" TEXT DEFAULT '',
+    "number" TEXT DEFAULT '',
+    "description" TEXT DEFAULT '',
     "phone" TEXT DEFAULT '',
     "status" BOOLEAN NOT NULL DEFAULT true,
     "timeZone" TEXT DEFAULT '',
     "stripe_customer_id" TEXT,
+    "plan" "Plan" NOT NULL DEFAULT 'TRIAL',
     "subscriptionId" TEXT,
     "times" TEXT[],
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -146,6 +174,9 @@ CREATE TABLE "Authenticator" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "Assessments_userId_key" ON "Assessments"("userId");
+
+-- CreateIndex
 CREATE INDEX "Appointment_appointmentDate_idx" ON "Appointment"("appointmentDate");
 
 -- CreateIndex
@@ -159,6 +190,9 @@ CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Authenticator_credentialID_key" ON "Authenticator"("credentialID");
+
+-- AddForeignKey
+ALTER TABLE "Assessments" ADD CONSTRAINT "Assessments_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Report" ADD CONSTRAINT "Report_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
