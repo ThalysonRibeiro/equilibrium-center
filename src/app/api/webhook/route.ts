@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Stripe from "stripe";
-import { stripe } from "@/utils/stipe";
+import { stripe } from "@/utils/stripe";
 import { manageSubscription } from '@/utils/manage-subscription';
 import { Plan } from '@/generated/prisma';
 import { revalidatePath } from 'next/cache';

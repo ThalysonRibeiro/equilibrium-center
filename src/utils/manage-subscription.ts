@@ -1,4 +1,4 @@
-import { stripe } from "@/utils/stipe";
+import { stripe } from "@/utils/stripe";
 import { Plan } from "@/generated/prisma";
 import prisma from "@/lib/prisma";
 
