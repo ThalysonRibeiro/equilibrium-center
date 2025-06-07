@@ -12,9 +12,6 @@ import { handleRegister, LoginType } from "../../_actions/login";
 import { FaDiscord, FaGithub } from "react-icons/fa6";
 import { FcGoogle } from "react-icons/fc";
 import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
-import Link from "next/link";
-import { ExternalLink, Shield, Users } from "lucide-react";
-import { CardLogin } from "./card-login";
 import Image from "next/image";
 import img_logo from "@/assets/logo-3.png";
 
@@ -77,13 +74,13 @@ export function LoginContent() {
             <FcGoogle />
           </Button>
 
-          <Button
+          {/* <Button
             onClick={() => handdleLogin("github")}
             className="bg-black hover:bg-black cursor-pointer border"
           >
             GitHub
             <FaGithub />
-          </Button>
+          </Button> */}
         </div>
 
 
