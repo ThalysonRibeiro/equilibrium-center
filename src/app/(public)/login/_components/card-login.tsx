@@ -52,13 +52,13 @@ export function CardLogin() {
             <FcGoogle />
           </Button>
 
-          <Button
+          {/* <Button
             onClick={() => handdleLogin("github")}
             className="bg-black hover:bg-black cursor-pointer border"
           >
             GitHub
             <FaGithub />
-          </Button>
+          </Button> */}
         </div>
 
 
