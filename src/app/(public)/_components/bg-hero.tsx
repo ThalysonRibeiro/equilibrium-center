@@ -4,7 +4,7 @@ import Image from "next/image";
 export function BgHero() {
   return (
     <>
-      <div className=" w-full absolute h-175 -z-10">
+      <div className=" w-full absolute h-screen min-h-175 -z-10">
         <Image
           src={img_bg_hero}
           alt="imagem do hero inlustratica"
