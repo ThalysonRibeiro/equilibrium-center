@@ -65,7 +65,7 @@ export function ReminderList({ reminder }: ReminderListProps) {
               aria-describedby="dialog-description"
             >
               <DialogHeader>
-                <DialogTitle id="dialog-title">Novo Lembrete</DialogTitle>
+                <DialogTitle>Novo Lembrete</DialogTitle>
                 <DialogDescription id="dialog-description">
                   Criar um novo lembrete para sua lista.
                 </DialogDescription>
