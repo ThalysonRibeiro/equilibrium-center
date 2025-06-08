@@ -93,7 +93,7 @@ export default function GeneratePDFInvoicingDate({ data }: GeneratePDFProps) {
   }, [data]);
 
   return (
-    <Button onClick={generatePDF || undefined} disabled={!generatePDF} className="hover:bg-accent">
+    <Button onClick={generatePDF || undefined} disabled={!generatePDF} className="hover:bg-accent w-fit">
       Gerar PDF <Download />
     </Button>
   );

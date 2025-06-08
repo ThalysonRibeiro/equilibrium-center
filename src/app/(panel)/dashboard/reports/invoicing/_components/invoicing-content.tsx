@@ -103,7 +103,7 @@ export function InvoicingContent({ limitReport, download_pdf, planId }: { limitR
       {limitReport.includes("performanceContent") && planId !== "EXPIRED" && (
         <Card>
           <CardHeader>
-            <CardTitle className="flex justify-between items-center">
+            <CardTitle className="flex flex-col gap-2 sm:flex-row sm:justify-between sm:items-center">
               <DateRangePicker value={30} />
               {download_pdf && (
                 <GeneratePDFInvoicingDate data={invoicingDate.forSpecificDate} />

@@ -11,6 +11,7 @@ import type { ComponentProps } from "react";
 import { twMerge } from "tailwind-merge";
 import { WeeklySummaryProps } from "../types/weekly-summary";
 import { formatShortNumber } from "@/utils/formatCurrency";
+import { useIsMobile } from "@/app/hooks/useMobile";
 
 interface BarChartLastOfWeekProps {
   data: WeeklySummaryProps;
@@ -18,6 +19,7 @@ interface BarChartLastOfWeekProps {
 
 
 export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
+  const isMobile = useIsMobile();
 
   return (
     <Card className="w-full">
@@ -61,7 +63,7 @@ export function BarChartLastOfWeek({ data }: BarChartLastOfWeekProps) {
                   <p
                     className="capitalize text-xs text-center"
                   >
-                    {days.daysOfWeek.replace("-feira", "")}
+                    {isMobile ? days.daysOfWeek.slice(0, 3) : days.daysOfWeek.replace("-feira", "")}
                   </p>
                 </div>
               ))}

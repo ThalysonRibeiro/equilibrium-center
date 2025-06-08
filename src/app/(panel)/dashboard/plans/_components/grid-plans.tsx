@@ -80,7 +80,7 @@ export function GridPlans({ plansType }: GridPlansProps) {
         </div>
       </div>
 
-      <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 px-10 md:px-0">
+      <article className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 xl:gap-10 px-1 md:px-0">
         {invoicingPerPlans.map((plan, index) => (
           <Card key={plan.id}
             className={`relative flex flex-col w-full mx-auto md:hover:scale-105 transition-transform duration-300 shadow-md

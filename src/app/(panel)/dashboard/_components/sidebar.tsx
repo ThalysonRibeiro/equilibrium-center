@@ -1,7 +1,7 @@
 "use client"
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -21,7 +21,9 @@ import {
   MessageCircleQuestion,
   Users,
   UserPen,
-  UserCheck
+  UserCheck,
+  ChevronDown,
+  ChevronUp
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -32,6 +34,7 @@ import {
 } from "@/components/ui/collapsible";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useIsMobile } from "@/app/hooks/useMobile";
 
 interface SidebarDashboardProps {
   children: React.ReactNode;
@@ -138,32 +141,17 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
                   <List className="w-6 h-6" />
                 </Button>
               </SheetTrigger>
-              <h1 className="font-montserrat">Menu - Equilibrium Center</h1>
+              <h1 className="font-montserrat">Menu - {user.name}</h1>
             </div>
 
             <SheetContent side="right" className="sm:max-w-xs p-3 border-l pt-10 bg-white">
               <SheetTitle>
                 <div className="flex items-center rounded-lg mb-2">
-                  <div className="w-12">
-                    <Image
-                      src={img_logo}
-                      alt="logo"
-                      priority
-                      quality={100}
-                      style={{
-                        width: 'auto',
-                        height: 'auto',
-                      }}
-                    />
-                  </div>
-                  <p className="uppercase font-montserrat">Equilibrium <br />
-                    <span className="text-accent">
-                      Center
-                    </span>
+                  <p className="uppercase font-montserrat">
+                    Menu
                   </p>
                 </div>
               </SheetTitle>
-              <SheetDescription>Menu administrativo</SheetDescription>
               <div className="flex flex-col justify-between h-full">
 
                 <NavigationItemsMap isCollapsed={isCollapsed} pathname={pathname} permission={permission} />
@@ -214,48 +202,78 @@ type NavigationItemsMapProps = Partial<SidebarLinksProps> & {
 };
 
 function NavigationItemsMap({ isCollapsed, pathname, permission }: NavigationItemsMapProps) {
+  const [openMenus, setOpenMenus] = useState<boolean[]>([]);
+  function handleToggleMenu(index: number) {
+    setOpenMenus(prev => {
+      const updated = [...prev];
+      updated[index] = !updated[index];
+      return updated;
+    });
+  }
+
+  useEffect(() => {
+    setOpenMenus(new Array(navigationItems.length).fill(false));
+  }, [navigationItems.length]);
+
+
   return (
     <nav className="grid gap-2 text-base">
-      {navigationItems.map(link => (
+      {navigationItems.map((link, index) => (
         <div key={link.heading}>
           {!isCollapsed && (
-            <span
+
+            <button
+              aria-expanded={openMenus[index]}
+              aria-controls={`menu-panel-${index}`}
+              onClick={() => handleToggleMenu(index)}
               key={link.heading}
-              className="text-sm text-gray-400 font-medium mt-1 uppercase"
+              className="text-sm text-gray-400 font-medium mt-1 uppercase flex justify-between w-full"
             >
               {link.heading}
-            </span>)}
-          {link.links.map(item => (
-            <div key={item.href} className="mt-0.5">
-              <SidebarLinks
-                href={item.href}
-                label={item.label}
-                pathname={pathname as string}
-                isCollapsed={isCollapsed as boolean}
-                icon={item.icon}
-              />
-              {["TRIAL", "NORMAL", "PROFESSIONAL"].includes(permission) && (
-                <>
-                  {item.subLinks && item.subLinks.length > 0 && (
-                    <div className={`${isCollapsed ? "mt-0.5" : "ml-6 pl-1 mt-0.5 border-l"}`}>
-                      {item?.subLinks?.map(item => (
-                        <div className="mt-0.5" key={item.href}>
-                          <SidebarLinks
-                            key={item.href}
-                            href={item.href}
-                            label={item.label}
-                            pathname={pathname as string}
-                            isCollapsed={isCollapsed as boolean}
-                            icon={item.icon}
-                          />
+              <ChevronUp className={`text-accent transition-transform duration-200 ${openMenus[index] ? "rotate-180 " : ""}`} />
+            </button>
+
+          )}
+          <Collapsible
+            id={`menu-section-${index}`}
+            open={!openMenus[index]}
+            role="region"
+            aria-labelledby={`menu-button-${index}`}
+          >
+            <CollapsibleContent>
+              {link.links.map((item) => (
+                <div key={item.href} className="mt-0.5">
+                  <SidebarLinks
+                    href={item.href}
+                    label={item.label}
+                    pathname={pathname as string}
+                    isCollapsed={isCollapsed as boolean}
+                    icon={item.icon}
+                  />
+                  {["TRIAL", "NORMAL", "PROFESSIONAL"].includes(permission) && (
+                    <>
+                      {item.subLinks && item.subLinks.length > 0 && (
+                        <div className={`${isCollapsed ? "mt-0.5" : "ml-6 pl-1 mt-0.5 border-l"}`}>
+                          {item?.subLinks?.map(item => (
+                            <div className="mt-0.5" key={item.href}>
+                              <SidebarLinks
+                                key={item.href}
+                                href={item.href}
+                                label={item.label}
+                                pathname={pathname as string}
+                                isCollapsed={isCollapsed as boolean}
+                                icon={item.icon}
+                              />
+                            </div>
+                          ))}
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </>
                   )}
-                </>
-              )}
-            </div>
-          ))}
+                </div>
+              ))}
+            </CollapsibleContent>
+          </Collapsible>
         </div>
       ))}
     </nav>
@@ -329,8 +347,10 @@ interface SideBarFooterProps {
 }
 
 function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) {
+  const isMobile = useIsMobile(380)
+
   return (
-    <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between ${isCollapsed ? "" : 'bg-accent text-white'} p-1 rounded-lg`}>
+    <div className={`${isCollapsed && 'flex-col gap-3'} flex items-center justify-between ${isCollapsed ? "" : 'bg-gray-200'} p-1 rounded-lg`}>
       <div className="h-full flex items-center gap-1">
         <div className="w-12 h-10 rounded-lg overflow-hidden relative">
           <Image
@@ -344,11 +364,12 @@ function SideBarFooter({ user, isCollapsed, handleLogout }: SideBarFooterProps) 
         </div>
         {!isCollapsed && <div className="flex flex-col items-start w-full">
           <span className="text-[12px] line-clamp-1">{user.name}</span>
-          <span className="text-[12px]">{user.email}</span>
+          {!isMobile && <span className="text-[12px]">{user.email}</span>}
         </div>}
       </div>
       <Button
         onClick={handleLogout}
+        variant={"destructive"}
         className="w-fit cursor-pointer"
       >
         Sair

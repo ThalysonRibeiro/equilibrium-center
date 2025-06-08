@@ -39,7 +39,7 @@ export default function GeneratePDFAppointments({ data }: GeneratePDFProps) {
         doc.setFontSize(14);
         doc.text("Relatório de Agendamentos", pageWidth / 2, yTitle, { align: 'center' });
 
-        let currentY = yTitle + 10;
+        const currentY = yTitle + 10;
 
         // ⬇️ Tabela de status com cores e alinhamento padronizado
         autoTable(doc, {

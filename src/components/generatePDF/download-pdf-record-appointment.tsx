@@ -37,7 +37,7 @@ export default function DownloadPDFRecordAppointment({ data }: GeneratePDFProps)
         doc.setFontSize(14);
         doc.text("Relatório de Agendamento", pageWidth / 2, yTitle, { align: 'center' });
 
-        let yStart = yTitle + 10;
+        const yStart = yTitle + 10;
 
         // Tabela com dados
         autoTable(doc, {
