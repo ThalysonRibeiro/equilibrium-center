@@ -27,6 +27,7 @@ interface AppointmentProps {
   appointments: AppointmentWithService[] | [];
   planId: string;
 }
+
 export function Appointment({ appointments, planId }: AppointmentProps) {
   const isMobile = useIsMobile(1280)
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
@@ -47,56 +48,135 @@ export function Appointment({ appointments, planId }: AppointmentProps) {
   }
 
   return (
-    <Card className="pt-0 overflow-auto">
+    <Card className="pt-0 overflow-auto" role="region" aria-label="Lista de agendamentos">
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <Table>
+        <Table role="table" aria-label="Tabela de agendamentos">
+          <TableCaption className="sr-only">
+            Lista de {appointments.length} agendamentos. Página {currentPage} de {totalPages}.
+            {appointments.length === 0 && "Nenhum agendamento encontrado."}
+          </TableCaption>
           <TableHeader className="bg-accent">
             <TableRow>
-              <TableHead className="text-white">Nome</TableHead>
-              <TableHead className="text-white">Status</TableHead>
-              {!isMobile && (<TableHead className="text-white">Serviço</TableHead>)}
-              {!isMobile && (<TableHead className="text-right text-white">Valor</TableHead>)}
+              <TableHead className="text-white" scope="col">Nome</TableHead>
+              <TableHead className="text-white" scope="col">Status</TableHead>
+              {!isMobile && (<TableHead className="text-white" scope="col">Serviço</TableHead>)}
+              {!isMobile && (<TableHead className="text-right text-white" scope="col">Valor</TableHead>)}
             </TableRow>
           </TableHeader>
           <TableBody>
-            {dataPage.map(appointment => (
-              <DialogTrigger asChild key={appointment.id} onClick={() => setDetailAppointment(appointment)}>
-                <TableRow className="cursor-pointer">
-                  <TableCell className="capitalize">{appointment.name.toLowerCase()}</TableCell>
-                  <TableCell className={clsx("uppercase", `${colorStatus(appointment.status)}`)}>
-                    {statusMap[appointment.status]}
-                  </TableCell>
-                  {!isMobile && (<TableCell>{appointment.service.name}</TableCell>)}
-                  {!isMobile && (<TableCell className="text-right">{formatCurrency(appointment.service.price.toString())}</TableCell>)}
-                </TableRow>
-              </DialogTrigger>
-            ))}
+            {dataPage.length === 0 ? (
+              <TableRow>
+                <TableCell
+                  colSpan={isMobile ? 2 : 4}
+                  className="text-center py-8 text-muted-foreground"
+                  role="cell"
+                >
+                  Nenhum agendamento encontrado
+                </TableCell>
+              </TableRow>
+            ) : (
+              dataPage.map((appointment, index) => (
+                <DialogTrigger
+                  asChild
+                  key={appointment.id}
+                  onClick={() => setDetailAppointment(appointment)}
+                >
+                  <TableRow
+                    className="cursor-pointer hover:bg-muted/50 focus-within:bg-muted/50"
+                    role="button"
+                    tabIndex={0}
+                    aria-label={`Ver detalhes do agendamento de ${appointment.name}, status ${statusMap[appointment.status]}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        setDetailAppointment(appointment);
+                        setIsDialogOpen(true);
+                      }
+                    }}
+                  >
+                    <TableCell className="capitalize" role="cell">
+                      {appointment.name.toLowerCase()}
+                    </TableCell>
+                    <TableCell
+                      className={clsx("uppercase", `${colorStatus(appointment.status)}`)}
+                      role="cell"
+                      aria-label={`Status: ${statusMap[appointment.status]}`}
+                    >
+                      {statusMap[appointment.status]}
+                    </TableCell>
+                    {!isMobile && (
+                      <TableCell role="cell">
+                        {appointment.service.name}
+                      </TableCell>
+                    )}
+                    {!isMobile && (
+                      <TableCell
+                        className="text-right"
+                        role="cell"
+                        aria-label={`Valor: ${formatCurrency(appointment.service.price.toString())}`}
+                      >
+                        {formatCurrency(appointment.service.price.toString())}
+                      </TableCell>
+                    )}
+                  </TableRow>
+                </DialogTrigger>
+              ))
+            )}
           </TableBody>
         </Table>
         <DialogAppointments appointment={detailAppointment} permission={planId} />
       </Dialog>
-      <CardFooter className="flex items-center justify-center">
-        {appointments.length > itemsPerPages && (
-          <div className="flex gap-3">
-            <Button variant={"ghost"} className="hover:bg-transparent hover:text-accent" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>
-              <ChevronLeft />
+
+      {appointments.length > itemsPerPages && (
+        <CardFooter className="flex items-center justify-center">
+          <nav
+            role="navigation"
+            aria-label="Navegação de páginas da tabela de agendamentos"
+            className="flex gap-3"
+          >
+            <Button
+              variant={"ghost"}
+              className="hover:bg-transparent hover:text-accent"
+              onClick={() => changePage(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Página anterior"
+            >
+              <ChevronLeft aria-hidden="true" />
             </Button>
-            {[...Array(totalPages)].map((_, index) => (
-              <Button
-                key={index}
-                variant={"ghost"}
-                onClick={() => changePage(index + 1)}
-                className={cn("hover:bg-transparent hover:text-accent", currentPage === index + 1 && "font-bold text-lg")}
-              >
-                {index + 1}
-              </Button>
-            ))}
-            <Button variant={"ghost"} className="hover:bg-transparent hover:text-accent" onClick={() => changePage(currentPage + 1)} disabled={currentPage === totalPages}>
-              <ChevronRight />
+
+            {[...Array(totalPages)].map((_, index) => {
+              const pageNumber = index + 1;
+              const isCurrentPage = currentPage === pageNumber;
+
+              return (
+                <Button
+                  key={index}
+                  variant={"ghost"}
+                  onClick={() => changePage(pageNumber)}
+                  className={cn(
+                    "hover:bg-transparent hover:text-accent",
+                    isCurrentPage && "font-bold text-lg"
+                  )}
+                  aria-label={`${isCurrentPage ? 'Página atual, ' : ''}Página ${pageNumber}`}
+                  aria-current={isCurrentPage ? "page" : undefined}
+                >
+                  {pageNumber}
+                </Button>
+              );
+            })}
+
+            <Button
+              variant={"ghost"}
+              className="hover:bg-transparent hover:text-accent"
+              onClick={() => changePage(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Próxima página"
+            >
+              <ChevronRight aria-hidden="true" />
             </Button>
-          </div>
-        )}
-      </CardFooter>
+          </nav>
+        </CardFooter>
+      )}
     </Card>
   )
 }

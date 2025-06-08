@@ -111,12 +111,18 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
     form.setValue("price", value)
   }
 
+  const isEditing = Boolean(serviceId);
+  const submitButtonText = isEditing ? "Atualizar serviço" : "Cadastrar serviço";
+  const dialogTitle = isEditing ? "Editar Serviço" : "Novo Serviço";
+
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="font-montserrat">Novo Servoço</DialogTitle>
+        <DialogTitle className="font-montserrat">
+          {dialogTitle}
+        </DialogTitle>
         <DialogDescription>
-          Adicione um serviço
+          {isEditing ? "Edite as informações do serviço" : "Adicione um novo serviço"}
         </DialogDescription>
       </DialogHeader>
 
@@ -124,6 +130,8 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
         <form
           className="space-y-2"
           onSubmit={form.handleSubmit(onSubmit)}
+          role="form"
+          aria-label={`Formulário para ${isEditing ? 'editar' : 'cadastrar'} serviço`}
         >
           <div className="flex flex-col">
 
@@ -132,15 +140,19 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
               name="name"
               render={({ field }) => (
                 <FormItem className="my-2">
-                  <FormLabel>
+                  <FormLabel htmlFor="service-name">
                     Nome do serviço
                   </FormLabel>
                   <FormControl>
-                    <Input {...field}
-                      placeholder="Digite o nome do seviço..."
+                    <Input
+                      {...field}
+                      id="service-name"
+                      placeholder="Digite o nome do serviço..."
+                      aria-describedby="service-name-error"
+                      aria-required="true"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage id="service-name-error" role="alert" />
                 </FormItem>
               )}
             />
@@ -150,72 +162,106 @@ export function DialogService({ closeModal, initialValues, serviceId }: DialogSe
               name="price"
               render={({ field }) => (
                 <FormItem className="my-2">
-                  <FormLabel>
-                    Nome do serviço
+                  <FormLabel htmlFor="service-price">
+                    Preço do serviço
                   </FormLabel>
                   <FormControl>
-                    <Input {...field}
+                    <Input
+                      {...field}
+                      id="service-price"
                       onChange={changeCurrency}
                       placeholder="Ex: 120,00"
+                      aria-describedby="service-price-error service-price-help"
+                      aria-required="true"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <div id="service-price-help" className="sr-only">
+                    Digite o preço no formato brasileiro, exemplo: 120,00
+                  </div>
+                  <FormMessage id="service-price-error" role="alert" />
                 </FormItem>
               )}
             />
 
           </div>
-          <p className="font-semibold">Tempo de duração do serviço</p>
-          <div className="grid grid-cols-2 gap-3">
-            <FormField
-              control={form.control}
-              name="hours"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Horas
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field}
-                      placeholder="1"
-                      min={0}
-                      type="number"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="minutes"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>
-                    Horas
-                  </FormLabel>
-                  <FormControl>
-                    <Input {...field}
-                      placeholder="0"
-                      min={0}
-                      type="number"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+
+          <fieldset className="border-0 p-0">
+            <legend className="font-semibold text-sm mb-2">
+              Tempo de duração do serviço
+            </legend>
+            <div className="grid grid-cols-2 gap-3">
+              <FormField
+                control={form.control}
+                name="hours"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="service-hours">
+                      Horas
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        id="service-hours"
+                        placeholder="1"
+                        min={0}
+                        max={23}
+                        type="number"
+                        aria-describedby="service-hours-error"
+                        aria-label="Horas de duração do serviço"
+                      />
+                    </FormControl>
+                    <FormMessage id="service-hours-error" role="alert" />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="minutes"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="service-minutes">
+                      Minutos
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        {...field}
+                        id="service-minutes"
+                        placeholder="0"
+                        min={0}
+                        max={59}
+                        step={5}
+                        type="number"
+                        aria-describedby="service-minutes-error"
+                        aria-label="Minutos de duração do serviço"
+                      />
+                    </FormControl>
+                    <FormMessage id="service-minutes-error" role="alert" />
+                  </FormItem>
+                )}
+              />
+            </div>
+          </fieldset>
 
           <Button
             disabled={loading}
             type="submit"
-            className=" hover:bg-accent w-full"
+            className="hover:bg-accent w-full"
+            aria-describedby={loading ? "loading-message" : undefined}
           >
-            {loading ?
-              <div className="w-6 h-6 border-2 border-t-2 border-gray-300 rounded-full animate-spin" />
-              : `${serviceId ? "Atualizar serviço" : "Cadastrar serviço"}`}
-
+            {loading ? (
+              <>
+                <div
+                  className="w-6 h-6 border-2 border-t-2 border-gray-300 rounded-full animate-spin mr-2"
+                  aria-hidden="true"
+                />
+                <span className="sr-only" id="loading-message">
+                  Processando...
+                </span>
+                {submitButtonText}
+              </>
+            ) : (
+              submitButtonText
+            )}
           </Button>
 
         </form>

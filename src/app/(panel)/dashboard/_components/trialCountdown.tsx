@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 export function TrialCountdown({ trialEndDate }: { trialEndDate: string | Date }) {
   const [timeLeft, setTimeLeft] = useState("");
+  const [isExpired, setIsExpired] = useState(false);
 
   useEffect(() => {
     const end = new Date(trialEndDate).getTime();
@@ -14,6 +15,7 @@ export function TrialCountdown({ trialEndDate }: { trialEndDate: string | Date }
       if (diff <= 0) {
         clearInterval(interval);
         setTimeLeft("Expirado");
+        setIsExpired(true);
         return;
       }
 
@@ -23,10 +25,26 @@ export function TrialCountdown({ trialEndDate }: { trialEndDate: string | Date }
       const seconds = Math.floor((diff / 1000) % 60);
 
       setTimeLeft(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      setIsExpired(false);
     }, 1000);
 
     return () => clearInterval(interval);
   }, [trialEndDate]);
 
-  return <p className="font-semibold">Você está no período de teste gratuito. Faltam: {timeLeft}</p>;
+  return (
+    <div
+      role="timer"
+      aria-live="polite"
+      aria-label="Contador do período de teste gratuito"
+    >
+      <p className={`font-semibold ${isExpired ? 'text-red-600' : ''}`}>
+        Você está no período de teste gratuito.
+        {isExpired ? (
+          <span aria-label="Período de teste expirado"> Expirado</span>
+        ) : (
+          <span aria-label={`Tempo restante: ${timeLeft}`}> Faltam: {timeLeft}</span>
+        )}
+      </p>
+    </div>
+  );
 }

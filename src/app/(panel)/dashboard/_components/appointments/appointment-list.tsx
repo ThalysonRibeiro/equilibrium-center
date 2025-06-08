@@ -39,11 +39,9 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
   const [isDialogOpen, setIsDialogOpen] = useState<boolean>(false);
   const [detailAppointment, setDetailAppointment] = useState<AppointmentWithService | null>(null);
 
-
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["get-appointments", date, statusQuery],
     queryFn: async () => {
-      //buscar da rota
       let activeDate = date;
       let activeStatus = statusQuery;
       if (!activeDate) {
@@ -56,14 +54,12 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
 
       const url = `${process.env.NEXT_PUBLIC_URL}/api/clinic/appointments?date=${activeDate}&status=${activeStatus}`;
       const response = await fetch(url);
-
       const json = await response.json() as AppointmentWithService[];
 
       if (!response.ok) return [];
-
       return json;
     },
-    staleTime: 20000, // 20 segundos de staletime
+    staleTime: 20000,
     refetchInterval: 30000
   });
 
@@ -77,7 +73,6 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
       if (startIndex !== -1) {
         for (let i = 0; i < requiredSlots; i++) {
           const slotIndex = startIndex + i;
-
           if (slotIndex < times.length) {
             occupantMap[times[slotIndex]] = appointment;
           }
@@ -87,9 +82,8 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
   }
 
   function confirmToWhatsapp(phone: string, name: string, date: string | Date, time: string) {
-    if (!date) {
-      return;
-    }
+    if (!date) return;
+
     const isoString = typeof date === "string" ? date : date.toISOString();
     const [year, month, day] = isoString.split("T")[0].split("-");
     const formatted = `${day}/${month}/${year}`;
@@ -99,9 +93,7 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
     return window.open(url, "_blank");
   }
 
-
   async function handleStatusAppointment(appointmentId: string, status: AppointmentStatus) {
-
     const response = await changeStatusAppointment({ appointmentId, status });
 
     if (response.error) {
@@ -113,6 +105,14 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
     toast.success(response.data);
   }
 
+  const statusMap = {
+    PENDING: "Pendente",
+    SCHEDULED: "Confirmado",
+    COMPLETED: "Completo",
+    NO_SHOW: "Não comparecido",
+    CANCELLED: "Cancelado"
+  };
+
   return (
     <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <Card>
@@ -123,101 +123,148 @@ export function AppointmentList({ times, permission, planId }: AppointmentListPr
           <ButtonPickerAppointment />
         </CardHeader>
         <CardContent>
-          <ScrollArea className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-15rem)] pr-4">
+          <ScrollArea
+            className="h-[calc(100vh-20rem)] lg:h-[calc(100vh-15rem)] pr-4"
+            aria-label="Lista de agendamentos do dia"
+          >
             {isLoading ? (
-              <div className="w-full h-[calc(100vh-15rem)] flex items-center justify-center">
-                <div className="w-10 h-10 border-4 border-t-4 border-gray-300 rounded-full animate-spin" />
+              <div
+                className="w-full h-[calc(100vh-15rem)] flex items-center justify-center"
+                role="status"
+                aria-live="polite"
+              >
+                <div
+                  className="w-10 h-10 border-4 border-t-primary border-gray-300 rounded-full animate-spin"
+                  aria-hidden="true"
+                />
+                <span className="sr-only">Carregando agendamentos...</span>
               </div>
             ) : (
-              times.map(slot => {
-                const occupant = occupantMap[slot];
-                const statusMap = {
-                  PENDING: "Pendente",
-                  SCHEDULED: "Confirmado",
-                  COMPLETED: "Completo",
-                  NO_SHOW: "Não comparecido",
-                  CANCELLED: "Cancelado"
-                };
-                if (occupant) {
-                  return (
-                    <div
-                      key={slot}
-                      className="flex items-center justify-between py-2 border-t last:border-b w-full"
-                    >
-                      <div className="w-full">
-                        <div className="flex gap-3">
-                          <div className="font-bold">{slot}</div>
-                          <div>
-                            <div className="text-sm font-montserrat font-bold capitalize line-clamp-1">
-                              {occupant.name.toLowerCase()}
+              <ul role="list" aria-label="Horários disponíveis e agendamentos">
+                {times.map(slot => {
+                  const occupant = occupantMap[slot];
+
+                  if (occupant) {
+                    return (
+                      <li
+                        key={slot}
+                        className="flex items-center justify-between py-2 border-t last:border-b w-full"
+                        role="listitem"
+                      >
+                        <article className="w-full">
+                          <div className="flex gap-3">
+                            <time
+                              className="font-bold"
+                              dateTime={slot}
+                              aria-label={`Horário ${slot}`}
+                            >
+                              {slot}
+                            </time>
+                            <div>
+                              <h3 className="text-sm font-montserrat font-bold capitalize line-clamp-1">
+                                {occupant.name.toLowerCase()}
+                              </h3>
+                              <p className="text-sm" aria-label={`Telefone: ${occupant.phone}`}>
+                                {occupant.phone}
+                              </p>
                             </div>
-                            <div className="text-sm">{occupant.phone}</div>
+                            {!permission && planId !== "TRIAL" && (
+                              <div className="ml-auto">
+                                <DialogTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => setDetailAppointment(occupant)}
+                                    aria-label={`Ver detalhes do agendamento de ${occupant.name} às ${slot}`}
+                                  >
+                                    <Eye aria-hidden="true" />
+                                  </Button>
+                                </DialogTrigger>
+                              </div>
+                            )}
                           </div>
-                          {!permission && planId !== "TRIAL" && (
-                            <div className="ml-auto">
-                              <DialogTrigger asChild>
-                                <Button
-                                  variant={"ghost"}
-                                  size={"icon"}
-                                  onClick={() => setDetailAppointment(occupant)}
+
+                          {(permission || planId === "TRIAL") && (
+                            <div className="flex gap-3 items-center justify-between mt-2">
+                              <div className="flex flex-col gap-1">
+                                <label
+                                  htmlFor={`status-${occupant.id}`}
+                                  className="text-sm font-medium sr-only"
                                 >
-                                  <Eye />
+                                  Alterar status do agendamento
+                                </label>
+                                <Select
+                                  onValueChange={(value: AppointmentStatus) => {
+                                    handleStatusAppointment(occupant.id, value)
+                                  }}
+                                >
+                                  <SelectTrigger
+                                    className="w-[185px]"
+                                    id={`status-${occupant.id}`}
+                                    aria-label={`Status atual: ${statusMap[occupant.status]}`}
+                                  >
+                                    <SelectValue placeholder={statusMap[occupant.status]} />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="PENDING">Pendente</SelectItem>
+                                    <SelectItem value="SCHEDULED">Confirmado</SelectItem>
+                                    <SelectItem value="COMPLETED">Completo</SelectItem>
+                                    <SelectItem value="NO_SHOW">Não comparecimento</SelectItem>
+                                    <SelectItem value="CANCELLED">Cancelado</SelectItem>
+                                  </SelectContent>
+                                </Select>
+                              </div>
+
+                              <div className="flex gap-2.5" role="group" aria-label="Ações do agendamento">
+                                <Button
+                                  size="icon"
+                                  onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
+                                  className="bg-green-400 hover:bg-accent rounded-md text-white text-sm font-semibold cursor-pointer"
+                                  aria-label={`Enviar confirmação via WhatsApp para ${occupant.name}`}
+                                  title="Enviar confirmação via WhatsApp"
+                                >
+                                  <FaWhatsapp aria-hidden="true" />
                                 </Button>
-                              </DialogTrigger>
+
+                                <DialogTrigger asChild>
+                                  <Button
+                                    variant="ghost"
+                                    size="icon"
+                                    onClick={() => setDetailAppointment(occupant)}
+                                    aria-label={`Ver detalhes do agendamento de ${occupant.name} às ${slot}`}
+                                    title="Ver detalhes do agendamento"
+                                  >
+                                    <Eye aria-hidden="true" />
+                                  </Button>
+                                </DialogTrigger>
+                              </div>
                             </div>
                           )}
-                        </div>
-                        {(permission || planId === "TRIAL") && (
-                          <div className="flex gap-3 items-center justify-between">
-                            <Select onValueChange={(value: AppointmentStatus) => {
-                              handleStatusAppointment(occupant.id, value)
-                            }}>
-                              <SelectTrigger className="w-[185px]">
-                                <SelectValue placeholder={statusMap[occupant.status]} />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectItem value="PENDING">Pendente</SelectItem>
-                                <SelectItem value="SCHEDULED">Confimado</SelectItem>
-                                <SelectItem value="COMPLETED">Completo</SelectItem>
-                                <SelectItem value="NO_SHOW">Não comparecimento</SelectItem>
-                                <SelectItem value="CANCELLED">Cancelado</SelectItem>
-                              </SelectContent>
-                            </Select>
-                            <div className="flex gap-2.5">
-                              <Button
-                                size={"icon"}
-                                onClick={() => confirmToWhatsapp(occupant.phone, occupant.name, occupant.appointmentDate, occupant.time)}
-                                className="bg-green-400 hover:bg-accent rounded-md text-white text-sm font-semibold cursor-pointer"
-                              >
-                                <FaWhatsapp />
-                              </Button>
+                        </article>
+                      </li>
+                    )
+                  }
 
-                              <DialogTrigger asChild>
-                                <Button
-                                  variant={"ghost"}
-                                  size={"icon"}
-                                  onClick={() => setDetailAppointment(occupant)}
-                                >
-                                  <Eye />
-                                </Button>
-                              </DialogTrigger>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    </div>
+                  return (
+                    <li
+                      key={slot}
+                      className="flex items-center gap-3 py-2 border-t last:border-b"
+                      role="listitem"
+                    >
+                      <time
+                        className="font-bold"
+                        dateTime={slot}
+                        aria-label={`Horário ${slot}`}
+                      >
+                        {slot}
+                      </time>
+                      <span aria-label={`Horário ${slot} disponível para agendamento`}>
+                        Disponível
+                      </span>
+                    </li>
                   )
-                }
-                return (
-                  <div
-                    key={slot}
-                    className="flex items-center gap-3 py-2 border-t last:border-b"
-                  >
-                    <div className="font-bold">{slot}</div>
-                    <div>Disponível</div>
-                  </div>
-                )
-              })
+                })}
+              </ul>
             )}
           </ScrollArea>
         </CardContent>

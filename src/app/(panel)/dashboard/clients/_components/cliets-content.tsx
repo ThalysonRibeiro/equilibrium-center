@@ -87,54 +87,99 @@ export function ClientsContent({ planId, download_pdf, limitReport }: ClientsCon
     setIsFiltersOpen(prev => !prev);
   }
 
+  const totalResults = appointmentsFiltered?.length || 0;
+
   return (
     <>
       {isLoading ? (
-        <><LoadingUI /></>
+        <div role="status" aria-label="Carregando dados dos clientes">
+          <LoadingUI />
+        </div>
       ) : (
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
+        <main className="space-y-4" role="main">
+          <header className="flex items-center justify-between" role="banner">
             {planId !== "EXPIRED" && (
-              <DateRangePicker value={30} />
+              <div role="group" aria-label="Seletor de período">
+                <DateRangePicker value={30} />
+              </div>
             )}
             {download_pdf && (
-              <GeneratePDFAppointments data={data} />
+              <div role="group" aria-label="Ações de download">
+                <GeneratePDFAppointments data={data} />
+              </div>
             )}
-          </div>
+          </header>
 
           {limitReport.includes("progressAppointments") && planId !== "EXPIRED" && (
-            <ProgressAppointments
-              startDate={data?.startDate || new Date()}
-              endDate={data?.endDate || new Date()}
-              loading={isLoading}
-              metricStatus={data?.metricStatus || null}
-              countAllAppointments={data?.countAllAppointments || 0}
-            />
+            <section aria-labelledby="progress-title" role="region">
+              <h2 id="progress-title" className="sr-only">Progresso dos agendamentos</h2>
+              <ProgressAppointments
+                startDate={data?.startDate || new Date()}
+                endDate={data?.endDate || new Date()}
+                loading={isLoading}
+                metricStatus={data?.metricStatus || null}
+                countAllAppointments={data?.countAllAppointments || 0}
+              />
+            </section>
           )}
 
-          <h2 className="text-2xl font-semibold text-center">Pesquisa por cliente especifico</h2>
+          <section aria-labelledby="search-section-title" role="region">
+            <h2 id="search-section-title" className="text-2xl font-semibold text-center">
+              Pesquisa por cliente específico
+            </h2>
 
-          <div className="flex gap-4">
-            <InputSearch
-              search={search}
-              setSearch={(event: string) => setSearch(event)}
-            />
-            <Button
-              onClick={openFilters}
-              className="h-10 border hover:bg-accent"
-            >
-              {isFiltersOpen ? <ChevronUp /> : <ChevronDown />}
-              Filtros
-            </Button>
-          </div>
-          {isFiltersOpen && (
-            <div className="flex items-center gap-4">
-              <span>Total de resultados: {appointmentsFiltered?.length}</span>
-              <StatusFilters />
+            <div className="flex gap-4" role="group" aria-label="Controles de pesquisa e filtros">
+              <div className="flex-1">
+                <InputSearch
+                  search={search}
+                  setSearch={(event: string) => setSearch(event)}
+                  aria-label="Pesquisar clientes por nome, email, telefone ou serviço"
+                />
+              </div>
+              <Button
+                onClick={openFilters}
+                className="h-10 border hover:bg-accent"
+                aria-expanded={isFiltersOpen}
+                aria-controls="filters-section"
+                aria-label={`${isFiltersOpen ? 'Ocultar' : 'Mostrar'} filtros adicionais`}
+              >
+                <span aria-hidden="true">
+                  {isFiltersOpen ? <ChevronUp /> : <ChevronDown />}
+                </span>
+                Filtros
+              </Button>
             </div>
-          )}
-          <Appointment appointments={appointmentsFiltered || []} planId={planId} />
-        </section>
+
+            {isFiltersOpen && (
+              <div
+                id="filters-section"
+                className="flex items-center gap-4"
+                role="group"
+                aria-label="Filtros e resultados"
+              >
+                <div
+                  role="status"
+                  aria-live="polite"
+                  aria-label={`${totalResults} ${totalResults === 1 ? 'resultado encontrado' : 'resultados encontrados'}`}
+                >
+                  <span>Total de resultados: {totalResults}</span>
+                </div>
+                <div role="group" aria-label="Filtros por status">
+                  <StatusFilters />
+                </div>
+              </div>
+            )}
+          </section>
+
+          <section aria-labelledby="appointments-table-title" role="region">
+            <h3 id="appointments-table-title" className="sr-only">
+              Lista de agendamentos filtrados
+            </h3>
+            <div aria-live="polite" aria-atomic="true">
+              <Appointment appointments={appointmentsFiltered || []} planId={planId} />
+            </div>
+          </section>
+        </main>
       )}
     </>
   )

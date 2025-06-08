@@ -16,7 +16,6 @@ import { scrollTosection } from "@/utils/scrollTosection";
 import { Session } from "next-auth";
 import { redirect, usePathname } from "next/navigation";
 
-
 interface NavItemsProps {
   href: string;
   label: string;
@@ -44,11 +43,11 @@ export function Header() {
 
   function scrollSection(link: string) {
     scrollTosection(link, "smooth");
-    setIsOpen(false)
+    setIsOpen(false);
   }
 
   const navItems: NavItemsProps[] = [
-    { href: "#hero", label: "Inicio" },
+    { href: "#hero", label: "Início" },
     { href: "#features", label: "Características" },
     { href: "#price", label: "Preços" },
     { href: "#testimonial", label: "Testemunhos" },
@@ -65,7 +64,7 @@ export function Header() {
           <Button
             key={link.label}
             variant="link"
-            className="hover:bg-transparent font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             onClick={() => {
               if (pathname === "/privacy-policy" || pathname === "/cookies-policy" || pathname === "/terms-of-service") {
                 redirect("/")
@@ -80,7 +79,7 @@ export function Header() {
             key={link.label}
             asChild
             variant="link"
-            className="hover:bg-transparent font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Link href={link.href}>{link.label}</Link>
           </Button>
@@ -88,30 +87,28 @@ export function Header() {
       })}
 
       {status === 'loading' ? (
-        <>
-          <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
-        </>
+        <div
+          className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin"
+          role="status"
+          aria-label="Carregando"
+        >
+          <span className="sr-only">Carregando...</span>
+        </div>
       ) : session ? (
-        <>
-          <Button
-            asChild
-            variant="link"
-            className="hover:bg-transparent font-montserrat hover:text-accent"
-          >
-            <Link href="/dashboard">
-              Acessar Clinica
-            </Link>
-          </Button>
-        </>
+        <Button
+          asChild
+          variant="link"
+          className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+        >
+          <Link href="/dashboard">Acessar Clínica</Link>
+        </Button>
       ) : (
         <Button
           asChild
           variant="link"
-          className="hover:bg-transparent font-montserrat hover:text-accent"
+          className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
         >
-          <Link href="/login">
-            Login
-          </Link>
+          <Link href="/login">Login</Link>
         </Button>
       )}
     </>
@@ -122,21 +119,35 @@ export function Header() {
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild className="fixed z-999 top-3 left-3">
           <Button
-            variant={"ghost"}
-            size={"icon"}
-            className="hover:text-accent backdrop-blur-md hover:bg-transparent border"
+            variant="ghost"
+            size="icon"
+            aria-label="Abrir menu"
+            aria-expanded={isOpen}
+            aria-controls="menu-lateral"
+            className="hover:text-accent backdrop-blur-md hover:bg-transparent border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             <Menu className="w-10 h-10" />
           </Button>
         </SheetTrigger>
-        <SheetContent side="right" className="p-4 w-[240px] sm:w-300px] z-[9999]">
+        <SheetContent
+          id="menu-lateral"
+          side="right"
+          className="p-4 w-[240px] sm:w-300px] z-[9999]"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu de navegação"
+        >
           <SheetTitle>Menu</SheetTitle>
-          <nav className="flex flex-col md:flex-row items-start">
+          <nav
+            className="flex flex-col md:flex-row items-start"
+            role="navigation"
+            aria-label="Menu lateral de navegação"
+          >
             <NavLinks />
           </nav>
         </SheetContent>
       </Sheet>
-    )
+    );
   }
 
   if (headerVisible) {
@@ -144,10 +155,8 @@ export function Header() {
   }
 
   return (
-    <header
-      className={`fixed top-0 right-0 left-0 z-[999] py-4 px-6 ${headerVisible && "hidden"}`}
-    >
-      <div className="relative container mx-auto flex  lg:justify-between justify-between  md:justify-center items-center">
+    <header className={`fixed top-0 right-0 left-0 z-[999] py-4 px-6 ${headerVisible && "hidden"}`}>
+      <div className="relative container mx-auto flex lg:justify-between justify-between md:justify-center items-center">
         <Link
           href="/"
           className="hidden lg:inline-flex items-center justify-center gap-2"
@@ -155,7 +164,7 @@ export function Header() {
           <div className="relative w-15 h-13">
             <Image
               src={logo}
-              alt="logo"
+              alt="Logotipo da clínica Equilibrium Center"
               quality={100}
               priority
               fill
@@ -165,7 +174,11 @@ export function Header() {
           <p className="uppercase text-primary">Equilibrium <br /> Center</p>
         </Link>
 
-        <nav className="hidden md:flex items-center">
+        <nav
+          className="hidden md:flex items-center"
+          role="navigation"
+          aria-label="Navegação principal"
+        >
           <NavLinks />
         </nav>
       </div>
@@ -176,12 +189,16 @@ export function Header() {
 interface FloatingMenuProps {
   navItems: NavItemsProps[];
   session: Session | null;
-  status: "loading" | "authenticated" | "unauthenticated"
+  status: "loading" | "authenticated" | "unauthenticated";
 }
 
 export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
   return (
-    <div className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-999 bg-white rounded-2xl py-1 px-2 border shadow hidden md:block w-fit floatingMenu hover:border-accent">
+    <div
+      className="fixed top-0 left-1/2 transform -translate-x-1/2 mt-4 z-999 bg-white rounded-2xl py-1 px-2 border shadow hidden md:block w-fit floatingMenu hover:border-accent"
+      role="navigation"
+      aria-label="Menu flutuante de navegação"
+    >
       <div className="flex gap-2">
         {navItems.map((link) => {
           const isAnchor = link.href.startsWith("#");
@@ -190,7 +207,7 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
             <Button
               key={link.label}
               variant="link"
-              className="hover:bg-transparent font-montserrat hover:text-accent"
+              className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
               onClick={() => scrollTosection(link.href.replace("#", ""), "smooth")}
             >
               {link.label}
@@ -200,41 +217,38 @@ export function FloatingMenu({ navItems, session, status }: FloatingMenuProps) {
               key={link.label}
               asChild
               variant="link"
-              className="hover:bg-transparent font-montserrat hover:text-accent"
+              className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
             >
               <Link href={link.href}>{link.label}</Link>
             </Button>
           );
-
         })}
         {status === 'loading' ? (
-          <>
-            <div className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin" />
-          </>
+          <div
+            className="w-6 h-6 border-2 border-t-2 border-gray-300 border-t-primary rounded-full animate-spin"
+            role="status"
+            aria-label="Carregando"
+          >
+            <span className="sr-only">Carregando...</span>
+          </div>
         ) : session ? (
-          <>
-            <Button
-              asChild
-              variant="link"
-              className="hover:bg-transparent font-montserrat hover:text-accent"
-            >
-              <Link href="/dashboard">
-                Acessar Clinica
-              </Link>
-            </Button>
-          </>
+          <Button
+            asChild
+            variant="link"
+            className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          >
+            <Link href="/dashboard">Acessar Clínica</Link>
+          </Button>
         ) : (
           <Button
             asChild
             variant="link"
-            className="hover:bg-transparent font-montserrat hover:text-accent"
+            className="hover:bg-transparent font-montserrat hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
-            <Link href="/login">
-              Login
-            </Link>
+            <Link href="/login">Login</Link>
           </Button>
         )}
       </div>
     </div>
-  )
+  );
 }

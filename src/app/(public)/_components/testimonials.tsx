@@ -13,12 +13,10 @@ export async function Testimonials() {
   function totalRating() {
     let ratingTotal: number = 0;
     newArray.forEach(testimonial => {
-      ratingTotal += testimonial.rating
+      ratingTotal += testimonial.rating;
     });
     rating = ratingTotal / newArray.length;
-    const result = Math.floor(ratingTotal / newArray.length);
-
-    return result
+    return Math.floor(rating);
   }
 
   const fallbackColors = [
@@ -30,17 +28,23 @@ export async function Testimonials() {
   ];
 
   return (
-    <section id="testimonial" className="bg-white py-6 sm:px-1 flex flex-col items-center justify-center gap-6">
+    <section
+      id="testimonials"
+      className="bg-white py-6 sm:px-1 flex flex-col items-center justify-center gap-6"
+      role="region"
+      aria-labelledby="testimonial-heading"
+      aria-describedby="testimonial-description"
+    >
       <div className="container mx-auto px-6">
-
-        <h2 className="text-3xl text-center font-bold">
+        <h2 id="testimonial-heading" className="text-3xl text-center font-bold">
           Amado por massoterapeutas
         </h2>
-        <p className="text-center">
+        <p id="testimonial-description" className="text-center">
           Depoimentos de profissionais de massagem que transformaram suas práticas com nossa plataforma.
         </p>
+
         <div className="w-full space-y-4 mt-10">
-          {(testimonials.length > 0 &&
+          {testimonials.length > 0 && (
             <CardAssessments
               testimonials={testimonials}
               starGroup={0}
@@ -48,7 +52,7 @@ export async function Testimonials() {
               reverse={true}
             />
           )}
-          {(testimonials.length > 13 &&
+          {testimonials.length > 13 && (
             <CardAssessments
               testimonials={testimonials}
               starGroup={10}
@@ -56,7 +60,7 @@ export async function Testimonials() {
               reverse={false}
             />
           )}
-          {(testimonials.length > 23 &&
+          {testimonials.length > 23 && (
             <CardAssessments
               testimonials={testimonials}
               starGroup={20}
@@ -68,20 +72,17 @@ export async function Testimonials() {
 
         <div className="w-full mt-16 bg-teal-50 rounded-xl p-8 md:p-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-
             <div className="md:col-span-2">
               <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                Junte-se a mais de {newArray.length + 100} profissionais de massoterapia que confiam no Equilibrium
-                Center
+                Junte-se a mais de {newArray.length + 100} profissionais de massoterapia que confiam no Equilibrium Center
               </h3>
               <p className="text-gray-700">
                 De profissionais autônomos a clínicas com várias unidades, nossa plataforma se adapta para atender às suas necessidades, mantendo a simplicidade que você deseja.
               </p>
             </div>
 
-            <div>
-
-              <div className="flex -space-x-2">
+            <div aria-label="Grupo de avatares e avaliação geral">
+              <div className="flex -space-x-2" aria-label="Avatares de usuários">
                 {newArray.slice(0, 8).map((avatar, index) => (
                   <Avatar key={avatar.id} className="border border-white">
                     <AvatarImage src={avatar.user.image ?? ""} />
@@ -98,18 +99,16 @@ export async function Testimonials() {
                 ))}
               </div>
 
-              <div>
+              <div className="mt-4" aria-label={`Nota média ${rating.toFixed(1)} de 5`}>
                 <StarRating rating={totalRating()} />
                 <p>
-                  {rating.toFixed(1)}/5
-                  (mais de {newArray.length + 100} avaliações)
+                  {rating.toFixed(1)}/5 (mais de {newArray.length + 100} avaliações)
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

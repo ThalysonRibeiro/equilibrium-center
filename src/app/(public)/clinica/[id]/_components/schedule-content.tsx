@@ -29,17 +29,14 @@ type UserWithServiceAndSubscription = Prisma.UserGetPayload<{
   };
 }>;
 
-// // Ajustar a tipagem apenas dos serviços
 type ServiceWithStringPrice = Omit<UserWithServiceAndSubscription["service"][0], "price"> & {
   price: string;
 };
 
-// Substituir o array de serviços pela versão com `price` como string
 type UserWithConvertedService = Omit<UserWithServiceAndSubscription, "service"> & {
   service: ServiceWithStringPrice[];
 };
 
-// Agora, use este tipo na sua interface
 interface ScheduleContentProps {
   clinic: UserWithConvertedService;
 }
@@ -53,17 +50,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const form = useAppoitmentForm();
   const { watch } = form;
 
-
   const selectedDate = watch("date")
   const selectedServiceId = watch("serviceId")
 
   const [selectedTime, setSelectedTime] = useState("");
   const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
-
-  // Quais os horários bloqueados 01/02/2025 > ["15:00", "18:00"]
   const [blockedTimes, setBlockedTimes] = useState<string[]>([])
-
 
   // Função que busca os horários bloqueados (via Fetch HTTP)
   const fetchBlockedTimes = useCallback(async (date: Date): Promise<string[]> => {
@@ -74,18 +67,14 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
       const json = await response.json();
       setLoadingSlots(false);
-      return json; // Retornar o array com horarios que já tem bloqueado desse Dia e dessa clinica.
-
-
+      return json;
     } catch (err) {
       setLoadingSlots(false);
       return [];
     }
   }, [clinic.id])
 
-
   useEffect(() => {
-
     if (selectedDate) {
       fetchBlockedTimes(selectedDate).then((blocked) => {
         setBlockedTimes(blocked)
@@ -105,10 +94,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
         if (!stilAvailable) {
           setSelectedTime("");
         }
-
       })
     }
-
   }, [selectedDate, clinic.times, fetchBlockedTimes, selectedTime])
 
   function calculateAge(nascimento: Date): number {
@@ -138,6 +125,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   async function handleRegisterAppointmnent(formData: AppoitmentFormData) {
     if (!selectedTime) {
+      toast.error("Por favor, selecione um horário para o agendamento");
       return;
     }
 
@@ -169,159 +157,442 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       return;
     }
 
-    toast.success("Massagem agendanda com sucesso");
+    toast.success("Agendamento realizado com sucesso");
     form.reset();
     setSelectedTime("");
   }
 
   return (
     <div className="min-h-screen flex flex-col mb-6">
-
-      <section className="w-full h-80 flex items-center justify-center mx-auto px-4 relative inset-0">
+      {/* Header Section */}
+      <header
+        className="w-full h-80 flex items-center justify-center mx-auto px-4 relative inset-0"
+        role="banner"
+      >
         <div className="h-80 -z-[1] bg-gradient-to-br from-teal-300/80 to-teal-500/80 shadow absolute inset-0" />
 
         <Image
           className="object-cover absolute w-full h-80 -z-[2] inset-0"
           src={clinic.image ? clinic.image : img_test}
-          alt="imagem de fundo da clinica"
+          alt={`Imagem de fundo da clínica ${clinic.name}`}
           width={1280}
           height={280}
+          priority
         />
+
         <div className="max-w-2xl mx-auto">
           <article className="flex flex-col items-center gap-2">
             <div className="relative w-32 h-32 rounded-full overflow-hidden border-2 border-white">
               <Image
                 src={clinic.image ? clinic.image : img_test}
-                alt="foto da clinica"
+                alt={`Logo da clínica ${clinic.name}`}
                 fill
                 className="object-cover"
               />
             </div>
 
-            <h1 className="text-4xl text-white  font-semibold">
+            <h1 className="text-4xl text-white font-semibold text-center">
               {clinic.name}
             </h1>
-            <h2 className="text-center text-sm text-white line-clamp-2">{clinic.description}</h2>
-            <div className="mb-2">
-              <span className="text-white flex">
-                <MapPin className="w-5 h-5" />
+
+            <p className="text-center text-sm text-white line-clamp-2">
+              {clinic.description}
+            </p>
+
+            <address className="mb-2 not-italic">
+              <span className="text-white flex items-center gap-1" role="img" aria-label="Localização">
+                <MapPin className="w-5 h-5" aria-hidden="true" />
+                <span className="sr-only">Endereço: </span>
                 {clinic.address ? clinic.address : "Endereço não informado"}
                 {clinic.number ? `, nº ${clinic.number}` : ""}
                 {clinic.city && clinic.state ? ` - ${clinic.city}-${clinic.state}` : ""}
                 {clinic.cep ? `, CEP ${clinic.cep}` : ""}
               </span>
-            </div>
-
+            </address>
           </article>
         </div>
-      </section>
+      </header>
 
-      {/* form */}
-      <section className="max-w-2xl mx-auto w-full mt-6">
+      {/* Form Section */}
+      <main className="max-w-2xl mx-auto w-full mt-6" role="main">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
             className="mx-4 space-y-6 bg-white p-6 rounded-md border"
+            noValidate
+            aria-label="Formulário de agendamento"
           >
-            <h3 className="font-semibold text-lg text-center">
-              Informações pessoais
-            </h3>
-            <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem className="my-2">
-                    <FormLabel>Nome completo*</FormLabel>
-                    <FormControl>
-                      <Input
-                        id="name"
-                        placeholder="Digite seu nome completo..."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+            {/* Seção de Informações Pessoais */}
+            <fieldset className="space-y-4">
+              <legend className="font-semibold text-lg text-center">
+                Informações pessoais
+              </legend>
 
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem className="my-2">
-                    <FormLabel>Email*</FormLabel>
-                    <FormControl>
-                      <Input
-                        id="email"
-                        placeholder="Digite seu email"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem className="my-2">
-                    <FormLabel>Telefone*</FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        id="phone"
-                        placeholder="(00) 00000-0000"
-                        onChange={(e) => {
-                          const formattedValue = formatPhone(e.target.value);
-                          field.onChange(formattedValue)
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <div className="flex gap-3">
+              <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                 <FormField
                   control={form.control}
-                  name="age"
+                  name="name"
                   render={({ field }) => (
-                    <FormItem className="my-2 w-1/2">
-                      <FormLabel>Idade</FormLabel>
+                    <FormItem className="my-2">
+                      <FormLabel htmlFor="name">Nome completo*</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="name"
+                          placeholder="Digite seu nome completo..."
+                          autoComplete="name"
+                          aria-required="true"
+                          aria-describedby={form.formState.errors.name ? "name-error" : undefined}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage id="name-error" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="my-2">
+                      <FormLabel htmlFor="email">Email*</FormLabel>
+                      <FormControl>
+                        <Input
+                          id="email"
+                          type="email"
+                          placeholder="Digite seu email"
+                          autoComplete="email"
+                          aria-required="true"
+                          aria-describedby={form.formState.errors.email ? "email-error" : undefined}
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage id="email-error" />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="phone"
+                  render={({ field }) => (
+                    <FormItem className="my-2">
+                      <FormLabel htmlFor="phone">Telefone*</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          id="age"
-                          type="number"
-                          readOnly
-                          placeholder="0"
+                          id="phone"
+                          type="tel"
+                          placeholder="(00) 00000-0000"
+                          autoComplete="tel"
+                          aria-required="true"
+                          aria-describedby={form.formState.errors.phone ? "phone-error" : undefined}
+                          onChange={(e) => {
+                            const formattedValue = formatPhone(e.target.value);
+                            field.onChange(formattedValue)
+                          }}
                         />
+                      </FormControl>
+                      <FormMessage id="phone-error" />
+                    </FormItem>
+                  )}
+                />
+
+                <div className="flex gap-3">
+                  <FormField
+                    control={form.control}
+                    name="age"
+                    render={({ field }) => (
+                      <FormItem className="my-2 w-1/2">
+                        <FormLabel htmlFor="age">Idade</FormLabel>
+                        <FormControl>
+                          <Input
+                            {...field}
+                            id="age"
+                            type="number"
+                            readOnly
+                            placeholder="0"
+                            aria-label="Idade calculada automaticamente"
+                            tabIndex={-1}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name="dateOfBirth"
+                    render={({ field }) => (
+                      <FormItem className="my-2 w-1/2">
+                        <FormLabel htmlFor="dateOfBirth">Data de nascimento</FormLabel>
+                        <FormControl>
+                          <DateTimePicker
+                            initialDate={new Date()}
+                            minDate={new Date(1900, 0, 1)}
+                            activeYear={true}
+                            className="rounded-md border px-2 py-1"
+                            aria-label="Selecione sua data de nascimento"
+                            onChange={(date) => {
+                              field.onChange(date)
+                            }}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+              </div>
+            </fieldset>
+
+            {/* Seção de Informações Clínicas */}
+            <fieldset className="space-y-4">
+              <legend className="font-semibold text-lg text-center">
+                Informações Clínicas
+              </legend>
+
+              <FormField
+                control={form.control}
+                name="symptoms"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="symptoms">
+                      Quais são suas principais queixas e sintomas?
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        id="symptoms"
+                        placeholder="Descreva suas principais queixas e sintomas"
+                        className="max-h-30 h-20"
+                        aria-describedby="symptoms-help"
+                      />
+                    </FormControl>
+                    <div id="symptoms-help" className="sr-only">
+                      Descreva detalhadamente seus sintomas para melhor atendimento
+                    </div>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="secondary"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="secondary">
+                      Quais são suas queixas ou sintomas secundários?
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        id="secondary"
+                        placeholder="Descreva suas queixas ou sintomas secundários"
+                        className="max-h-30 h-20"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={form.control}
+                name="complaints"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="complaints">
+                      Qual é o histórico dessas queixas?
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        id="complaints"
+                        placeholder="Descreva o histórico das suas queixas"
+                        className="max-h-30 h-20"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </fieldset>
+
+            {/* Seção de Informações Adicionais */}
+            <fieldset className="space-y-4">
+              <legend className="font-semibold text-lg text-center">
+                Informações Adicionais
+              </legend>
+
+              <div className="flex flex-col md:flex-row gap-4 md:gap-8 md:justify-between">
+                <FormField
+                  control={form.control}
+                  name="useOfAnyMedication"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Faz uso de alguma medicação?</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          aria-required="false"
+                          className="flex gap-4"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="yes"
+                              id="medication-yes"
+                              aria-describedby="medication-yes-label"
+                            />
+                            <Label htmlFor="medication-yes" id="medication-yes-label">
+                              Sim
+                            </Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="not"
+                              id="medication-no"
+                              aria-describedby="medication-no-label"
+                            />
+                            <Label htmlFor="medication-no" id="medication-no-label">
+                              Não
+                            </Label>
+                          </div>
+                        </RadioGroup>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
+
                 <FormField
                   control={form.control}
-                  name="dateOfBirth"
+                  name="bePregnant"
                   render={({ field }) => (
-                    <FormItem className="my-2 w-1/2">
-                      <FormLabel>Data de nascimento</FormLabel>
+                    <FormItem>
+                      <FormLabel>Está ou pode estar grávida?</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex gap-4"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="yes"
+                              id="pregnant-yes"
+                              aria-describedby="pregnant-yes-label"
+                            />
+                            <Label htmlFor="pregnant-yes" id="pregnant-yes-label">
+                              Sim
+                            </Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="not"
+                              id="pregnant-no"
+                              aria-describedby="pregnant-no-label"
+                            />
+                            <Label htmlFor="pregnant-no" id="pregnant-no-label">
+                              Não
+                            </Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="eatingRoutine"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Pratica atividades físicas?</FormLabel>
+                      <FormControl>
+                        <RadioGroup
+                          onValueChange={field.onChange}
+                          defaultValue={field.value}
+                          className="flex gap-4"
+                        >
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="yes"
+                              id="exercise-yes"
+                              aria-describedby="exercise-yes-label"
+                            />
+                            <Label htmlFor="exercise-yes" id="exercise-yes-label">
+                              Sim
+                            </Label>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <RadioGroupItem
+                              value="not"
+                              id="exercise-no"
+                              aria-describedby="exercise-no-label"
+                            />
+                            <Label htmlFor="exercise-no" id="exercise-no-label">
+                              Não
+                            </Label>
+                          </div>
+                        </RadioGroup>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+
+              <FormField
+                control={form.control}
+                name="physicalActivities"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="physicalActivities">
+                      Como é sua rotina alimentar?
+                    </FormLabel>
+                    <FormControl>
+                      <Textarea
+                        {...field}
+                        id="physicalActivities"
+                        placeholder="Descreva sua rotina alimentar"
+                        className="max-h-30 h-20"
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </fieldset>
+
+            {/* Seção de Agendamento */}
+            <fieldset className="space-y-4">
+              <legend className="font-semibold text-lg text-center">
+                Agendamento
+              </legend>
+
+              <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
+                <FormField
+                  control={form.control}
+                  name="date"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Data do agendamento*</FormLabel>
                       <FormControl>
                         <DateTimePicker
                           initialDate={new Date()}
-                          minDate={new Date(1900, 0, 1)}
-                          activeYear={true}
                           className="rounded-md border px-2 py-1"
+                          aria-label="Selecione a data do agendamento"
+                          aria-required="true"
                           onChange={(date) => {
-                            field.onChange(date)
-                            console.log(field.value);
-
-                            console.log("Data escolhida:", date)
+                            if (date) {
+                              field.onChange(date)
+                              setSelectedTime("");
+                            }
                           }}
                         />
                       </FormControl>
@@ -329,286 +600,132 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                     </FormItem>
                   )}
                 />
-              </div>
-            </div>
 
-            <h3 className="font-semibold text-lg text-center">
-              Informações Clínicas
-            </h3>
-
-            <FormField
-              control={form.control}
-              name="symptoms"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Quais são suas principais queixas e sintomas?</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      id="symptoms"
-                      placeholder="Descreva Quais são suas principais queixas e sintomas"
-                      className="max-h-30 h-10"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="secondary"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Quais são suas queixas ou sintomas secundários?</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      id="secondary"
-                      placeholder="Descreva Quais são suas queixas ou sintomas secundários?"
-                      className="max-h-30 h-10"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="complaints"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Qual é o histórico dessas queixas?</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      id="complaints"
-                      placeholder="Descreva Qual é o histórico dessas queixas?"
-                      className="max-h-30 h-10"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <h3 className="font-semibold text-lg text-center">
-              Informações Adicionais
-            </h3>
-            <div className="flex flex-col md:flex-row gap-4 md:gap-0 md:justify-between">
-              <FormField
-                control={form.control}
-                name="useOfAnyMedication"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Faz uso de alguma medicação?</FormLabel>
-                    <FormControl className="flex md:justify-center gap-4">
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="yes" id="yes" />
-                          <Label htmlFor="yes">sim</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="not" id="not" />
-                          <Label htmlFor="not">não</Label>
-                        </div>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="bePregnant"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Está ou pode estar grávida?</FormLabel>
-                    <FormControl className="flex md:justify-center gap-4">
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="true" id="true" />
-                          <Label htmlFor="yes">sim</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="false" id="false" />
-                          <Label htmlFor="not">não</Label>
-                        </div>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="eatingRoutine"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Faz atividades físicas?</FormLabel>
-                    <FormControl className="flex md:justify-center gap-4">
-                      <RadioGroup
-                        onValueChange={field.onChange}
-                        defaultValue={field.value}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="true" id="true" />
-                          <Label htmlFor="yes">sim</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="false" id="false" />
-                          <Label htmlFor="not">não</Label>
-                        </div>
-                      </RadioGroup>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-            </div>
-
-            <FormField
-              control={form.control}
-              name="physicalActivities"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Como é sua rotina alimentar?</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      {...field}
-                      id="physicalActivities"
-                      placeholder="Descreva Como é sua rotina alimentar"
-                      className="max-h-30 h-10"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <h3 className="font-semibold text-lg text-center">
-              Agendamento
-            </h3>
-            <div className="w-full grid grid-cols-2 gap-4">
-              <FormField
-                control={form.control}
-                name="date"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Data do agendamento*</FormLabel>
-                    <FormControl>
-                      <DateTimePicker
-                        initialDate={new Date()}
-                        className="rounded-md border px-2 py-1"
-                        onChange={(date) => {
-                          if (date) {
-                            field.onChange(date)
+                <FormField
+                  control={form.control}
+                  name="serviceId"
+                  render={({ field }) => (
+                    <FormItem className="w-full">
+                      <FormLabel>Selecione o serviço*</FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) => {
+                            field.onChange(value)
                             setSelectedTime("");
-                          }
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="serviceId"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormLabel>Selecione o serviço*</FormLabel>
-                    <FormControl>
-                      <Select onValueChange={(value) => {
-                        field.onChange(value)
-                        setSelectedTime("");
-                      }}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="Selecione um serviço" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {clinic.service.map(service => (
-                            <SelectItem key={service.id} value={service.id}>
-                              {service.name} ({Math.floor(service.duration / 60)}h {service.duration % 60}min)
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            {selectedServiceId && (
-              <div className="space-y-2">
-                <Label>Horários disponíeis*</Label>
-                <div className="bg-gray-100 p-2 rounded-md border">
-                  {loadingSlots ? (
-                    <LoadingUI />
-                  ) : availableTimeSlots.length === 0 ? (
-                    <p>Nenhum horário disponivel</p>
-                  ) : (
-                    <ScheduleTimeList
-                      onSelecTime={(time) => setSelectedTime(time)}
-                      clinicTimes={clinic.times}
-                      blockedTimes={blockedTimes}
-                      availableTimeSlots={availableTimeSlots}
-                      selectedTime={selectedTime}
-                      selectedDate={selectedDate}
-                      requiredSlots={
-                        clinic.service.find(serv => serv.id === selectedServiceId)
-                          ? Math.ceil(clinic.service.find(serv => serv.id === selectedServiceId)!.duration / 30)
-                          : 1
-                      }
-                    />
+                          }}
+                          aria-required="true"
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Selecione um serviço" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {clinic.service.map(service => (
+                              <SelectItem
+                                key={service.id}
+                                value={service.id}
+                                aria-label={`${service.name}, duração ${Math.floor(service.duration / 60)} horas e ${service.duration % 60} minutos`}
+                              >
+                                {service.name} ({Math.floor(service.duration / 60)}h {service.duration % 60}min)
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
                   )}
-                </div>
+                />
               </div>
-            )}
 
+              {selectedServiceId && (
+                <div className="space-y-2">
+                  <Label>Horários disponíveis*</Label>
+                  <div
+                    className="bg-gray-100 p-2 rounded-md border"
+                    role="region"
+                    aria-label="Lista de horários disponíveis"
+                  >
+                    {loadingSlots ? (
+                      <div role="status" aria-live="polite">
+                        <LoadingUI />
+                        <span className="sr-only">Carregando horários disponíveis...</span>
+                      </div>
+                    ) : availableTimeSlots.length === 0 ? (
+                      <p role="status" aria-live="polite">
+                        Nenhum horário disponível para esta data
+                      </p>
+                    ) : (
+                      <ScheduleTimeList
+                        onSelecTime={(time) => setSelectedTime(time)}
+                        clinicTimes={clinic.times}
+                        blockedTimes={blockedTimes}
+                        availableTimeSlots={availableTimeSlots}
+                        selectedTime={selectedTime}
+                        selectedDate={selectedDate}
+                        requiredSlots={
+                          clinic.service.find(serv => serv.id === selectedServiceId)
+                            ? Math.ceil(clinic.service.find(serv => serv.id === selectedServiceId)!.duration / 30)
+                            : 1
+                        }
+                      />
+                    )}
+                  </div>
+                </div>
+              )}
+            </fieldset>
+
+            {/* Status da Clínica e Botão de Submit */}
             {clinic.status ? (
               <Button
+                type="submit"
                 className="hover:bg-accent w-full"
                 disabled={
                   !watch("name") ||
                   !watch("email") ||
                   !watch("phone") ||
-                  !watch("date")
+                  !watch("date") ||
+                  !selectedTime
                 }
+                aria-describedby="submit-help"
               >
                 Realizar agendamento
               </Button>
             ) : (
-              <p className="bg-red-500 text-white rounded-md text-center px-4 py-2">
-                A clinica está fechada nesse momento
-              </p>
+              <div
+                className="bg-red-500 text-white rounded-md text-center px-4 py-2"
+                role="alert"
+                aria-live="polite"
+              >
+                A clínica está fechada neste momento
+              </div>
             )}
-            <article className="max-w-2xl mx-auto w-full mt-6 space-y-2 px-4 text-[12px]">
+
+            <div id="submit-help" className="sr-only">
+              Preencha todos os campos obrigatórios e selecione um horário para continuar
+            </div>
+
+            {/* Termos e Condições */}
+            <section
+              className="max-w-2xl mx-auto w-full mt-6 space-y-2 px-4 text-[12px]"
+              aria-labelledby="terms-heading"
+            >
+              <h3 id="terms-heading" className="sr-only">
+                Termos de confidencialidade e consentimento
+              </h3>
               <p>
-                Sua Terapia será conduzida de forma estritamente confidencial. As informações pessoais passadas durante todo o procedimento da terapia, bem como essa ficha de Anamnese, não serão divulgadas para ninguém.
+                Sua terapia será conduzida de forma estritamente confidencial. As informações pessoais
+                fornecidas durante todo o procedimento da terapia, bem como esta ficha de anamnese,
+                não serão divulgadas para ninguém.
               </p>
               <p>
-                Ao assinar esse formulário, você reconhece que leu e concordou com o que está exposto acima, bem como, que está ciente que o sucesso terapêutico também depende do seguimento das recomendações profissionais concedidas.
+                Ao preencher este formulário, você reconhece que leu e concordou com o exposto acima,
+                bem como está ciente de que o sucesso terapêutico também depende do seguimento das
+                recomendações profissionais concedidas.
               </p>
-            </article>
+            </section>
           </form>
         </Form>
-      </section>
-
-
+      </main>
     </div>
   )
 }

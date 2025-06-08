@@ -21,7 +21,7 @@ export default async function Dashboard() {
 
   return (
     <main>
-      {subscription.subscriptionStatus === "active" && (
+      {subscription.planId !== "EXPIRED" && (
         <div className="space-x-2 flex items-center justify-end">
           <Link href={`/clinica/${session.user.id}`} target="_blank">
             <Button

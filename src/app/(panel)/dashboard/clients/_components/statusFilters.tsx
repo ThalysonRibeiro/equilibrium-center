@@ -11,7 +11,6 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 
-
 type RangerType = {
   status: string;
 }
@@ -34,7 +33,7 @@ export function StatusFilters() {
     updateURLWithPartialFilters({
       status: statusSelected
     })
-  }, [statusSelected]);
+  }, [statusSelected, updateURLWithPartialFilters]);
 
   const matStatus = [
     { id: "PENDING", status: "Pendente" },
@@ -45,7 +44,6 @@ export function StatusFilters() {
   ];
 
   function handleClearFilters() {
-
     let startDate: Date;
     let endDate: Date;
 
@@ -57,21 +55,76 @@ export function StatusFilters() {
     router.replace(`/dashboard/clients?start-date=${format(startDate, "yyyy-MM-dd")}&end-date=${format(endDate, "yyyy-MM-dd")}`, { scroll: false });
   }
 
+  const getSelectedStatusLabel = () => {
+    const selectedStatus = matStatus.find(item => item.id === statusSelected);
+    return selectedStatus ? selectedStatus.status : "Nenhum status selecionado";
+  };
+
   return (
-    <div className="flex gap-4">
-      <Select onValueChange={(value) => { setStatusSelected(value) }} value={statusSelected}>
-        <SelectTrigger className="w-[165px]">
-          <SelectValue placeholder="status" />
-        </SelectTrigger>
-        <SelectContent>
-          {matStatus.map(item => (
-            <SelectItem key={item.id} value={item.id}>{item.status}</SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
-      <Button onClick={handleClearFilters} className="border hover:bg-accent">
+    <div
+      className="flex gap-4"
+      role="group"
+      aria-label="Filtros de status de agendamentos"
+    >
+      <div className="relative">
+        <label
+          htmlFor="status-filter"
+          className="sr-only"
+        >
+          Filtrar por status do agendamento
+        </label>
+        <Select
+          onValueChange={(value) => { setStatusSelected(value) }}
+          value={statusSelected}
+          aria-label="Selecionar status para filtrar agendamentos"
+        >
+          <SelectTrigger
+            className="w-[165px]"
+            id="status-filter"
+            aria-describedby="status-filter-help"
+          >
+            <SelectValue
+              placeholder="Selecione o status"
+              aria-label={statusSelected ? `Status selecionado: ${getSelectedStatusLabel()}` : "Nenhum status selecionado"}
+            />
+          </SelectTrigger>
+          <SelectContent role="listbox" aria-label="Opções de status">
+            {matStatus.map(item => (
+              <SelectItem
+                key={item.id}
+                value={item.id}
+                role="option"
+                aria-selected={statusSelected === item.id}
+              >
+                {item.status}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+        <div id="status-filter-help" className="sr-only">
+          Use este filtro para mostrar apenas agendamentos com o status selecionado
+        </div>
+      </div>
+
+      <Button
+        onClick={handleClearFilters}
+        className="border hover:bg-accent"
+        aria-label="Limpar todos os filtros e retornar aos últimos 30 dias"
+        type="button"
+      >
         Limpar filtros
       </Button>
+
+      {/* Feedback para leitores de tela sobre o filtro ativo */}
+      {statusSelected && (
+        <div
+          className="sr-only"
+          aria-live="polite"
+          role="status"
+        >
+          Filtro ativo: mostrando apenas agendamentos com status {getSelectedStatusLabel()}
+        </div>
+      )}
     </div>
   )
 }
