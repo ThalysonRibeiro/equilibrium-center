@@ -6,8 +6,11 @@ import { Check } from "lucide-react";
 import { TRIAL_DAYS } from "@/utils/permissions/trial-limits";
 import { toast } from "sonner";
 import { redirect } from "next/navigation";
+import { useIsMobile } from "@/app/hooks/useMobile";
+import { cn } from "@/lib/utils";
 
 export function Hero() {
+  const isMobile = useIsMobile(360)
   async function handleCopyCupon() {
     try {
       await navigator.clipboard.writeText(`MAS50OFF`);
@@ -27,19 +30,21 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative w-full h-screen min-h-175"
+      className="relative w-full h-screen min-h-175 flex items-center"
       aria-labelledby="hero-heading"
       role="banner"
     >
       <BgHero />
 
-      <div className="container mx-auto sm:px-1 min-h-150">
+      <div className="container mx-auto sm:px-1">
         <div className="flex flex-col lg:flex-row items-center justify-between px-6 w-full h-full gap-6 sm:pt-40 pt-20">
 
-          <article className="text-primary z-10 pt-5 space-y-5 max-w-3xl lg:w-1/2 w-full flex flex-col justify-center">
+          <article className="text-primary z-10 pt-5 space-y-5 lg:w-1/2 w-full flex flex-col justify-center items-center">
             <h1
               id="hero-heading"
-              className="font-semibold uppercase lg:text-6xl md:text-6xl sm:text-4xl text-3xl"
+              className={cn("font-bold uppercase text-center lg:text-6xl md:text-6xl text-5xl",
+                isMobile && "text-3xl"
+              )}
             >
               <span className="text-accent">
                 Otimize sua prática de
@@ -50,26 +55,27 @@ export function Hero() {
               </span>
             </h1>
 
-            <p className="sm:text-lg" role="text">
+            <p className="sm:text-lg text-center" role="text">
               A plataforma de gestão completa projetada especificamente para massoterapeutas. Agende consultas, gerencie clientes e expanda seus negócios com facilidade
             </p>
 
-            <button
-              onClick={() => redirect("/login")}
-              className="cursor-pointer p-4 bg-accent rounded-full w-fit text-sm md:text-base text-white font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
-              aria-label={`Iniciar teste gratuito de ${TRIAL_DAYS} dias`}
-            >
-              Comece seu teste gratuito de {TRIAL_DAYS} dias
-            </button>
-
-            <button
-              onClick={handleCopyCupon}
-              className="lg:hidden w-fit border border-dashed border-ring rounded-full flex flex-col sm:flex-row px-6 gap-2.5 items-center justify-center text-center font-semibold text-sm md:text-xl p-2 uppercase text-primary hover:bg-accent hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 cursor-pointer"
-              aria-label="Copiar cupom de desconto MAS50OFF para 50% de desconto no primeiro mês"
-            >
-              <span>50% no primeiro mês</span>
-              <span>use: MAS50OFF</span>
-            </button>
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+              <button
+                onClick={() => redirect("/login")}
+                className="cursor-pointer p-4 bg-accent rounded-full w-fit text-sm md:text-base text-white font-semibold shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200"
+                aria-label={`Iniciar teste gratuito de ${TRIAL_DAYS} dias`}
+              >
+                Comece seu teste gratuito de {TRIAL_DAYS} dias
+              </button>
+              <button
+                onClick={handleCopyCupon}
+                className="lg:hidden w-fit border border-dashed border-ring rounded-full flex flex-col px-4 items-center justify-center text-center font-semibold text-xl p-2 uppercase text-primary hover:bg-accent hover:text-white focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-all duration-200 cursor-pointer"
+                aria-label="Copiar cupom de desconto MAS50OFF para 50% de desconto no primeiro mês"
+              >
+                <span className="text-sm font-normal">50% no primeiro mês use:</span>
+                <span>MAS50OFF</span>
+              </button>
+            </div>
 
             <div className="flex gap-4 flex-col md:flex-row text-sm" role="list">
               <p className="flex items-center" role="listitem">
@@ -112,7 +118,7 @@ export function Hero() {
           </article>
 
         </div>
-      </div>
-    </section>
+      </div >
+    </section >
   )
 }
