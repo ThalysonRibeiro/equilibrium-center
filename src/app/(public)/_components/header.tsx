@@ -50,7 +50,7 @@ export function Header() {
     { href: "#hero", label: "Início" },
     { href: "#features", label: "Características" },
     { href: "#price", label: "Preços" },
-    { href: "#testimonial", label: "Testemunhos" },
+    { href: "#testimonials", label: "Testemunhos" },
     { href: "#faq", label: "FAQ" },
     { href: "/professionals", label: "Profissionais" },
   ];
