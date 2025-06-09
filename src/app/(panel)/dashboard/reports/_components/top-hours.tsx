@@ -71,6 +71,7 @@ export function TopHours({ data }: TopHoursProps) {
                     alt="imagem trofeu silver"
                     width={100}
                     height={100}
+                    sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                   />
                   <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[1].time}</p>
                   <p className="text-xs">Agendamentos: {data.hours[1].count}</p>
@@ -83,6 +84,7 @@ export function TopHours({ data }: TopHoursProps) {
                   alt="imagem trofeu gold"
                   width={150}
                   height={150}
+                  sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                 />
                 <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[0].time}</p>
                 <p className="text-xs">Agendamentos: {data.hours[0].count}</p>
@@ -95,6 +97,7 @@ export function TopHours({ data }: TopHoursProps) {
                     alt="imagem trofeu btonze"
                     width={100}
                     height={100}
+                    sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                   />
                   <p className="font-bold px-2 py-0.5 rounded bg-primary text-white">{data.hours[2].time}</p>
                   <p className="text-xs">Agendamentos: {data.hours[2].count}</p>

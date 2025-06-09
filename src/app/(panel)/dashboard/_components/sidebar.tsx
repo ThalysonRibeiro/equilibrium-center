@@ -104,6 +104,7 @@ export function SidebarDashboard({ children, user, permission }: SidebarDashboar
                 width: 'auto',
                 height: 'auto',
               }}
+              sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
             />
           </div>
           {!isCollapsed && (
@@ -471,6 +472,7 @@ function SideBarFooter({ user, isCollapsed, handleLogout, isLoggingOut }: SideBa
             quality={100}
             fill
             className="object-cover"
+            sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
           />
         </div>
         {!isCollapsed && (

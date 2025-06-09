@@ -14,6 +14,7 @@ export function Hero() {
           fill
           alt="fundo de hero pagina  de profissionais"
           className="object-cover"
+          sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-sky-950 to-sky-700/50" />
       </div>

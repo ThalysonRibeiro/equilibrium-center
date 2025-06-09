@@ -9,6 +9,7 @@ export function BackgroundIMG() {
         alt="imagem do hero inlustratica"
         fill
         className="object-cover"
+        sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
       />
     </div>
   )

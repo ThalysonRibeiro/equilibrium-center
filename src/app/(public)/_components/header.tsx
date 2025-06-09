@@ -169,6 +169,7 @@ export function Header() {
               priority
               fill
               className="bg-contain"
+              sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
             />
           </div>
           <p className="uppercase text-primary">Equilibrium <br /> Center</p>

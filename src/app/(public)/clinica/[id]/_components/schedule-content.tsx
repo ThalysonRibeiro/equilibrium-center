@@ -178,6 +178,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           width={1280}
           height={280}
           priority
+          sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
         />
 
         <div className="max-w-2xl mx-auto">
@@ -188,6 +189,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                 alt={`Logo da clínica ${clinic.name}`}
                 fill
                 className="object-cover"
+                sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
               />
             </div>
 

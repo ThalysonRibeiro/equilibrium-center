@@ -113,6 +113,7 @@ export function Hero() {
                 priority
                 quality={100}
                 className="object-cover rounded-2xl"
+                sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
               />
             </div>
           </article>

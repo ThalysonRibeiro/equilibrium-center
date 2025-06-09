@@ -113,6 +113,7 @@ export function Features() {
                 src={img_features}
                 alt="Massoterapeuta usando o software Equilibrium Center"
                 className="absolute inset-0 w-full h-full object-cover"
+                sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
               />
             </div>
           </div>

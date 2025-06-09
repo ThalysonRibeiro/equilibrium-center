@@ -71,6 +71,7 @@ export function TopCustomers({ data }: TopCustomersProps) {
                     alt="imagem trofeu silver"
                     width={100}
                     height={100}
+                    sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                   />
                   <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
                     {data.groupedCustomers[1].name.split(" ")[0].toLowerCase()}
@@ -90,6 +91,7 @@ export function TopCustomers({ data }: TopCustomersProps) {
                   alt="imagem trofeu silver"
                   width={150}
                   height={150}
+                  sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                 />
                 <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
                   {data.groupedCustomers[0].name.split(" ")[0].toLowerCase()}
@@ -109,6 +111,7 @@ export function TopCustomers({ data }: TopCustomersProps) {
                     alt="imagem trofeu silver"
                     width={100}
                     height={100}
+                    sizes="(max-width:480px) 100vw (max-width: 1024px) 75vw, 60vw"
                   />
                   <p className="px-2 py-0.5 rounded bg-primary text-white capitalize">
                     {data.groupedCustomers[2].name.split(" ")[0].toLowerCase()}
