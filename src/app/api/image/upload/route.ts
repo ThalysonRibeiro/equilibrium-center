@@ -20,7 +20,7 @@ export const POST = async (req: Request) => {
     return NextResponse.json({ error: "Falha ao alterar imagem." }, { status: 401 });
   }
 
-  if (["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
+  if (!["image/png", "image/jpeg", "image/webp"].includes(file.type)) {
     return NextResponse.json({ error: "Formato de imagem inválido." }, { status: 401 });
   }
 
