@@ -240,7 +240,7 @@ export function Assessment({ user, editAssessment }: AssessmentProps) {
                     </FormControl>
                     {field.value && (
                       <div id="message-counter" className="text-xs text-gray-500 text-right">
-                        {field.value.length}/1000 caracteres
+                        {field.value.length}/300 caracteres
                       </div>
                     )}
                     <FormMessage role="alert" />
