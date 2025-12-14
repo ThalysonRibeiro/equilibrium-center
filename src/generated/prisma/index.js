@@ -285,7 +285,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\rafae\\OneDrive\\Documentos\\projetos\\equilibrium-center\\src\\generated\\prisma",
+      "value": "C:\\projetos\\equilibrium-center\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -299,7 +299,7 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\rafae\\OneDrive\\Documentos\\projetos\\equilibrium-center\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\projetos\\equilibrium-center\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
