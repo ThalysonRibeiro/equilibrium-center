@@ -76,7 +76,6 @@ export function ButtonPickerAppointment() {
             mode="single"
             selected={selectedDate}
             onSelect={handleSelect}
-            initialFocus
             locale={ptBR}
             className="rounded-md"
             // Props de acessibilidade do calendário

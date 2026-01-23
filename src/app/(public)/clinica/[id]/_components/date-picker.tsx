@@ -88,7 +88,6 @@ export function DateTimePicker({
           mode="single"
           selected={date}
           onSelect={handleChange}
-          initialFocus
           locale={ptBR}
           fromDate={minDate ?? new Date()}
           // Força o calendário a mostrar o ano selecionado
