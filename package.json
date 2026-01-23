@@ -40,7 +40,7 @@
     "jspdf-autotable": "^5.0.7",
     "lucide-react": "^0.506.0",
     "next": "^16.0.10",
-    "next-auth": "^5.0.0-beta.27",
+    "next-auth": "^5.0.0-beta.30",
     "react": "^19.2.3",
     "react-day-picker": "^8.10.1",
     "react-dom": "^19.2.3",
